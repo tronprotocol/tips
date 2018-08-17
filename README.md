@@ -1,2 +1,2 @@
-# tips
+# TIPS
 Tron Improvement Proposals
