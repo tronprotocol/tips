@@ -1,4 +1,3 @@
-tip-10
 ---
 tip: 10
 title: TRC-10 Token Standard
