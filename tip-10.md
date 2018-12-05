@@ -14,9 +14,10 @@ A standard interface for tokens.
 
 ## Abstract
 
+The following standard allows for the implementation of a standard API for tokens on native chain. This standard provides basic functionality to transfer tokens.
 
 ## Motivation
-
+A standard interface allows any language to implement the token.
 ## Specification
 
 ## Token
@@ -24,14 +25,17 @@ A standard interface for tokens.
 
 **NOTES**:
 
+#### id
+returns the id of token
 #### name
-
+returns the name of token
 #### symbol
-
+returns the symbol of token.
 #### decimals
+Returns the number of decimals the token uses - e.g. 8, means to divide the token amount by 100000000 to get its user representation.
 
 #### totalSupply
-
+Returns the total token supply.
 #### balanceOf
 
 #### transfer
