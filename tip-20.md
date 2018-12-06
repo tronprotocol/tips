@@ -11,8 +11,9 @@ created: 2018-12-01
 ## Simple Summary
 
 A standard interface for tokens.
-TVM is compatiable with EVM.  TRC20  come for ERC20 https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20.md
-thanks the author of erc20. 
+TVM is compatiable with EVM.
+TRC20  comes for ERC20 https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20.md
+Thanks the author of ERC20. 
 
 ## Abstract
 
