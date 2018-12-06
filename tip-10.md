@@ -27,21 +27,27 @@ A standard interface allows any language to implement the token.
 
 #### id
 returns the id of token
+#####
+ID is integer stored as string and start from 100001. 
+the ID less then 100000 is reserved.
 #### name
+#####
 returns the name of token
+
 #### symbol
 returns the symbol of token.
 #### decimals
 Returns the number of decimals the token uses - e.g. 8, means to divide the token amount by 100000000 to get its user representation.
+#####
+The value range is between 0 to 6.
 
 #### totalSupply
 Returns the total token supply.
 #### balanceOf
-
+Returns the balance of account.
 #### transfer
 
 ### Events
-
 
 #### Transfer
 
