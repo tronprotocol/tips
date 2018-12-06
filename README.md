@@ -1,4 +1,4 @@
-# tips
+# TIPS
 Tron Improvement Proposals
 
 Table of Contents:
