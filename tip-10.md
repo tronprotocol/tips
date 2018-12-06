@@ -25,7 +25,7 @@ A standard interface allows any language to implement the token.
 
 **NOTES**:
 
-#### id
+#### ID
 returns the id of token
 #####
 ID is integer stored as string and start from 100001. 
