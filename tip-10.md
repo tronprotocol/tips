@@ -47,3 +47,21 @@ ALLOW_SAME_TOKEN_NAME proposal needs to be turned on first. Otherwise, it defaul
 Returns the total token supply.
 #### balanceOf
 Returns the balance of account.
+
+#### description
+Token description, for example：”trondada”
+
+#### url
+the URL link of the token. 
+
+#### free_asset_net_limit
+free available bandwidth for transferring this specific asset of each account. 
+
+#### public_free_asset_net_limit
+free available bandwidth for transferring this specific asset of all accounts. 
+
+#### public_free_asset_net_usage
+free bandwidth used by all acounts for transferring this specific asset. 
+
+#### public_latest_free_net_time
+the amount of time used on free bandwidth when the token was most recently transferred
