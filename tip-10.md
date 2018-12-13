@@ -33,24 +33,17 @@ the ID less then 100000 is reserved.
 #### name
 #####
 returns the name of token
+When the ALLOW_SAME_TOKEN_NAME proposal is opened, duplicate names are allowed
 
 #### symbol
 returns the symbol of token.
 #### decimals
-Returns the number of decimals the token uses - e.g. 8, means to divide the token amount by 100000000 to get its user representation.
+Returns the number of decimals the token uses - e.g. 6, means to divide the token amount by 1000000 to get its user representation.
 #####
 The value range is between 0 to 6.
+ALLOW_SAME_TOKEN_NAME proposal needs to be turned on first. Otherwise, it defaults to 0
 
 #### totalSupply
 Returns the total token supply.
 #### balanceOf
 Returns the balance of account.
-#### transfer
-
-### Events
-
-#### Transfer
-
-#### Approval
-
-## Implementation
