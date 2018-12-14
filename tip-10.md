@@ -80,6 +80,7 @@ the amount of time used on free bandwidth when the token was most recently trans
 ## The influences of the proposal AllowSameTokenName
 The identify of token will be id instead of name and every token will support decimal places after the proposal is approved, so it will affect the following contracts.
 
+```
 AssetIssueContract: add field precision, means the number of decimal places
 
 message TransferAssetContract {
@@ -98,7 +99,6 @@ message ParticipateAssetIssueContract {
 **notice**
 asset_name is token name before the proposal ALLOW_SAME_TOKEN_NAME is active, otherwise it is token id and token is should be in string format.
 
-```
 message ExchangeCreateContract {
   bytes owner_address = 1;
   bytes first_token_id = 2;
@@ -128,6 +128,6 @@ message ExchangeTransactionContract {
   int64 quant = 4;
   int64 expected = 5;
 }
-```
 **notice**
-first_token_id and second_token_id are token name before the proposal ALLOW_SAME_TOKEN_NAME is active, otherwise they are token id in string format. first_token_balance and second_token_balance are the number of token in smallest unit. quant and expected are the number of token in smallest unit. 
+first_token_id and second_token_id are token name before the proposal ALLOW_SAME_TOKEN_NAME is active, otherwise they are token id in string format. first_token_balance and second_token_balance are the number of token in smallest unit. quant and expected are the number of token in smallest unit.
+``` 
