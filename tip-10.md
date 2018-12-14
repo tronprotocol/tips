@@ -32,7 +32,7 @@ the ID less then 100000 is reserved.
 returns the name of token
 When the ALLOW_SAME_TOKEN_NAME proposal is opened, duplicate names are allowed
 
-#### symbol
+#### abbr
 returns the symbol of token.
 
 #### presion
@@ -76,3 +76,71 @@ free bandwidth used by all acounts for transferring this specific asset.
 
 #### public_latest_free_net_time
 the amount of time used on free bandwidth when the token was most recently transferred
+
+## API
+message AssetIssueContract {
+  message FrozenSupply {
+    int64 frozen_amount = 1;
+    int64 frozen_days = 2;
+  }
+  bytes owner_address = 1;
+  bytes name = 2;
+  bytes abbr = 3;
+  int64 total_supply = 4;
+  repeated FrozenSupply frozen_supply = 5;
+  int32 trx_num = 6;
+  int32 precision = 7;
+  int32 num = 8;
+  int64 start_time = 9;
+  int64 end_time = 10;
+  bytes description = 20;
+  bytes url = 21;
+  int64 free_asset_net_limit = 22;
+  int64 public_free_asset_net_limit = 23;
+  int64 public_free_asset_net_usage = 24;
+  int64 public_latest_free_net_time = 25;
+}
+**notice**
+asset_name is token name before the proposal ALLOW_SAME_TOKEN_NAME is active, otherwise it is token id and token is should be in string format.
+
+message ParticipateAssetIssueContract {
+  bytes owner_address = 1;
+  bytes to_address = 2;
+  bytes asset_name = 3; // this field is token name before the proposal ALLOW_SAME_TOKEN_NAME is active, otherwise it is token id and token is should be in string format.
+  int64 amount = 4; // the amount of sun
+}
+**notice**
+asset_name is token name before the proposal ALLOW_SAME_TOKEN_NAME is active, otherwise it is token id and token is should be in string format.
+
+message ExchangeCreateContract {
+  bytes owner_address = 1;
+  bytes first_token_id = 2;
+  int64 first_token_balance = 3;
+  bytes second_token_id = 4;
+  int64 second_token_balance = 5;
+}
+
+message ExchangeInjectContract {
+  bytes owner_address = 1;
+  int64 exchange_id = 2;
+  bytes token_id = 3;
+  int64 quant = 4;
+}
+
+message ExchangeWithdrawContract {
+  bytes owner_address = 1;
+  int64 exchange_id = 2;
+  bytes token_id = 3;
+  int64 quant = 4;
+}
+
+message ExchangeTransactionContract {
+  bytes owner_address = 1;
+  int64 exchange_id = 2;
+  bytes token_id = 3;
+  int64 quant = 4;
+  int64 expected = 5;
+}
+
+**notice**
+token_id is token name before the proposal ALLOW_SAME_TOKEN_NAME is active, otherwise it is token id and token is should be in string format.
