@@ -21,9 +21,6 @@ A standard interface allows any language to implement the token.
 ## Specification
 
 ## Token
-### Methods
-
-**NOTES**:
 
 #### ID
 returns the id of token
