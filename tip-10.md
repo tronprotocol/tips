@@ -36,7 +36,7 @@ When the ALLOW_SAME_TOKEN_NAME proposal is opened, duplicate names are allowed
 #### abbr
 returns the symbol of token.
 
-#### presion
+#### decimals
 Returns the number of decimals the token uses - e.g. 6, means to divide the token amount by 1000000 to get its user representation.
 #####
 The value range is between 0 to 6.
