@@ -79,13 +79,35 @@ free bandwidth used by all acounts for transferring this specific asset.
 the amount of time used on free bandwidth when the token was most recently transferred
 
 ## The influences of the proposal AllowSameTokenName
-The identify of token will be id instead of name and every token will support decimal places after the proposal is approved, so it will affect the following contracts.
+The identify of token will be id instead of name and every token will support decimal places after the proposal is approved, so it will affect the following structure and contracts.
 
 ```
+message Account {
+  // the other asset owned by this account, deprecated
+  map<string, int64> asset = 6;
+  // the other asset owned by this account, key is assetId
+  map<string, int64> assetV2 = 56;
+
+  // name of asset issued, deprecated
+  bytes asset_issued_name = 17;
+  // id of asset issued
+  bytes asset_issued_ID = 57;
+
+  // latest asset operation time, deprecated
+  map<string, int64> latest_asset_operation_time = 18;
+  // latest asset operation time, key is assetId
+  map<string, int64> latest_asset_operation_timeV2 = 58;
+
+  // free asset net usage, deprecated
+  map<string, int64> free_asset_net_usage = 20;
+  // free asset net usage, key is assetId
+  map<string, int64> free_asset_net_usageV2 = 59;
+}
+
 AssetIssueContract: add field precision, means the number of decimal places
 
 message TransferAssetContract {
-  bytes asset_name = 1; // this field is token name before the proposal ALLOW_SAME_TOKEN_NAME is active, otherwise it is token id and token is should be in string format.
+  bytes asset_name = 1; // this field is token name before the proposal ALLOW_SAME_TOKEN_NAME is active, otherwise it is token id which should be in string format.
   bytes owner_address = 2;
   bytes to_address = 3;
   int64 amount = 4; // the number of tokens in smallest unit
@@ -94,11 +116,11 @@ message TransferAssetContract {
 message ParticipateAssetIssueContract {
   bytes owner_address = 1;
   bytes to_address = 2;
-  bytes asset_name = 3; // this field is token name before the proposal ALLOW_SAME_TOKEN_NAME is active, otherwise it is token id and token is should be in string format.
+  bytes asset_name = 3; // this field is token name before the proposal ALLOW_SAME_TOKEN_NAME is active, otherwise it is token id which should be in string format.
   int64 amount = 4; // the amount of sun
 }
 **notice**
-asset_name is token name before the proposal ALLOW_SAME_TOKEN_NAME is active, otherwise it is token id and token is should be in string format.
+asset_name is token name before the proposal ALLOW_SAME_TOKEN_NAME is active, otherwise it is token id which should be in string format.
 
 message ExchangeCreateContract {
   bytes owner_address = 1;
