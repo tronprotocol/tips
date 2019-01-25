@@ -22,19 +22,16 @@ A standard interface allows any language to implement the token.
 ## Specification
 
 ## Token
-
-#### ID
+https://github.com/tronprotocol/protocol/blob/6138aa7ac3af751ee778259a140d3484f8d9e5a4/core/Tron.proto#L70
+#### asset_issued_ID
 returns the id of token
 #####
 ID is integer stored as string and start from 100001. 
 the ID less then 100000 is reserved.
-#### name
+#### asset_issued_name
 #####
 returns the name of token
 When the ALLOW_SAME_TOKEN_NAME proposal is opened, duplicate names are allowed
-
-#### abbr
-returns the symbol of token.
 
 #### decimals
 Returns the number of decimals the token uses - e.g. 6, means to divide the token amount by 1000000 to get its user representation.
