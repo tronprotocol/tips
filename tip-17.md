@@ -3,7 +3,7 @@ tip: 17
 title: Adaptive Energy Limit Model
 author: nanfengpo <nanfengpo@hotmail.com> 
 discussions to: https://github.com/tronprotocol/TIPs/issues/17
-status: in process
+status: accepted
 type: Standards Track
 category: TRC
 created: 2018-12-29
