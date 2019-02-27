@@ -1,13 +1,15 @@
-```
+---
 tip: 16
 title: Account Multi-signature
 author: Marcus Zhao(@zhaohong ) <zhaohong229@gmail.com> 
 discussions to: https://github.com/tronprotocol/TIPs/issues/16
-status: Draft
+status: in process
 type: Standards Track
 category: TRC
 created: 2018-12-27
-```
+---
+
+
 ## Simple Summary
 
 This doc describes the  standard interface of Account Multi-signature
