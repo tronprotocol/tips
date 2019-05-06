@@ -3,7 +3,7 @@ tip: 28
 title: TRC-28 Built-in message queue for event subscribe
 author: jiangyy <jiangyangyang@tron.network> 
 discussions to: https://github.com/tronprotocol/TIPs/issues/28
-status: In progress
+status: accepted
 type: Standards Track
 category: TRC
 created: 2019-03-14
