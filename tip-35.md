@@ -77,3 +77,47 @@ Parameter:
 ```json
 
 ```
+Return:
+```bash
+```
+** Step 3. Call api: wallet/broadcasttransaction to broadcast this transaction(no need to sign this transaction)
+Method: Post
+Parameter:
+```json
+
+```
+Return:
+```bash
+```
+
+### 2. Transfer from shielded address to transparent address
+
+** Step 1. Call api: wallet/getmerkletreevoucherinfo to get the voucher of the shield address, this info will be used when create shielded transaction **
+Method: Post
+Parameter:
+```json
+
+```
+Return:
+```bash
+```
+
+** Step 2. Call api: wallet/createshieldedtransaction to create transaction **
+Method: Post
+Parameter:
+```json
+
+```
+Return:
+```bash
+```
+
+** Step 3. Call api: wallet/broadcasttransaction to broadcast this transaction(no need to sign this transaction)
+Method: Post
+Parameter:
+```json
+
+```
+Return:
+```bash
+```
