@@ -1,4 +1,3 @@
-
 ---
 tip: <to be assigned>
 title: <TIP title>
