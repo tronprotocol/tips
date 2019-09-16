@@ -1,6 +1,6 @@
 ---
 tip: 51
-title: TRC-35 rate limit of api traffic
+title: TRC-51 rate limit of api traffic
 author: shydesky<shydesky@gmail.com>
 discussions-to: https://github.com/tronprotocol/TIPs/issues/51
 status: Draft
