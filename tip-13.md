@@ -14,7 +14,7 @@ created: 2018-12-21
 This doc describes the design of the TRON account system.
 
 # Abstract
-Account system mainly including account name spec, account name exchange,  transfer through account name.  Account name will be equal to Address but easier memorize. 
+Account system mainly including account name spec, account name exchange,  transfer through account name.  The account name will be equal to Address but easier memorize. 
 TRX can only transfer by address. 
 # Motivation
 the address is the unique identity of an account.   
@@ -27,7 +27,7 @@ length: [8, 20]
 case sensitive: No
 
 ```
-### how to set account name
+### how to set the account name
 The address is sha256(public_key) in TRON.  after the address is activated through transfer user get an account in the network.  The user can set the account name to this address by RPC interface. something like below:
 ```
 Account {
@@ -56,4 +56,4 @@ string address4;
 ```
 That means account lovelycat controlled by adderss3 and address4.
 ## Reserved List 
-The full note should keep a  reserved list for famous company and brand. All the SR can manager this list by voting the proposal to add or remove name from list.
+The full note should keep a  reserved list for famous company and brand. All the SR can manager this list by voting the proposal to add or remove a name from the list.
