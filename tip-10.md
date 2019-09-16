@@ -15,7 +15,7 @@ A standard interface for tokens.
 
 ## Abstract
 
-The following standard allows for the implementation of a standard API for tokens on native chain. This standard provides basic functionality to transfer tokens.
+The following standard allows for the implementation of a standard API for tokens on the native chain. This standard provides basic functionality to transfer tokens.
 
 ## Motivation
 A standard interface allows any language to implement the token.
@@ -26,7 +26,7 @@ https://github.com/tronprotocol/protocol/blob/6138aa7ac3af751ee778259a140d3484f8
 #### asset_issued_ID
 returns the id of token
 #####
-ID is integer stored as string and start from 100001. 
+The ID is integer stored as a string and start from 100001. 
 the ID less then 100000 is reserved.
 #### asset_issued_name
 #####
@@ -46,37 +46,37 @@ Returns the total token supply.
 the list of the amount and duration of frozen tokens 
 
 #### trx_num
-the equivalent TRX amount, for example：232241
+the equivalent TRX amount, for example,232241
 
 #### num
 the equivalent custom amount of assets
 
 #### start_time
-starting time, for example：20170312
+starting time, for example,20170312
 
 #### end_time
-finishing time, for example：20170512
+finishing time, for example,20170512
 
 #### description
-Token description, for example：”trondada”
+Token description, for example,”trondada”
 
-#### url
+#### URL
 the URL link of the token. 
 
 #### free_asset_net_limit
-free available bandwidth for transferring this specific asset of each account. 
+The free available bandwidth for transferring this specific asset of each account. 
 
 #### public_free_asset_net_limit
-free available bandwidth for transferring this specific asset of all accounts. 
+The free available bandwidth for transferring this specific asset of all accounts. 
 
 #### public_free_asset_net_usage
-free bandwidth used by all acounts for transferring this specific asset. 
+free bandwidth used by all accounts for transferring this specific asset. 
 
 #### public_latest_free_net_time
 the amount of time used on free bandwidth when the token was most recently transferred
 
 ## The influences of the proposal AllowSameTokenName
-The identify of token will be id instead of name and every token will support decimal places after the proposal is approved, so it will affect the following structure and contracts.
+The identity of the token will be id instead of name and every token will support decimal places after the proposal is approved, so it will affect the following structure and contracts.
 
 ```
 message Account {
