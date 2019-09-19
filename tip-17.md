@@ -31,9 +31,9 @@ However, if some accounts freeze TRX and have the corresponding energy, but do n
 ## Implementation
 
 This model adjusts the energy owned by each account by adjusting the total upper limit of the total network energy. For the energy of the entire Tron network, there are the following measures:
-- Real Energy Limit: An upper limit on the real capacity of the TRON network within 24 hours. The current value is $100 billion. Only the committee can change this value.  
-- Virtual Energy Limit: An upper limit on the virtual capacity of the TRON network within 24 hours. Used to calculate the energy owned by an address in real-time, changes per block
-- Target Energy Limit: The target upper limit of Energy consumed in one minute (equal to 10% * RealEnergyLimit/(24 * 60)), used to measure whether the TotalEnergyAverageUsage in the past minute is small or large, so as to determine whether the virtual upper limit is high or low, that is, whether the network is congested or not. [will change as the RealEnergyLimit changes]
+- Real Energy Limit: An upper limit on the real capacity of the TRON network within 24 hours. The current value is 100 billion. Only the committee can change this value.  
+- Virtual Energy Limit: An upper limit on the virtual capacity of the TRON network within 24 hours. Used to calculate the energy owned by an address in real-time, changes per block.The current maximum is 5_000_000_000_000.
+- Target Energy Limit: The target upper limit of Energy consumed in one minute (equal to 50% * RealEnergyLimit/(24 * 60)), used to measure whether the TotalEnergyAverageUsage in the past minute is small or large, so as to determine whether the virtual upper limit is high or low, that is, whether the network is congested or not. [will change as the RealEnergyLimit changes]
 - Average energy usage over the last minute: changes per block
 
 Adjustment strategy:
