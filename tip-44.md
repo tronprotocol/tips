@@ -2,7 +2,7 @@
 tip: 44
 title: TRC-44 Address.isContract instructions
 author: llwslc<llwslc@gmail.com> 
-discussions to: https://github.com/tronprotocol/TIPs/issues/43
+discussions to: https://github.com/tronprotocol/TIPs/issues/44
 category: TRC
 status: accept
 created: 2019-07-10
