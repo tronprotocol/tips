@@ -6,7 +6,8 @@ Tron Improvement Proposals
 
 
 ## Tips Guide 
-
+|  ID   | Title  |
+|  ----  | ----  |
 | Tip-01  | [TRON Wallet Proposal](https://github.com/tronprotocol/TIPs/blob/master/tip-01.md)                                       |
 | Tip-10  | [TRON Token Standard](https://github.com/tronprotocol/TIPs/blob/master/tip-10.md)                                        |
 | Tip-12  | [TRON Event Subscription Model](https://github.com/tronprotocol/TIPs/blob/master/tip-12.md)                              |
