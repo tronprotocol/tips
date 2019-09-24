@@ -5,7 +5,7 @@ author: shydesky<shydesky@gmail.com>
 type: Standards Track
 category: TRC
 discussion-to: https://github.com/tronprotocol/TIPs/issues/24
-status: in process
+status: Final(core)
 created: 2019-03-04
 ---
 
