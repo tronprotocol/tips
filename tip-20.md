@@ -1,4 +1,3 @@
-
 ---
 tip: 20
 title: TRC-20 Token Standard
