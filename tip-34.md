@@ -30,7 +30,10 @@ If it is false, we only pass  the  raw data to developers who subscribe events.
 
 Moreover, event query service adds three new http api for supporting developers to developers parse contract log and contract event by self upload ABI string.
 
-Developers could subscribe triggers more conveniently.  
+Developers could subscribe triggers more conveniently.
+## Rationale
+
+The strategy is not affect among the old event subsribe interfaces. The contract log and contract event should be parsed if you don't want define a specific strategy.
 
 ## Backwards Compatibility
 
