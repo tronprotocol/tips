@@ -5,7 +5,7 @@ author: shydesky<shydesky@gmail.com>
 discussions-to: https://github.com/tronprotocol/TIPs/issues/51
 status: Draft
 type: Standards Track
-category Interface
+category: Interface
 created: 2019-07-30
 ---  
 
