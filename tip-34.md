@@ -4,9 +4,11 @@ title: TRC-34 Event subscribe to support contract without ABI
 author: wubin1<wubin1@tron.network> 
 discussions to: https://github.com/tronprotocol/TIPs/issues/34
 category: TRC
-status: accepted
+status: final (non-Core)
 created: 2019-4-19
 ```
+## Simple Summary
+This tip is about event subsribe to support contract without abi. It is very convenient for developers who need to upload self ABI.
 
 ## Abstract
 To support contract without ABI,  contract log parsing is separated from java-tron main program.
