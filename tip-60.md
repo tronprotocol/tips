@@ -1,6 +1,6 @@
 ```
 tip: 60
-title: TRC-60:Precompiled contract function for multi-signature validation
+title: TRC-60:Precompiled contract function for multi-signature verification
 author: Sh11thead <ksl2945@gmail.com>
 discussions to: https://github.com/tronprotocol/TIPs/issues/60
 category: TRC
@@ -28,11 +28,30 @@ This function could takes 4 parameters:
 validatemultisign(
 address accountAddress, // account address  
 uint256 permissionId, //permissionId for account
-bytes32 hash, //content for verifying
+bytes32 content, //content for verifying
 bytes[] signatures//signatures to be verified
 )
 ```
 
+Pay special attention to the parameter `signatures`,
+The specific signature method is implemented in java code as follows:
+```
+//parameters address，permissionId ，hash
+byte[] address  = address
+int permissionId = permissionId ;
+byte[] hash= originData;
+
+//merge
+byte[] merged =  ByteUtil.merge(address,ByteArray.fromInt(permissionId),data);
+//get the content to sign
+byte[] toSign = Sha256Hash.hash(merged);
+
+
+//sign content
+List<Object> signs = new ArrayList<>();
+signs.add(Hex.toHexString(key1.sign(toSign).toByteArray()));
+signs.add(Hex.toHexString(key2.sign(toSign).toByteArray()));
+```
 This function will call to a specific address (for example,`0x000000000000000000000000000000000000000a`) which will executed precompiledContracts in TVM to validate multi-sign.Since in TRON, one transaction allow max up to 5 different account to sign,the parameter `signatures` is allow max up to 5.
 
 In TVM , we could reuse `ECKey.ECDSASignature.fromComponents(r, s, v)`method,which is already used by `ecrecover()` to recover address for signature.
