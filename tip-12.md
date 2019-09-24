@@ -1,4 +1,4 @@
-```
+---
 tip: 12
 title: TRC-12 Tron event subscribes model
 author: jiangyy<jiangyangyang@tron.network> 
@@ -7,18 +7,18 @@ status: accepted
 type: Standards Track
 category: TRC
 created: 2018-12-20
-```
+---
 
-# Simple Summary
+## Simple Summary
 This doc describes event subscribe model of Tron.
 
-# Abstract
+## Abstract
 The following describes a model which is used to subscribe to block chain events, transaction events, contract logs and contract events from Tron FullNode. Developers can set up filters to subscribe to specific events. Plug-ins can be developed to export these events for further development.
 
-# Motivation
+## Motivation
 This will allow dapps developers or exchange to subscribe any event triggered on Tron. 
 
-# Specification
+## Specification
 
 ## Events to subscribe
 
