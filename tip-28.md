@@ -1,4 +1,4 @@
-
+---  
 tip: 28
 title: TRC-28 Built-in message queue for event subscribe
 author: jiangyy <jiangyangyang@tron.network> 
@@ -7,19 +7,20 @@ status: accepted
 type: Standards Track
 category: TRC
 created: 2019-03-14
+---  
 
-**Simple Summary**
+## Simple Summary
 Adding built-in message queue for event subscribe in java-tron. 
 
-**Abstract**
+## Abstract
 The built-in message queue is designed for event subscribe. Developers could subscribe triggers directly from fullnode without event plugin.
 
-**Motivation**
+## Motivation
 Developers could use event plugins to subscribe triggers from fullnode, which provide very reliable service and store very large amount of data. 
 
 But in some cases, developers want to subscribe directly from fullnode, with short-term subscriptions. Native message queue is implemented to meet such requirement.
 
-**Specification**
+## Specification
 The function of native queue is configurable. It's is disabled by default. It shared the configuration of triggers with eventplugin.
 
 The communication channel between fullnode and subscription client is socket. The bindport could be configurable to avoid conflicting.
