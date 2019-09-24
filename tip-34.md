@@ -8,7 +8,7 @@ status: final (non-Core)
 created: 2019-4-19
 ```
 ## Simple Summary
-This tip is about event subsribe to support contract without abi. This is very necessary for developers who need to upload self ABI.
+This tip is about event subsribe to support contract without abi. It is very convenient for developers who need to upload self ABI.
 
 ## Abstract
 To support contract without ABI,  contract log parsing is separated from java-tron main program.
