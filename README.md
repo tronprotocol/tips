@@ -23,7 +23,7 @@ Tron Improvement Proposals
  
 
 
- 
+
 
 TRON Improvement Proposals (TIPs) describe standards for the TRON platform, including core protocol specifications, client APIs, and contract standards.
 
@@ -55,4 +55,4 @@ When you believe your TIP is mature and ready to progress past the draft phase, 
 
 - **Final (non-Core)**: A TIP that has been in Last Call for at least 2 weeks and any technical changes that were requested have been addressed by the author.  
 
-- **Final (Core)**: A TIP that the Core Devs have decided to implement and release in a future hard fork or has already been released in a hard fork.      
+- **Final (Core)**: A TIP that the Core Devs have decided to implement and release in a future version or has already been released.      
