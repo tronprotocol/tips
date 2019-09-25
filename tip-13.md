@@ -1,4 +1,4 @@
----
+```
 tip: 13
 title: TRC-13 Account System Standard
 author: Justin Sun<justin@tron.network>
@@ -7,7 +7,7 @@ category: TRC
 discussion-to: https://github.com/tronprotocol/TIPs/issues/13
 status: in process
 created: 2018-12-21
----
+```
 
 # Simple Summary
 

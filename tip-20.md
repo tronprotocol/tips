@@ -1,4 +1,4 @@
----
+```
 tip: 20
 title: TRC-20 Token Standard
 author: Marcus Zhao <zhaohong2292@gmail.com>
@@ -6,7 +6,7 @@ status: Final
 type: Standards Track
 category: TRC
 created: 2018-12-01
----   
+``` 
 
 
 ## Simple Summary

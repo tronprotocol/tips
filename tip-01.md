@@ -1,6 +1,3 @@
-## Tron Wallet Proposal (TWP)
-## Preamble
-
 ```
 TIP: 0001
 Title: Tron Wallet Proposal - Key Derivation Methods for Tron Accounts with BIP39

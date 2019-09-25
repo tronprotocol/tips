@@ -1,4 +1,4 @@
----
+```
 tip: 51
 title: TRC-51 rate limit of api traffic
 author: shydesky<shydesky@gmail.com>
@@ -7,7 +7,7 @@ status: Draft
 type: Standards Track
 category: Interface
 created: 2019-07-30
----  
+```
 
 ## Simple Summary
 

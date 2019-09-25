@@ -1,4 +1,4 @@
----
+```
 tip: 10
 title: TRC-10 Token Standard
 author: Marcus Zhao<zhaohong229@gmail.com>
@@ -7,7 +7,8 @@ category: TRC
 discussion-to: https://github.com/tronprotocol/TIPs/issues/10
 status: in process
 created: 2018-11-11
----
+```
+
 ## Simple Summary
 
 A standard interface for tokens.

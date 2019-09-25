@@ -1,4 +1,4 @@
----
+```
 tip: 19
 title: TRC-19 Deferred transaction
 author: jiangyy jiangyangyang@tron.network
@@ -7,7 +7,7 @@ status: in progress
 type: Standards Track
 category: TRC
 created: 2019-01-30
----  
+``` 
 
 ## Simple Summary
 

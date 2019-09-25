@@ -1,4 +1,4 @@
----
+```
 tip: 17
 title: Adaptive Energy Limit Model
 author: nanfengpo <nanfengpo@hotmail.com> 
@@ -7,7 +7,8 @@ status: accepted
 type: Standards Track
 category: TRC
 created: 2018-12-29
----
+```
+
 ## Simple Summary
 
 This doc describes the  standard interface of the Adaptive Energy Limit Model

@@ -1,4 +1,4 @@
----
+```
 tip: 12
 title: TRC-12 Tron event subscribes model
 author: jiangyy<jiangyangyang@tron.network> 
@@ -7,7 +7,7 @@ status: accepted
 type: Standards Track
 category: TRC
 created: 2018-12-20
----
+```
 
 ## Simple Summary
 This doc describes event subscribe model of Tron.

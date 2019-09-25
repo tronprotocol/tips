@@ -1,4 +1,4 @@
----
+```
 tip: 24
 title: TRC-24 Implement DB storage with RocksDB
 author: shydesky<shydesky@gmail.com>
@@ -7,7 +7,7 @@ category: TRC
 discussion-to: https://github.com/tronprotocol/TIPs/issues/24
 status: Final(core)
 created: 2019-03-04
----
+```
 
 ## Simple Summary
 Implement the database storage layer with RocksDB.  

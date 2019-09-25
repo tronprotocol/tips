@@ -1,4 +1,4 @@
----
+```
 tip: 16
 title: Account Multi-signature
 author: Marcus Zhao(@zhaohong ) <zhaohong229@gmail.com> 
@@ -7,7 +7,7 @@ status: accepted
 type: Standards Track
 category: TRC
 created: 2018-12-27
----
+```
 
 
 ## Simple Summary
