@@ -5,7 +5,7 @@ author: Justin Sun<justin@tron.network>
 type: Standards Track
 category: TRC
 discussion-to: https://github.com/tronprotocol/TIPs/issues/13
-status: in process
+status: Final
 created: 2018-12-21
 ```
 
