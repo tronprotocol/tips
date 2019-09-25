@@ -3,7 +3,7 @@ tip: 12
 title: TRC-12 Tron event subscribes model
 author: jiangyy<jiangyangyang@tron.network> 
 discussions to: https://github.com/tronprotocol/TIPs/issues/12
-status: accepted
+status: Final
 type: Standards Track
 category: TRC
 created: 2018-12-20
