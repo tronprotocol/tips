@@ -14,6 +14,7 @@ Tron Improvement Proposals
 | Tip-13  | [Design of TRON account](https://github.com/tronprotocol/TIPs/blob/master/tip-13.md)                                     |
 | Tip-16  | [TRON Account Multi-Signature](https://github.com/tronprotocol/TIPs/blob/master/tip-16.md)                               |
 | Tip-17  | [TRON Adaptive Energy Limit Model](https://github.com/tronprotocol/TIPs/blob/master/tip-17.md)                           |
+| Tip-19  | [Deferred transaction](https://github.com/tronprotocol/tips/blob/master/tip-19.md)                                       |
 | Tip-20  | [TRC-20 Token Standard](https://github.com/tronprotocol/TIPs/blob/master/tip-20.md)                                      |
 | Tip-24  | [Implement of DB storage with RocksDB](https://github.com/tronprotocol/TIPs/blob/master/tip-24.md)                       |
 | Tip-28  | [Built-in Message Queue in Event Subscription Model](https://github.com/tronprotocol/TIPs/blob/master/tip-28.md)         |
