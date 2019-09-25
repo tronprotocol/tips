@@ -5,7 +5,7 @@ author: Marcus Zhao<zhaohong229@gmail.com>
 type: Standards Track
 category: TRC
 discussion-to: https://github.com/tronprotocol/TIPs/issues/10
-status: in process
+status: Final
 created: 2018-11-11
 ```
 
