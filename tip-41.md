@@ -25,6 +25,7 @@ TRON database already occupied 163GB and it increases 20G each month. So how to 
 
 TransactionHistory doesn't directly save in transactionHistoryStore after the execution of transactions.
 **_transactionHistoryStore.put(trxCap.getTransactionId().getBytes(), transactionInfo);_**
+
 Add transaction history in memory and save in disk after executing one whole block.
  
 ` transationHistoryCapsule.addTransactionResult(result); 
