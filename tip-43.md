@@ -18,14 +18,27 @@ Since the multi-signature is widely used in Tron, there needs a way for low ener
 
 ## Specification
 
-Adds a new precompiled contract function, which need 3 arguments input: 
-- uint256[] addresses
-- uint256[] hashes
-- uint256[] signatures
+Adds a new precompiled contract function named `batchvalidatesign` , which need 3 arguments input: 
+- bytes32 hash
+- bytes[] signatures
+- address[] addresses
 
-output the result of signature validating would be a bytes32, for example `10100000000000000000000000000000` representing the first signatue and third signatue is correct
+Sample code
+```
+pragma experimental ABIEncoderV2;
+contract Demo {
+    function testBatch(bytes32 hash, bytes[] memory signatures, address[] memory addresses) public returns(bytes32){
+        return batchvalidatesign(hash, signatures, addresses);
+    }
+}
+````
 
-for safety concern, the number of signatures is limited to 16
+output of the result of signature validating would be a bytes32, for example :
+`10100000000000000000000000000000` representing the first signatue and third signatue is correct
+
+for safety concern, the number of signatures is limited to 16,when count of signatures is greater than 16,all zero output will be provided.
+
+
 
 
 ## Energy cost
