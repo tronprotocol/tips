@@ -4,7 +4,7 @@ title: TRC-37: forbid using TransferContract & TransferAssetContract  for contra
 author: Taihao Fu <taihao.fu@gmail.com>
 discussions to: https://github.com/tronprotocol/TIPs/issues/37
 category: TRC
-status: accepted
+status: Final
 created: 2019-05-10
 ```
 
