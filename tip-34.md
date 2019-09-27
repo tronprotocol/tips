@@ -4,37 +4,40 @@ title: TRC-34 Event subscribe to support contract without ABI
 author: wubin1<wubin1@tron.network> 
 discussions to: https://github.com/tronprotocol/TIPs/issues/34
 category: TRC
-status: final (non-Core)
+status: Final
 created: 2019-4-19
 ```
 
-## Simple Summary
-This tip is about event subsribe to support contract without abi. It is very convenient for developers who need to upload self ABI.
-
 ## Abstract
-To support contract without ABI,  contract log parsing is separated from java-tron main program.
-Moreover, developers could upload self ABI string to parse contract log and contract event,  which could be more convenient to support some contracts without ABI.
+
+To support contract without ABI, contract log parsing is separated from java-tron main program.
+Moreover, developers could upload self ABI string to parse contract log and contract event, which could be more convenient to support some contracts without ABI.
 
 ## Motivation
 
-The contract does not need ABI anymore after the introduction of [triggerConstantContract](#31 ) api, so tron-eventquery service could support developers to upload ABI and parse contract log and contract event.
+The contract does not need ABI anymore after the introduction of triggerConstantContract api, so tron-eventquery service could support developers to upload ABI and parse contract log and contract event.
 
 ## Specification
+
 In order to support contract without ABI, contract log parsing is separated from java-tron main program and we parse contract log in event plugin.
-In addition,  the function of parse contract log is configurable. It's is true by default. 
+In addition, the function of parse contract log is configurable. It's is true by default.
 
+```
 event.subscribe = {
-      contractParse = true,
-    ......
+contractParse = true,
+......
+```
 
-If it is false, we only pass  the  raw data to developers who subscribe events.
+If it is false, we only pass the raw data to developers who subscribe events.
 
 Moreover, event query service adds three new http api for supporting developers to developers parse contract log and contract event by self upload ABI string.
 
 Developers could subscribe triggers more conveniently.
+
+
 ## Rationale
 
-The strategy is not affect among the old event subsribe interfaces. The contract log and contract event should be parsed if you don't want define a specific strategy.
+The rationale fleshes out the specification by describing what motivated the design and why particular design decisions were made. It should describe alternate designs that were considered and related work, e.g. how the feature is supported in other languages. The rationale may also provide evidence of consensus within the community, and should discuss important objections or concerns raised during discussion.
 
 ## Backwards Compatibility
 
@@ -44,3 +47,6 @@ There are no backwards compatibility concerns.
 
 1. Emitting events from contract that without ABI.
 2. Emitting events from contract that with ABI.
+
+
+
