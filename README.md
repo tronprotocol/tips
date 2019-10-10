@@ -43,13 +43,14 @@ TRON Improvement Proposals (TIPs) describe standards for the TRON platform, incl
 The TIPS repository is [https://github.com/tronprotocol/TIPs](https://github.com/tronprotocol/TIPs)
 
 
-<h2> To Submit a TRC </h2>
-1.Before create a TIP, you need to create a new TRC in the TIPS’ issue.  
+<h2> To Submit a TRC </h2>  
+
+1.Before create a TIP, you need to create a new TRC in the TIPS’ issue.    
 
 2.Follow the template to fill the content and name the title with the format like: TRC-200: Create Key.   
 Here is the template: https://github.com/tronprotocol/tips/blob/master/template.md  
 
-3.If your issues are to solve the existed TIPs' problems, figure out the TIPs' file address in the TRC.  
+3.If your issues are to solve the existed TIPs' problems, figure out the TIPs' file address in the TRC.    
 
 4.Submit the TRC.  
 
