@@ -45,14 +45,14 @@ The TIPS repository is [https://github.com/tronprotocol/TIPs](https://github.com
 
 <h2> To Submit a TRC </h2>  
 
-1.Before create a TIP, you need to create a new TRC in the TIPS’ issue.    
+1.&nbsp;Before create a TIP, you need to create a new TRC in the TIPS’ issue.    
 
-2.Follow the template to fill the content and name the title with the format like: TRC-200: Create Key.   
+2.&nbsp;Follow the template to fill the content and name the title with the format like: TRC-200: Create Key.   
 Here is the template: https://github.com/tronprotocol/tips/blob/master/template.md  
 
-3.If your issues are to solve the existed TIPs' problems, figure out the TIPs' file address in the TRC.    
+3.&nbsp;If your issues are to solve the existed TIPs' problems, figure out the TIPs' file address in the TRC.    
 
-4.Submit the TRC.  
+4.&nbsp;Submit the TRC.  
 
 The TRC is the first step to be submitted before you submit the TIP. The TRC should follow the format of the criteria enforced by the build (largely, correct metadata in the header). Make sure you open GitHub issue where people can discuss the TRC as a whole.  
 
