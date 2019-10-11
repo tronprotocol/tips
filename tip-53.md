@@ -1,6 +1,6 @@
 ```
 tip: 53
-title: TRC53: Optimize the current TRON delegation mechanism
+title: Optimize the current TRON delegation mechanism
 author: lvs007 <zy.liang.5@163.com>
 discussions to: https://github.com/tronprotocol/TIPs/issues/53
 category: TRC
@@ -13,7 +13,17 @@ This doc describes a solution to optimize the current TRON delegation mechanism
 # Abstract
 At present, the TRON's delegation mechanism is that the user votes for the node. If the node is elected sr, then each block will reward sr with 32 TRX, and the top 100 votes will receive additional rewards; if the node does not give the user dividends, then users can not get rewards, it can not improve the enthusiasm of users to vote, resulting in a lower mortgage rate on the whole network.
 
-# Current Situation
+# Motivation
+Improve the mortgage rate of the entire network TRX, while increasing the user's income more fairly
+
+# Specification
+Two types of rewards: block reward and voting reward.
+Block reward: the SR will get 16 TRX for each block it has generated.
+Voting reward: for each block, the most-voted 127 SRs will receive TRX in proportion to the votes they get. Each block will reward 160 TRX in total, and each SR will get (SR’s votes/ total votes) * 160 TRX.
+The rewarded TRX will not be added to the “allowance” field of the SR immediately. Users (including SRs) will have to withdraw TRX by themselves so that the rewards will show up on their account balance.
+Meanwhile, SRs can take a percentage of commission from the dividends distributed to the users. For the commission, SRs can specify a value from 0 to 100. 0 means that no TRX will be extracted from users’ dividends, while 100 means that all dividends will be taken by the SRs. Also, SRs can modify the percentage and the new percentage will take effect from the next maintenance period.
+
+## Current Situation
 
 The current setting for block production rewards is 32 TRX per block. The block production cycle is 3 seconds. For every six hours, there will be two production cycles counting the votes without packing the blocks. Thus, the number of blocks packed by TRON blockchain is 86400 / 3 - 2 * 4 = 28792.
 Thus, the daily rewards for block production are 32TRX/block * 28792 block = 921344 TRX.
@@ -39,17 +49,7 @@ The current mechanism is to have both production rewards and voting rewards dire
 3. On-chain governance and incentive mechanism not separated
 Under current mechanism, production reward is far higher than the voting reward. Those who are not able to take part in the on-chain governance have lost the interest and the will to contribute to the community, which in a way severs the connection between the government body and the entire community. In the long run, that will make TRON blockchain become a somewhat centralized ecosystem, dampening its long-term growth. Once a supernode is down, it will be hard to fill its place right away, undermining the efficiency of the network.
 
-# Motivation
-Improve the mortgage rate of the entire network TRX, while increasing the user's income more fairly
-
-# Specification
-Two types of rewards: block reward and voting reward.
-Block reward: the SR will get 16 TRX for each block it has generated.
-Voting reward: for each block, the most-voted 127 SRs will receive TRX in proportion to the votes they get. Each block will reward 160 TRX in total, and each SR will get (SR’s votes/ total votes) * 160 TRX.
-The rewarded TRX will not be added to the “allowance” field of the SR immediately. Users (including SRs) will have to withdraw TRX by themselves so that the rewards will show up on their account balance.
-Meanwhile, SRs can take a percentage of commission from the dividends distributed to the users. For the commission, SRs can specify a value from 0 to 100. 0 means that no TRX will be extracted from users’ dividends, while 100 means that all dividends will be taken by the SRs. Also, SRs can modify the percentage and the new percentage will take effect from the next maintenance period.
-
-# Algorithm
+## Algorithm
 
 Dividends SRs:
 
