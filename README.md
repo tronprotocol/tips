@@ -74,23 +74,30 @@ When you believe your TIP is mature and ready to progress past the draft phase, 
 
 TIPs are separated into a number of types, and each has its own list of TIPs.
 
-**Standard Track**
-Describes any change that affects most or all Ethereum implementations, such as a change to the the network protocol, a change in block or transaction validity rules, proposed application standards/conventions, or any change or addition that affects the interoperability of applications using Ethereum. Furthermore Standard EIPs can be broken down into the following categories.
+**Standard Track**  
 
-**Core** 
-Improvements requiring a consensus fork (e.g. EIP5, EIP101), as well as changes that are not necessarily consensus critical but may be relevant to “core dev” discussions (for example, the miner/node strategy changes 2, 3, and 4 of EIP86).
+Describes any change that affects most or all TRON implementations, such as a change a change in block or transaction validity rules, proposed application standards/conventions, or any change or addition that affects the interoperability of applications using TRON. Furthermore Standard TIPs can be broken down into the following categories.  
 
-**Networking**  
-Includes improvements around network protocol.  
+**Core**   
 
-**Interface** 
+Improvements requiring a consensus fork, as well as changes that are not necessarily consensus critical but may be relevant to “core dev” discussions.    
+
+**Networking**    
+
+Includes improvements around network protocol.      
+
+**Interface**   
+
 Includes improvements around client API/RPC specifications and standards.    
 
-**TRC**
-Application-level standards and conventions, including contract standards such as token standards (TRC-20)  
+**TRC**  
 
-**VM**
-Includes improvements around TRON Virtual Machine.  
+Application-level standards and conventions, including contract standards such as token standards (TRC-20)    
 
-**Informational**
-Describes a TRON design issue, or provides general guidelines or information to the TRON community, but does not propose a new feature.     
+**VM**  
+
+Includes improvements around TRON Virtual Machine.    
+
+**Informational**  
+
+Describes a TRON design issue, or provides general guidelines or information to the TRON community, but does not propose a new feature.       
