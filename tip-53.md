@@ -7,23 +7,23 @@ category: TRC
 status: Final
 created: 2019-07-31
 ```
-# Simple Summary
+## Simple Summary
 This doc describes a solution to optimize the current TRON delegation mechanism
 
-# Abstract
+## Abstract
 At present, the TRON's delegation mechanism is that the user votes for the node. If the node is elected sr, then each block will reward sr with 32 TRX, and the top 100 votes will receive additional rewards; if the node does not give the user dividends, then users can not get rewards, it can not improve the enthusiasm of users to vote, resulting in a lower mortgage rate on the whole network.
 
-# Motivation
+## Motivation
 Improve the mortgage rate of the entire network TRX, while increasing the user's income more fairly
 
-# Specification
+## Specification
 Two types of rewards: block reward and voting reward.
 Block reward: the SR will get 16 TRX for each block it has generated.
 Voting reward: for each block, the most-voted 127 SRs will receive TRX in proportion to the votes they get. Each block will reward 160 TRX in total, and each SR will get (SR’s votes/ total votes) * 160 TRX.
 The rewarded TRX will not be added to the “allowance” field of the SR immediately. Users (including SRs) will have to withdraw TRX by themselves so that the rewards will show up on their account balance.
 Meanwhile, SRs can take a percentage of commission from the dividends distributed to the users. For the commission, SRs can specify a value from 0 to 100. 0 means that no TRX will be extracted from users’ dividends, while 100 means that all dividends will be taken by the SRs. Also, SRs can modify the percentage and the new percentage will take effect from the next maintenance period.
 
-## Current Situation
+### Current Situation
 
 The current setting for block production rewards is 32 TRX per block. The block production cycle is 3 seconds. For every six hours, there will be two production cycles counting the votes without packing the blocks. Thus, the number of blocks packed by TRON blockchain is 86400 / 3 - 2 * 4 = 28792.
 Thus, the daily rewards for block production are 32TRX/block * 28792 block = 921344 TRX.
@@ -49,7 +49,7 @@ The current mechanism is to have both production rewards and voting rewards dire
 3. On-chain governance and incentive mechanism not separated
 Under current mechanism, production reward is far higher than the voting reward. Those who are not able to take part in the on-chain governance have lost the interest and the will to contribute to the community, which in a way severs the connection between the government body and the entire community. In the long run, that will make TRON blockchain become a somewhat centralized ecosystem, dampening its long-term growth. Once a supernode is down, it will be hard to fill its place right away, undermining the efficiency of the network.
 
-## Algorithm
+### Algorithm
 
 Dividends SRs:
 
@@ -71,7 +71,9 @@ New  block reword distribution plan:
 The current block distribution plan is 32 TRX reword to SR who produce the block and 16 TRX reword equally distributed to SRs and stand-by SRs according to the voting number.
 To encourage SRs to have more voters,  we will change the 32 TRX(reword to block producer) to 16TRX and 16TRX (reword to all SRs according to the voting number)  to 160 TRX.
 
-# Advantages:
+## Rationale
+
+### Advantages:
 
 1. A decentralized dividend distribution mechanism featuring fairness that encourages 
 greater user participation.  Moving the distribution process on the chain and keeping the record on the blockchain makes the rewards distribution completely decentralized and trackable.
@@ -86,9 +88,9 @@ consumption and thus a more robust network
 possibilities and convenience for future development 
 
 
-# Future goals:
+### Future goals:
 
-## A Brand New Consensus Mechanism
+#### A Brand New Consensus Mechanism
 
 A new hybrid consensus mechanism has been running smoothly on TRON for 15 months. The stability of the DPOS consensus mechanism plays a significant part in this success, but we should also notice there is room for the DPOS mechanism to improve - for example, shorter block confirmation time and SPV support. 
 
@@ -97,14 +99,14 @@ Therefore, we plan on developing a new hybrid consensus mechanism based on DPOS+
 The new hybrid consensus mechanism will help to expand the scalability of the TRON ecosystem, unify cross-chain protocols and improve DApp usability.
 
 
-## Punishment Mechanism
+#### Punishment Mechanism
 
 TRON’s sound progress is closely related to the stable and efficient block generation of our excellent SR nodes. That being said, we have also noticed a relatively high block missing rate and low packaging rate in some nodes due to undesirable equipment and network performance. 
 
 These nodes are slowing down the overall network speed, which can be harmful to the network and unfair to other SRs. To address this problem, we plan to introduce the automatic dividend distribution mechanism. By punishing unreliable and malicious nodes more directly, efficiently and accurately, the mechanism will be of great use in improving the performance of the whole network. 
 	
 
-##  Proposal Prize Pool
+####  Proposal Prize Pool
 
 As of today, 26 proposals have been initiated in the TRON network, each contributing to the development of the network. Nevertheless, we believe that the proposals can help us achieve autonomy in the community to a greater extent. 
 
@@ -112,7 +114,7 @@ In order to encourage more community members to take part in the proposals, we p
 
 Moving on, we will also innovate and modify the way we organize proposals, e.g. participant eligibility, initiator eligibility, participant number, etc., so as to improve community activity and lower the cost for an efficient community autonomy.
 
-## Giving Back To The Community
+#### Giving Back To The Community
 The new delegation mechanism and staking rewards distribution mechanism will be an important milestone in the evolution of our TRON protocol. Fair and transparent reward distribution mechanism will attract a wide range of nodes to participate in the TRON Blockchain network governance. At the same time, excluding the dividend payout transactions, the operation of the TRON Blockchain network will be more efficient.
 
 In order to express our gratitude to all SRs for their outstanding contributions to TRON networks over the past year, TRON Foundation proposes a 50 million TRX distribution:
