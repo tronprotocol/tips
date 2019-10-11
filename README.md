@@ -36,27 +36,11 @@ Tron Improvement Proposals
  
 
 
-
-
 TRON Improvement Proposals (TIPs) describe standards for the TRON platform, including core protocol specifications, client APIs, and contract standards.
 
 The TIPS repository is [https://github.com/tronprotocol/TIPs](https://github.com/tronprotocol/TIPs)
 
-
-<h2> To Submit a TRC </h2>  
-
-1.&nbsp;Before create a TIP, you need to create a new TRC in the TIPS’ issue.    
-
-2.&nbsp;Follow the template to fill the content and name the title with the format like: TRC-200: Create Key.   
-Here is the template: https://github.com/tronprotocol/tips/blob/master/template.md  
-
-3.&nbsp;If your issues are to solve the existed TIPs' problems, figure out the TIPs' file address in the TRC.    
-
-4.&nbsp;Submit the TRC.  
-
-The TRC is the first step to be submitted before you submit the TIP. The TRC should follow the format of the criteria enforced by the build (largely, correct metadata in the header). Make sure you open GitHub issue where people can discuss the TRC as a whole.  
-
-If anyone have no more questions about the TRC after discussion, next step is to submit a TIP. When you submit the TIP, conclude the discussion and fill the template in detail. Make sure the TIP lists the discussion address of the TRC.  
+Before you submit a TIP, you need to create a issue for comment, and add the issue url to your TIP header.   
 
 <h2>To Submit a TIP</h2>
 
@@ -84,4 +68,29 @@ When you believe your TIP is mature and ready to progress past the draft phase, 
 
 - **Final (non-Core)**: A TIP that has been in Last Call for at least 2 weeks and any technical changes that were requested have been addressed by the author.  
 
-- **Final (Core)**: A TIP that the Core Devs have decided to implement and release in a future version or has already been released.      
+- **Final (Core)**: A TIP that the Core Devs have decided to implement and release in a future version or has already been released.    
+
+<h2>TIP Types</h2>
+
+TIPs are separated into a number of types, and each has its own list of TIPs.
+
+**Standard Track**
+Describes any change that affects most or all Ethereum implementations, such as a change to the the network protocol, a change in block or transaction validity rules, proposed application standards/conventions, or any change or addition that affects the interoperability of applications using Ethereum. Furthermore Standard EIPs can be broken down into the following categories.
+
+**Core** 
+Improvements requiring a consensus fork (e.g. EIP5, EIP101), as well as changes that are not necessarily consensus critical but may be relevant to “core dev” discussions (for example, the miner/node strategy changes 2, 3, and 4 of EIP86).
+
+**Networking**  
+Includes improvements around network protocol.  
+
+**Interface** 
+Includes improvements around client API/RPC specifications and standards.    
+
+**TRC**
+Application-level standards and conventions, including contract standards such as token standards (TRC-20)  
+
+**VM**
+Includes improvements around TRON Virtual Machine.  
+
+**Informational**
+Describes a TRON design issue, or provides general guidelines or information to the TRON community, but does not propose a new feature.     
