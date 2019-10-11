@@ -8,32 +8,35 @@ TRON Improvement Proposals
 ## TIPs Guide 
 |  ID   | Title  |
 |  ----  | ----  |
-| TIP-01  | [TRON Wallet Proposal](https://github.com/tronprotocol/TIPs/blob/master/tip-01.md)                                       |
-| TIP-10  | [TRON Token Standard](https://github.com/tronprotocol/TIPs/blob/master/tip-10.md)                                        |
-| TIP-12  | [TRON Event Subscription Model](https://github.com/tronprotocol/TIPs/blob/master/tip-12.md)                              |
-| TIP-13  | [Design of TRON account](https://github.com/tronprotocol/TIPs/blob/master/tip-13.md)                                     |
-| TIP-16  | [TRON Account Multi-Signature](https://github.com/tronprotocol/TIPs/blob/master/tip-16.md)                               |
-| TIP-17  | [TRON Adaptive Energy Limit Model](https://github.com/tronprotocol/TIPs/blob/master/tip-17.md)                           |
-| TIP-19  | [Deferred transaction](https://github.com/tronprotocol/tips/blob/master/tip-19.md)                                       |
-| TIP-20  | [TRC-20 Token Standard](https://github.com/tronprotocol/TIPs/blob/master/tip-20.md)                                      |
-| TIP-23  | [Add the account world status tree root to the block header](https://github.com/tronprotocol/tips/blob/master/tip-23.md) |
-| TIP-24  | [Implement of DB storage with RocksDB](https://github.com/tronprotocol/tips/blob/master/tip-24.md)                       |
-| TIP-26  | [Create2](https://github.com/tronprotocol/tips/blob/master/tip-26.md)                                                    |
-| TIP-28  | [Built-in Message Queue in Event Subscription Model](https://github.com/tronprotocol/TIPs/blob/master/tip-28.md)         |
-| TIP-29  | [Bitwise shifting instructions in Tron](https://github.com/tronprotocol/tips/blob/master/tip-29.md)                      |
-| TIP-30  | [Code hash instructions](https://github.com/tronprotocol/tips/blob/master/tip-30.md)                                     |
-| TIP-31  | [Trigger constant contract](https://github.com/tronprotocol/tips/blob/master/tip-31.md)                                  |
-| TIP-32  | [Clear the ABI of contract](https://github.com/tronprotocol/tips/blob/master/tip-32.md)                                  |
-| TIP-34  | [Event subscribe to support contract without ABI](https://github.com/tronprotocol/tips/blob/tip34/tip-34.md)             |
-| TIP-37  | [Forbid using TransferContract & TransferAssetContract  for contract account](https://github.com/tronprotocol/tips/blob/master/tip-37.md)|
-| TIP-41  | [Optimize transactionHistoryStore occupancy space](https://github.com/tronprotocol/tips/blob/master/tip-41.md)           |
-| TIP-43  | [Precompiled contract function for signature parallel verification](https://github.com/tronprotocol/tips/blob/master/tip-43.md)|
-| TIP-44  | [Address.isContract instructions](https://github.com/tronprotocol/tips/blob/master/tip-44.md)                            |
-| TIP-51  | [Rate limit of API traffic](https://github.com/tronprotocol/tips/blob/master/tip-51.md)                                  |
-| TIP-54  | [Automatically active non-existent account when transferring TRX/TRC10 asset in a smart contract](https://github.com/tronprotocol/tips/blob/master/tip-54.md)|
-| TIP-60  | [Precompiled contract function for multi-signature verification](https://github.com/tronprotocol/tips/blob/master/tip-60.md)|
+| Tip-01  | [TRON Wallet Proposal](https://github.com/tronprotocol/TIPs/blob/master/tip-01.md)                                       |
+| Tip-10  | [TRON Token Standard](https://github.com/tronprotocol/TIPs/blob/master/tip-10.md)                                        |
+| Tip-12  | [TRON Event Subscription Model](https://github.com/tronprotocol/TIPs/blob/master/tip-12.md)                              |
+| Tip-13  | [Design of TRON account](https://github.com/tronprotocol/TIPs/blob/master/tip-13.md)                                     |
+| Tip-16  | [TRON Account Multi-Signature](https://github.com/tronprotocol/TIPs/blob/master/tip-16.md)                               |
+| Tip-17  | [TRON Adaptive Energy Limit Model](https://github.com/tronprotocol/TIPs/blob/master/tip-17.md)                           |
+| Tip-19  | [Deferred transaction](https://github.com/tronprotocol/tips/blob/master/tip-19.md)                                       |
+| Tip-20  | [TRC-20 Token Standard](https://github.com/tronprotocol/TIPs/blob/master/tip-20.md)                                      |
+| Tip-23  | [Add the account world status tree root to the block header](https://github.com/tronprotocol/tips/blob/master/tip-23.md) |
+| Tip-24  | [Implement of DB storage with RocksDB](https://github.com/tronprotocol/tips/blob/master/tip-24.md)                       |
+| Tip-26  | [Create2](https://github.com/tronprotocol/tips/blob/master/tip-26.md)                                                    |
+| Tip-28  | [Built-in Message Queue in Event Subscription Model](https://github.com/tronprotocol/TIPs/blob/master/tip-28.md)         |
+| Tip-29  | [Bitwise shifting instructions in Tron](https://github.com/tronprotocol/tips/blob/master/tip-29.md)                      |
+| Tip-30  | [Code hash instructions](https://github.com/tronprotocol/tips/blob/master/tip-30.md)                                     |
+| Tip-31  | [Trigger constant contract](https://github.com/tronprotocol/tips/blob/master/tip-31.md)                                  |
+| Tip-32  | [Clear the ABI of contract](https://github.com/tronprotocol/tips/blob/master/tip-32.md)                                  |
+| Tip-34  | [Event subscribe to support contract without ABI](https://github.com/tronprotocol/tips/blob/tip34/tip-34.md)             |
+| Tip-37  | [Forbid using TransferContract & TransferAssetContract  for contract account](https://github.com/tronprotocol/tips/blob/master/tip-37.md)|
+| Tip-41  | [Optimize transactionHistoryStore occupancy space](https://github.com/tronprotocol/tips/blob/master/tip-41.md)           |
+| Tip-43  | [Precompiled contract function for signature parallel verification](https://github.com/tronprotocol/tips/blob/master/tip-43.md)|
+| Tip-44  | [Address.isContract instructions](https://github.com/tronprotocol/tips/blob/master/tip-44.md)                            |
+| Tip-51  | [Rate limit of API traffic](https://github.com/tronprotocol/tips/blob/master/tip-51.md)
+| Tip-53  | [Optimize the current TRON delegation mechanism](https://github.com/tronprotocol/tips/blob/master/tip-53.md)|
+| Tip-54  | [Automatically active non-existent account when transferring TRX/TRC10 asset in a smart contract](https://github.com/tronprotocol/tips/blob/master/tip-54.md)|
+| Tip-60  | [Precompiled contract function for multi-signature verification](https://github.com/tronprotocol/tips/blob/master/tip-60.md)|
 
  
+
+
 
 
 TRON Improvement Proposals (TIPs) describe standards for the TRON platform, including core protocol specifications, client APIs, and contract standards.
