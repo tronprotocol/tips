@@ -7,7 +7,6 @@ status: <Draft | Last Call | Accepted | Final>
 type: <Standards Track (Core, Networking, Interface, TRC, VM) | Informational>
 category (*only required for Standard Track): <Core | Networking | Interface | TRC | VM>
 created: <date created on, in ISO 8601 (yyyy-mm-dd) format>
-layers: <Applications | Consensus | TVM>
 requires (*optional): <TIP number(s)>
 replaces (*optional): <TIP number(s)>
 ---  
