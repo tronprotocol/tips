@@ -20,8 +20,8 @@ Tron Improvement Proposals
 | Tip-24  | [Implement of DB storage with RocksDB](https://github.com/tronprotocol/tips/blob/master/tip-24.md)                       | @shydesky <shydesky@gmail.com> | Standards Track | Applications |
 | Tip-26  | [Create2](https://github.com/tronprotocol/tips/blob/master/tip-26.md)                                                    |                                | Standards Track | TVM |
 | Tip-28  | [Built-in Message Queue in Event Subscription Model](https://github.com/tronprotocol/TIPs/blob/master/tip-28.md)         | jiangyy <jiangyangyang@tron.network> | Standards Track | Applications |
-| Tip-29  | [Bitwise shifting instructions in Tron](https://github.com/tronprotocol/tips/blob/master/tip-29.md)                      | @ithinker1991 | Standards Track | TRC |
-| Tip-30  | [Code hash instructions](https://github.com/tronprotocol/tips/blob/master/tip-30.md)                                     | llwslc <llwslc@gmail.com> | Standards Track | TRC |
+| Tip-29  | [Bitwise shifting instructions in Tron](https://github.com/tronprotocol/tips/blob/master/tip-29.md)                      | @ithinker1991 | Standards Track | Applications |
+| Tip-30  | [Code hash instructions](https://github.com/tronprotocol/tips/blob/master/tip-30.md)                                     | llwslc <llwslc@gmail.com> | Standards Track | Applications |
 | Tip-31  | [Trigger constant contract](https://github.com/tronprotocol/tips/blob/master/tip-31.md)                                  | llwslc <llwslc@gmail.com> | Standards Track | TVM |
 | Tip-32  | [Clear the ABI of contract](https://github.com/tronprotocol/tips/blob/master/tip-32.md)                                  | llwslc <llwslc@gmail.com>| Standards Track | TVM |
 | Tip-34  | [Event subscribe to support contract without ABI](https://github.com/tronprotocol/tips/blob/tip34/tip-34.md)             | wubin1 <wubin1@tron.network> | Standards Track | TVM |
@@ -100,3 +100,13 @@ Includes improvements around TRON Virtual Machine.
 **Informational**  
 
 Describes a TRON design issue, or provides general guidelines or information to the TRON community, but does not propose a new feature.       
+
+<h2>TIP Layers</h2>
+
+**Applications**  
+
+**TVM**  
+
+**Informational**  
+
+**Consensus**
