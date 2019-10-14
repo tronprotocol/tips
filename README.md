@@ -105,8 +105,16 @@ Describes a TRON design issue, or provides general guidelines or information to 
 
 **Applications**  
 
+Applictions, includes update and create things about API and so on. 
+
 **TVM**  
+
+Improvements around TRON Virtual Machine. 
 
 **Informational**  
 
+Describe the design about TRON.
+
 **Consensus**
+
+Improvements around the consensus.
