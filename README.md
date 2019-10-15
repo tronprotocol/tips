@@ -6,33 +6,33 @@ TRON Improvement Proposals
 
 
 ## TIPs Guide 
-|  ID    | Title  | Author | Type | Hard fork |
-|  ----  | ----   | ----   | ---- | ----  |
-| TIP-01  | [TRON Wallet Proposal](https://github.com/tronprotocol/TIPs/blob/master/tip-01.md)                                       | getty.io| Standards Track |false |
-| TIP-10  | [TRON Token Standard](https://github.com/tronprotocol/TIPs/blob/master/tip-10.md)                                        | <zhaohong229@gmail.com> | Standards Track |false |
-| TIP-12  | [TRON Event Subscription Model](https://github.com/tronprotocol/TIPs/blob/master/tip-12.md)                              | <jiangyangyang@tron.network> |  Informational |false |
-| TIP-13  | [Design of TRON account](https://github.com/tronprotocol/TIPs/blob/master/tip-13.md)                                     | <justin@tron.network> | Standards Track   |false |
-| TIP-16  | [TRON Account Multi-Signature](https://github.com/tronprotocol/TIPs/blob/master/tip-16.md)                               | <zhaohong229@gmail.com> | Core |true |
-| TIP-17  | [TRON Adaptive Energy Limit Model](https://github.com/tronprotocol/TIPs/blob/master/tip-17.md)                           | <nanfengpo@hotmail.com> |Standards Track |true |
-| TIP-19  | [Deferred transaction](https://github.com/tronprotocol/tips/blob/master/tip-19.md)                                       | <jiangyangyang@tron.network> | Core |true |
-| TIP-20  | [TRC-20 Token Standard](https://github.com/tronprotocol/TIPs/blob/master/tip-20.md)                                      |  <zhaohong2292@gmail.com> | Standards Track |true |
-| TIP-23  | [Add the account world status tree root to the block header](https://github.com/tronprotocol/tips/blob/master/tip-23.md) | <liangzhiyan@tron.network> | Standards Track |true |
-| TIP-24  | [Implement of DB storage with RocksDB](https://github.com/tronprotocol/tips/blob/master/tip-24.md)                       |  <shydesky@gmail.com> | Standards Track |false |
-| TIP-26  | [Create2](https://github.com/tronprotocol/tips/blob/master/tip-26.md)                                                    |  <jiangxinjian@tron.network>  | VM |false |
-| TIP-28  | [Built-in Message Queue in Event Subscription Model](https://github.com/tronprotocol/TIPs/blob/master/tip-28.md)         |  <jiangyangyang@tron.network> | Informational |false |
-| TIP-29  | [Bitwise shifting instructions in Tron](https://github.com/tronprotocol/tips/blob/master/tip-29.md)                      | <jiangxinjian@tron.network> | VM |false |
-| TIP-30  | [Code hash instructions](https://github.com/tronprotocol/tips/blob/master/tip-30.md)                                     |  <llwslc@gmail.com> | VM |true |
-| TIP-31  | [Trigger constant contract](https://github.com/tronprotocol/tips/blob/master/tip-31.md)                                  |  <llwslc@gmail.com> | VM |true |
-| TIP-32  | [Clear the ABI of contract](https://github.com/tronprotocol/tips/blob/master/tip-32.md)                                  |  <llwslc@gmail.com>| VM | true |
-| TIP-34  | [Event subscribe to support contract without ABI](https://github.com/tronprotocol/tips/blob/tip34/tip-34.md)             |  <wubin1@tron.network> | Standards Track | false |
-| TIP-37  | [Forbid using TransferContract & TransferAssetContract for contract account](https://github.com/tronprotocol/tips/blob/master/tip-37.md)| <taihao.fu@gmail.com> | VM |true |
-| TIP-41  | [Optimize transactionHistoryStore occupancy space](https://github.com/tronprotocol/tips/blob/master/tip-41.md)           |  <wubin1@tron.network>| Standards Track |false |
-| TIP-43  | [Precompiled contract function for signature parallel verification](https://github.com/tronprotocol/tips/blob/master/tip-43.md)| <ksl2945@gmail.com>|Standards Track |true |
-| TIP-44  | [Address.isContract instructions](https://github.com/tronprotocol/tips/blob/master/tip-44.md)                            | <llwslc@gmail.com> | Standards Track |true |
-| TIP-51  | [Rate limit of API traffic](https://github.com/tronprotocol/tips/blob/master/tip-51.md)                                  |  <shydesky@gmail.com>| Interface |false |
-| TIP-53  | [Optimize the current TRON delegation mechanism](https://github.com/tronprotocol/tips/blob/master/tip-53.md)|<liangzhiyan@tron.network> | TRC   |true |
-| TIP-54  | [Automatically active non-existent account when transferring TRX/TRC10 asset in a smart contract](https://github.com/tronprotocol/tips/blob/master/tip-54.md)|  <jiangxinjian@tron.network> | VM | true |
-| TIP-60  | [Precompiled contract function for multi-signature verification](https://github.com/tronprotocol/tips/blob/master/tip-60.md)|  <ksl2945@gmail.com>| VM |true |
+|  ID   | Title | Author| Type| Hard fork| Status |
+|  ---  | ---   | ---   | --- | --- | --- |
+| TIP-01  | [TRON Wallet Proposal](https://github.com/tronprotocol/TIPs/blob/master/tip-01.md)                                       | getty.io| Standards Track |false | --- |
+| TIP-10  | [TRON Token Standard](https://github.com/tronprotocol/TIPs/blob/master/tip-10.md)                                        | <zhaohong229@gmail.com> | Standards Track |false | Final |
+| TIP-12  | [TRON Event Subscription Model](https://github.com/tronprotocol/TIPs/blob/master/tip-12.md)                              | <jiangyangyang@tron.network> |  Informational |false | Final |
+| TIP-13  | [Design of TRON account](https://github.com/tronprotocol/TIPs/blob/master/tip-13.md)                                     | <justin@tron.network> | Standards Track   |false | Final |
+| TIP-16  | [TRON Account Multi-Signature](https://github.com/tronprotocol/TIPs/blob/master/tip-16.md)                               | <zhaohong229@gmail.com> | Core |true | Final |
+| TIP-17  | [TRON Adaptive Energy Limit Model](https://github.com/tronprotocol/TIPs/blob/master/tip-17.md)                           | <nanfengpo@hotmail.com> |Standards Track |true | Final |
+| TIP-19  | [Deferred transaction](https://github.com/tronprotocol/tips/blob/master/tip-19.md)                                       | <jiangyangyang@tron.network> | Core |true | Accepted |
+| TIP-20  | [TRC-20 Token Standard](https://github.com/tronprotocol/TIPs/blob/master/tip-20.md)                                      |  <zhaohong2292@gmail.com> | Standards Track |true | Final |
+| TIP-23  | [Add the account world status tree root to the block header](https://github.com/tronprotocol/tips/blob/master/tip-23.md) | <liangzhiyan@tron.network> | Standards Track |true | Accepted |
+| TIP-24  | [Implement of DB storage with RocksDB](https://github.com/tronprotocol/tips/blob/master/tip-24.md)                       |  <shydesky@gmail.com> | Standards Track |false | Final(core) |
+| TIP-26  | [Create2](https://github.com/tronprotocol/tips/blob/master/tip-26.md)                                                    |  <jiangxinjian@tron.network>  | VM |false | Final |
+| TIP-28  | [Built-in Message Queue in Event Subscription Model](https://github.com/tronprotocol/TIPs/blob/master/tip-28.md)         |  <jiangyangyang@tron.network> | Informational |false | Accepted |
+| TIP-29  | [Bitwise shifting instructions in Tron](https://github.com/tronprotocol/tips/blob/master/tip-29.md)                      | <jiangxinjian@tron.network> | VM |false | Final |
+| TIP-30  | [Code hash instructions](https://github.com/tronprotocol/tips/blob/master/tip-30.md)                                     |  <llwslc@gmail.com> | VM |true | Final |
+| TIP-31  | [Trigger constant contract](https://github.com/tronprotocol/tips/blob/master/tip-31.md)                                  |  <llwslc@gmail.com> | VM |true | Final |
+| TIP-32  | [Clear the ABI of contract](https://github.com/tronprotocol/tips/blob/master/tip-32.md)                                  |  <llwslc@gmail.com>| VM | true | Final |
+| TIP-34  | [Event subscribe to support contract without ABI](https://github.com/tronprotocol/tips/blob/tip34/tip-34.md)             |  <wubin1@tron.network> | Standards Track | false | Final |
+| TIP-37  | [Forbid using TransferContract & TransferAssetContract for contract account](https://github.com/tronprotocol/tips/blob/master/tip-37.md)| <taihao.fu@gmail.com> | VM |true | Final |
+| TIP-41  | [Optimize transactionHistoryStore occupancy space](https://github.com/tronprotocol/tips/blob/master/tip-41.md)           |  <wubin1@tron.network>| Standards Track |false | Final |
+| TIP-43  | [Precompiled contract function for signature parallel verification](https://github.com/tronprotocol/tips/blob/master/tip-43.md)| <ksl2945@gmail.com>|Standards Track |true | Final |
+| TIP-44  | [Address.isContract instructions](https://github.com/tronprotocol/tips/blob/master/tip-44.md)                            | <llwslc@gmail.com> | Standards Track |true | Final |
+| TIP-51  | [Rate limit of API traffic](https://github.com/tronprotocol/tips/blob/master/tip-51.md)                                  |  <shydesky@gmail.com>| Interface |false | Accepted |
+| TIP-53  | [Optimize the current TRON delegation mechanism](https://github.com/tronprotocol/tips/blob/master/tip-53.md)|<liangzhiyan@tron.network> | TRC   |true | Final |
+| TIP-54  | [Automatically active non-existent account when transferring TRX/TRC10 asset in a smart contract](https://github.com/tronprotocol/tips/blob/master/tip-54.md)|  <jiangxinjian@tron.network> | VM | true | Final |
+| TIP-60  | [Precompiled contract function for multi-signature verification](https://github.com/tronprotocol/tips/blob/master/tip-60.md)|  <ksl2945@gmail.com>| VM |true | Accepted |
 
 
 
@@ -69,6 +69,14 @@ When you believe your TIP is mature and ready to progress past the draft phase, 
 - **Final (non-Core)**: A TIP that has been in Last Call for at least 2 weeks and any technical changes that were requested have been addressed by the author.  
 
 - **Final (Core)**: A TIP that the Core Devs have decided to implement and release in a future version or has already been released.    
+
+- **Active**: If the TIPs are never meant to be completed, the TIPs may also have a status of “Active” . 
+
+- **Abandoned**: This TIP is no longer pursued by the original authors or it may not be a (technically) preferred option anymore.
+
+- **Rejected**: A TIP that is fundamentally broken or a Core TIP that was rejected by the Core Devs and will not be implemented. An TIP cannot move on from this state.
+
+- **Superseded**: A TIP which was previously Final but is no longer considered state-of-the-art. Another TIP will be in Final status and reference the Superseded TIP. An TIP cannot move on from this state.
 
 <h2>TIP Types</h2>
 
