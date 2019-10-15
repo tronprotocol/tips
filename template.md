@@ -49,3 +49,10 @@ Test cases for an implementation are mandatory for TIPs that are affecting conse
 
 The implementations must be completed before any TIP is given status "Final", but it need not be completed before the TIP is accepted. While there is merit to the approach of reaching consensus on the specification and rationale before writing code, the principle of "rough consensus and running code" is still useful when it comes to resolving many discussions of API details.
 
+## Copyright
+
+The TIP's Copyright and related rights waived via CC0.
+
+## Acknowledgements
+
+Declare the contributors of this TIP.
