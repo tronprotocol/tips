@@ -6,8 +6,8 @@ TRON Improvement Proposals (TIPs) describe standards for the TRON platform, incl
 
 
 ## TIPs Guide 
-|  ID    | Title  | Author | Type | Hard fork |
-|  ----  | ----   | ----   | ---- | ----  |
+|  ID    | Title  | Author | Type | Hard&nbsp;fork |
+|  ----  | ----   | ----   | :----: | ----  |
 | TIP&nbsp;01  | [TRON Wallet Proposal](https://github.com/tronprotocol/TIPs/blob/master/tip-01.md)                                       | getty.io| Standards&nbsp;Track |false |
 | TIP&nbsp;10  | [TRON Token Standard](https://github.com/tronprotocol/TIPs/blob/master/tip-10.md)                                        | <zhaohong229@gmail.com> | Standards&nbsp;Track |false |
 | TIP&nbsp;12  | [TRON Event Subscription Model](https://github.com/tronprotocol/TIPs/blob/master/tip-12.md)                              | <jiangyangyang@tron.network> |  Informational |false |
