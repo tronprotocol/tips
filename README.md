@@ -36,10 +36,11 @@ TRON Improvement Proposals (TIPs) describe standards for the TRON platform, incl
 
 
 
-
-Before you submit a TIP, you need to create a issue for comment, and add the issue url to your TIP header.   
+ 
 
 <h2>To Submit a TIP</h2>
+
+Before you submit a TIP, you need to create a issue for comment, and add the issue url to your TIP header.    
 
 1.&nbsp;Fork the repository by clicking "Fork" in the top right.  
 
