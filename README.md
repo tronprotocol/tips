@@ -14,6 +14,8 @@ TRON Improvement Proposals (TIPs) describe standards for the TRON platform, incl
 ****
 
 ## TIPs Guide 
+
+
 |  ID    | Title  | Author | Type | Hard&nbsp;fork | Status |
 |  ----  | ----   | :----:   | :----: | :----:  | :----: |
 | TIP&nbsp;01  | [TRON Wallet Proposal](https://github.com/tronprotocol/TIPs/blob/master/tip-01.md)                                       | getty.io| Standards&nbsp;Track |false | -- |
@@ -45,7 +47,7 @@ TRON Improvement Proposals (TIPs) describe standards for the TRON platform, incl
 
 ## To Submit a TIP
 
-Before you submit a TIP, you need to create a issue for comment, and add the issue url to your TIP header.   
+Before you submit a TIP, you need to create an issue for comment and add the issue URL to your TIP header.   
 
 1.&nbsp;Fork the repository by clicking "Fork" in the top right.  
 
@@ -59,14 +61,15 @@ Make sure you include a discussions-to header with the URL to a discussion forum
 
 When you believe your TIP is mature and ready to progress past the draft phase, you should do one of two things:
 
-- For a Standards Track TIP of type Core, ask to have your issue added to the agenda of an upcoming All Core Devs meeting, where it can be discussed for inclusion in a future hard fork. If implementers agree to include it, the TIP editors will update the state of your TIP to 'Accepted'.  
+- For a Standards Track TIP of type Core, ask to have your issue added to the agenda of an upcoming All Core Devs meeting, where it can be discussed for inclusion in a future hard fork. If implementers agree to include it, the TIP editors will update the state of your TIP to 'Accepted'. 
 
-- For all other TIPs, open a PR changing the state of your TIP to 'Final'. An editor will review your draft and ask if anyone objects to its being finalized. If the editor decides there is no rough consensus, they may close the PR and request that you fix the issues in the draft before trying again.
+- For all other TIPs, open a PR changing the state of your TIP to 'Final'. An editor will review your draft and ask if anyone objects to its being finalized. If the editor decides there is no rough consensus, they may close the PR and request you fix the issues in the draft before trying again.
 
+****
 
 ## TIP Status
 
-TIPs are separated into a number of status.
+TIPs are separated into several statuses.
 
 - **Draft**: A TIP that is undergoing rapid iteration and changes.  
 
@@ -86,12 +89,13 @@ TIPs are separated into a number of status.
 
 - **Superseded**: A TIP which was previously Final but is no longer considered state-of-the-art. Another TIP will be in the Final status and cite the Superseded TIP. 
 
+****
 
 ## TIP Types
 
-TIPs are separated into a number of types, and each has its own list of TIPs.
+TIPs are separated into several types, and each has its list of TIPs.
 
-* **Standard Track**: Describes any change that affects most or all TRON implementations, such as a change in block or transaction validity rules, proposed application standards/conventions, or any change or addition that affects the interoperability of applications using TRON. Furthermore， Standard TIPs can be broken down into the following categories. 
+* **Standard Track**: Describes any change that affects most or all TRON implementations, such as a change in block or transaction validity rules, proposed application standards/conventions, or any change or addition that affects the interoperability of applications using TRON. Furthermore, Standard TIPs can be broken down into the following categories. 
 
 * **Core**: Improvements requiring a consensus fork, as well as changes that are not necessarily consensus critical but may be relevant to “core dev” discussions.    
 
