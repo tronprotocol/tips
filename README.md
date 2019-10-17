@@ -53,41 +53,45 @@ Before you submit a TIP, you need to create a issue for comment, and add the iss
 
 3.&nbsp;Submit a Pull Request to TRON's TIPs repository.
 
-Your first PR should be a first draft of the final TIP. It must meet the formatting criteria enforced by the build (largely, correct metadata in the header). An editor will manually review the first PR for a new TIP and assign it a number before merging it. Make sure you include a discussions-to header with the URL to a discussion forum or open GitHub issue where people can discuss the TIP as a whole. If a TIP is about the feature development of java-tron, and a PR of the development exists, in your TIP and your java-tron's PR you need to refer each other's github link.
+Your first PR should be a first draft of the final TIP. It must meet the formatting criteria enforced by the build (largely, correct metadata in the header). An editor will manually review the first PR for a new TIP and assign it a number before merging it. 
+
+Make sure you include a discussions-to header with the URL to a discussion forum or open GitHub issue where people can discuss the TIP as a whole. If a TIP is about the feature development of java-tron, and a PR of the development exists, in your TIP and your java-tron's PR you need to refer each other's github link.
 
 When you believe your TIP is mature and ready to progress past the draft phase, you should do one of two things:
 
 - For a Standards Track TIP of type Core, ask to have your issue added to the agenda of an upcoming All Core Devs meeting, where it can be discussed for inclusion in a future hard fork. If implementers agree to include it, the TIP editors will update the state of your TIP to 'Accepted'.  
 
-- For all other TIPs, open a PR changing the state of your TIP to 'Final'. An editor will review your draft and ask if anyone objects to its being finalised. If the editor decides there is no rough consensus, they may close the PR and request that you fix the issues in the draft before trying again.
+- For all other TIPs, open a PR changing the state of your TIP to 'Final'. An editor will review your draft and ask if anyone objects to its being finalized. If the editor decides there is no rough consensus, they may close the PR and request that you fix the issues in the draft before trying again.
 
 
 ## TIP Status
+
+TIPs are separated into a number of status.
 
 - **Draft**: A TIP that is undergoing rapid iteration and changes.  
 
 - **Last Call**: A TIP that is done with its initial iteration and ready for review by a wide audience.  
 
-- **Accepted**: A core TIP that has been in Last Call for at least 2 weeks and any technical changes that were requested have been addressed by the author. The process for Core Devs to decide whether to encode an TIP into their clients as part of a hard fork is not part of the TIP process. If such a decision is made, the TIP will move to final.  
+- **Accepted**: A core TIP that has been in the Last Call for at least 2 weeks and any technical changes that were requested have been addressed by the author. The process for Core Devs to decide whether to encode a TIP into their clients as part of a hard fork is not part of the TIP process. If such a decision is made, the TIP will move to the final.  
 
-- **Final (non-Core)**: A TIP that has been in Last Call for at least 2 weeks and any technical changes that were requested have been addressed by the author.  
+- **Final (non-Core)**: A TIP that has been in the Last Call for at least 2 weeks and any technical changes that were requested have been addressed by the author.  
 
-- **Final (Core)**: A TIP that the Core Devs have decided to implement and release in a future version or has already been released.    
+- **Final (Core)**: A TIP that the Core Devs have decided to implement and release in a future version or has already been released.
 
-- **Active**: If the TIPs are never meant to be completed, the TIPs may also have a status of “Active”. 
+- **Active**: If the TIPs are never meant to be completed, the TIPs may have a status of “Active”. 
 
 - **Abandoned**: If a TIP is no longer pursued by the original authors or it may not be a (technically) preferred option anymore.
 
 - **Rejected**: A TIP that is fundamentally broken or a Core TIP that was rejected by the Core Devs and will not be implemented. 
 
-- **Superseded**: A TIP which was previously Final but is no longer considered state-of-the-art. Another TIP will be in Final status and reference the Superseded TIP. 
+- **Superseded**: A TIP which was previously Final but is no longer considered state-of-the-art. Another TIP will be in the Final status and cite the Superseded TIP. 
 
 
 ## TIP Types
 
 TIPs are separated into a number of types, and each has its own list of TIPs.
 
-* **Standard Track**: Describes any change that affects most or all TRON implementations, such as a change a change in block or transaction validity rules, proposed application standards/conventions, or any change or addition that affects the interoperability of applications using TRON. Furthermore Standard TIPs can be broken down into the following categories. 
+* **Standard Track**: Describes any change that affects most or all TRON implementations, such as a change in block or transaction validity rules, proposed application standards/conventions, or any change or addition that affects the interoperability of applications using TRON. Furthermore， Standard TIPs can be broken down into the following categories. 
 
 * **Core**: Improvements requiring a consensus fork, as well as changes that are not necessarily consensus critical but may be relevant to “core dev” discussions.    
 
@@ -95,8 +99,7 @@ TIPs are separated into a number of types, and each has its own list of TIPs.
 
 * **Interface**: Includes improvements around client API/RPC specifications and standards.    
 
-* **TRC**: Application-level standards and conventions, including contract standards such as token standards (TRC-20)    
-
+* **TRC**: Application-level standards and conventions, including contract standards such as token standards (TRC-20).    
 * **VM**: Includes improvements around TRON Virtual Machine.    
 
-* **Informational**: Describes a TRON design issue, or provides general guidelines or information to the TRON community, but does not propose a new feature.       
+* **Informational**: Describes a TRON design issue, or provides general guidelines or information to the TRON community, but does not propose a new feature.
