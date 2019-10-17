@@ -51,9 +51,9 @@ Before you submit a TIP, you need to create a issue for comment, and add the iss
 
 2.&nbsp;Add your TIP to your fork of the repository. There is a [TIP template](https://github.com/tronprotocol/TIPs/blob/master/template.md) here.  
 
-3.&nbsp;Submit a Pull Request to TRON's TIPs repository. If the TIP is related to its java-tron's Pull Request, you need to reference it on the both two PR sides.
+3.&nbsp;Submit a Pull Request to TRON's TIPs repository.
 
-Your first PR should be a first draft of the final TIP. It must meet the formatting criteria enforced by the build (largely, correct metadata in the header). An editor will manually review the first PR for a new TIP and assign it a number before merging it. Make sure you include a discussions-to header with the URL to a discussion forum or open GitHub issue where people can discuss the TIP as a whole.  
+Your first PR should be a first draft of the final TIP. It must meet the formatting criteria enforced by the build (largely, correct metadata in the header). An editor will manually review the first PR for a new TIP and assign it a number before merging it. Make sure you include a discussions-to header with the URL to a discussion forum or open GitHub issue where people can discuss the TIP as a whole. If a TIP is about the feature development of java-tron, and a PR of the development exists, in your TIP and your java-tron's PR you need to refer each other's github link.
 
 When you believe your TIP is mature and ready to progress past the draft phase, you should do one of two things:
 
