@@ -2,7 +2,6 @@
 
 TRON Improvement Proposals (TIPs) describe standards for the TRON platform, including core protocol specifications, client APIs, and contract standards.
 
-[Gitter](https://gitter.im/tronprotocol/TIPs)  
 ****
 
 ## Contents
@@ -18,7 +17,6 @@ TRON Improvement Proposals (TIPs) describe standards for the TRON platform, incl
 
 |  ID    | Title  | Author | Type | Hard&nbsp;fork | Status |
 |  ----  | ----   | :----:   | :----: | :----:  | :----: |
-| TIP&nbsp;01  | [TRON Wallet Proposal](https://github.com/tronprotocol/TIPs/blob/master/tip-01.md)                                       | getty.io| Standards&nbsp;Track |false | -- |
 | TIP&nbsp;10  | [TRON Token Standard](https://github.com/tronprotocol/TIPs/blob/master/tip-10.md)                                        | <zhaohong229@gmail.com> | Standards&nbsp;Track |false | Final |
 | TIP&nbsp;12  | [TRON Event Subscription Model](https://github.com/tronprotocol/TIPs/blob/master/tip-12.md)                              | <jiangyangyang@tron.network> |  Informational |false | Final |
 | TIP&nbsp;13  | [Design of TRON account](https://github.com/tronprotocol/TIPs/blob/master/tip-13.md)                                     | <justin@tron.network> | Standards&nbsp;Track   |false | Final |
@@ -106,3 +104,5 @@ TIPs are separated into several types, and each has its list of TIPs.
 * **VM**: Includes improvements around TRON Virtual Machine.    
 
 * **Informational**: Describes a TRON design issue, or provides general guidelines or information to the TRON community, but does not propose a new feature.
+
+For further discussion, please enter [Gitter](https://gitter.im/tronprotocol/TIPs)  
