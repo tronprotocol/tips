@@ -24,7 +24,6 @@ TRON Improvement Proposals (TIPs) describe standards for the TRON platform, incl
 | TIP&nbsp;13  | [Design of TRON account](https://github.com/tronprotocol/TIPs/blob/master/tip-13.md)                                     | <justin@tron.network> | Standards&nbsp;Track   |false | Final |
 | TIP&nbsp;16  | [TRON Account Multi-Signature](https://github.com/tronprotocol/TIPs/blob/master/tip-16.md)                               | <zhaohong229@gmail.com> | Core |true | Final |
 | TIP&nbsp;17  | [TRON Adaptive Energy Limit Model](https://github.com/tronprotocol/TIPs/blob/master/tip-17.md)                           | <nanfengpo@hotmail.com> |Standards&nbsp;Track |true | Final |
-| TIP&nbsp;19  | [Deferred transaction](https://github.com/tronprotocol/tips/blob/master/tip-19.md)                                       | <jiangyangyang@tron.network> | Core |true | Accepted |
 | TIP&nbsp;20  | [TRC-20 Token Standard](https://github.com/tronprotocol/TIPs/blob/master/tip-20.md)                                      |  <zhaohong2292@gmail.com> | Standards&nbsp;Track |true | Final |
 | TIP&nbsp;23  | [Add the account world status tree root to the block header](https://github.com/tronprotocol/tips/blob/master/tip-23.md) | <liangzhiyan@tron.network> | Standards&nbsp;Track |true | Accepted |
 | TIP&nbsp;24  | [Implement of DB storage with RocksDB](https://github.com/tronprotocol/tips/blob/master/tip-24.md)                       |  <shydesky@gmail.com> | Standards&nbsp;Track |false | Final |
