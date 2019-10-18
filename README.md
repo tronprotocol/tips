@@ -26,7 +26,7 @@ TRON Improvement Proposals (TIPs) describe standards for the TRON platform, incl
 | TIP&nbsp;23  | [Add the account world status tree root to the block header](https://github.com/tronprotocol/tips/blob/master/tip-23.md) | <liangzhiyan@tron.network> | Standards&nbsp;Track |true | Accepted |
 | TIP&nbsp;24  | [Implement of DB storage with RocksDB](https://github.com/tronprotocol/tips/blob/master/tip-24.md)                       |  <shydesky@gmail.com> | Standards&nbsp;Track |false | Final |
 | TIP&nbsp;26  | [Create2](https://github.com/tronprotocol/tips/blob/master/tip-26.md)                                                    |  <jiangxinjian@tron.network>  | VM |false | Final |
-| TIP&nbsp;28  | [Built-in Message Queue in Event Subscription Model](https://github.com/tronprotocol/TIPs/blob/master/tip-28.md)         |  <jiangyangyang@tron.network> | Informational |false | Accepted |
+| TIP&nbsp;28  | [Built-in Message Queue in Event Subscription Model](https://github.com/tronprotocol/TIPs/blob/master/tip-28.md)         |  <jiangyangyang@tron.network> | Informational |false | Final |
 | TIP&nbsp;29  | [Bitwise shifting instructions in Tron](https://github.com/tronprotocol/tips/blob/master/tip-29.md)                      | <jiangxinjian@tron.network> | VM |false | Final |
 | TIP&nbsp;30  | [Code hash instructions](https://github.com/tronprotocol/tips/blob/master/tip-30.md)                                     |  <llwslc@gmail.com> | VM |true | Final |
 | TIP&nbsp;31  | [Trigger constant contract](https://github.com/tronprotocol/tips/blob/master/tip-31.md)                                  |  <llwslc@gmail.com> | VM |true | Final |
