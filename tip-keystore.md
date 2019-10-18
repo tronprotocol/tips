@@ -26,9 +26,9 @@ The proposal presents the explicit method to generate the keystore file and impr
 
 First, the user needs to provide the passphrase as the input of [PBKDF2](https://en.wikipedia.org/wiki/PBKDF2). The key derivation function has five input parameters:
 
-```
-DK = PBKDF2(PRF, Passphrase, Salt, c, dkLen)
-```
+
+    K = PBKDF2(PRF, Passphrase, Salt, c, dkLen)
+
 where
 * *PRF* is a pseudorandom function, such as sha256
 * *Passphrase* is the master password from which a derived key is generated
@@ -52,9 +52,9 @@ where
 
 MAC (Message authentication code) is used to check the correctness of derived key *DK* when the user try to decrypt the private key 
 with the passphrase. [SHA3](https://en.wikipedia.org/wiki/SHA-3) is used to produce the MAC:
-```
-mac = SHA3-256 (DK, C)
-```
+
+    mac = SHA3-256 (DK, C)
+
 where
 * *DK* is the derived key
 * *C* is the cipher text of private key 
