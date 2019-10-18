@@ -30,35 +30,35 @@ First, the user needs to provide the passphrase as the input of [PBKDF2](https:/
 DK = PBKDF2(PRF, Passphrase, Salt, c, dkLen)
 ```
 where
-* PRF is a pseudorandom function, such as sha256
-* Password is the master password from which a derived key is generated
-* Salt is a sequence of bits, known as a cryptographic salt
-* c is the number of iterations desired
-* dkLen is the desired bit-length of the derived key
-* DK is the generated derived key
+* *PRF* is a pseudorandom function, such as sha256
+* *Passphrase* is the master password from which a derived key is generated
+* *Salt* is a sequence of bits, known as a cryptographic salt
+* *c* is the number of iterations desired
+* *dkLen* is the desired bit-length of the derived key
+* *DK* is the generated derived key
 
 ### Symmetric Encryption
-The derived key DK is used as key of [AES](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard) to encrypt the real private key of user.
-```
-C = AES-128(DK, PrivK, CTR)
-```
+The derived key *DK* is used as key of [AES](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard) to encrypt the real private key of user.
+
+    C = AES-128(DK, PrivK, CTR)
+
 where
-* DK is the derived key
-* PrivK is the private key of user 
-* CTR is the counter encryption mode 
-* C is the generated cipher text
+* *DK* is the derived key
+* *PrivK* is the private key of user 
+* *CTR* is the counter encryption mode 
+* *C* is the generated cipher text
 
 ### Message Authentication Code
 
-MAC (Message authentication code) is used to check the correctness of derived key DK when the user try to decrypt the private key 
+MAC (Message authentication code) is used to check the correctness of derived key *DK* when the user try to decrypt the private key 
 with the passphrase. [SHA3](https://en.wikipedia.org/wiki/SHA-3) is used to produce the MAC:
 ```
 mac = SHA3-256 (DK, C)
 ```
 where
-* DK is the derived key
-* C is the cipher text of private key 
-* mac is the generated MAC
+* *DK* is the derived key
+* *C* is the cipher text of private key 
+* *mac* is the generated MAC
 
 ## Rationale
 
