@@ -84,7 +84,9 @@ TIPs are separated into several statuses.
 
 - **Rejected**: A TIP that is fundamentally broken or a Core TIP that was rejected by the Core Devs and will not be implemented. 
 
-- **Superseded**: A TIP which was previously Final but is no longer considered state-of-the-art. Another TIP will be in the Final status and cite the Superseded TIP. 
+- **Superseded**: A TIP which was previously Final but is no longer considered state-of-the-art. Another TIP will be in the Final status and cite the Superseded TIP.
+
+- **Deferred**: A TIP which isn't accepted now, it may be accepted in the future. 
 
 ****
 
@@ -101,6 +103,7 @@ TIPs are separated into several types, and each has its list of TIPs.
 * **Interface**: Includes improvements around client API/RPC specifications and standards.    
 
 * **TRC**: Application-level standards and conventions, including contract standards such as token standards (TRC-20).    
+
 * **VM**: Includes improvements around TRON Virtual Machine.    
 
 * **Informational**: Describes a TRON design issue, or provides general guidelines or information to the TRON community, but does not propose a new feature.
