@@ -133,7 +133,7 @@ We represent a extended spending key as (*ask*, *nsk*, *ovk*, *dk*, *c*), where 
 is the normal expanded spending key, *dk* is a diversifier key, and *c* is the chain code.
 
 We represent a extended full viewing key as (*ak*, *nk*, *ovk*, *dk*, *c*), where (*ak*, *nk*, *ovk*)
-is the normal Sapling full viewing key, *dk* is the same diversifier key as above, and *c* is the chain code.
+is the normal full viewing key, *dk* is the same diversifier key as above, and *c* is the chain code.
 
 #### The helper functions
 
@@ -143,9 +143,10 @@ Define EncodeExtFVKParts(*ak*, *nk*, *ovk*, *dk*) := LEBS2OSP<sub>256</sub> (rep
 
 #### Master Key Generation
 
-Let *S* be a seed byte sequence of a chosen length, which MUST be at least 32 bytes.
+Let path<sub>i</sub>= m / xx' / 195' / i' / 0', *i* denotes the *i*-th account.  Let sk<sub>path<sub>i</sub></sub>, pk<sub>path<sub>i</sub></sub>, c<sub>path<sub>i</sub></sub>
+denotes the private key, public key and chain code at path<sub>i</sub> derived by [BIP32](https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki).
 
-- Calculate *I* = BLAKE2b-512("TronIPXX", *S*).
+- Calculate *I* = BLAKE2b-512 ("TronIPXX", *sk<sub>path<sub>i</sub></sub>*||*pk<sub>path<sub>i</sub></sub>*||*c<sub>path<sub>i</sub></sub>* ).
 - Split *I* into two 32-byte sequences, *I*<sub>L</sub> and *I*<sub>R</sub> .
 - Use *I*<sub>L</sub> as the master spending key *sk*<sub>m</sub> , and *I*<sub>R</sub> as the master chain code
   *c*<sub>m</sub>.
@@ -162,7 +163,7 @@ Let *S* be a seed byte sequence of a chosen length, which MUST be at least 32 by
 - Return (*ask*<sub>m</sub> , *nsk*<sub>m</sub> , *ovk*<sub>m</sub> , *dk*<sub>m</sub> , *c*<sub>m</sub> ) as the
   master extended spending key *m*.
 
-#### Child Key Derivation
+### Child Key Derivation
 
 As in BIP 32, the method for deriving a child extended key, given a parent extended key and an index *i*,
 depends on the type of key being derived, and whether this is a hardened or non-hardened derivation.
@@ -177,7 +178,7 @@ CDKsk((*ask*<sub>par</sub> , *nsk*<sub>par</sub> , *ovk*<sub>par</sub> , *dk*<su
   - If so (hardened child): let *I* = PRF<sup>expand</sup> (*c*<sub>par</sub> , [0x11] || EncodeExtSKParts(*ask*<sub>par</sub> , *nsk*<sub>par</sub> , *ovk*<sub>par</sub> , *dk*<sub>par</sub> ) || I2LEOSP<sub>32</sub> (*i*))
   - If not (normal child):  let *I* = PRF<sup>expand</sup> (*c*<sub>par</sub> , [0x12] || EncodeExtFVKParts(*ak*<sub>par</sub> , *nk*<sub>par</sub> , *ovk*<sub>par</sub> , *dk*<sub>par</sub> ) || I2LEOSP<sub>32</sub> (*i*))
     where (*nk*<sub>par</sub> , *ak*<sub>par</sub> , *ovk*<sub>par</sub> ) is the full viewing key derived from
-    (*ask*<sub>par</sub> , *nsk*<sub>par</sub> , *ovk*<sub>par</sub> ) as described in [#sapling-key-components]_.
+    (*ask*<sub>par</sub> , *nsk*<sub>par</sub> , *ovk*<sub>par</sub> ).
 
 - Split *I* into two 32-byte sequences, *I*<sub>L</sub> and *I*<sub>R</sub> .
 - Let *I*<sub>ask</sub> = ToScalar(PRF<sup>expand</sup> (*I*<sub>L</sub> , [0x13]))
@@ -228,40 +229,28 @@ FF1-AES256 as a Pseudo-Random Permutation as follows:
 A valid diversifier *d*<sub>j</sub> is one for which DiversifyHash(*d*<sub>j</sub>) ≠ ⊥.
 For a given *dk*, approximately half of the possible values of *j* yield valid diversifiers.
 
-The default diversifier for a Sapling extended key is defined to be *d*<sub>j</sub>\ , where *j* is the
+The default diversifier for an extended key is defined to be *d*<sub>j</sub> , where *j* is the
 least nonnegative integer yielding a valid diversifier.
 
 
-### Specification: Fingerprints and Tags
+### Fingerprints and Tags
 
 
 #### Full Viewing Key Fingerprints and Tags
 
 
-A full viewing key with raw encoding *FVK*  is given by:
+A full viewing key fingerprint with raw encoding *FVK*  is given by:
 
     BLAKE2b-256("TronFVFP", FVK)
 
-It MAY be used to uniquely identify a particular Sapling full viewing key.
+It MAY be used to uniquely identify a particular full viewing key.
 
 A "full viewing key tag" is the first 4 bytes of the corresponding full viewing key
 fingerprint. It is intended for optimizing performance of key lookups, and MUST NOT be assumed to
 uniquely identify a particular key.
 
 
-
-#### Seed Fingerprints
-
-A "seed fingerprint" for the master seed *S* of a hierarchical deterministic wallet is given by:
-
-    BLAKE2b-256("Tron_HD_Seed_FP", S)
-
-It MAY be used to uniquely identify a particular hierarchical deterministic wallet.
-
-No corresponding short tag is defined.
-
-
-### Specification: Key Encodings
+### Key Encodings
 
 The following encodings are analogous to the ``xprv`` and ``xpub`` encodings defined
 in BIP 32 for transparent keys and addresses. Each key type has a raw representation
@@ -270,7 +259,7 @@ and a [Bech32](https://github.com/bitcoin/bips/blob/master/bip-0173.mediawiki) e
 
 #### Extended Spending Keys
 
-A Sapling extended spending key (*ask*, *nsk*, *ovk*, *dk*, *c*), at depth *depth*,
+An extended spending key (*ask*, *nsk*, *ovk*, *dk*, *c*), at some *path*,
 with parent full viewing key tag *parent_fvk_tag* and child number *i*, is
 represented as a byte sequence:
 
@@ -293,8 +282,8 @@ represented as a byte sequence:
 For the master extended full viewing key, *depth* is 0, *parent_fvk_tag* is 4 zero bytes,
 and *i* is 0.
 
-When encoded as Bech32, the Human-Readable Part is ``zxviews`` for the production
-network, or ``zxviewtestsapling`` for the test network.
+When encoded as Bech32, the Human-Readable Part is ``txviews`` for the production
+network, or ``txviewtest`` for the test network.
 
 
 ## Rationale
@@ -313,8 +302,6 @@ TBC
 * https://github.com/zcash/librustzcash/pull/29
 
 
-## References
 
-https://github.com/zcash/zips/blob/master/zip-0032.rst
 
 
