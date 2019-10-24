@@ -1,6 +1,6 @@
 ```
 tip: xx
-title: Pirvate key protection by passphrase in keystore
+title: Tron Keystore Specification
 author: xxx<xxx@tron.network>
 discussions-to: https://github.com/tronprotocol/TIPs/issues/xx
 status: draft
