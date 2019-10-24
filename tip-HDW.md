@@ -2,6 +2,10 @@
 TIP: xx
 Title: Tron Wallet Proposal - Hierarchical Deterministic Wallets
 Author: xxx.xx
+discussions-to: https://github.com/tronprotocol/TIPs/issues/xx
+status: draft
+type: Standards Track
+category: TRC
 Created: 2019-10-22
 ```
 
