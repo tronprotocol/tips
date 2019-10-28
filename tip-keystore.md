@@ -15,7 +15,7 @@ This TIP describes the keystore generation method to store the private key in wa
 
 ## Motivation
 
-Private key is fatal important for users, which should be kept secret. Mnemonic code specified in [BIP39](https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki) is used to 
+Private key is fatally important for users, which should be kept secret. Mnemonic code specified in [BIP39](https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki) is used to 
 generate the private key, but it is not convenient for users to remember. Usually, encrypted private key is stored in keystore file and can be restored by users by passphrase. 
 The proposal presents the explicit method to generate the keystore file and guarantee the security of users' private keys.
 
