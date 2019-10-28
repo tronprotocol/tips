@@ -1,8 +1,8 @@
 ```
 TIP: xx
-Title: Tron Wallet Proposal - Hierarchical Deterministic Wallets
+Title: Tron Hierarchical Deterministic Wallets
 Author: xxx.xx
-discussions-to: https://github.com/tronprotocol/TIPs/issues/xx
+discussions-to: https://github.com/tronprotocol/tips/issues/102
 status: draft
 type: Standards Track
 category: TRC

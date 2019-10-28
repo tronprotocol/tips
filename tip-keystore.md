@@ -2,7 +2,7 @@
 tip: xx
 title: Tron Keystore Specification
 author: xxx<xxx@tron.network>
-discussions-to: https://github.com/tronprotocol/TIPs/issues/xx
+discussions-to: https://github.com/tronprotocol/tips/issues/101
 status: draft
 type: Standards Track
 category: TRC
