@@ -17,7 +17,7 @@ and [BIP44](https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki), to 
 ## Motivation
 
 [BIP32](https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki) and [BIP44](https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki) are the standard mechanism by which wallets for Bitcoin and its derivatives  generate keys and addresses deterministically. 
-However, they only support the transparent address generation and neglect the compatibility for the shielded addresses generation. At present, Tron network has updated to support the shielded addresses by ZK-SNARKs, so it is necessary to provide the standard compatibility for shielded hierarchical deterministic wallets.  
+However, they only support the transparent address generation and neglect the compatibility for the shielded addresses generation. At present, Tron network has planned to support the shielded addresses by ZK-SNARKs, so it is necessary to provide the standard compatibility for shielded hierarchical deterministic wallets.  
 
 ## Specification
 
