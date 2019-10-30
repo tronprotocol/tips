@@ -3,7 +3,7 @@ tip: 19
 title: TRC-19 Deferred transaction
 author: jiangyy jiangyangyang@tron.network
 discussions to: https://github.com/tronprotocol/tips/issues/19
-status: Deferred
+status: Accepted
 type: Standards Track
 category: TRC
 created: 2019-01-30
