@@ -22,7 +22,7 @@ The following standard allows for the implementation of a standard API for token
 A standard interface allows any language to implement the token.
 ## Specification
 
-## Token
+### Token
 https://github.com/tronprotocol/protocol/blob/6138aa7ac3af751ee778259a140d3484f8d9e5a4/core/Tron.proto#L70
 #### asset_issued_ID
 returns the id of token
@@ -76,7 +76,7 @@ free bandwidth used by all accounts for transferring this specific asset.
 #### public_latest_free_net_time
 the amount of time used on free bandwidth when the token was most recently transferred
 
-## The influences of the proposal AllowSameTokenName
+### The influences of the proposal AllowSameTokenName
 The identity of the token will be id instead of name and every token will support decimal places after the proposal is approved, so it will affect the following structure and contracts.
 
 ```
