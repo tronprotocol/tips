@@ -20,14 +20,14 @@ This will allow dapps developers or exchange to subscribe any event triggered on
 
 ## Specification
 
-### Events to subscribe
+## Events to subscribe
 
 - **transactionTrigger**, triggered after the transaction is processed
 - **blockTrigger**, triggered after a block is inserted into block chain
 - **contractLogTrigger**, triggered after smart contract is executed
 - **contractEventTrigger**,  triggered after smart contract is executed
 
-### Filter
+## Filter
 
 - **fromBlock**: the beginning of the queried range, it could be set to "", "earliest", "latest" or specified block number, the default value is "latest". "earliest" is the oldest block number from the beginning of the subscription. "latest" is the latest block number when the filter is set.
 - **toBlock**: end of the range, it could be set to "", "latest" or specified block number, the default value is "latest".
@@ -36,7 +36,7 @@ This will allow dapps developers or exchange to subscribe any event triggered on
 
 **Notice**: No support the historical data query.
 
-### Smart Contract log
+## Smart Contract log
 **contractLogTrigger** is used to represent the object of smart contract log, which has following parameters:
 
 - **transactionId**, transaction id.
@@ -47,7 +47,7 @@ This will allow dapps developers or exchange to subscribe any event triggered on
 - **contractTopics**, list of topics that Log can output in Solidity language.
 - **data**, data filed that Log can output in Solidity language.
 
-### Smart Contract event
+## Smart Contract event
 **contracteventTrigger** is used to represent the object of smart contract log, which has following parameters:
 
 - **transactionId**, transaction id.
@@ -60,14 +60,14 @@ This will allow dapps developers or exchange to subscribe any event triggered on
 - **data**, data filed that log can output in Solidity language.
 
  
-### Trigger event
+## Trigger event
 
 - Triggering block event, create a blockTrigger when the block is inserted.
 - Triggering transaction event, create a txsTrigger before the transaction is executed.
 - Triggeingr smart contract log, create a contractLogTrigger after the contract is executed.
 - Triggering smart contract event, create a contractEventTrigger after the contract is executed.
 
-### Send trigger
+## Send trigger
 java-tron sends the trigger to the plugin asynchronously, and the trigger must satisfy the filter condition. The following is a filter example, the block number of the trigger must be between fromBlock and toBlock, the contractAddress must be "AddressA", the topics must include "TopicA", and only the Trigger that satisfies the condition will be sent.
 
 - **fromBlock**: 0x1000000 
@@ -75,7 +75,7 @@ java-tron sends the trigger to the plugin asynchronously, and the trigger must s
 - **contractAddress**: "AddressA" 
 - **topics**: ["TopicA"]
 
-## Implementation
+## Plugin implementation
 The function of the plugin is to implement event dump. Developers can customize it according to their needs, such as Message queue, Kafka, MongoDB or writing to local files.
 
 The plugin is independent of java-tron and is not loaded by default.  It can be enabled by configuring command line parameters. By default, only subscriptions to smart contract event are supported. Developers could subscribe to other triggers by modifying configuration files.
