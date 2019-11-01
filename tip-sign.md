@@ -1,6 +1,6 @@
 ```
-tip: xx
-title: Tron Message Signing Specification
+tip: 104
+title: Message Signing Specification
 author: federico<federico.zhen@tron.network>
 discussions-to: https://github.com/tronprotocol/tips/issues/101
 status: draft
@@ -69,7 +69,6 @@ This encoding is deterministic because the individual components are. The encodi
 
 The 'version byte' is fixed to `0x01`, the 'version specific data' is the 32-byte domain separator `domainSeparator` and the 'data to sign' is the 32-byte `hashStruct(message)`.
 
-[eip191]: https://github.com/ethereum/EIPs/blob/master/EIPS/eip-191.md
 
 ### Definition of typed structured data `𝕊`
 
@@ -125,10 +124,10 @@ The struct values are encoded recursively as `hashStruct(value)`. This is undefi
 
 
 ```
-domainSeparator = hashStruct(tipxxxDomain)
+domainSeparator = hashStruct(tip104Domain)
 ```
 
-where the type of `tipxxxDomain` is a struct named `TIPXXXDomain` with one or more of the below fields. Protocol designers only need to include the fields that make sense for their signing domain. Unused fields are left out of the struct type.
+where the type of `tip104Domain` is a struct named `TIP104Domain` with one or more of the below fields. Protocol designers only need to include the fields that make sense for their signing domain. Unused fields are left out of the struct type.
 
 *   `string name` the user readable name of signing domain, i.e. the name of the DApp or the protocol.
 *   `string version` the current major version of the signing domain. Signatures from different versions are not compatible.
