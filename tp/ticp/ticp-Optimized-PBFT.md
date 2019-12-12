@@ -1,5 +1,12 @@
-
-Optimized PBFT Consensus Algorithm
+```
+tip: 1
+title: Optimized PBFT Consensus Algorithm
+author: @lvs007
+type: Tron Inter-blockchain Communication Protocol
+category: TRC
+status: Draft
+created: 2019-12-12
+```
 
 ## Summary
 

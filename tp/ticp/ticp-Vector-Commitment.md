@@ -120,7 +120,3 @@ coming soon
 ## Reference
 -  [Bitcoin: A Peer-to-Peer Electronic Cash System](https://bitcoin.org/bitcoin.pdf)
 -   [Vector Commitments and their Applications](https://eprint.iacr.org/2011/495.pdf)
-
-## Copyright
-All content herein is licensed under  [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0).
- 
