@@ -36,7 +36,9 @@ message Ping {
 }
 ```
 `from` is the message sender. 
+
 `to` is the message recipient. 
+
 `version` is used to identify a P2P network. 
 
 When a `Ping` packet is received, the recipient should reply with a `Pong` packet. It may also consider the sender for addition into the local table. Implementations should ignore any mismatches in version.
@@ -83,9 +85,9 @@ The k-bucket entries are sorted by the time last seen — least-recently seen no
 
 A lookup locates the `k` closest nodes to a node ID.
 
-The lookup initiator starts by picking `α` closest nodes to the target it knows of. The initiator then sends concurrent FindNeighbours packets to those nodes. `α` is a system-wide concurrency parameter, such as 3. In the recursive step, the initiator resends FindNeighbours to nodes it has learned about from previous queries. Of the `k` nodes the initiator has heard of closest to the target, it picks `α` that it has not yet queried and resends FindNeighbours to them. Nodes that fail to respond quickly are removed from consideration.
+The lookup initiator starts by picking `α` closest nodes to the target it knows of. The initiator then sends concurrent `FindNeighbours` packets to those nodes. `α` is a system-wide concurrency parameter, such as 3. In the recursive step, the initiator resends `FindNeighbours` to nodes it has learned about from previous queries. Of the `k` nodes the initiator has heard of closest to the target, it picks `α` that it has not yet queried and resends `FindNeighbours` to them. Nodes that fail to respond quickly are removed from consideration.
 
-If a round of FindNeighbours queries fails to return a node any closer than the closest already seen, the initiator resends the find node to all of the `k` closest nodes it has not already queried. The lookup terminates when the initiator has queried and gotten responses from the `k` closest nodes it has seen.
+If a round of `FindNeighbours` queries fails to return a node any closer than the closest already seen, the initiator resends the find node to all of the `k` closest nodes it has not already queried. The lookup terminates when the initiator has queried and gotten responses from the `k` closest nodes it has seen.
 
 ```typescript
 MAX_STEPS = 8;
