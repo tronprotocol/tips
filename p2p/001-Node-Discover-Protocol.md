@@ -35,10 +35,8 @@ message Ping {
   int64 timestamp = 4;
 }
 ```
-`from` is the message sender. 
-
-`to` is the message recipient. 
-
+`from` is the message sender.
+`to` is the message recipient.
 `version` is used to identify a P2P network. 
 
 When a `Ping` packet is received, the recipient should reply with a `Pong` packet. It may also consider the sender for addition into the local table. Implementations should ignore any mismatches in version.
