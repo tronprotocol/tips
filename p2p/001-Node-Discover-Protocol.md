@@ -3,7 +3,7 @@ This specification defines the Node Discovery protocol, a Kademlia-like DHT that
 
 ## Definitions
 ### Node ID
-Identity of a node, consists of 64 bytes. Each node has a unique ID
+Identity of a node, consists of 64 bytes. Each node has a unique ID.
 ### Node Distance
 It is a logical distance, the `distance` between two node IDs is the bitwise exclusive or on the hashes of the IDs, taken as the number.
 ```
@@ -36,10 +36,10 @@ message Ping {
 }
 ```
 `from` is the message sender.
-`to` is the message  recipient.
+`to` is the message recipient.
 `version` is used to identify a P2P network.
 
-When a `Ping` packet is received, the recipient should reply with a `Pong` packet. It may also consider the sender for addition into the local table. Implementations should ignore any  mismatches in version.
+When a `Ping` packet is received, the recipient should reply with a `Pong` packet. It may also consider the sender for addition into the local table. Implementations should ignore any mismatches in version.
 
 ### Pong Packet (0x02)
 ```typescript
@@ -61,7 +61,7 @@ message FindNeighbours {
 ```
 `targetId` consists of 64 bytes.
 
-A `FindNeighbours`  packet requests information about nodes close to `targetId`, When `FindNeighbours`  is received, the recipient should reply with Neighbors packets containing the closest 16 nodes to `targetId`  found in its local table.
+A `FindNeighbours` packet requests information about nodes close to `targetId`, When `FindNeighbours` is received, the recipient should reply with Neighbors packets containing the closest 16 nodes to `targetId` found in its local table.
 
 ###  Neighbors Packet (0x04)
 ```typescript
