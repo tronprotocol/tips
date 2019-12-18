@@ -79,9 +79,13 @@ Each node only votes once on blocks of the same height; messages already receive
 
 TRON's optimized PBFT consensus algorithm also features a Timeout mechanism. If a round of PBFT algorithm fails to reach finality within a given period of time, all data related to this round will be cleared by all nodes. But one difference from the traditional PBFT is that TRON will not re-initiate this round.
 
-Figure 1
+<center>Figure 1</center>
 
-Figure 2
+![](https://github.com/tronprotocol/tips/raw/master/tp/ticp/ticp-optimized-pbft/pbft-1.png)
+
+<center>Figure 2</center>
+
+![](https://github.com/tronprotocol/tips/raw/master/tp/ticp/ticp-optimized-pbft/pbft-2.png)
 
 ### Datatypes
 
