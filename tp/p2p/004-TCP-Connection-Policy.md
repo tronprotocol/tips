@@ -1,5 +1,5 @@
 ## Abstract
-This document introduces the TCP connection policy, including methods to select neighboring nodes and to process a TCP connection request.
+This document introduces the TCP Connection Policy, including methods to select neighboring nodes and to process a TCP connection request.
 
 ## Definitions
 
