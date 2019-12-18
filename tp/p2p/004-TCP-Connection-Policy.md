@@ -59,13 +59,13 @@ channelManager.getActiveNodes().forEach((address, node) -> {
 
 step 2: Calculate the number of remaining `lackSize` connections.
 ```typescript
-int size = Math.max(minActiveNodes - peers.size(), minActiveNodes - activePeers.get()));
+int size = Math.max(minNodes - peers.size(), minActiveNodes - activePeers.get()));
 int lackSize = size - connectNodes.size();
 ```
 
 step 3: Select `lackSize` nodes and add them to `connectNodes`. First, select the eligible nodes from the list of neighboring nodes, then select `lackSize` nodes with the highest score.
 ```typescript
-public List<NodeHandler> getNodes(Predicate<NodeHandler> predicate, int limit) { 
+public List<NodeHandler> getNodes(Predicate<NodeHandler> predicate, int lackSize) { 
   List<NodeHandler> filtered = new ArrayList<>(); 
   for (NodeHandler handler : nodeHandlerMap.values()) { 
     if (handler.getNode().isConnectible() && predicate.test(handler)) { 
@@ -73,7 +73,7 @@ public List<NodeHandler> getNodes(Predicate<NodeHandler> predicate, int limit) {
     }
   } 
   filtered.sort(Comparator.comparingInt(handler -> -handler.getNodeStatistics().getReputation())); 
-  return CollectionUtils.truncate(filtered, limit); 
+  return CollectionUtils.truncate(filtered, lackSize); 
 }
 ```
 
