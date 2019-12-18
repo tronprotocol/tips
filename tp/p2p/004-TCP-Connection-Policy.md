@@ -9,7 +9,7 @@ This document introduces the TCP connection policy, including methods to select 
 Specify through configuration file. Upon initiation, system will add `activeNodes` into `trustNodes` and try to build connections with them. If the connection with `activeNodes` fails, a retry will be launched in the next TCP cycle.
 
 #### `trustNodes` 
-Specify through configuration file. System will skip all other verifying steps and create a connection right away upon receiving a request from `trustNodes`(See more details in the section on how to process TCP connection requests).
+Specify through configuration file. System will skip all other verifying steps and create a connection right away upon receiving a request from `trustNodes`. More details refer to [Processing TCP connection requests](#processing-tcp-connection-requests).
 
 #### `badNodes`
 When receiving an abnormal message, system will add the sender node into `badNodes` and keep its status for 1 hour. The connection requests from `badNodes` will be directly rejected.
