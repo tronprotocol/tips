@@ -6,7 +6,7 @@ This document introduces the TCP Connection Policy, including methods to select 
 ### Node Types
 
 #### `activeNodes`
-Specify through configuration file. Upon initiation, system will add `activeNodes` into `trustNodes` and try to build connections with them. If the connection with `activeNodes` fails, a retry will be launched in the next TCP cycle.
+Specify through configuration file. Upon initiation, system will add `activeNodes` into `trustNodes` and try to build connections with them. If the connection fails, a retry will be launched in the next TCP cycle.
 
 #### `trustNodes` 
 Specify through configuration file. System will skip all other verifying steps and create a connection right away upon receiving a request from `trustNodes`. More details refer to [Processing TCP connection requests](#processing-tcp-connection-requests).
