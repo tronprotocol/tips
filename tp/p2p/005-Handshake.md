@@ -8,7 +8,7 @@ This document explains a TCP Handshake process that is done by exchanging a pair
 A blockchain is made up by a chain of blocks, each labeled with a unique ID. The very first block generated is called a Genesis Block at the block height of 0.
 
 ### Solid Block
-Solid Blocks are blocks that are irretrievable. A block cannot be erased from the blockchain once it is solidified. Refer to [Calculation of Solid Blocks](calculation-of-solid-blocks).
+Solid Blocks are blocks that are irretrievable. A block cannot be erased from the blockchain once it is solidified. Refer to [Calculation of Solid Blocks](#calculation-of-solid-blocks).
 
 ### Head Block
 The latest block on the blockchain, representing the max block height.
