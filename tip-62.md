@@ -1,72 +1,102 @@
 ```
-tip:  61
+tip:  62
 title: Tron consensus algorithm introduction
 author: xing@tron.network
 discussions-to: <URL>
 status: Draft
 type: Core
-category : Core 
+category : Core
 created: 2019-12-18
-
-```
-
-## Simple Summary  
-
-This TIP mainly describes tron consensus algorithm- Delegated Proof of Stake (DPoS) as well as give some basic introduction about related algorithms like PBFT, which was implemented on tron block validation. 
-
-## Abstract 
-
- DPoS , basically, it looks likes a voting system where account holders vote for a few delegates that will secure the network named Super Node (SR) in tron. Practical Byzantine Fault Tolerance-PBFT is widely used in distributing environment so as to safeguard against the system failures like network delay , nodes dead ,attack ,etc. 
-
-## Motivation 
-
-Proof of Work POW, which is being used in bitcoin or ethereum,provide a good solution to resolve blockchain security problem. However, it consume too much power and compute resource since it need take lot of computation to get next block hash. In order to solve this problem, a light-weight DPoS had come to our eye in 2014, which was developed by Daniel Larimer,in 2014. Bitshares, Steem, Ark, and Lisk are some of the cryptocurrency projects that make use of DPoS consensus algorithm. 
-
-## Specification 
-
-Tron implements DPoS algorithm in their own way. Like there are 27 Super node total, which dynamically elected by account holders every 6 hours. 
-
-## Rationale 
-There are a couple of stages in DPoS.  
-1. Voting  
-   - Firstly, those account holders who want to join in voting need to freeze their accounts. The reason why we need freezing is that avoid race conditions.  
-   - Secondly, those account holders who freeze their account can vote SR candidates. After the end of voting period, the top 27 SR candidates with highly number of votes can be a SR node, which can product a new block.
-2. Produce block  
-   - check turn: tron use round-robin algorithm to decide which SR is responsible for producing block based on currentTime, latest block time and the number of active witness node on the network.
-   - validate transactions: Once SR get turn to produce block, it will validate all the transactions it receiver from the network and then processing and packing them into blocks. 
-   - broadcast: After SR finish producing a block, it will broadcast a message to the network so that other SR knows produce status.  
-    Notice: status can be fail since network failure may happen. If SR fail to produce a block, the network will reset the state and begin next round voting and do the same process until research success status. 
-3. Confirm  
-   - Once producing block SR receive 2/3+1 replies from other SR, then this block is being confirmed by the whole network.  Why ?? Take a look at PBFT section.
-4. Reward  
-   - vote reward: The top 127 candidates updated every round can share 115,200 TRX as mined. Those reward will be split in accordance with the vote weight each candidate receives. The account holder who joins in voting also receive reward from corresponding SR candidates.
-   - block reward (SR reward): The top 27 candidates who are elected every round will share roughly 230,400 TRX as mined. The reward will be split evenly between the 27 SRs. On average, the SRs who produce a block will get 16 TRX. 
-   
-   The optimized delegation mechanism will add dividend to both user and SRs, increase reward for top 127 SR candidates so that they have enough TRX to give back to vote users, which encourage more uses to join vote and boost community.  More details check [TIP-53](https://github.com/tronprotocol/tips/blob/master/tip-53.md)
-      
  
+```
+ 
+## Simple Summary 
+ 
+This TIP mainly describes tron consensus algorithm- Delegated Proof of Stake (DPoS) as well as gives some related concepts explanation.
+## Abstract
+ 
+DPoS , basically, it looks likes a voting system where account holders vote for a few delegates that will secure the network named Super Representative (SR) in tron.
+ 
+## Motivation
+ 
+Proof of Work POW, which is being used in bitcoin or ethereum,provides a good solution to resolve blockchain security problem. However, it consume too much power and compute resource since it need take lot of computations to get next block hash. In order to solve this problem, a light-weight DPoS had come to our eye in 2014, which was developed by Daniel Larimer,in 2014. Bitshares, Steem, Ark, and Lisk are some of the cryptocurrency projects that make use of DPoS consensus algorithm.
+ 
+## Specification
+ 
+### Epoch  
+    Every six hours is called Epoch in tron. In other words, a cycle for producing a certain number of blocks. 
+### Slot  
+    Slot is a place where a newly produced block can be put into.  Once a block is successfully being produced, the system will assign a corresponding slot based on timestamp. A slot can be empty if fail to produce a block at a specific time.  
+### Maintenance Period   
+      Tron sets two slot time as maintenance period, which is used to calculate the number of votes each SR got as well as get the block producing order. Notice, there is no any producing or processing activities during maintenance period. Only get vote and get order.   
+### Ballot  
+     Tron defines that one TRX owns one ballot right, which can be used to vote for SRs selection. 
+### Vote Process
+     Tron defines that vote for a SR candidate is a special deal, nodes can generate a vote transactions for voting SRs candidates.  
+ 
+Tron implements DPoS algorithm in their own way. In each Epoch(every six hour), there are maintenance period and block producing period. The maintenance which take only 2 slot time is used for calculating votes and select top 27 SRs for next Epoch, while the block producing period is used for producing blocks. Each slot is 3 second, which also is a block producing time. 
+ 
+## Rationale
+There are a couple of stages in DPoS. 
+1. Voting 
+  - Firstly, those account holders who want to join in voting need to freeze their TRX . A vote power, bandwidth and energy can be received by freezed TRX.
+  - Secondly, those account holders who freeze their account can vote SR candidates. After the end of the voting period, the top 27 SR candidates with highly number of votes can be a SR node, which can produce blocks.
+2. Produce block 
+  - check turn: On the last maintenance period, the top 27 SR would be elected and sorted by the number of votes they got. At the start of Epoch, System start to produce blocks based on current slot index % total SR 27. Once the SRs with least number of vote finish producing block, next round will start from the SR with highest number of votes to the SR with least number of votes and repeat until reach the end of Epoch. In addition, a slot index is used for located SR based on current linux producing time and latest block producing timestamp.
+     ``` 
+     Epoch:Epoch Start...............................Epoch End
+    slot :  1     2    3 ..........................  119  120
+    Status: block empty block .....................Maintain Period
+    slot :  121    122    123 ................ .......  129  130
+    Status: block block block .....................Maintain Period
+    ```
+  - validate transactions: Once SR get turn to produce block, it will validate all the transactions received from the network and then processing and packing them into blocks.
+  - broadcast: After SR finish producing a block, it will broadcast a message to the network so that other SR knows produce status. 
+   Notice: status can be fail since network failure may happen. If the SR failed to produce a block, then this produce slot will be empty and next SR will produce a new block follow the step 2 within his slot time.
+3. Confirm 
+  - the confirm process is based on the mechanism that later SRs produce new blocks which contain precious block hash inside header. when the first unconfirmed block has 2/3n+1=19 children blocks produced by different SRs, the first unconfirmed block will be entry confirmed status, also known as solid status.   
+    ``` 
+      block:  A --> B----->     ...18 new block....    ->R      
+      status: solid->unconfirmed->....18 unconfirmed block->unconfirmed   
+     ```
+      After reach 19 unconfirmed block (excluding itself) after last solid block on main chain, then first unconfirmed block become solid block, namely confirm status. new status as following:
+
+     ``` 
+      block:  A --> B-----> C    ...17 block....    ->R ---->S     
+      status: solid->solid->unconfirmed...17 unconfirmed block->unconfirmed->unconfirmed  
+     ```
+      Above mechanism is a little bit like sliding windows, the size of the window is 19+1 unconfirmed block, every time move one slot if corresponding SR successfully produce a block.
+
+     ``` 
+        window:          start..........................End  
+        Block     A  ----> B->C...........17..........--->R
+        Status  solid ---> unconfirmed->...........->unconfirmed
+     ```
+      Initially, slide window starts from the first unconfirmed block, the size is 1, then will increase windows size as the number of unconfirmed block increase. Once windows size reach threshold say 19+1, which is R in above, then will make B statue to be solid, move into C, decrease windows size by one, which is 19.
     
 
-## PBFT   
+      
+    Notice: if there is fork on main chain, the longer chain will be a main chain while the shorter fork chain will store locally in DB. Once  longest chain was confirmed, then local shorter chain will be invalid. 
 
-   Roughly give an introduction based on tron consensus algorithm. We denote  
-   ``` 
-   R=3f+1
-   ```  
-where f is the maximum number of replicas that may be faulty, R is a set of replicas.  In the asynchronous system, R is optimal, namely it is the minimum number which can guarantee the correctness  of data.    
-- why??  
-
-    ``` n ``` is the number of replicas in the network.    
-    f replicas would send wrong data, while remaining n-f can rely correct data to client. However, it is possible that f replicas that did not response are faulty. Therefore, total max replicas that would be faulty are 2f. In order to get correct data, we must ensure that n-2f>f, which is n>3f. Since n is an integer, so the minimum integer which satisfies this inequation is 3f+1.  In the simple send and reply model (only two state), when client successfully receive f+1 replies then it can said yes to this result.  
-    So, now we get n=3f+1.   
-    However, there are total 5 states between client and replicas in normal case operations: request, pre-prepare, prepare, commit, reply. The init state is request, the final state is reply. The convert sequence is like following:
-    ``` 
-      request->Pre-prepare->prepare->commit->reply 
     ```
-    Firstly, the client send multicast to all the replicas, once primary replica receive request and then will send multicast to all the replicas. Once other replicas receive Pre_prepare message, they will send multicast to all the replicas. In every state, once replicas receive request and then send a multicase to the network after confirm.   
+                    -B---C---E.........->R
+     main chain-A->
+                    -D--G--S.......>S
+    ``` 
+    Firstly, tron alway chose longest chain main as main chain, like above chose A->B->C-E...._R.  If at specific time, length of two sub-chain is equal, like A-B-C vs A-D-S, then tron will chose first arrive block to process like B, so A->B-C->E can be main chain. Once block B was confirmed, then shorted chain A-D-G-S will be invalid.  
 
-    Each status depend the precious status, like if commit is true , then prepare and Pre-prepare are all true. In prepare status, if a replica confirm status is true, which means there are at least f+1 no-faulty replicas send a request to this replica. This is local confirm, also refer as prepare_out. if prepare_out is true ,  commit_in must be true since each status has in and out and in status depend last out status. Move into commit status, if commit_in is true, then at least f+1 no-faulty replicas which match prepare_out status  (true), at least 2f+1 no-faulty replicas which math Pre-prepare_out status.   
-
-
-    So this could be an interesting probability problem, but this tip do not talk deeply about proof of 2f+1. More detail [check this paper](http://pmg.csail.mit.edu/papers/osdi99.pdf)
+4. Reward 
+  - vote reward: The top 127 candidates updated every round can share a huge number of TRX as mined. Those reward will be split in accordance with the vote weight each candidate receives. The account holder who joins in voting also receive reward from corresponding SR candidates.
+  - block reward (SR reward): The top 27 candidates who are elected every round will share roughly 230,400 TRX as mined. The reward will be split evenly between the 27 SRs. On average, the SRs who produce a block will get 16 TRX. Once they successfully produce a block, the reward will immediately be sent to them.
+ 
+  The optimized delegation mechanism will add dividend to both user and SRs, increase reward for top 127 SR candidates so that they have enough TRX to give back to vote users, which encourage more uses to join vote and boost community.  More details check [TIP-53](https://github.com/tronprotocol/tips/blob/master/tip-53.md)
+ 
+  
+  
+  Tron consensus algorithm requires current unconfirmed block must have 2f+1 child block to confirm its status to be solid.  Why??  (will use PBFT 2f+1 rule)  
+      
+    The next block always contains previous block hash, so if first unconfirmed block is valid, then the next block is also valid since generation of next block hash based on previous block hash. Therefore, if first unconfirmed block is valid, then all its 2f+1 unconfirmed child block is also valid. In PBFT, it require 2f+1 no-faulty replicas to confirm correctness of result, which is the same as 2f+1 child block in tron network.
+ 
+ 
+  
 
