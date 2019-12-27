@@ -24,15 +24,17 @@ Proof of Work POW, which is being used in bitcoin or ethereum,provides a good so
 ## Specification
  
 ### Epoch  
-    Every six hours is called Epoch in tron. In other words, a cycle for producing a certain number of blocks. 
-### Slot  
-    Slot is a place where a newly produced block can be put into.  Once a block is successfully being produced, the system will assign a corresponding slot based on timestamp. A slot can be empty if fail to produce a block at a specific time.  
-### Maintenance Period   
-      Tron sets two slot time as maintenance period, which is used to calculate the number of votes each SR got as well as get the block producing order. Notice, there is no any producing or processing activities during maintenance period. Only get vote and get order.   
+Every six hours is called Epoch in tron. In other words, a cycle for producing a certain number of blocks. 
+### Slot   
+Slot is a place where a newly produced block can be put into.  Once a block is successfully being produced, the system will assign a corresponding slot based on timestamp. A slot can be empty if fail to produce a block at a specific time.  
+### Maintenance Period    
+   Tron sets two slot time as maintenance period, which is used to calculate the number of votes each SR got as well as get the block producing order. Notice, there is no any producing or processing activities during maintenance period. Only get vote and get order.   
 ### Ballot  
-     Tron defines that one TRX owns one ballot right, which can be used to vote for SRs selection. 
-### Vote Process
-     Tron defines that vote for a SR candidate is a special deal, nodes can generate a vote transactions for voting SRs candidates.  
+  Tron defines that one TRX owns one ballot right, which can be used to vote for SRs selection. 
+### Vote Process  
+  Tron defines that vote for a SR candidate is a special deal, nodes can generate a vote transactions for voting SRs candidates.    
+
+  
  
 Tron implements DPoS algorithm in their own way. In each Epoch(every six hour), there are maintenance period and block producing period. The maintenance which take only 2 slot time is used for calculating votes and select top 27 SRs for next Epoch, while the block producing period is used for producing blocks. Each slot is 3 second, which also is a block producing time. 
  
@@ -95,7 +97,7 @@ There are a couple of stages in DPoS.
   
   Tron consensus algorithm requires current unconfirmed block must have 2f+1 child block to confirm its status to be solid.  Why??  (will use PBFT 2f+1 rule)  
       
-    The next block always contains previous block hash, so if first unconfirmed block is valid, then the next block is also valid since generation of next block hash based on previous block hash. Therefore, if first unconfirmed block is valid, then all its 2f+1 unconfirmed child block is also valid. In PBFT, it require 2f+1 no-faulty replicas to confirm correctness of result, which is the same as 2f+1 child block in tron network.
+  The next block always contains previous block hash, so if first unconfirmed block is valid, then the next block is also valid since generation of next block hash based on previous block hash. Therefore, if first unconfirmed block is valid, then all its 2f+1 unconfirmed child block is also valid. In PBFT, it require 2f+1 no-faulty replicas to confirm correctness of result, which is the same as 2f+1 child block in tron network.
  
  
   
