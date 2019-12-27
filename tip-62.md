@@ -2,9 +2,8 @@
 tip:  62
 title: Tron consensus algorithm introduction
 author: xing@tron.network
-discussions-to: <URL>
 status: Draft
-type: Core
+type: consensus algorithm
 category : Core
 created: 2019-12-18
  
@@ -34,7 +33,7 @@ Slot is a place where a newly produced block can be put into.  Once a block is s
 ### Vote Process  
   Tron defines that vote for a SR candidate is a special deal, nodes can generate a vote transactions for voting SRs candidates.    
 
-  
+
  
 Tron implements DPoS algorithm in their own way. In each Epoch(every six hour), there are maintenance period and block producing period. The maintenance which take only 2 slot time is used for calculating votes and select top 27 SRs for next Epoch, while the block producing period is used for producing blocks. Each slot is 3 second, which also is a block producing time. 
  
