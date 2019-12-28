@@ -39,7 +39,7 @@ Consider about slide windows model, Current tron consensus algorithm only move o
        window:          start..........................End 
        Block     A  ----> B->C...........17..........--->R
        Status  solid ---> unconfirmed->...........->unconfirmed
-    ```
+  ```
  Initially, slide window starts from the first unconfirmed block, the size is 1, then will increase windows size as the number of unconfirmed block increase. Once windows size reach threshold say 19+1, which is R in above, then will make B statue to be solid, move into C, decrease windows size by one, which is 19. 
  
  When combined with optimized tron pBFT, the windows can move faster.
@@ -94,7 +94,7 @@ where f is the maximum number of replicas that may be faulty, R is a set of repl
  3f2+1 <=3f+1
 ```
  If f1 is zero, then 3f2+1=3f+1 since there is no any failure happen from SR broadcast message state to Verifiers received state. To successful verified correctness of result, we need:
-```
+ ```
  2f2+1<=2f+1
 ```
  The same as above , only if f1=0, then 2f2+1=2f+1.
@@ -103,7 +103,8 @@ where f is the maximum number of replicas that may be faulty, R is a set of repl
  However, if the network is not good, f1 increase, then it is hard to get 2f+1 replies from Verifiers, which mean this round fail to reach consensus for block A validation. But if the next block B or C successful reach consensus from Verifiers, then all the unconfirmed block before B or C on the main chain will also become a solid state since block B or C alway contain precious block hash and generations of hash depend precious block hash. So, this optimized tron pBFT would have a greater performance on average.
  ```
  A-->B--->C--->D-->E.......
- ```
+ ```  
+  
   case like A fails, B fail, C success is the same as the case like A success, B success, C success, which means fail will not degrade performance.
  
 
