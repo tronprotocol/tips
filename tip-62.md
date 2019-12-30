@@ -71,7 +71,7 @@ There are a couple of stages in DPoS.
        Block     A  ----> B->C...........17..........--->R
        Status  solid ---> unconfirmed->...........->unconfirmed
     ```
-    Initially, the slide window starts from the first unconfirmed block, the size is 1, then will increase window size as the number of unconfirmed blocks increase. Once windows size reach threshold say 19+1, which is R in above, then will make B statue to be solid, move into C, decrease windows size by one, which is 19.
+    Initially, the slide window starts from the first unconfirmed block, the size is 1, then will increase window size as the number of unconfirmed blocks increase. Once windows size reach threshold say 19+1, which is R in above, then will make B status to be solid, move into C, decrease windows size by one, which is 19.
     
    Notice: if there is a fork on the main chain, the longer chain will be a main chain while the shorter fork chain will store locally in DB. Once the longest chain is confirmed, then the local shorter chain will be invalid.
  
@@ -86,12 +86,9 @@ There are a couple of stages in DPoS.
   - vote reward: The top 127 candidates updated every round can share a huge number of TRX as mined. Those rewards will be split in accordance with the vote weight each candidate receives. The account holder who joins in voting also receives a reward from corresponding SR candidates.
   - block reward (SR reward): The top 27 candidates who are elected every round will share roughly 230,400 TRX as mined. The reward will be split evenly between the 27 SRs. On average, the SRs who produce a block will get 16 TRX. Once they successfully produce a block, the reward will immediately be sent to them.
  
-  The optimized delegation mechanism will add dividend to both user and SRs, increase reward for top 127 SR candidates so that they have enough TRX to give back to vote users, which encourage more uses to join vote and boost community.  More details check [TIP-53](https://github.com/tronprotocol/tips/blob/master/tip-53.md)
+  The optimized delegation mechanism will add dividend to both users and SRs, increase reward for top 127 SR candidates so that they have enough TRX to give back to vote users, which encourage more uses to join vote and boost community.  More details check [TIP-53](https://github.com/tronprotocol/tips/blob/master/tip-53.md)
  
-  
-   Tron consensus algorithm requires current unconfirmed block must have 2f+1 child block to confirm its status to be solid.  Why??  (will use pBFT 2f+1 rule) 
-    
-   The next block always contains previous block hash, so if the first unconfirmed block is valid, then the next block is also valid since generation of next block hash based on previous block hash. Therefore, if the first unconfirmed block is valid, then all its 2f+1 unconfirmed child block is also valid. In pBFT, it requires 2f+1 no faulty replicas to confirm correctness of result, which is the same as 2f+1 child block in tron network.
+
  
  
   
