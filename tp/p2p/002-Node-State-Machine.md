@@ -3,30 +3,30 @@ This document explains different node states and how nodes switch between states
 
 ## Definitions
 
-### DISCOVERED
-DISCOVERED is the initial state wherein the local node will send a Ping message to the node in this state. A node will be initialized to DISCOVERED state in the following cases:
-1.  When start a node, its seed node will be initialized to DISCOVERED state
-2.  When start a node, the nodes which was saved from the last run of Node Discovery protocol will be initialized to DISCOVERED state   
-3.  If a node has no information saved locally or is in NONACTIVE or DEAD state when a Ping message is received, it will be initialized to DISCOVERED state
-4.  The new nodes carried by neighbours messages will be initialized to DISCOVERED state
+### Discovered
+`Discovered` is the initial state wherein the local node will send a [Ping message](https://github.com/tronprotocol/tips/blob/master/tp/p2p/001-Node-Discover-Protocol.md#ping-packet-0x01) to the node in this state. A node will be initialized to `Discovered` state in the following cases:
+1.  When start a node, its seed node will be initialized to `Discovered` state
+2.  When start a node, the nodes which was saved from the last run of [Node Discovery protocol](https://github.com/tronprotocol/tips/blob/master/tp/p2p/001-Node-Discover-Protocol.md) will be initialized to `Discovered` state   
+3.  If a node has no information saved locally or is in `Nonactive` or `Dead` state when a [Ping message](https://github.com/tronprotocol/tips/blob/master/tp/p2p/001-Node-Discover-Protocol.md#ping-packet-0x01) is received, it will be initialized to `Discovered` state
+4.  The new nodes carried by [Neighbours messages](https://github.com/tronprotocol/tips/blob/master/tp/p2p/001-Node-Discover-Protocol.md#neighbors-packet-0x04) will be initialized to `Discovered` state
 
-### DEAD
-DEAD means the node is offline and unable to communicate. A node will switch from DISCOVERED to DEAD state if it fails to ping.
+### Dead
+`Dead` means the node is offline and unable to communicate. A node will switch from `Discovered` to `Dead` state if it fails to ping.
 
-### ALIVE
-ALIVE indicates that node is online and able to communicate with others. A node will switch from DISCOVERED to ALIVE state if it pings successfully. The node will then switch from ALIVE to ACTIVE state if it is successfully written into K-Bucket.
+### Alive
+`Alive` indicates that node is online and able to communicate with others. A node will switch from `Discovered` to `Alive` state if it pings successfully. The node will then switch from `Alive` to `Active` state if it is successfully written into K-Bucket.
 
-### ACTIVE
-ACTIVE means the node has been written into K-Bucket and is participating in Node Discovery Protocol. A node will have its state set to ACTIVE in the following two cases:
-1.  A node will switch from ALIVE to ACTIVE state if it is successfully written into K-Bucket
-2.  A node will switch from EVICTCANDIDATE to ACTIVE state if it pings successfully
+### Active
+`Active` means the node has been written into [K-Bucket](https://github.com/tronprotocol/tips/blob/master/tp/p2p/001-Node-Discover-Protocol.md#kademlia-table) and is participating in [Node Discovery protocol](https://github.com/tronprotocol/tips/blob/master/tp/p2p/001-Node-Discover-Protocol.md). A node will have its state set to `Active` in the following two cases:
+1.  A node will switch from `Alive` to `Active` state if it is successfully written into [K-Bucket](https://github.com/tronprotocol/tips/blob/master/tp/p2p/001-Node-Discover-Protocol.md#kademlia-table)
+2.  A node will switch from `Evictcandidate` to `Active` state if it pings successfully
     
 
-### EVICTCANDIDATE
-EVICTCANDIDATE is a temporary state. When a node in ALIVE state attempts to be written into K-Bucket but at this time the corresponding bucket is full, it will challenge the node with the earliest update time in the bucket. The challenged node will switch to EVICTCANDIDATE state and the local node will send a Ping message to the node in this state.
+### Evictcandidate
+`Evictcandidate` is a temporary state. When a node in `Alive` state attempts to be written into [K-Bucket](https://github.com/tronprotocol/tips/blob/master/tp/p2p/001-Node-Discover-Protocol.md#kademlia-table) but at this time the corresponding bucket is full, it will challenge the node with the earliest update time in the bucket. The challenged node will switch to `Evictcandidate` state and the local node will send a [Ping message](https://github.com/tronprotocol/tips/blob/master/tp/p2p/001-Node-Discover-Protocol.md#ping-packet-0x01) to the node in this state.
 
-### NONACTIVE
-NONACTIVE means the node is offline. A node will switch from EVICTCANDIDATE to NONACTIVE state if it fails to ping.
+### Nonactive
+`Nonactive` means the node is offline. A node will switch from `Evictcandidate` to `Nonactive` state if it fails to ping.
 
 ## Implements
 Here is the function for switching node states:
