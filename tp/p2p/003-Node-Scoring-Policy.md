@@ -20,7 +20,7 @@ The number of disconnections between nodes shows their stability. The less frequ
 #### Handshake
 Nodes that had successful handshakes will be connected first because they have the same blockchain information with the local node.
 
-### Penalty score
+### Penalty state
 Nodes in the state of penalty have a score of 0, and won’t receive score for any other metrics.
 Usually, these nodes
 1.  disconnected less than 60 seconds ago
