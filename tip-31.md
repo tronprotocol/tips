@@ -13,7 +13,7 @@ This TIP specifies a new api, which triggers the constant contract without ABI.
 
 ## Motivation
 
-Many developers hope not upload the ABI, and trigger the contract by their judgment.
+test:Many developers hope not upload the ABI, and trigger the contract by their judgment.
 
 ## Specification
 
