@@ -118,5 +118,3 @@ function withDraw(bytes memory data, address payable toAddress ,uint amount) pub
 Multi signatures can only support signatures of up to five private keys.
 
 'validatemultisign' consumes 1500 energy to verify per signature. If three signatures are verified at the same time, 1500 * 3 = 4500 energy will be consumed.
-
-If you have any question, please leave a comment.
