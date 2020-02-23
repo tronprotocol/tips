@@ -1,3 +1,5 @@
-|  Proposal ID    | Vote No.  | Tip No. | Description | Hard&nbsp;fork | Status |
+This document is mainly used to record the relationship between proposal and tip.
+
+|  Proposal ID    | Vote No.  | TIP No. | Description | Hard&nbsp;fork | Status |
 |  ----  | ----   | :----:   | :----: | :----:  | :----: |
-|Proposal&nbsp;32|29|TIP&nbsp;43,TIP&nbsp;44,TIP&nbsp;60||yes|voting|
+|32|29|[TIP&nbsp;43](../tip-43.md),[TIP&nbsp;44](../tip-44.md),[TIP&nbsp;60](../tip-60.md)|[proposal 32](proposal-32.md)|yes|voting|
