@@ -82,6 +82,7 @@ In the contract, you can use the 'validatemultisign' keyword for multi signature
 ```
 validatemultisign(address accountAddress, uint256 permissionId, bytes32 content, bytes[] signatures)
 ```
+A single signature here means an sha256 hashed byte array which composed with TRON 21 bytes address, permissionId (in bytes) and the actual content need to be signed (in bytes).
 
 The following example is an application scenario using a multi signature account to transfer to other accounts:
 
@@ -114,3 +115,10 @@ function withDraw(bytes memory data, address payable toAddress ,uint amount) pub
 Multi signatures can only support signatures of up to five private keys.
 
 'validatemultisign' consumes 1500 energy to verify per signature. If three signatures are verified at the same time, 1500 * 3 = 4500 energy will be consumed.
+
+
+**4.Support transfer TRX to a non-exisiting address in smart contract**
+
+Now, TRON allow transfer TRX to a non-existing address in smart contract and create an account for this address, which means it will not throw an exception and consume msg.sender feelimit as in the past.
+
+It makes address.transfer() function easier to handle.
