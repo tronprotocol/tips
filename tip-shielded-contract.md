@@ -1,0 +1,255 @@
+```
+tip: xx 
+title: Shielded Token Contract 
+author: xx
+discussions-to: https://github.com/tronprotocol/tips/issues/xx
+status: draft
+type: Standards Track
+category: TRC
+created: 2019-10-31
+```
+
+## Simple Summary
+
+This TIP provides the contract implementation of transforming public TRC-20 token to shielded token, which can guarantee the privacy for token ownership and transactions. 
+
+## Abstract
+
+The shielded token contract has three core modules: `mint`, `transfer` and `burn`. `mint` is used to transform the public TRC-20 token to shielded token, then token ownership is hided. `transfer` is used for shielded token transactions, which can hide the source and destination address, and transaction amount. `burn` is used to transform the shielded token to the public TRC-20 token. The technology implementaion is based on zk-SNARK proof system, which is secure and efficient.  
+
+## Motivation
+
+TRC-20 token contract allows users to issue and transfer tokens, but it can not guarantee the privacy, since  it leaks the token ownership. When transfering the token, the source and destination address, and the token amout are also public. The shielded token contract aims to solve the problems and provide users better privacy for token ownership and transactions.
+
+## Specification
+
+The following define the methods implementation for shielded token contract. 
+
+### Preliminaries
+**NoteCommitment**
+
+The TRC-20 token is tranformed into shielded token in the form of commitment by cryptographic method, which is defined as:
+
+​                                               $note_{-}commitment = NoteCommitment_r(v)$
+
+The `v` value is hided by  `note_commitment` with the blinding factor `r`.
+
+**SpendDescription**
+
+The `SpendDescription` includes zk-SNARK proof related data, which is used as the input of shielded token transaction. 
+
+```text  
+message SpendDescription { 
+  bytes value_commitment = 1; // value commitment
+  bytes anchor = 2; // merkle root
+  bytes nullifier = 3; // used for check double spend
+  bytes rk = 4; // used for check spend spend authority signature
+  bytes zkproof = 5; // zk-SNARK proof
+  bytes spend_authority_signature = 6; //spend authority signature 
+}
+```
+
+**ReceiveDescription**
+
+The `ReceiveDescrion` also includes zk-SNARK proof related data, which is used as the output of shielded token transaction.
+
+```text  
+message ReceiveDescription { 
+  bytes value_commitment = 1; // value commitment used for binding signature
+  byte  note_commitment = 2;  // note commitment used for hiding the value
+  bytes epk = 3;  // ephemeral public key used for encryption
+  bytes c_enc = 4;  // encryption for note plaintext
+  bytes c_out = 5; // encryption for audit
+  bytes zkproof = 6; // zk-SNARK proof 
+}
+```
+
+For more details about `note commitment`, `SpendDescription` and `ReceiveDescripton`, please refer the [TRONZ shielded transaction protocol](https://www.tronz.io/Shielded Transaction Protocol.pdf).
+
+### Methods
+
+**constructor**
+
+The `constructor` method binds the TRC-20 token address to shield token contract when it is deployed.
+
+```
+ constructor(address _trc20Token) public {
+      _owner = msg.sender;
+      trc20Token = TRC20Interface(_trc20Token);
+  }
+```
+
+**mint**
+
+`mint`method is to transform the public TRC-20 token with amount `value` to shielded token in the form of `note_commitment`. The method input parameters also include zk-SNARK proof related data.
+
+```
+    //input includes: value_commitment, epk, proof, bindingSig
+    function mint(uint64 value, bytes32 note_commitment, bytes32[10] calldata input, bytes32 signHash) external {
+         // step 1: check the value
+         require(value > 0, "Mint negative value.");
+         
+        // step 2: check the zk-SNARK proof 
+        (bool result,bytes memory msg) = verifyProofContract(abi.encode(note_commitment, input, value, signHash, frontier, leafCount));
+        require(result, "The proof and signature have not been verified by the contract");
+        
+        //step 3: store the note_commitment in the Merkle tree
+        uint256 slot = uint8(msg[0]);
+        uint256 nodeIndex = leafCount + 2 ** 32 - 1;
+        for (uint256 i = 0; i < slot+1; i++) {
+            tree[nodeIndex] = bytesToBytes32(msg, i*32+1);
+            if(i == slot){
+                frontier[slot] = tree[nodeIndex];
+            }
+            nodeIndex = (nodeIndex - 1) / 2;
+        }
+        latestRoot = bytesToBytes32(msg, (slot+1)*32+1);
+        tree[0]= latestRoot;
+        
+        //step 4: store the latest root in the contract
+        roots[latestRoot] = latestRoot;
+        leafCount ++;
+        
+        // step 5: transfer the TRC-20 Tokens from the sender to this contract
+        trc20Token.transferFrom(msg.sender, address(this), value);
+    }
+```
+
+The `mint` includes the five steps:
+
+(1) check the `value` is positive;
+
+(2) verify the proof to check the validity of `note_commitment`by [verifyproof]() instruction;
+
+(3) store  the `note_commitment` in the merkle tree `tree`, which is a mapping data structure.
+
+```
+mapping(uint256 => bytes32) public tree;
+```
+
+(4) store the latest root in the `roots`, which is used for merkle path proof.
+
+```
+mapping(bytes32 => bytes32) public roots; 
+```
+
+(5) transfer the TRC-20 token to the shielded token contract by `transferFrom` function.
+
+**transfer**
+
+`transfer`method is used for shielded token transfer with one input and two outputs. 
+
+```
+    //input includes: cv, rk, spend_auth_sig, proof
+    //output1 includes: cv, cm, epk, proof
+    //output2 includes: cv, cm, epk, proof
+    function transfer(bytes32[10] calldata input, bytes32 anchor, bytes32 nullifier, bytes32[9] calldata output1, bytes32[9] calldata output2, bytes32[2] calldata bindingSignature, bytes32 signHash) external {
+        // step 1: check the nullifiers     
+        require(nullifiers[nullifier] == 0, "The notecommitment being spent has already been nullified!");
+        
+        //step 2: check the roots and proof 
+        require(roots[anchor] != 0, "The anchor must exist");
+        (bool result,bytes memory msg) = verifyProofContract.call(abi.encode(input, anchor, nf, output1, output2, bindingSignature, signHash, frontier, leafCount));
+        require(result, "The proof and signature has not been verified by the contract");
+        
+        //step 3: store the output note_commitments in the merkle tree 
+        uint slot1 = uint8(msg[0]);
+        uint slot2 = uint8(msg[1]);
+        //process slot1
+        uint256 nodeIndex = leafCount + 2 ** 32 - 1;
+        for (uint256 i = 0; i < slot1+1; i++) {
+            tree[nodeIndex] = bytesToBytes32(msg, i * 32 + 2);
+            if(i == slot1){
+                frontier[slot1] = tree[nodeIndex];
+            }
+            nodeIndex = (nodeIndex - 1) / 2;
+        }
+        //process slot2
+        nodeIndex = leafCount + 2 ** 32;
+        for (uint256 i = 0; i < slot2 + 1; i++) {
+            tree[nodeIndex] = bytesToBytes32(msg, (i + slot1 + 1) * 32 + 2);
+            if(i == slot2){
+                frontier[slot2] = tree[nodeIndex];
+            }
+            nodeIndex = (nodeIndex - 1) / 2;
+        }
+        
+        //step 4: store the latest root and nullifier in the contract
+        latestRoot = bytesToBytes32(msg, (slot1+slot2+2)*32+2);
+        roots[latestRoot] = latestRoot;
+        leafCount = leafCount + 2;
+        nullifiers[nullifier] = nullifier;
+    }
+```
+
+The `transfer` method includes the four steps:
+
+(1) check the `nullifiers` to prevent the double spend. `nullifiers` is defined as a mapping structure in the contract. 
+
+```
+mapping(bytes32 => bytes32) public nullifiers; 
+```
+
+(2) check the`roots`and verify the proof by [verifyproof]() instructionto check the validity of the  `note_commitments`;
+
+(3) store  the output `note_commitments` in the merkle tree `tree`.
+
+(4) store the latest root in `roots` and the input nullifer in the `nullifiers` .
+
+**burn**
+
+`burn`method is to transform shielded token `note_commitment` to the public TRC-20 token with amount `value`.
+
+```
+    //input includes: cv, rk, spend_auth_sig, proof
+    function burn(bytes32[10] calldata input, bytes32 anchor, bytes32 nullifer, uint64 value, bytes32[2] calldata bindingSignature, bytes32 signHash, uint256 payTo) external {
+        //step 1： check the parameter validity
+        require(value > 0, "Mint negative value.");
+        require(nullifiers[nullifier] == 0, "The notecommitment being spent has already been nullified!");
+        require(roots[anchor] != 0, "The anchor must exist");
+        
+        //step 2:: check the zk-SNARK proof 
+        (bool result,bytes memory msg) = verifyProofContract.call(abi.encode(input, anchor, nf, value, bindingSignature, signHash));
+        require(result, "The proof and signature have not been verified by the contract");
+        
+        //step 3: store nullifier in the contract
+        nullifiers[nullifier] = nullifier;
+        
+        //step 4: transfer TRC-20 token from this contract to the nominated address
+        address payToAddress = address(payTo);
+        trc20Token.transfer(payToAddress, value);
+    }
+```
+
+The `burn` includes the four steps:
+
+(1) check the validity of  `value`, `nullifier` and  `anchor`;
+
+(2) verify the proof to check the validity of `note_commitment`by [verifyproof]() instruction;
+
+(3) store  the `nullifier` in the contract.
+
+(4) transfer the TRC-20 token from the shielded token contract  to `payTo` address by `transfer` function.
+
+**getPath**
+
+In order to make it convenient for users to construct zk-SNARK proof, the shielded token contract provide `getPath` function to return the merkle tree path for the given `note_commitment` with `position` parameter.
+
+```
+ function getPath(uint256 position) external {
+        ...
+    }
+```
+
+### Privacy Protection
+
+The shielded token contract aims to provide users better privacy for token ownership and transactions. The `transfer` function can completely hide the source and destation address, and amount for token transaction. But it still has some limitations. For `mint`(`burn`) function, the TRC-20 source (destination) address and amout are public, it may leak some information. Furthermore, triggering the contract involves the public address, which may leak the ownership of `note_commitment`. To solve the problem, triggering the contract can be delegated to a third party (refer [EIP-1077](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-1077.md)) or GSN (Gas Station Network, refer [EIP-1613](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-1613.md)).      
+
+## Rationale
+
+ Transaction privacy protection is quite import  for blockchain. By providing the shielded token contract,  it can attract more users by providing better privacy for token transactions and promote the widespread adoption of  TRC-20 token and related DApps.
+
+
+## Implementation 
+
+* https://github.com/tronprotocol/java-tron/blob/feature/shieldedUSDT/deploy/PrivateUSDT.sol
