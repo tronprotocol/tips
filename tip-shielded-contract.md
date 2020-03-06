@@ -6,7 +6,7 @@ discussions-to: https://github.com/tronprotocol/tips/issues/xx
 status: draft
 type: Standards Track
 category: TRC
-created: 2019-10-31
+created: 2020-03-04
 ```
 
 ## Simple Summary
@@ -15,7 +15,7 @@ This TIP provides the contract implementation of transforming public TRC-20 toke
 
 ## Abstract
 
-The shielded token contract has three core modules: `mint`, `transfer` and `burn`. `mint` is used to transform the public TRC-20 token to shielded token, then token ownership is hided. `transfer` is used for shielded token transactions, which can hide the source and destination address, and transaction amount. `burn` is used to transform the shielded token to the public TRC-20 token. The technology implementaion is based on zk-SNARK proof system, which is secure and efficient.  
+The shielded token contract has three core modules: `mint`, `transfer` and `burn`. `mint` is used to transform the public TRC-20 token to shielded token, then token ownership is invisible. `transfer` is used for shielded token transactions, which can hide the source and destination address, and transaction amount. `burn` is used to transform the shielded token to the public TRC-20 token. The technology implementaion is based on zk-SNARK proof system, which is secure and efficient.  
 
 ## Motivation
 
@@ -85,26 +85,30 @@ The `constructor` method binds the TRC-20 token address to shield token contract
 
 ```
     //input includes: value_commitment, epk, proof, bindingSig
-    function mint(uint64 value, bytes32 note_commitment, bytes32[10] calldata input, bytes32 signHash) external {
+    function mint(uint64 value, bytes32 note_commitment, bytes32[10] calldata input, bytes32[21] calldata C) external {
          // step 1: check the value
          require(value > 0, "Mint negative value.");
          
         // step 2: check the zk-SNARK proof 
-        (bool result,bytes memory msg) = verifyProofContract(abi.encode(note_commitment, input, value, signHash, frontier, leafCount));
+        bytes32 signHash = sha256(abi.encode(address(this), value, note_commitment, cv, epk, proof, C));
+        (bool result,bytes memory msg) = verifyMintProofContract(abi.encode(note_commitment, input, value, signHash, frontier, leafCount));
         require(result, "The proof and signature have not been verified by the contract");
         
         //step 3: store the note_commitment in the Merkle tree
         uint256 slot = uint8(msg[0]);
         uint256 nodeIndex = leafCount + 2 ** 32 - 1;
-        for (uint256 i = 0; i < slot+1; i++) {
-            tree[nodeIndex] = bytesToBytes32(msg, i*32+1);
+        tree[nodeIndex] = note_commitment;
+        if(slot == 0){
+            frontier[0] = note_commitment;
+        }
+        for (uint256 i = 1; i < slot+1; i++) {
+            nodeIndex = (nodeIndex - 1) / 2;
+            tree[nodeIndex] = bytesToBytes32(msg, i*32-31);
             if(i == slot){
                 frontier[slot] = tree[nodeIndex];
             }
-            nodeIndex = (nodeIndex - 1) / 2;
         }
-        latestRoot = bytesToBytes32(msg, (slot+1)*32+1);
-        tree[0]= latestRoot;
+        latestRoot = bytesToBytes32(msg, slot*32+1);
         
         //step 4: store the latest root in the contract
         roots[latestRoot] = latestRoot;
@@ -119,7 +123,7 @@ The `mint` includes the five steps:
 
 (1) check the `value` is positive;
 
-(2) verify the proof to check the validity of `note_commitment`by [verifyproof]() instruction;
+(2) verify the proof to check the validity of `note_commitment`by [verifyMintProof]() instruction;
 
 (3) store  the `note_commitment` in the merkle tree `tree`, which is a mapping data structure.
 
@@ -143,13 +147,14 @@ mapping(bytes32 => bytes32) public roots;
     //input includes: cv, rk, spend_auth_sig, proof
     //output1 includes: cv, cm, epk, proof
     //output2 includes: cv, cm, epk, proof
-    function transfer(bytes32[10] calldata input, bytes32 anchor, bytes32 nullifier, bytes32[9] calldata output1, bytes32[9] calldata output2, bytes32[2] calldata bindingSignature, bytes32 signHash) external {
+    function transfer(bytes32[10] calldata input, bytes32 anchor, bytes32 nullifier, bytes32[9] calldata output1, bytes32[9] calldata output2, bytes32[2] calldata bindingSignature, bytes32[21] calldata C1, bytes32[21] calldata C2) external {
         // step 1: check the nullifiers     
         require(nullifiers[nullifier] == 0, "The notecommitment being spent has already been nullified!");
         
         //step 2: check the roots and proof 
         require(roots[anchor] != 0, "The anchor must exist");
-        (bool result,bytes memory msg) = verifyProofContract.call(abi.encode(input, anchor, nf, output1, output2, bindingSignature, signHash, frontier, leafCount));
+        bytes32 signHash = sha256(abi.encode(address(this),cv,rk,proof,anchor,nullifier,output1,output2));
+        (bool result,bytes memory msg) = verifyTransferProofContract.call(abi.encode(input, anchor, nf, output1, output2, bindingSignature, signHash, frontier, leafCount));
         require(result, "The proof and signature has not been verified by the contract");
         
         //step 3: store the output note_commitments in the merkle tree 
@@ -157,25 +162,33 @@ mapping(bytes32 => bytes32) public roots;
         uint slot2 = uint8(msg[1]);
         //process slot1
         uint256 nodeIndex = leafCount + 2 ** 32 - 1;
-        for (uint256 i = 0; i < slot1+1; i++) {
-            tree[nodeIndex] = bytesToBytes32(msg, i * 32 + 2);
+        tree[nodeIndex] = output1[1];//cm
+        if(slot1 == 0){
+            frontier[0] = output1[1];
+        }
+        for (uint256 i = 1; i < slot1+1; i++) {
+            nodeIndex = (nodeIndex - 1) / 2;
+            tree[nodeIndex] = bytesToBytes32(msg, i * 32 - 30);
             if(i == slot1){
                 frontier[slot1] = tree[nodeIndex];
             }
-            nodeIndex = (nodeIndex - 1) / 2;
         }
         //process slot2
         nodeIndex = leafCount + 2 ** 32;
-        for (uint256 i = 0; i < slot2 + 1; i++) {
-            tree[nodeIndex] = bytesToBytes32(msg, (i + slot1 + 1) * 32 + 2);
+        tree[nodeIndex] = output2[1];//cm
+        if(slot2 == 0){
+            frontier[0] = output2[1];
+        }
+        for (uint256 i = 1; i < slot2 + 1; i++) {
+            nodeIndex = (nodeIndex - 1) / 2;
+            tree[nodeIndex] = bytesToBytes32(msg, (i + slot1) * 32 - 30);
             if(i == slot2){
                 frontier[slot2] = tree[nodeIndex];
             }
-            nodeIndex = (nodeIndex - 1) / 2;
         }
         
         //step 4: store the latest root and nullifier in the contract
-        latestRoot = bytesToBytes32(msg, (slot1+slot2+2)*32+2);
+        latestRoot = bytesToBytes32(msg, (slot1+slot2)*32+2);
         roots[latestRoot] = latestRoot;
         leafCount = leafCount + 2;
         nullifiers[nullifier] = nullifier;
@@ -190,7 +203,7 @@ The `transfer` method includes the four steps:
 mapping(bytes32 => bytes32) public nullifiers; 
 ```
 
-(2) check the`roots`and verify the proof by [verifyproof]() instructionto check the validity of the  `note_commitments`;
+(2) check the`roots`and verify the proof by [verifyTransferProof]() instructionto check the validity of the  `note_commitments`;
 
 (3) store  the output `note_commitments` in the merkle tree `tree`.
 
@@ -202,14 +215,15 @@ mapping(bytes32 => bytes32) public nullifiers;
 
 ```
     //input includes: cv, rk, spend_auth_sig, proof
-    function burn(bytes32[10] calldata input, bytes32 anchor, bytes32 nullifer, uint64 value, bytes32[2] calldata bindingSignature, bytes32 signHash, uint256 payTo) external {
+    function burn(bytes32[10] calldata input, bytes32 anchor, bytes32 nullifer, uint64 value, bytes32[2] calldata bindingSignature, uint256 payTo) external {
         //step 1： check the parameter validity
         require(value > 0, "Mint negative value.");
         require(nullifiers[nullifier] == 0, "The notecommitment being spent has already been nullified!");
         require(roots[anchor] != 0, "The anchor must exist");
         
         //step 2:: check the zk-SNARK proof 
-        (bool result,bytes memory msg) = verifyProofContract.call(abi.encode(input, anchor, nf, value, bindingSignature, signHash));
+        bytes32 signHash = sha256(abi.encode(address(this),cv,rk,proof,anchor,nullifier,value));
+        (bool result,bytes memory msg) = verifyBurnProofContract.call(abi.encode(input, anchor, nf, value, bindingSignature, signHash));
         require(result, "The proof and signature have not been verified by the contract");
         
         //step 3: store nullifier in the contract
@@ -225,7 +239,7 @@ The `burn` includes the four steps:
 
 (1) check the validity of  `value`, `nullifier` and  `anchor`;
 
-(2) verify the proof to check the validity of `note_commitment`by [verifyproof]() instruction;
+(2) verify the proof to check the validity of `note_commitment`by [verifyBurnProof]() instruction;
 
 (3) store  the `nullifier` in the contract.
 
@@ -233,7 +247,7 @@ The `burn` includes the four steps:
 
 **getPath**
 
-In order to make it convenient for users to construct zk-SNARK proof, the shielded token contract provide `getPath` function to return the merkle tree path for the given `note_commitment` with `position` parameter.
+In order to make it convenient for users to construct zk-SNARK proof, the shielded token contract provides `getPath` function to return the merkle tree path for the given `note_commitment` with `position` parameter.
 
 ```
  function getPath(uint256 position) external {
