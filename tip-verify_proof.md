@@ -1,7 +1,7 @@
 ---
 ```
 tip: xx 
-title: Zero-knowledeg Proof Verification Instructions 
+title: Zero-knowledeg Proof Verification functions 
 author: federico<federico.zhen@tron.network>
 discussions-to: https://github.com/tronprotocol/tips/issues/xx
 status: draft
@@ -12,51 +12,128 @@ created: 2020-03-09
 
 ## Simple Summary 
 
-The TIP provides the zero-knowledge proof verification instructions in shielded contract, which can be used in shielded token transactions.
+The TIP provides the zero-knowledge proof verification functions in shielded contract, which can be used in shielded token transactions.
 
 ## Abstract 
 
-The TIP introduces three new instructions: `VERIFYMINTPROOF`, `VERIFYTRANSFERPROOF`, and `VERIFYBURNPROOF`, which can accelerate the zero-knowledge verification for the `mint`, `transfer` and `burn` modules in shielded token contract. 
+The TIP introduces three new functions: `verifyMintProof`, `verifyTransferProof`, and `verifyBurnProof`, which can accelerate the zero-knowledge verification for the `mint`, `transfer` and `burn` processing in shielded token contract. 
 
 ## Motivation 
 
-In order to implement shielded transaction for [TRC-20](https://github.com/tronprotocol/TIPs/blob/master/tip-20.md) token,  We have developed the shielded token contract. The contract has three core modules: `mint`, `transfer` and `burn`. `mint` is used to transform the public TRC-20 tokens into shielded tokens. `transfer` is used for shielded  token transactions. `burn` is  used to transform the shielded  tokens back to public TRC-20 tokens.  The shielded contract is implemented based on zero-knowledge proof, so it needs the complex zero-knowledge proof verification in `mint`, `transfer` and `burn` methods. In order to accelerate the speed, we will make use of  instructions in the contract to implement the verification process. 
+In order to implement shielded transaction for [TRC-20](https://github.com/tronprotocol/TIPs/blob/master/tip-20.md) token,  We have developed the shielded token contract. The contract has three core modules: `mint`, `transfer` and `burn`. `mint` is used to transform the public TRC-20 tokens into shielded tokens. `transfer` is used for shielded  token transactions. `burn` is  used to transform the shielded  tokens back to public TRC-20 tokens.  The shielded contract is implemented based on zero-knowledge proof, so it needs the complex zero-knowledge proof verification in `mint`, `transfer` and `burn` methods. In order to accelerate the speed, we will make use of  the new functions in the contract to implement the verification process. 
 
 ## Specification
 
-(1)`VERIFYMINTPROOF` 
+The following define the methods implementation for shielded token contract. 
 
-`VERIFYMINTPROOF` is used to verify the validity of zero-knowledge proof when transforming the public TRC-20 token into shielded tokens.  
+### Preliminaries
+**NoteCommitment**
 
-```
-(bool result,bytes memory msg) = VERIFYMINTPROOF(byte[1480] intput);
-```
+The TRC-20 token is tranformed into shielded token in the form of commitment by cryptographic method, which is defined as:
 
-The length of `input` is 1480 bytes. For the output, `reuslt` is a bool value to indicate whether the proof verification succeeds, the length of `msg` is 33~1057 bytes, which returns the node value to construct the Merkle tree. The time cost of `VERIFYMINTPROOF` instruction takes about 10ms.
+    *note<sub>-</sub>commitment = NoteCommitment<sub>r</sub>(v)*
 
-（2）`VERIFYTRANSFERPROOF` 
+The `v` value is hided by  `note_commitment` with the blinding factor `r`.
 
-`VERIFYTRANSFERPROOF` is used to verify the validity of zero-knowledge proof for shielded tokens transactions.  
+**SpendDescription**
 
-```
-(bool result,bytes memory msg) = VERIFYTRANSFERPROOF(byte[2144] intput);
-```
+The `SpendDescription` includes zk-SNARK proof related data, which is used as the input of shielded token transaction. 
 
-The length of `input` is 2144 bytes. For the output, `reuslt` is a bool value to indicate whether the proof verification succeeds, the length of `msg` is 66~1058 bytes, which returns the node value to construct the Merkle tree. The time cost of `VERIFYTRANSFERPROOF` instruction takes about 15ms in parallel mode.
-
-（3）`VERIFYBURNPROOF`指令 
-
-`VERIFYMINTPROOF` is used to verify the validity of zero-knowledge proof when transforming the shielded tokens back to  public TRC-20 tokens.  
-
-```
-(bool result,bytes memory msg) = VERIFYBURNPROOF(byte[488] input);
+```text  
+message SpendDescription { 
+  bytes value_commitment = 1; // value commitment
+  bytes anchor = 2; // merkle root
+  bytes nullifier = 3; // used for check double spend
+  bytes rk = 4; // used for check spend spend authority signature
+  bytes zkproof = 5; // zk-SNARK proof
+  bytes spend_authority_signature = 6; //spend authority signature 
+}
 ```
 
-The length of `input` is 488 bytes. For the output, `reuslt` is a bool value to indicate whether the proof verification succeeds, the length of `msg` is 0. The time cost of `VERIFYBURNPROOF` instruction takes about 10ms.
+**ReceiveDescription**
+
+The `ReceiveDescrion` also includes zk-SNARK proof related data, which is used as the output of shielded token transaction.
+
+```text  
+message ReceiveDescription { 
+  bytes value_commitment = 1; // value commitment used for binding signature
+  byte  note_commitment = 2;  // note commitment used for hiding the value
+  bytes epk = 3;  // ephemeral public key used for encryption
+  bytes c_enc = 4;  // encryption for note plaintext
+  bytes c_out = 5; // encryption for audit
+  bytes zkproof = 6; // zk-SNARK proof 
+}
+```
+
+For more details about `note commitment`, `SpendDescription` and `ReceiveDescripton`, please refer the [TRONZ shielded transaction protocol](https://www.tronz.io).
+
+### Function
+
+(1)`verifyMintProof` 
+
+`verifyMintProof` function is used to verify the validity of zero-knowledge proof when transforming the public TRC-20 token into shielded tokens.  
+
+```
+byte[320] input = abi.encode(value_commitment, epk, zkproof, bindingSig)
+byte[1480] total_intput = abi.encode(note_commitment, input, value, signHash, frontier, leafCount)
+bytes memory msg = verifyMintProof(total_intput);
+```
+
+- `bindingSig` - the binding signature
+- `value` - the amount of TRC-20 tokens to be shielded
+- `signHash` - the message hash for the binding signature
+- `frontier` - used to compute the Merkle tree root
+- `leafCount` - the leaf number in the Merkle tree
+- The other parameters are specified in the above preliminaries
+
+```
+[32 bytes for note_commitment][32 bytes for value_commitment][32 bytes for epk][192 bytes for zkproof][64 bytes for bindingSig][8 bytes for value][32 bytes for signHash][1056 bytes for frontier][32 bytes for leafCount]
+```
+
+The length of `total_input` is 1480 bytes. For the output, the length of `msg` is 34~1058 bytes. Its first byte is a bool value to indicate whether the proof verification succeeds,  and the other bytes return the node value to construct the Merkle tree. The time cost of `verifyMintProof` function takes about 10ms.
+
+（2）`verifyTransferProof` 
+
+`verifyTransferProof` function is used to verify the validity of zero-knowledge proof for shielded tokens transactions.  
+
+```
+byte[320] input = abi.encode(value_commitment, rk, spend_authority_signature, zkproof)
+byte[288] output1 = abi.encode(value_commitment, note_commitment, epk, zkproof)
+byte[288] output2 = abi.encode(value_commitment, note_commitment, epk, zkproof)
+byte[2144] input = abi.encode(input, anchor, nullifier, output1, output2, bindingSignature, signHash, frontier, leafCount)
+bytes memory msg = verifyTransferProof(total_intput);
+```
+
+- The  parameters are specified as above 
+
+```
+[32 bytes for value_commitment][32 bytes for epk][64 bytes for spend_authority_signature][192 bytes for zkproof][32 bytes for value_commitment][32 bytes for note_commitment][32 bytes for epk][192 bytes for zkproof][32 bytes for value_commitment][32 bytes for note_commitment][32 bytes for epk][192 bytes for zkproof][32 bytes for anchor][32 bytes for nullifier][64 bytes for bindingSignature][32 bytes for signHash][1056 bytes for frontier][32 bytes for leafCount]
+```
+
+The length of `total_input` is 2144 bytes. For the output, the length of `msg` is 67~1059 bytes. The first byte is a bool value to indicate whether the proof verification succeeds, and the other bytes return the node value to construct the Merkle tree. The time cost of `verifyTransferProof` function takes about 15ms in parallel mode.
+
+（3）`verifyBurnProof` 
+
+`verifyBurnProof` function is used to verify the validity of zero-knowledge proof when transforming the shielded tokens back to  public TRC-20 tokens.  
+
+```
+byte[320] input = abi.encode(value_commitment, rk, spend_authority_signature, zkproof)
+byte[488] total_input  = abi.encode(input, anchor, nullifier, value, bindingSignature, signHash)
+bytes memory msg = verifyBurnProof(byte[488] input);
+```
+
+- `value` - the amout of shielded tokens to be made public
+-  The  other parameters are specified as above 
+
+```
+[32 bytes for value_commitment][32 bytes for rk][64 bytes for spend_authority_signature][192 bytes for zkproof][32 bytes for anchor][32 bytes for nullifier][8 bytes for value][64 bytes for bindingSignature][32 bytes for signHash]
+```
+
+The length of `input` is 488 bytes. For the output, `msg` is a bool value to indicate whether the proof verification succeeds. The time cost of `verifyBurnProof` function takes about 10ms.
 
 ## Rationale
 
-By introducing the zero-knowledge proof verification instructions, it will be more convenient for shielded token contract implementation, which can providing users stronger privacy for shielded token transactions.
+By introducing the zero-knowledge proof verification functions, it will be more convenient for shielded token contract implementation, which can providing users stronger privacy for shielded token transactions.
 
 ## Test Cases
 
