@@ -1,7 +1,7 @@
 ---
 ```
 tip: xx 
-title: Pedersen Hash Instruction 
+title: Pedersen hash function 
 author: federico<federico.zhen@tron.network>
 discussions-to: https://github.com/tronprotocol/tips/issues/xx
 status: draft
@@ -12,29 +12,29 @@ created: 2020-03-10
 
 ## Simple Summary 
 
-The TIP provides the Pedersen hash computation instruction in shielded contract, which can be used in shielded token transactions.
+The TIP provides the Pedersen hash computation function in shielded contract, which can be used in shielded token transactions.
 
 ## Abstract 
 
-The TIP introduces the `PEDERSENHASH` instruction, which is used for compuation of Merkle tree node value in shielded contract. 
+The TIP introduces the `PedersenHash` function, which is used for compuation of Merkle tree node value in shielded contract. 
 
 ## Motivation 
 
-In order to implement shielded transaction for [TRC-20](https://github.com/tronprotocol/TIPs/blob/master/tip-20.md) token,  We have developed the shielded token contract and  it needs the Merkle tree construction and proof, which needs the Pedersen hash compution. So providing the Pedersen hash instruction `PEDERSENHASH` is nesscessary for shielded contract implementation.
+In order to implement shielded transaction for [TRC-20](https://github.com/tronprotocol/TIPs/blob/master/tip-20.md) token,  We have developed the shielded token contract and  it needs the Merkle tree construction and proof, which needs the Pedersen hash compution. So providing the Pedersen hash function `PedersenHash` is nesscessary for shielded contract implementation.
 
 ## Specification
 
-`PEDERSENHASH` is used to compute the node value in the  Merkle tree.
+`PedersenHash` function is used to compute the node value in the  Merkle tree.
 
 ```
-(bool result,bytes memory msg) = PEDERSENHASH(uint256 level, bytes32 left, bytes32 right)
+bytes memory msg = PedersenHash(uint256 level, bytes32 left, bytes32 right)
 ```
 
-The length of `input` is 96 bytes and it includes three parameters: `level`, `left` and `right`. `level` denotes Merkle tree level; `left` denotes the left child node and `right` denotes the right child node.  For the output, `reuslt` is a bool value to indicate whether the Pedersen hash computation succeeds, the length of `msg` is 32 bytes, which returns the parent node value to construct the Merkle tree. The time cost of `PEDERSENHASH` instruction takes less than 1ms.
+The length of `input` is 96 bytes and it includes three parameters: `level`, `left` and `right`. `level` denotes Merkle tree level; `left` denotes the left child node and `right` denotes the right child node.  For the output,the length of `msg` is 33 bytes. The first byte is a bool value to indicate whether the Pedersen hash computation succeeds, and the other 32 bytes return the parent node value to construct the Merkle tree. The time cost of `PedersenHash` function takes less than 1ms.
 
 ## Rationale
 
-By introducing the Pedersen hash computation instruction, it will be more convenient for Merkle tree construction and  shielded token contract implementation, which can providing users stronger privacy for shielded token transactions.
+By introducing the Pedersen hash computation function, it will be more convenient for Merkle tree construction and  shielded token contract implementation, which can providing users stronger privacy for shielded token transactions.
 
 ## Test Cases
 
