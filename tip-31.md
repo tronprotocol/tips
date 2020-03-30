@@ -13,7 +13,7 @@ This TIP specifies a new api, which triggers the constant contract without ABI.
 
 ## Motivation
 
-Many developers hope not upload the ABI, and trigger the contract by their judgment.
+Some of contracts are uploaded without the ABI. It is hard to judge whether the function is a constant function or not. So, we must provide an interface for calling the constant function explicitly.  
 
 ## Specification
 

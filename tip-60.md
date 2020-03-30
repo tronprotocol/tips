@@ -4,7 +4,7 @@ title: TRC-60:Precompiled contract function for multi-signature verification
 author: Sh11thead <ksl2945@gmail.com>
 discussions to: https://github.com/tronprotocol/TIPs/issues/60
 category: TRC
-status: accepted
+status: Final
 created: 2019-09-20
 ```
 
