@@ -41,7 +41,9 @@ TRON Improvement Proposals (TIPs) describe standards for the TRON platform, incl
 | TIP&nbsp;54  | [Automatically active non-existent account when transferring TRX/TRC10 asset in a smart contract](https://github.com/tronprotocol/tips/blob/master/tip-54.md)|  <jiangxinjian@tron.network> | VM | true | Final |
 | TIP&nbsp;60  | [Precompiled contract function for multi-signature verification](https://github.com/tronprotocol/tips/blob/master/tip-60.md)|  <ksl2945@gmail.com>| VM |true | Accepted |
 | TIP&nbsp;62  | [Tron consensus algorithm introduction](https://github.com/tronprotocol/tips/blob/master/tip-62.md)|  <xing@tron.network>| Core |false | Draft |
-| TIP&nbsp;135  | [Shielded Token Contract](https://github.com/tronprotocol/tips/blob/master/tip-135.md)|  <federico.zhen@tron.network>| TRC |true | Draft |
+| TIP&nbsp;135  | [Shielded Token Contract](https://github.com/tronprotocol/tips/blob/master/tip-135.md)|  <federico.zhen@tron.network>| TRC |false | Draft |
+| TIP&nbsp;137  | [Zero-knowledge Proof Verification functions](https://github.com/tronprotocol/tips/blob/master/tip-137.md)|  <federico.zhen@tron.network>| VM |true | Draft |
+| TIP&nbsp;138  | [Pedersen hash function](https://github.com/tronprotocol/tips/blob/master/tip-138.md)|  <federico.zhen@tron.network>| VM |true | Draft |
 ****
 
 ## To Submit a TIP
