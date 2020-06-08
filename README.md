@@ -36,7 +36,7 @@ TRON Improvement Proposals (TIPs) describe standards for the TRON platform, incl
 | TIP&nbsp;41  | [Optimize transactionHistoryStore occupancy space](https://github.com/tronprotocol/tips/blob/master/tip-41.md)           |  <wubin1@tron.network>| Standards&nbsp;Track |false | Final |
 | TIP&nbsp;43  | [Precompiled contract function for signature parallel verification](https://github.com/tronprotocol/tips/blob/master/tip-43.md)| <ksl2945@gmail.com>|Standards&nbsp;Track |true | Final |
 | TIP&nbsp;44  | [Address.isContract instructions](https://github.com/tronprotocol/tips/blob/master/tip-44.md)                            | <llwslc@gmail.com> | Standards&nbsp;Track |true | Final |
-| TIP&nbsp;51  | [Rate limit of API traffic](https://github.com/tronprotocol/tips/blob/master/tip-51.md)                                  |  <shydesky@gmail.com>| Interface |false | Accepted |
+| TIP&nbsp;51  | [Rate limit of API traffic](https://github.com/tronprotocol/tips/blob/master/tip-51.md)                                  |  <shydesky@gmail.com>| Interface |false | Final |
 | TIP&nbsp;53  | [Optimize the current TRON delegation mechanism](https://github.com/tronprotocol/tips/blob/master/tip-53.md)|<liangzhiyan@tron.network> | TRC   |true | Final |
 | TIP&nbsp;54  | [Automatically active non-existent account when transferring TRX/TRC10 asset in a smart contract](https://github.com/tronprotocol/tips/blob/master/tip-54.md)|  <jiangxinjian@tron.network> | VM | true | Final |
 | TIP&nbsp;60  | [Precompiled contract function for multi-signature verification](https://github.com/tronprotocol/tips/blob/master/tip-60.md)|  <ksl2945@gmail.com>| VM |true | Accepted |
