@@ -14,7 +14,7 @@ Practical Byzantine Fault Tolerance(pBFT) is designed for reaching a consensus i
 ## Motivation 
 In the distributed network, it is very hard for very node to keep status of other nodes and also ensure the correctness of data since instability networks environments. Any request can be delayed, or fail to send or manipulated by hackers like TCP hijacking , etc.  Reach a global consensus state between different nodes is interest topic and lots of scientists start to overcome this problem by coming up with different innovative architecture. pBFT is a really efficient way to solve it by providing 3f+1 replicas in the network.
 ## Specification
-Normally, pBFT have `request->Pre-prepare->prepare->commit->reply`  five types of message, but optimized tron pBFT just have `Pre-prepare->prepare->commit` three types of message, which is much easier to manipulate and implement.  By combining with current tron consensus algorithm, the first phase is block broadcasting, which is equivalent to the pre_prepare phase of traditional PBFT; the second is the vote stage where blocks are verified, equivalent to the prepare phase of traditional PBFT; the third phase is verifying vote results, equivalent to the commit phase of traditional PBFT. Below are the details:
+Normally, pBFT have `request->Pre-prepare->prepare->commit->reply`  five types of message, but optimized tron pBFT just have `Pre-prepare->prepare->commit` four types of message, which is much easier to manipulate and implement.  By combining with current tron consensus algorithm, the first phase is block broadcasting, which is equivalent to the pre_prepare phase of traditional PBFT; the second is the vote stage where blocks are verified, equivalent to the prepare phase of traditional PBFT; the third phase is verifying vote results, equivalent to the commit phase of traditional PBFT. Below are the details:
 1. SRs will broadcast the message after producing a block
 2. Upon receiving the broadcast block, Verifiers will validate it, then sign and broadcast the result
 3. Upon receiving signed prepare messages from more than 2/3+1 Verifiers, a commit message will be generated, which will then be signed and broadcasted by Verifiers
@@ -23,19 +23,21 @@ Basically, by adding multiple Verifiers in the current tron network shorten the 
 Consider about slide windows model, Current tron consensus algorithm only move one slot every pass, while optimized tron pBFT can move multiple slot once receiver 2/3+1 Verifiers replies. Below is current tron consensus algorithm:
  ```
      Tron window:       start..........................End
-      Block     A  ----> B->C...........17..........--->R
+      Block     A  ----> B->C...........17..........--->R                    (a)
       Status  solid ---> unconfirmed->...........->unconfirmed
  ```
 Initially, slide window starts from the first unconfirmed block, the size is 1, then will increase windows size as the number of unconfirmed block increase. Once windows size reach threshold say 19+1, which is R in above, then make B‘s status to be solid, move into C, decrease windows size by one, which is 19.And continue to move once start point block of windows become solid status.
 When combined with optimized tron pBFT, the windows can move faster.
 ```
  Tron window:     start....................................End
- optimized:       start                  end(receives message)
+ optimized:       start                  end(receives message)              (b)
  Block     A  ----> B----->C------>D------>E..............--->R
  Status  solid ---> unconfirmed->...................->unconfirmed
 ```
-Initially, slide window starts from the first unconfirmed block, the size is 1, then will increase windows size as the number of unconfirmed block increase and do not receiver 2/3+1 relies message from verifiers.  Once receive 2/3+1 replies messages from verifiers , which show that block E is valid, then B,C,D,E are all valid and be marked as solid status since each block hash relies precious block hash . In this case, the slide windows move super faster in comparing with tron windows before tron windows reach thresholds-19.  In best case, which means no fork and network is good-a slot time to receive Verifiers replicas, both of them have the same move speed after tron windows size reach threshold. On average, if there is a fork on the main chain, then tron window reset windows size and wait for 19 blocks time to confirm while optimized windows can maintenance the same move speed. More detail: See the proof the correctness of optimized pBFT.
+For optimized PBFT, slide window starts from the first unconfirmed block with size of 1,  will increase windows size as the number of unconfirmed block increase when 2/3+1 relies message from verifiers not be received.  Once get more than 2/3+1 replies messages from verifiers stating that block E is valid, which proves that block E on (b) is valid, which draws a conclusion that B,C,D,E are all valid and can be marked as solid status since each block hash relies precious block hash . In this case, the slide windows move super faster in comparing with tron windows before tron windows reach thresholds-19.  In best case, which means no fork and network is good means a slot time is enough to receive Verifiers replicas, both of them have the same move speed after tron windows size reach threshold. However, if there is a fork on the main chain, then tron window (a) reset windows size and wait for 19 blocks time to confirm while optimized windows (b) can maintenance the same move speed. More detail: See the proof the correctness of optimized pBFT.
   
+Notice: even if (a) and (b) have same window moving speed, the transaction confirm time of (a) is much bigger than (b) since it need to wait more than 2f+1 block to be produced to valid a block
+
 ## Rationale 
 ## Proof of 3f+1
 Following will give some simple proof about pBFT. We denote
@@ -54,8 +56,8 @@ So, now we get n=3f+1.
  ```
    request->Pre-prepare->prepare->commit->reply
  ```
-Firstly, the client send request to primary replicas, once primary replica receive request and it will start three-phase protocol and send multicast to all the replicas. Once other replicas receive Pre_prepare message and valid message, they will send multicast to all the replicas. In every state, once replicas receive request from precious state and then send a multicast to the network after confirm message with correct view number and sequence number.
- Each state depends the precious state within same view message, like if commit is true , then prepare and Pre-prepare are all true. If commit is true, there are at least f+1 no-faulty replicas in a set R1 send a request to this replica from prepare state within same view message m and also there are f+1 no-faulty replicas send a request from Pre_Prepare state within same view message m. However, there are can be some network failure which cause primary replica not receive request message from client. At this time, it trigger 'three-phase protocol ' change view, recreate a new primary replicas and increase view number to be v+1. Consider this case, any view v'>v contains correct view-change messages from every replica in a set R2 of 2f+1 replicas. Since there are  total 3f+ 1 replicas, R1 and R2 must intersect in at least one no faulty replica k. k’s view-change message will ensure that prepared in a previous view is propagated to subsequent views ,unless the new-view message contains a view-change message with a stable checkpoint with a sequence number higher than n. But this is impossible that no replicas in the new view accept message with sequence number lower than n.  
+Firstly, the client send request to primary replicas, once primary replica receive request and it will start three-phase protocol and send multicast to all the replicas. Once other replicas receive valid Pre_prepare message , they will send multicast to all the replicas. In every state, once replicas receive request from precious state and then will send a multicast to the network after confirm message with correct view number and sequence number.
+ Each state depends the precious state within same view message, like if commit is true , then both prepare and Pre-prepare should are true. If commit is true, there are at least f+1 no-faulty replicas in a set R1 send a request to this replica from prepare state within same view message m and also there are f+1 no-faulty replicas send a request from Pre_Prepare state within same view message m. However, there are can be some network failure which cause primary replica not receive request message from client. At this time, it trigger 'three-phase protocol ' change view, recreate a new primary replicas and increase view number to be v+1. Consider this case, any view v'>v contains correct view-change messages from every replica in a set R2 of 2f+1 replicas. Since there are  total 3f+ 1 replicas, R1 and R2 must intersect in at least one no faulty replica k. k’s view-change message will ensure that prepared in a previous view is propagated to subsequent views ,unless the new-view message contains a view-change message with a stable checkpoint with a sequence number higher than n. But this is impossible that no replicas in the new view accept message with sequence number lower than n.  
  ```
    |R2|-|R1|>=1
    |R2|+|R1|=3f+1          (1)     →|R2|>=2f+1
@@ -71,16 +73,16 @@ Firstly, the client send request to primary replicas, once primary replica recei
 In consideration of both cases, so we need at least 2f+1 replicas to ensure the correctness of the result. More detail [check this paper](http://pmg.csail.mit.edu/papers/osdi99.pdf)
 ### Proof of Correctness of Optimized Tron pBFT
  `Assumption`: SR can successfully broadcast message to the network after finishing produce a block.  
- After SR finish producing block and broadcast message to all Verifiers, before Verifiers receive this message, there might be some network failures happen, like network delay, package loss, etc. We denote that ` f1 ` is the max number Verifiers that would be faulty from SR broadcast state to Verifiers received state, ` f2 ` is the max number of Verifiers that would be faulty after receive SR broadcast message. `f` is the max number of faulty Verifiers as we set by default. So, f>max(f1,f2). Based on pBFT, we should set total Verifiers :
+ After SR finish producing block and broadcast message to all Verifiers, there might be some network failures happen, like network delay, package loss, etc. We denote that ` f1 ` is the max number Verifiers that would be faulty before receiving broadcast message , ` f2 ` is the max number of Verifiers that would be faulty after receive SR broadcast message. `f` is the max number of faulty Verifiers as we set by default. So, f>max(f1,f2). Based on pBFT, we should set total Verifiers :
 ```
 3f2+1 <=3f+1
 ```
-If f1 is zero, then 3f2+1=3f+1 since there is no any failure happen from SR broadcast message state to Verifiers received state. To successful verified correctness of result, we need:
+If f1 is zero, then 3f2+1=3f+1 since there is no any failure happen before receiving broadcast message. To successful verified correctness of result, we need:
 ```
 2f2+1<=2f+1
 ```
 The same as above , only if f1=0, then 2f2+1=2f+1.
-When receive at least 2f+1 replies from Verifiers, then confirm block status to be solid. 2f+1 always bigger or equal than 2f2+1. Worst case f1=f, then need all the Verifiers that successful receive broadcast message from SR , which is 2f+1=3f2+1>2f2+1.  Best case, f1=0, just need at least 2f2+1=2f+1 Verifiers replies.  If f>f1>0, then 2f+1 >2f2+1 always true.  Therefore, keep at least 2f+1 replies from Verifiers always ensure the correctness of the result.
+When receive at least 2f+1 replies from Verifiers, then confirm block status can be solid status. 2f+1 always bigger or equal than 2f2+1. Worst case f1=f, then need all the remaining Verifiers that successful receive broadcast message from SR , which is 2f+1=3f2+1>2f2+1.  Best case, f1=0, just need at least 2f2+1=2f+1 Verifiers replies.  If f>f1>0, then 2f+1 >2f2+1 always true.  Therefore, keep at least 2f+1 replies from Verifiers always ensure the correctness of the result.
 ### Proof of Performance of Optimized Tron pBFT
 However, if the network is not good, f1 increase, then it is hard to get 2f+1 replies from Verifiers, which mean this round fail to reach consensus for block A validation. But if the next block B or C successful reach consensus from Verifiers, then all the unconfirmed block before B or C on the main chain will also become a solid state since block B or C alway contain precious block hash and generations of hash depend precious block hash. So, this optimized tron pBFT would have a greater performance on average.
 ```
