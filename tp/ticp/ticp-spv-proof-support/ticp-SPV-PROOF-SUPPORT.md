@@ -1,9 +1,9 @@
 ```
-tip: 1
+ticp: 1
 title: SPV proof support
 author: @lvs007
 type: Tron Inter-blockchain Communication Protocol
-category: TRC
+category: CORE
 status: Draft
 created: 2020-03-09
 ```

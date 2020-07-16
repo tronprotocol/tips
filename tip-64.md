@@ -1,6 +1,6 @@
 ```
 tip:  64
-title: tron mix consensus introduction
+title: tron mix consensus Analytics
 author: xing@tron.network
 status: Draft
 type: algorithm
