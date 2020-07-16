@@ -9,6 +9,7 @@ created: 2019-12-17
 ```
 ## Simple Summary
 This TIP mainly describes widely used pBFT and give some explanation how it works on tron consensus algorithm.
+[Optimize pBFT](https://github.com/tronprotocol/tips/blob/master/tp/ticp/ticp-optimized-pbft/ticp-Optimized-PBFT.md)
 ## Abstract
 Practical Byzantine Fault Tolerance(pBFT) is designed for reaching a consensus in the distributed network like blockchain even when some nodes in the network fail to response or controlled by hacker or response with wrong result. In order to fully implement pBFT, system need to configure a certain number of replicas. This TIP will give some simple proof of 3f+1 and 2f+1 based on precious research paper. In addition, give proof of correctness and performance of optimized tron consensus algorithm.
 ## Motivation 
@@ -140,3 +141,4 @@ Take a look at optimized tron pBFT, consider cases like (3) though it is impossi
     Overall, Optimized tron pBFT have tremendously improve performance.
    
 
+    
