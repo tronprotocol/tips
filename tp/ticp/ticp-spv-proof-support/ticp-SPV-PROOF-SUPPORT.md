@@ -14,7 +14,7 @@ This doc describes a solution to support SPV proof
 
 ## Abstract
 
-This standard defines a way to support SPV proof, In this way client can get certified block headers. The client can use transactions' Merkel root in headers to make a Merkel proof
+This standard defines a way to support SPV correctness and security, In this way client can get certified block headers. The client can use transactions' Merkel root in headers to make a Merkel proof
 
 
 
