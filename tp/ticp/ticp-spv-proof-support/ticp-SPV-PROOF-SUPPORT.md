@@ -37,10 +37,9 @@ We can use threshold signature to reduce the signature size. The new data struct
 
 message SrList {
 message raw {
-bytes currentSrList = 1;
-bytes nextSrList = 2;
+bytes nextSrList = 1;
 }
-bytes sr_signature = 3;
+bytes sr_signature = 2;
 }
 
 
