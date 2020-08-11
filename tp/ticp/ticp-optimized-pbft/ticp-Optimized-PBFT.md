@@ -1,5 +1,5 @@
 ```
-tip: 1
+ticp: 2
 title: Optimized PBFT Consensus Algorithm
 author: @lvs007
 type: Tron Inter-blockchain Communication Protocol
@@ -86,6 +86,10 @@ TRON's optimized PBFT consensus algorithm also features a Timeout mechanism. If 
 <center>Figure 2</center>
 
 ![](https://github.com/tronprotocol/tips/raw/master/tp/ticp/ticp-optimized-pbft/pbft-2.png)
+
+A SR can be acted as Verifiers role, both of those two run on the same server. 
+
+For fullnode,  it only receive pbft message from network and not participate in consensus process. Once fullnode receive 2f+1 commit pbft message, it will confirm blocks. 
 
 ### Datatypes
 
