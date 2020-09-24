@@ -46,8 +46,6 @@ TRON Improvement Proposals (TIPs) describe standards for the TRON platform, incl
 | TIP&nbsp;135  | [Shielded TRC-20 Contract](https://github.com/tronprotocol/tips/blob/master/tip-135.md)|  <federico.zhen@tron.network>| TRC |false | Final |
 | TIP&nbsp;137  | [Zero-knowledge Proof Verification functions](https://github.com/tronprotocol/tips/blob/master/tip-137.md)|  <federico.zhen@tron.network>| VM |true | Final |
 | TIP&nbsp;138  | [Pedersen hash function](https://github.com/tronprotocol/tips/blob/master/tip-138.md)|  <federico.zhen@tron.network>| VM |true | Final |
-| TIP&nbsp;154  | [TRC10 And TRC20 Conversion Contract Standard](https://github.com/tronprotocol/tips/blob/master/tip-154.md)|  <@tron.network>| TRC |false | Draft |
-| TIP&nbsp;155  | [Allow Issuing TRC10 In Contract](https://github.com/tronprotocol/tips/blob/master/tip-155.md)|  <@tron.network>| VM |false | Draft |
 ****
 
 ## To Submit a TIP
