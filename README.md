@@ -42,6 +42,11 @@ TRON Improvement Proposals (TIPs) describe standards for the TRON platform, incl
 | TIP&nbsp;60  | [Precompiled contract function for multi-signature verification](https://github.com/tronprotocol/tips/blob/master/tip-60.md)|  <ksl2945@gmail.com>| VM |true | Accepted |
 | TIP&nbsp;62  | [Tron consensus algorithm introduction](https://github.com/tronprotocol/tips/blob/master/tip-62.md)|  <xing@tron.network>| Core |false | Final |
 | TIP&nbsp;64  | [Tron tron mix consensus Analytics](https://github.com/tronprotocol/tips/blob/master/tip-64.md)|  <xing@tron.network>| Core |false | Draft |
+| TIP&nbsp;101  | [Wallet Keystore Specification](https://github.com/tronprotocol/tips/blob/master/tip-101.md)|  <federico.zhen@tron.network>| TRC |false | Last Call |
+| TIP&nbsp;102  | [Hierarchical Deterministic Wallet](https://github.com/tronprotocol/tips/blob/master/tip-102.md)|  <federico.zhen@tron.network>| TRC |false | Last Call |
+| TIP&nbsp;104  | [Data Signing Specification](https://github.com/tronprotocol/tips/blob/master/tip-104.md)|  <federico.zhen@tron.network>| TRC |false | Last Call |
+| TIP&nbsp;105  | [Multi-signature Permission Operation](https://github.com/tronprotocol/tips/blob/master/tip-105.md)|  <federico.zhen@tron.network>| TRC |true | Final |
+| TIP&nbsp;120  | [ECDSA Signature Encoding Specification](https://github.com/tronprotocol/tips/blob/master/tip-120.md)|  <federico.zhen@tron.network>| TRC |false | Last Call |
 | TIP&nbsp;127  | [Support Tron-DEX based on system contracts](https://github.com/tronprotocol/tips/blob/master/tip-127.md)|  <liu.sean@tron.network>| CORE |false | Draft |
 | TIP&nbsp;135  | [Shielded TRC-20 Contract](https://github.com/tronprotocol/tips/blob/master/tip-135.md)|  <federico.zhen@tron.network>| TRC |false | Final |
 | TIP&nbsp;137  | [Zero-knowledge Proof Verification functions](https://github.com/tronprotocol/tips/blob/master/tip-137.md)|  <federico.zhen@tron.network>| VM |true | Final |
