@@ -1,10 +1,10 @@
 ```
 ticp: 2
 title: Optimized PBFT Consensus Algorithm
-author: @lvs007
+author: @lvs007 zy.liang.5@163.com
 type: Tron Inter-blockchain Communication Protocol
-category: TRC
-status: Draft
+category: Core
+status: LastCall
 created: 2019-12-12
 ```
 
