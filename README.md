@@ -53,7 +53,13 @@ TRON Improvement Proposals (TIPs) describe standards for the TRON platform, incl
 | TIP&nbsp;135  | [Shielded TRC-20 Contract](https://github.com/tronprotocol/tips/blob/master/tip-135.md)|  <federico.zhen@tron.network>|  Standards&nbsp;Track | TRC | false | Final |
 | TIP&nbsp;137  | [Zero-knowledge Proof Verification functions](https://github.com/tronprotocol/tips/blob/master/tip-137.md)|  <federico.zhen@tron.network>| Standards&nbsp;Track | VM | true | Final |
 | TIP&nbsp;138  | [Pedersen hash function](https://github.com/tronprotocol/tips/blob/master/tip-138.md)|  <federico.zhen@tron.network>| Standards&nbsp;Track | VM | true | Final |
-
+| TIP&nbsp;156  | [Vote instructions in TVM](https://github.com/tronprotocol/tips/blob/master/tip-156.md)|  <taihao.fu@gmail.com>| Standards&nbsp;Track | VM | true | Draft |
+| TIP&nbsp;157  | [Freeze instructions in TVM](https://github.com/tronprotocol/tips/blob/master/tip-157.md)|  <taihao.fu@gmail.com>| Standards&nbsp;Track | VM | true | Draft |
+| TIP&nbsp;171  | [STAKE instructions in TVM](https://github.com/tronprotocol/tips/blob/master/tip-171.md)|  <taihao.fu@gmail.com>| Standards&nbsp;Track | VM | true | Draft |
+| TIP&nbsp;174  | [CHAINID instructions in TVM](https://github.com/tronprotocol/tips/blob/master/tip-174.md)|  <taihao.fu@gmail.com>| Standards&nbsp;Track | VM | true | Last Call |
+| TIP&nbsp;175  | [SELFBALANCE instructions in TVM](https://github.com/tronprotocol/tips/blob/master/tip-175.md)|  <taihao.fu@gmail.com>| Standards&nbsp;Track | VM | true | Last Call |
+| TIP&nbsp;176  | [altbn128 operation energy reduction in TVM](https://github.com/tronprotocol/tips/blob/master/tip-176.md)|  <taihao.fu@gmail.com>| Standards&nbsp;Track | VM | true | Last Call|
+| TIP&nbsp;178  | [TOKENISSUE and UPDATEASSET Instruction in TVM](https://github.com/tronprotocol/tips/blob/master/tip-178.md)|  <taihao.fu@gmail.com>| Standards&nbsp;Track | VM | true | Draft |
 ****
 
 ## To Submit a TIP
