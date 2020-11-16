@@ -32,7 +32,6 @@ TRON Improvement Proposals (TIPs) describe standards for the TRON platform, incl
 | TIP&nbsp;30  | [Code hash instructions](https://github.com/tronprotocol/tips/blob/master/tip-30.md)                                     |  <llwslc@gmail.com> | Standards&nbsp;Track | VM |true | Final |
 | TIP&nbsp;31  | [Trigger constant contract](https://github.com/tronprotocol/tips/blob/master/tip-31.md)                                  |  <llwslc@gmail.com> |Standards&nbsp;Track | VM |true | Final |
 | TIP&nbsp;32  | [Clear the ABI of contract](https://github.com/tronprotocol/tips/blob/master/tip-32.md)                                  |  <llwslc@gmail.com>|Standards&nbsp;Track | VM | true | Final |
-| TIP&nbsp;34  | [Event subscribe to support contract without ABI](https://github.com/tronprotocol/tips/blob/tip34/tip-34.md)             |  <wubin1@tron.network> | Standards&nbsp;Track | TRC | false | Final |
 | TIP&nbsp;37  | [Forbid using TransferContract & TransferAssetContract for contract account](https://github.com/tronprotocol/tips/blob/master/tip-37.md)| <taihao.fu@gmail.com> | Standards&nbsp;Track | VM | true | Final |
 | TIP&nbsp;41  | [Optimize transactionHistoryStore occupancy space](https://github.com/tronprotocol/tips/blob/master/tip-41.md)           |  <wubin1@tron.network>| Standards&nbsp;Track  | Core |false | Final |
 | TIP&nbsp;43  | [Precompiled contract function for signature parallel verification](https://github.com/tronprotocol/tips/blob/master/tip-43.md)| <ksl2945@gmail.com>| Standards&nbsp;Track | VM | true | Final |
