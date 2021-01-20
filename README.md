@@ -46,7 +46,7 @@ TRON Improvement Proposals (TIPs) describe standards for the TRON platform, incl
 | TIP&nbsp;102  | [Hierarchical Deterministic Wallet](https://github.com/tronprotocol/tips/blob/master/tip-102.md)|  <federico.zhen@tron.network>| Standards&nbsp;Track | TRC | false | Last Call |
 | TIP&nbsp;104  | [Data Signing Specification](https://github.com/tronprotocol/tips/blob/master/tip-104.md)|  <federico.zhen@tron.network>| Standards&nbsp;Track | TRC | false | Last Call |
 | TIP&nbsp;105  | [Multi-signature Permission Operation](https://github.com/tronprotocol/tips/blob/master/tip-105.md)|  <federico.zhen@tron.network>| Standards&nbsp;Track | TRC | true | Final |
-| TIP&nbsp;120  | [ECDSA Signature Encoding Specification](https://github.com/tronprotocol/tips/blob/master/tip-120.md)|  <federico.zhen@tron.network>| Standards&nbsp;Track | TRC | false | Last Call |
+| TIP&nbsp;120  | [ECDSA Signature Encoding Specification](https://github.com/tronprotocol/tips/blob/master/tip-120.md)|  <federico.zhen@tron.network>| Standards&nbsp;Track | TRC | false | Final |
 | TIP&nbsp;127  | [Support Tron-DEX based on system contracts](https://github.com/tronprotocol/tips/blob/master/tip-127.md)| <liu.sean@tron.network>| Standards&nbsp;Track | CORE | false | Draft |
 | TIP&nbsp;128  | [TIP128 Lite Fullnode support](https://github.com/tronprotocol/tips/blob/master/tip-128.md)| <ray.wu@tron.network>| Standards&nbsp;Track | CORE | false | Draft |
 | TIP&nbsp;135  | [Shielded TRC-20 Contract](https://github.com/tronprotocol/tips/blob/master/tip-135.md)|  <federico.zhen@tron.network>|  Standards&nbsp;Track | TRC | false | Final |
