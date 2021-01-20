@@ -55,11 +55,11 @@ TRON Improvement Proposals (TIPs) describe standards for the TRON platform, incl
 | TIP&nbsp;156  | [Vote instructions in TVM](https://github.com/tronprotocol/tips/blob/master/tip-156.md)|  <taihao.fu@gmail.com>| Standards&nbsp;Track | VM | true | Draft |
 | TIP&nbsp;157  | [Freeze instructions in TVM](https://github.com/tronprotocol/tips/blob/master/tip-157.md)|  <taihao.fu@gmail.com>| Standards&nbsp;Track | VM | true | Draft |
 | TIP&nbsp;171  | [STAKE instructions in TVM](https://github.com/tronprotocol/tips/blob/master/tip-171.md)|  <taihao.fu@gmail.com>| Standards&nbsp;Track | VM | true | Draft |
-| TIP&nbsp;174  | [CHAINID instructions in TVM](https://github.com/tronprotocol/tips/blob/master/tip-174.md)|  <taihao.fu@gmail.com>| Standards&nbsp;Track | VM | true | Last Call |
-| TIP&nbsp;175  | [SELFBALANCE instructions in TVM](https://github.com/tronprotocol/tips/blob/master/tip-175.md)|  <taihao.fu@gmail.com>| Standards&nbsp;Track | VM | true | Last Call |
-| TIP&nbsp;176  | [altbn128 operation energy reduction in TVM](https://github.com/tronprotocol/tips/blob/master/tip-176.md)|  <taihao.fu@gmail.com>| Standards&nbsp;Track | VM | true | Last Call|
+| TIP&nbsp;174  | [CHAINID instructions in TVM](https://github.com/tronprotocol/tips/blob/master/tip-174.md)|  <taihao.fu@gmail.com>| Standards&nbsp;Track | VM | true | Final |
+| TIP&nbsp;175  | [SELFBALANCE instructions in TVM](https://github.com/tronprotocol/tips/blob/master/tip-175.md)|  <taihao.fu@gmail.com>| Standards&nbsp;Track | VM | true | Final |
+| TIP&nbsp;176  | [altbn128 operation energy reduction in TVM](https://github.com/tronprotocol/tips/blob/master/tip-176.md)|  <taihao.fu@gmail.com>| Standards&nbsp;Track | VM | true | Final|
 | TIP&nbsp;178  | [TOKENISSUE and UPDATEASSET Instruction in TVM](https://github.com/tronprotocol/tips/blob/master/tip-178.md)|  <taihao.fu@gmail.com>| Standards&nbsp;Track | VM | true | Draft |
-| TIP&nbsp;196  | [Reward SRs with the transaction fees charged for bandwidth and Energy](https://github.com/tronprotocol/tips/blob/master/tip-196.md)|  <liu.sean@tron.network>| Standards&nbsp;Track | Core | true | Last Call |
+| TIP&nbsp;196  | [Reward SRs with the transaction fees charged for bandwidth and Energy](https://github.com/tronprotocol/tips/blob/master/tip-196.md)|  <liu.sean@tron.network>| Standards&nbsp;Track | Core | true | Final |
 | TIP&nbsp;204 | [Make MAX_FEE_LIMIT configurable as a chain property](https://github.com/tronprotocol/tips/blob/master/tip-204.md) | <yanghang8612@163.com> | Standards&nbsp;Track | VM | false | Final |
 | TIP&nbsp;209 | [Adapt to Solidity 0.6.0](https://github.com/tronprotocol/tips/blob/master/tip-209.md) | <neo.hong@tron.network> | Standards&nbsp;Track | VM | false | Final |
 
