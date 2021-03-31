@@ -46,7 +46,7 @@ TRON Improvement Proposals (TIPs) describe standards for the TRON platform, incl
 | TIP&nbsp;102  | [Hierarchical Deterministic Wallet](https://github.com/tronprotocol/tips/blob/master/tip-102.md)|  <federico.zhen@tron.network>| Standards&nbsp;Track | TRC | false | Last Call |
 | TIP&nbsp;104  | [Data Signing Specification](https://github.com/tronprotocol/tips/blob/master/tip-104.md)|  <federico.zhen@tron.network>| Standards&nbsp;Track | TRC | false | Last Call |
 | TIP&nbsp;105  | [Multi-signature Permission Operation](https://github.com/tronprotocol/tips/blob/master/tip-105.md)|  <federico.zhen@tron.network>| Standards&nbsp;Track | TRC | true | Final |
-| TIP&nbsp;120  | [ECDSA Signature Encoding Specification](https://github.com/tronprotocol/tips/blob/master/tip-120.md)|  <federico.zhen@tron.network>| Standards&nbsp;Track | TRC | false | Last Call |
+| TIP&nbsp;120  | [ECDSA Signature Encoding Specification](https://github.com/tronprotocol/tips/blob/master/tip-120.md)|  <federico.zhen@tron.network>| Standards&nbsp;Track | TRC | false | Final |
 | TIP&nbsp;127  | [Support Tron-DEX based on system contracts](https://github.com/tronprotocol/tips/blob/master/tip-127.md)| <liu.sean@tron.network>| Standards&nbsp;Track | CORE | false | Draft |
 | TIP&nbsp;128  | [TIP128 Lite Fullnode support](https://github.com/tronprotocol/tips/blob/master/tip-128.md)| <ray.wu@tron.network>| Standards&nbsp;Track | CORE | false | Draft |
 | TIP&nbsp;135  | [Shielded TRC-20 Contract](https://github.com/tronprotocol/tips/blob/master/tip-135.md)|  <federico.zhen@tron.network>|  Standards&nbsp;Track | TRC | false | Final |
@@ -55,12 +55,15 @@ TRON Improvement Proposals (TIPs) describe standards for the TRON platform, incl
 | TIP&nbsp;156  | [Vote instructions in TVM](https://github.com/tronprotocol/tips/blob/master/tip-156.md)|  <taihao.fu@gmail.com>| Standards&nbsp;Track | VM | true | Draft |
 | TIP&nbsp;157  | [Freeze instructions in TVM](https://github.com/tronprotocol/tips/blob/master/tip-157.md)|  <taihao.fu@gmail.com>| Standards&nbsp;Track | VM | true | Draft |
 | TIP&nbsp;171  | [STAKE instructions in TVM](https://github.com/tronprotocol/tips/blob/master/tip-171.md)|  <taihao.fu@gmail.com>| Standards&nbsp;Track | VM | true | Draft |
-| TIP&nbsp;174  | [CHAINID instructions in TVM](https://github.com/tronprotocol/tips/blob/master/tip-174.md)|  <taihao.fu@gmail.com>| Standards&nbsp;Track | VM | true | Last Call |
-| TIP&nbsp;175  | [SELFBALANCE instructions in TVM](https://github.com/tronprotocol/tips/blob/master/tip-175.md)|  <taihao.fu@gmail.com>| Standards&nbsp;Track | VM | true | Last Call |
-| TIP&nbsp;176  | [altbn128 operation energy reduction in TVM](https://github.com/tronprotocol/tips/blob/master/tip-176.md)|  <taihao.fu@gmail.com>| Standards&nbsp;Track | VM | true | Last Call|
+| TIP&nbsp;174  | [CHAINID instructions in TVM](https://github.com/tronprotocol/tips/blob/master/tip-174.md)|  <taihao.fu@gmail.com>| Standards&nbsp;Track | VM | true | Final |
+| TIP&nbsp;175  | [SELFBALANCE instructions in TVM](https://github.com/tronprotocol/tips/blob/master/tip-175.md)|  <taihao.fu@gmail.com>| Standards&nbsp;Track | VM | true | Final |
+| TIP&nbsp;176  | [altbn128 operation energy reduction in TVM](https://github.com/tronprotocol/tips/blob/master/tip-176.md)|  <taihao.fu@gmail.com>| Standards&nbsp;Track | VM | true | Final|
 | TIP&nbsp;178  | [TOKENISSUE and UPDATEASSET Instruction in TVM](https://github.com/tronprotocol/tips/blob/master/tip-178.md)|  <taihao.fu@gmail.com>| Standards&nbsp;Track | VM | true | Draft |
-| TIP&nbsp;196  | [Reward SRs with the transaction fees charged for bandwidth and Energy](https://github.com/tronprotocol/tips/blob/master/tip-196.md)|  <liu.sean@tron.network>| Standards&nbsp;Track | Core | true | Draft |
+| TIP&nbsp;196  | [Reward SRs with the transaction fees charged for bandwidth and Energy](https://github.com/tronprotocol/tips/blob/master/tip-196.md)|  <liu.sean@tron.network>| Standards&nbsp;Track | Core | true | Final |
+| TIP&nbsp;204 | [Make MAX_FEE_LIMIT configurable as a chain property](https://github.com/tronprotocol/tips/blob/master/tip-204.md) | <yanghang8612@163.com> | Standards&nbsp;Track | VM | false | Final |
 | TIP&nbsp;207  | [A proposal to improve network resources model ](https://github.com/tronprotocol/tips/blob/master/tip-207.md)|  <liu.sean@tron.network>| Standards&nbsp;Track | Core | true | Draft |
+| TIP&nbsp;209 | [Adapt to Solidity 0.6.0](https://github.com/tronprotocol/tips/blob/master/tip-209.md) | <neo.hong@tron.network> | Standards&nbsp;Track | VM | false | Final |
+
 ****
 
 ## To Submit a TIP
