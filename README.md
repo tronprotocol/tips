@@ -63,6 +63,7 @@ TRON Improvement Proposals (TIPs) describe standards for the TRON platform, incl
 | TIP&nbsp;204 | [Make MAX_FEE_LIMIT configurable as a chain property](https://github.com/tronprotocol/tips/blob/master/tip-204.md) | <yanghang8612@163.com> | Standards&nbsp;Track | VM | false | Final |
 | TIP&nbsp;207  | [A proposal to improve network resources model ](https://github.com/tronprotocol/tips/blob/master/tip-207.md)|  <liu.sean@tron.network>| Standards&nbsp;Track | Core | true | Draft |
 | TIP&nbsp;209 | [Adapt to Solidity 0.6.0](https://github.com/tronprotocol/tips/blob/master/tip-209.md) | <neo.hong@tron.network> | Standards&nbsp;Track | VM | false | Final |
+| TIP&nbsp;250 | [Include transaction results on the chain](https://github.com/tronprotocol/tips/blob/master/tip-250.md) | <andy.zhang@tron.network> | Standards&nbsp;Track | Core | true | Final |
 
 ****
 
