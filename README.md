@@ -67,8 +67,7 @@ TRON Improvement Proposals (TIPs) describe standards for the TRON platform, incl
 | TIP&nbsp;268 | [SmartContract ABI optimization](https://github.com/tronprotocol/tips/blob/master/tip-268.md) | <yanghang8612@163.com> | Standards&nbsp;Track | VM | false | Final |
 | TIP&nbsp;269 | [Optimize the performance of block processing](https://github.com/tronprotocol/tips/blob/master/tip-269.md) | <forfreeday@163.com> | Standards&nbsp;Track | Core | false | Final |
 | TIP&nbsp;281 | [Optimize the query of database](https://github.com/tronprotocol/tips/blob/master/tip-281.md) | <forfreeday@163.com> | Standards&nbsp;Track | Core | false | Final |
-
-
+| TIP&nbsp;295 | [Optimize assets of account](https://github.com/tronprotocol/tips/blob/master/tip-295.md) | <forfreeday@163.com> | Standards&nbsp;Track | Core | false | Draft |
 
 ****
 
