@@ -74,6 +74,8 @@ TRON Improvement Proposals (TIPs) describe standards for the TRON platform, incl
 | TIP&nbsp;293 | [Add a proposal to adjust the total net limit](https://github.com/tronprotocol/tips/blob/master/tip-293.md)| <federico.zhen@tron.network> | Standards&nbsp;Track | TRC | true | Final |
 | TIP&nbsp;295 | [Optimize assets of account](https://github.com/tronprotocol/tips/blob/master/tip-295.md) | <forfreeday@163.com> | Standards&nbsp;Track | Core | false | Final |
 | TIP&nbsp;298 | [Reformat manifest](https://github.com/tronprotocol/tips/blob/master/tip-298.md) | <halibobo1205@gmail.com> | Standards&nbsp;Track | Core | false | Final |
+| TIP&nbsp;289 | [Block Broadcast Optimization](https://github.com/tronprotocol/tips/blob/master/tip-289.md) | <lucas.wu@tron.network> | Standards&nbsp;Track | Core | true | edited |
+| TIP&nbsp;290 | [Dynamic store optimization](https://github.com/tronprotocol/tips/blob/master/tip-290.md) | <lucas.wu@tron.network> | Standards&nbsp;Track | Core | true | edited |
 | TIP&nbsp;306 | [Adapt to solidity_0.8.4](https://github.com/tronprotocol/tips/blob/master/tip-306.md) | <neo.hong@tron.network> | Standards&nbsp;Track | VM | false | Final |
 | TIP&nbsp;721 | [TRC-721 Non-Fungible Token Standard](https://github.com/tronprotocol/tips/blob/master/tip-721.md) | <timothychungkitwai@gmail.com> | Standards&nbsp;Track | TRC | true | Final |
 
