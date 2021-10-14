@@ -67,6 +67,7 @@ TRON Improvement Proposals (TIPs) describe standards for the TRON platform, incl
 | TIP&nbsp;268 | [SmartContract ABI optimization](https://github.com/tronprotocol/tips/blob/master/tip-268.md) | <yanghang8612@163.com> | Standards&nbsp;Track | VM | false | Final |
 | TIP&nbsp;269 | [Optimize the performance of block processing](https://github.com/tronprotocol/tips/blob/master/tip-269.md) | <forfreeday@163.com> | Standards&nbsp;Track | Core | false | Final |
 | TIP&nbsp;271 | [Vote for SR in Smart Contract](https://github.com/tronprotocol/tips/blob/master/tip-271.md) | <yanghang8612@163.com> | Standards&nbsp;Track | VM | true | Final |
+| TIP&nbsp;272 | [Compatible with EVM](https://github.com/tronprotocol/tips/blob/master/tip-272.md) | <yanghang8612@163.com> | Standards&nbsp;Track | VM | true | Final |
 | TIP&nbsp;276 | [Optimize block verification logic](https://github.com/tronprotocol/tips/blob/master/tip-276.md) | <lucas.wu@tron.network> | Standards&nbsp;Track | Core | false | Final |
 | TIP&nbsp;281 | [Optimize the query of database](https://github.com/tronprotocol/tips/blob/master/tip-281.md) | <forfreeday@163.com> | Standards&nbsp;Track | Core | false | Final |
 | TIP&nbsp;285 | [Node startup optimization](https://github.com/tronprotocol/tips/blob/master/tip-285.md) | <lucas.wu@tron.network> | Standards&nbsp;Track | Core | false | Final |
@@ -77,6 +78,7 @@ TRON Improvement Proposals (TIPs) describe standards for the TRON platform, incl
 | TIP&nbsp;295 | [Optimize assets of account](https://github.com/tronprotocol/tips/blob/master/tip-295.md) | <forfreeday@163.com> | Standards&nbsp;Track | Core | false | Final |
 | TIP&nbsp;298 | [Reformat manifest](https://github.com/tronprotocol/tips/blob/master/tip-298.md) | <halibobo1205@gmail.com> | Standards&nbsp;Track | Core | false | Final |
 | TIP&nbsp;306 | [Adapt to solidity_0.8.4](https://github.com/tronprotocol/tips/blob/master/tip-306.md) | <neo.hong@tron.network> | Standards&nbsp;Track | VM | false | Final |
+| TIP&nbsp;318 | [Adapt to Ethereum London Release](https://github.com/tronprotocol/tips/blob/master/tip-318.md) | <neo.hong@tron.network> | Standards&nbsp;Track | VM | false | Final |
 | TIP&nbsp;721 | [TRC-721 Non-Fungible Token Standard](https://github.com/tronprotocol/tips/blob/master/tip-721.md) | <timothychungkitwai@gmail.com> | Standards&nbsp;Track | TRC | true | Final |
 
 ****
