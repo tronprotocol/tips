@@ -79,6 +79,7 @@ TRON Improvement Proposals (TIPs) describe standards for the TRON platform, incl
 | TIP&nbsp;298 | [Reformat manifest](https://github.com/tronprotocol/tips/blob/master/tip-298.md) | <halibobo1205@gmail.com> | Standards&nbsp;Track | Core | false | Final |
 | TIP&nbsp;306 | [Adapt to solidity_0.8.4](https://github.com/tronprotocol/tips/blob/master/tip-306.md) | <neo.hong@tron.network> | Standards&nbsp;Track | VM | false | Final |
 | TIP&nbsp;318 | [Adapt to Ethereum London Release](https://github.com/tronprotocol/tips/blob/master/tip-318.md) | <neo.hong@tron.network> | Standards&nbsp;Track | VM | false | Final |
+| TIP&nbsp;343 | [DB params optimization ](https://github.com/tronprotocol/tips/blob/master/tip-343.md) | <halibobo1205@gmail.com> | Standards&nbsp;Track | Core | false | Draft |
 | TIP&nbsp;721 | [TRC-721 Non-Fungible Token Standard](https://github.com/tronprotocol/tips/blob/master/tip-721.md) | <timothychungkitwai@gmail.com> | Standards&nbsp;Track | TRC | true | Final |
 
 ****
