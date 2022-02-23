@@ -78,8 +78,8 @@ TRON Improvement Proposals (TIPs) describe standards for the TRON platform, incl
 | TIP&nbsp;295 | [Optimize assets of account](https://github.com/tronprotocol/tips/blob/master/tip-295.md) | <forfreeday@163.com> | Standards&nbsp;Track | Core | false | Final |
 | TIP&nbsp;298 | [Reformat manifest](https://github.com/tronprotocol/tips/blob/master/tip-298.md) | <halibobo1205@gmail.com> | Standards&nbsp;Track | Core | false | Final |
 | TIP&nbsp;306 | [Adapt to solidity_0.8.4](https://github.com/tronprotocol/tips/blob/master/tip-306.md) | <neo.hong@tron.network> | Standards&nbsp;Track | VM | false | Final |
-| TIP&nbsp;318 | [Adapt to Ethereum London Release](https://github.com/tronprotocol/tips/blob/master/tip-318.md) | <neo.hong@tron.network> | Standards&nbsp;Track | VM | false | Final |
-| TIP&nbsp;343 | [DB params optimization ](https://github.com/tronprotocol/tips/blob/master/tip-343.md) | <halibobo1205@gmail.com> | Standards&nbsp;Track | Core | false | Final |
+| TIP&nbsp;318 | [Adapt to Ethereum London Upgrade](https://github.com/tronprotocol/tips/blob/master/tip-318.md) | <neo.hong@tron.network> | Standards&nbsp;Track | VM | false | Final |
+| TIP&nbsp;343 | [DB params optimization ](https://github.com/tronprotocol/tips/blob/master/tip-343.md) | <halibobo1205@gmail.com> | Standards&nbsp;Track | Core | false | Draft |
 | TIP&nbsp;344 | [Optimize instruction execution for TVM](https://github.com/tronprotocol/tips/blob/master/tip-344.md) | <yanghang8612@163.com> | Standards&nbsp;Track | VM | false | Final |
 | TIP&nbsp;362 | [Optimized node broadcast data caching](https://github.com/tronprotocol/tips/blob/master/tip-362.md) | <forfreeday@163.com> | Standards&nbsp;Track | Core | false | Final |
 | TIP&nbsp;366 | [Node startup optimization](https://github.com/tronprotocol/tips/blob/master/tip-366.md) | <halibobo1205@gmail.com> | Standards&nbsp;Track | Core | false | Final |
