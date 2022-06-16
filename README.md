@@ -70,11 +70,6 @@ TRON Improvement Proposals (TIPs) describe standards for the TRON platform, incl
 | TIP&nbsp;272 | [Compatible with EVM](https://github.com/tronprotocol/tips/blob/master/tip-272.md) | <yanghang8612@163.com> | Standards&nbsp;Track | VM | true | Final |
 | TIP&nbsp;276 | [Optimize block verification logic](https://github.com/tronprotocol/tips/blob/master/tip-276.md) | <lucas.wu@tron.network> | Standards&nbsp;Track | Core | false | Final |
 | TIP&nbsp;281 | [Optimize the query of database](https://github.com/tronprotocol/tips/blob/master/tip-281.md) | <forfreeday@163.com> | Standards&nbsp;Track | Core | false | Final |
-| TIP&nbsp;285 | [Node startup optimization](https://github.com/tronprotocol/tips/blob/master/tip-285.md) | <lucas.wu@tron.network> | Standards&nbsp;Track | Core | false | Last Call |
-| TIP&nbsp;292  | [Make the FREE_NET_LIMIT parameter configurable](https://github.com/tronprotocol/tips/blob/master/tip-292.md)|  <federico.zhen@tron.network>|  Standards&nbsp;Track | TRC | true | Last Call |
-| TIP&nbsp;293  | [Make the TOTAL_NET_LIMIT parameter configurable](https://github.com/tronprotocol/tips/blob/master/tip-293.md)|  <federico.zhen@tron.network>|  Standards&nbsp;Track | TRC | true | Last Call |
-| TIP&nbsp;295 | [Optimize assets of account](https://github.com/tronprotocol/tips/blob/master/tip-295.md) | <forfreeday@163.com> | Standards&nbsp;Track | Core | false | Last Call |
-| TIP&nbsp;298 | [Reformat manifest](https://github.com/tronprotocol/tips/blob/master/tip-298.md) | <halibobo1205@gmail.com> | Standards&nbsp;Track | Core | false | Draft |
 | TIP&nbsp;285 | [Node startup optimization](https://github.com/tronprotocol/tips/blob/master/tip-285.md) | <lucas.wu@tron.network> | Standards&nbsp;Track | Core | false | Final |
 | TIP&nbsp;289 | [Block Broadcast Optimization](https://github.com/tronprotocol/tips/blob/master/tip-289.md) | <lucas.wu@tron.network> | Standards&nbsp;Track | Core | true | Final |
 | TIP&nbsp;290 | [Dynamic store optimization](https://github.com/tronprotocol/tips/blob/master/tip-290.md) | <lucas.wu@tron.network> | Standards&nbsp;Track | Core | true | Final |
