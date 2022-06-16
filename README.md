@@ -74,6 +74,9 @@ TRON Improvement Proposals (TIPs) describe standards for the TRON platform, incl
 | TIP&nbsp;293  | [Make the TOTAL_NET_LIMIT parameter configurable](https://github.com/tronprotocol/tips/blob/master/tip-293.md)|  <federico.zhen@tron.network>|  Standards&nbsp;Track | TRC | true | Last Call |
 | TIP&nbsp;295 | [Optimize assets of account](https://github.com/tronprotocol/tips/blob/master/tip-295.md) | <forfreeday@163.com> | Standards&nbsp;Track | Core | false | Last Call |
 | TIP&nbsp;298 | [Reformat manifest](https://github.com/tronprotocol/tips/blob/master/tip-298.md) | <halibobo1205@gmail.com> | Standards&nbsp;Track | Core | false | Draft |
+| TIP&nbsp;382 | [TIP-382: Optimize the data structure of account assets](https://github.com/tronprotocol/tips/blob/master/tip-382.md) | <wb_bupt@163.com> | Standards&nbsp;Track | Core | false | Final |
+| TIP&nbsp;383 | [TIP-383: Optimize transaction cache loading](https://github.com/tronprotocol/tips/blob/master/tip-383.md) | <wb_bupt@163.com> | Standards&nbsp;Track | Core | false | Final |
+| TIP&nbsp;388 | [TIP-388: Optimize light node synchronization logic](https://github.com/tronprotocol/tips/blob/master/tip-388.md) | <wb_bupt@163.com> | Standards&nbsp;Track | Core | false | Final |
 
 ****
 
