@@ -1,7 +1,7 @@
 ```
 tip: 10
 title: TRC-10 Token Standard
-author: Marcus Zhao<zhaohong229@gmail.com>
+author: Marcus Zhao<chiadet72@gmail.com>
 type: Standards Track
 category: TRC
 discussion-to: https://github.com/tronprotocol/TIPs/issues/10
