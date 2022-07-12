@@ -1,7 +1,7 @@
 # IDEA
 .idea
 *iml
-.DS_Store
+.md
 
 # gradle
 .gradle
