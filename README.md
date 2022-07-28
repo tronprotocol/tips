@@ -89,6 +89,7 @@ TRON Improvement Proposals (TIPs) describe standards for the TRON platform, incl
 | TIP&nbsp;383 | [TIP-383: Optimize transaction cache loading](https://github.com/tronprotocol/tips/blob/master/tip-383.md) | <wb_bupt@163.com> | Standards&nbsp;Track | Core | false | Final |
 | TIP&nbsp;388 | [TIP-388: Optimize light node synchronization logic](https://github.com/tronprotocol/tips/blob/master/tip-388.md) | <wb_bupt@163.com> | Standards&nbsp;Track | Core | false | Final |
 | TIP&nbsp;391 | [TIP-391: Optimize fetch block process](https://github.com/tronprotocol/tips/blob/master/tip-391.md) | <vikingzzu@163.com> | Standards&nbsp;Track | Core | false | Final |
+| TIP&nbsp;397 | [Raise limit of the 13th network parameter](https://github.com/tronprotocol/tips/blob/master/tip-397.md) | <yanghang8612@163.com> | Standards&nbsp;Track | VM | true | Final |
 | TIP&nbsp;721 | [TRC-721 Non-Fungible Token Standard](https://github.com/tronprotocol/tips/blob/master/tip-721.md) | <timothychungkitwai@gmail.com> | Standards&nbsp;Track | TRC | true | Final |
 
 ****
