@@ -81,6 +81,7 @@ TRON Improvement Proposals (TIPs) describe standards for the TRON platform, incl
 | TIP&nbsp;318 | [Adapt to Ethereum London Upgrade](https://github.com/tronprotocol/tips/blob/master/tip-318.md) | <neo.hong@tron.network> | Standards&nbsp;Track | VM | false | Final |
 | TIP&nbsp;343 | [DB params optimization ](https://github.com/tronprotocol/tips/blob/master/tip-343.md) | <halibobo1205@gmail.com> | Standards&nbsp;Track | Core | false | Draft |
 | TIP&nbsp;344 | [Optimize instruction execution for TVM](https://github.com/tronprotocol/tips/blob/master/tip-344.md) | <yanghang8612@163.com> | Standards&nbsp;Track | VM | false | Final |
+| TIP&nbsp;397 | [Raise limit of the 13th network parameter](https://github.com/tronprotocol/tips/blob/master/tip-397.md) | <yanghang8612@163.com> | Standards&nbsp;Track | VM | true | Final |
 | TIP&nbsp;721 | [TRC-721 Non-Fungible Token Standard](https://github.com/tronprotocol/tips/blob/master/tip-721.md) | <timothychungkitwai@gmail.com> | Standards&nbsp;Track | TRC | true | Final |
 
 ****
