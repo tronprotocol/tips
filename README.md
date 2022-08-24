@@ -90,6 +90,8 @@ TRON Improvement Proposals (TIPs) describe standards for the TRON platform, incl
 | TIP&nbsp;388 | [TIP-388: Optimize light node synchronization logic](https://github.com/tronprotocol/tips/blob/master/tip-388.md) | <wb_bupt@163.com> | Standards&nbsp;Track | Core | false | Final |
 | TIP&nbsp;391 | [TIP-391: Optimize fetch block process](https://github.com/tronprotocol/tips/blob/master/tip-391.md) | <vikingzzu@163.com> | Standards&nbsp;Track | Core | false | Final |
 | TIP&nbsp;397 | [Raise limit of the 13th network parameter](https://github.com/tronprotocol/tips/blob/master/tip-397.md) | <yanghang8612@163.com> | Standards&nbsp;Track | VM | true | Final |
+| TIP&nbsp;425 | [TIP-425: Speed up TCP connection establishment](https://github.com/tronprotocol/tips/blob/master/tip-425.md) | <wb_bupt@163.com> | Standards&nbsp;Track | Net | false | Final |
+| TIP&nbsp;428 | [TIP-428: Increase the probability that the block processing thread acquires the lock](https://github.com/tronprotocol/tips/blob/master/tip-428.md) | <wb_bupt@163.com> | Standards&nbsp;Track | Core | false | Final |
 | TIP&nbsp;440 | [Transaction cache optimization](https://github.com/tronprotocol/tips/blob/master/tip-440.md) | <jell7@163.com> | Standards&nbsp;Track | Core | false | Final |
 | TIP&nbsp;721 | [TRC-721 Non-Fungible Token Standard](https://github.com/tronprotocol/tips/blob/master/tip-721.md) | <timothychungkitwai@gmail.com> | Standards&nbsp;Track | TRC | true | Final |
 
