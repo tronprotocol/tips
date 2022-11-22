@@ -95,6 +95,7 @@ TRON Improvement Proposals (TIPs) describe standards for the TRON platform, incl
 | TIP&nbsp;428 | [TIP-428: Increase the probability that the block processing thread acquires the lock](https://github.com/tronprotocol/tips/blob/master/tip-428.md) | <wb_bupt@163.com> | Standards&nbsp;Track | Core | false | Final |
 | TIP&nbsp;440 | [Transaction cache optimization](https://github.com/tronprotocol/tips/blob/master/tip-440.md) | <jell7@163.com> | Standards&nbsp;Track | Core | false | Final |
 | TIP&nbsp;461 | [Optimize database inconsistent when the system shutdown ungracefully](https://github.com/tronprotocol/tips/blob/master/tip-461.md) | <ray.wu@tron.network> | Standards&nbsp;Track | Core | false | Final |
+| TIP&nbsp;465 | [New reward calculation algorithm](https://github.com/tronprotocol/tips/blob/master/tip-465.md) | <bladehan@163.com> | Standards&nbsp;Track | Core | true | Final |
 | TIP&nbsp;476 | [Delegate Data Structure Optimization](https://github.com/tronprotocol/tips/blob/master/tip-476.md) | <lxcmyf@gmail.com> | Standards&nbsp;Track | Core | false | Final |
 | TIP&nbsp;721 | [TRC-721 Non-Fungible Token Standard](https://github.com/tronprotocol/tips/blob/master/tip-721.md) | <timothychungkitwai@gmail.com> | Standards&nbsp;Track | TRC | true | Final |
 | TIP&nbsp;1102 | [TIP-1102: Opt-in account exposure](https://github.com/tronprotocol/tips/blob/master/tip-1102.md) | <aaronluotron@gmail.com> | Standards&nbsp;Track | Interface | false | Last Call |
