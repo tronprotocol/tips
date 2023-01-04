@@ -2,6 +2,8 @@ No. 29 voting request was initiated to vote on No. 32 proposal at 11:30, Februar
 
 After No. 32 proposal is approved, four new features of TVM (TRON Virtual Machine) will be opened: support for parallel signature verification, multi-signature verification, judge whether the address is the contract address and support transfer TRX to a nonexisting address in the smart contract. This proposal will further enrich the application scenarios of smart contracts.
 
+For more details, please refer to: [TIP-43](https://github.com/tronprotocol/tips/blob/master/tip-43.md), [TIP-44](https://github.com/tronprotocol/tips/blob/master/tip-44.md), [TIP-54](https://github.com/tronprotocol/tips/blob/master/tip-54.md), [TIP-60](https://github.com/tronprotocol/tips/blob/master/tip-60.md).  
+
 Next, I'd like to give you a detailed introduction of the use scenarios of these four new features and what should be noted.
 
 **1.Support parallel signature verification in TVM**
