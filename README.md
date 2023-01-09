@@ -5,11 +5,12 @@ TRON Improvement Proposals (TIPs) describe standards for the TRON platform, incl
 ****
 
 ## Contents
- * [TIPs](#tips)
-    * [TIPs Guide](#tips-guide)
-    * [To Submit a TIP](#to-submit-a-tip)
-    * [TIP Status](#tip-status)
-    * [TIP Types](#tip-types)
+* [TIPs](#tips)
+  * [Contents](#contents)
+  * [TIPs Guide](#tips-guide)
+  * [To Submit a TIP](#to-submit-a-tip)
+  * [TIP Status](#tip-status)
+  * [TIP Types](#tip-types)
 ****
 
 ## TIPs Guide 
@@ -96,6 +97,7 @@ TRON Improvement Proposals (TIPs) describe standards for the TRON platform, incl
 | TIP&nbsp;440 | [Transaction cache optimization](https://github.com/tronprotocol/tips/blob/master/tip-440.md) | <jell7@163.com> | Standards&nbsp;Track | Core | false | Final |
 | TIP&nbsp;461 | [Optimize data consistency for system abnormals](https://github.com/tronprotocol/tips/blob/master/tip-461.md) | <ray.wu@tron.network> | Standards&nbsp;Track | Core | false | Final |
 | TIP&nbsp;465 | [New reward calculation algorithm](https://github.com/tronprotocol/tips/blob/master/tip-465.md) | <bladehan@163.com> | Standards&nbsp;Track | Core | true | Final |
+| TIP&nbsp;474 | [Optimize the return value of chainid opcode](https://github.com/tronprotocol/tips/blob/master/tip-474.md) | <yanghang8612@163.com> | Standards&nbsp;Track | VM | true | Last Call |
 | TIP&nbsp;476 | [Delegate Data Structure Optimization](https://github.com/tronprotocol/tips/blob/master/tip-476.md) | <lxcmyf@gmail.com> | Standards&nbsp;Track | Core | false | Final |
 | TIP&nbsp;491 | [TIP-491: Dynamic Energy Model](https://github.com/tronprotocol/tips/blob/master/tip-491.md) | <daniel.cao@tron.network> | Standards&nbsp;Track | Core | false | Last Call |
 | TIP&nbsp;721 | [TRC-721 Non-Fungible Token Standard](https://github.com/tronprotocol/tips/blob/master/tip-721.md) | <timothychungkitwai@gmail.com> | Standards&nbsp;Track | TRC | true | Final |
