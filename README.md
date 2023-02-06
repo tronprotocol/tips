@@ -65,6 +65,7 @@ TRON Improvement Proposals (TIPs) describe standards for the TRON platform, incl
 | TIP&nbsp;204 | [Make MAX_FEE_LIMIT configurable as a chain property](https://github.com/tronprotocol/tips/blob/master/tip-204.md) | <yanghang8612@163.com> | Standards&nbsp;Track | VM | false | Final |
 | TIP&nbsp;207 | [A proposal to improve network resources model ](https://github.com/tronprotocol/tips/blob/master/tip-207.md)| <liu.sean@tron.network> | Standards&nbsp;Track | Core | true | Draft |
 | TIP&nbsp;209 | [Adapt to Solidity 0.6.0](https://github.com/tronprotocol/tips/blob/master/tip-209.md) | <neo.hong@tron.network> | Standards&nbsp;Track | VM | false | Final |
+| TIP&nbsp;222 | [Improve transaction execution speed](https://github.com/tronprotocol/tips/blob/master/tip-222.md) | <kiven.liang@tron.network> | Standards&nbsp;Track | TRC | true | Final |
 | TIP&nbsp;250 | [Include transaction results on the chain](https://github.com/tronprotocol/tips/blob/master/tip-250.md) | <andy.zhang@tron.network> | Standards&nbsp;Track | Core | true | Final |
 | TIP&nbsp;268 | [SmartContract ABI optimization](https://github.com/tronprotocol/tips/blob/master/tip-268.md) | <yanghang8612@163.com> | Standards&nbsp;Track | VM | false | Final |
 | TIP&nbsp;269 | [Optimize the performance of block processing](https://github.com/tronprotocol/tips/blob/master/tip-269.md) | <forfreeday@163.com> | Standards&nbsp;Track | Core | false | Final |
@@ -98,7 +99,7 @@ TRON Improvement Proposals (TIPs) describe standards for the TRON platform, incl
 | TIP&nbsp;440 | [Transaction cache optimization](https://github.com/tronprotocol/tips/blob/master/tip-440.md) | <jell7@163.com> | Standards&nbsp;Track | Core | false | Final |
 | TIP&nbsp;461 | [Optimize data consistency for system abnormals](https://github.com/tronprotocol/tips/blob/master/tip-461.md) | <ray.wu@tron.network> | Standards&nbsp;Track | Core | false | Final |
 | TIP&nbsp;465 | [New reward calculation algorithm](https://github.com/tronprotocol/tips/blob/master/tip-465.md) | <bladehan@163.com> | Standards&nbsp;Track | Core | true | Final |
-| TIP&nbsp;467  | [Stake 2.0 - A new TRON stake model](https://github.com/tronprotocol/tips/blob/master/tip-467.md)                                                             |       <lxcmyf@gmail.com>       | Standards&nbsp;Track |   Core    |     false      |   Final   |
+| TIP&nbsp;467 | [Stake 2.0 - A new TRON stake model](https://github.com/tronprotocol/tips/blob/master/tip-467.md)                                                             |       <lxcmyf@gmail.com>       | Standards&nbsp;Track |   Core    |     false      |   Final   |
 | TIP&nbsp;474 | [Optimize the return value of chainid opcode](https://github.com/tronprotocol/tips/blob/master/tip-474.md) | <yanghang8612@163.com> | Standards&nbsp;Track | VM | true | Final |
 | TIP&nbsp;476 | [Delegate Data Structure Optimization](https://github.com/tronprotocol/tips/blob/master/tip-476.md) | <lxcmyf@gmail.com> | Standards&nbsp;Track | Core | false | Final |
 | TIP&nbsp;491 | [Dynamic Energy Model](https://github.com/tronprotocol/tips/blob/master/tip-491.md) | <daniel.cao@tron.network> | Standards&nbsp;Track | VM | true | Final |
