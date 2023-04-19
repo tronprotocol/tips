@@ -1,6 +1,6 @@
 ```
 TIP: 
-Title: Tron Resource Consumption Proposal - Disabling Mechanism of Transaction TRX Burning due to Lack of Available Resources. 
+Title: Optimize TRX burning mechanism in transaction.
 Author: Dmytro Shalaiev (shalaevdmitriy99@gmail.com)
 Type: Standards Track
 Category: Core
