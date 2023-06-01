@@ -175,7 +175,7 @@ TIPs are separated into several types, and each has its list of TIPs.
 
   **4.TRC**: Application-level standards and conventions, including contract standards such as token standards (TRC-20).    
 
-  **5.VM**: Includes improvements around TRON Virtual Machine.    
+  **5.TVM**: Includes improvements around TRON Virtual Machine.    
 
 * **Informational**: Describes a TRON design issue, or provides general guidelines or information to the TRON community, but does not propose a new feature.
 
