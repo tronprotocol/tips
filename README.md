@@ -112,6 +112,12 @@ TRON Improvement Proposals (TIPs) describe standards for the TRON platform, incl
 | TIP&nbsp;1193 | [TIP-1193: TRON Provider JavaScript API](https://github.com/tronprotocol/tips/blob/master/tip-1193.md)                                                        | <aaronluotron@gmail.com> | Standards&nbsp;Track | Interface | false | Final |
 | TIP&nbsp;3326 | [TIP-3326: Wallet Switch TRON Chain Method](https://github.com/tronprotocol/tips/blob/master/tip-3326.md)                                                     | <aaronluotron@gmail.com> | Standards&nbsp;Track | Interface | false | Final |
 | TIP&nbsp;534  | [Remove Vulnerable APIs](https://github.com/tronprotocol/tips/blob/master/tip-534.md)                                                                         | <halibobo1205@gmail.com> | Standards&nbsp;Track | Core | false | Draft |
+| TIP&nbsp;547  | [Connection precheck before P2P communication](https://github.com/tronprotocol/tips/blob/master/tip-547.md) 
+                                  | <wb_bupt@163.com> | Standards&nbsp;Track | Networking | false | Final |
+| TIP&nbsp;550  | [P2P message snappy compression](https://github.com/tronprotocol/tips/blob/master/tip-550.md) 
+                                  | <allen.cheng@tron.network> | Standards&nbsp;Track | Networking | false | Final |
+| TIP&nbsp;555  | [Network upgrade logic optimization](https://github.com/tronprotocol/tips/blob/master/tip-555.md) 
+                                  | <allen.cheng@tron.network> | Standards&nbsp;Track | Core | false | Final |
 
 ****
 
