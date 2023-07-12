@@ -119,7 +119,7 @@ TRON Improvement Proposals (TIPs) describe standards for the TRON platform, incl
 | TIP&nbsp;1155 | [Multi Token Standard](https://github.com/tronprotocol/tips/blob/master/tip-1155.md)                                                                          |     <yanghang8612@163.com>     | Standards&nbsp;Track |    TRC     |     false      |   Final   |
 | TIP&nbsp;1193 | [TIP-1193: TRON Provider JavaScript API](https://github.com/tronprotocol/tips/blob/master/tip-1193.md)                                                        |    <aaronluotron@gmail.com>    | Standards&nbsp;Track | Interface  |     false      |   Final   |
 | TIP&nbsp;3326 | [TIP-3326: Wallet Switch TRON Chain Method](https://github.com/tronprotocol/tips/blob/master/tip-3326.md)                                                     |    <aaronluotron@gmail.com>    | Standards&nbsp;Track | Interface  |     false      |   Final   |
-| TIP&nbsp;4906 | [TRC-4906: Fork from ERC-4907 Rental NFT](https://github.com/tronprotocol/tips/blob/master/tip-4906.md)                                                     |    <lopeed_prcy>    | Standards&nbsp;Track | TRC  |     false      |   Review   |
+| TIP&nbsp;4906 | [TRC-4906: Fork from ERC-4907 Rental NFT](https://github.com/tronprotocol/tips/blob/master/tip-4906.md)                                                     |    <lopeed_prcy>    | Standards&nbsp;Track | TRC  |     false      |   Final   |
 
 ****
 
