@@ -1,7 +1,7 @@
 ```
 tip: 41
 title: Optimize transactionHistoryStore occupancy space#40
-author: wubin1<wubin1@tron.network> 
+author: Maths42 <Maths4211@gmail.com > 
 discussions to: https://github.com/tronprotocol/TIPs/issues/40
 category: TRC
 status: Final
