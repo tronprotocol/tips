@@ -1,4 +1,4 @@
-```
+`I am a layman and know nothing about these aspects. However, because my account has been tampered with by a nasty bad guy, I have been trying for several months and still cannot successfully transfer assets. The transaction must be signed by the bad guy, but according to your tips here The method, change the account permissions, seems to have changed a bit, but when it comes to the final signature, I don’t know how to do it. I hope I can get your help and look forward to your reply: Email lltx16888@gmail.com/lltx16888@qq.com``
 tip: 16
 title: Account Multi-signature
 author: Marcus Zhao(@zhaohong ) <zhaohong229@gmail.com> 
