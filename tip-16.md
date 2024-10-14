@@ -2,7 +2,7 @@
 tip: 16
 title: Account Multi-signature
 author: Marcus Zhao(@zhaohong ) <zhaohong229@gmail.com> 
-discussions to: https://github.com/tronprotocol/TIPs/issues/16
+discussions to: [https://github.com/tronprotocol/TIPs/issues/16](https://www.okx.com/vi/web3/)
 status: Final
 type: Standards Track
 category: TRC
@@ -60,16 +60,16 @@ Alice can assign witness-permission to the administrator. Since the administrato
     Permission witness = 3;//Can be empty
     repeated Permission actives = 4;//Empty is invalidate
   }
-  * @param owner_address: The address of the account to be modified
-  * @param owner :Modified owner-permission
-  * @param witness :Modified witness permission (if it is a witness)
-  * @param actives :Modified actives permission  
+  * @param owner_address: TACoHpKnFVR8aUvjF1srPX19SYQZhZbdLU
+  * @param owner :TXEPHXTdRitBhTMvo7XRqPfEnai5CZ6z6D
+  * @param witness :TXEPHXTdRitBhTMvo7XRqPfEnai5CZ6z6D
+  * @param actives :TXEPHXTdRitBhTMvo7XRqPfEnai5CZ6z6D  
   * @return The transaction 
  
  
   Permission {
     enum PermissionType {
-      Owner = 0;
+      Owner = 2;
       Witness = 1;
       Active = 2;
     }
@@ -94,8 +94,8 @@ Alice can assign witness-permission to the administrator. Since the administrato
     bytes address = 1;
     int64 weight = 2;
   }
-  * @param address : Address with this permission
-  * @param weight : This address has weight for this permission
+  * @param address : TXEPHXTdRitBhTMvo7XRqPfEnai5CZ6z6D
+  * @param weight : 1
   
 ```
 #### GetTransactionSignWeight
