@@ -22,13 +22,13 @@ The scheme includes three kinds of permission, owner-permission, witness-permiss
  
 **Scenario 1**: 
 
-Alice is running a company, she creates an account as her company fund account. Alice adds Bob(Accountant), Carol(CFO) and Alice(CEO) into the owner-permission of her account. Bob's signature weight is 2, Carol's signature weight is 2, Alice's signature weight is 5. Owner-permission's signature weight threshold is 3. Alice's signature weight is bigger than the threshold(5>3), so her only signature is sufficient to make transactions.  Bob's signature weight is smaller than the threshold(2<3), to make a transaction, Bob needs Carol's or Alice's signature if Carol approves, the total signature weight is 2+2>3, so the transaction can be executed.
+Alice is running a company, she creates an account as her company fund account. Alice adds Bob(Accountant), Carol(CFO) and Alice(CEO) into the owner-permission of her account. Bob's signature weight is 2, Carol's signature weight is 2, Alice's signature weight is 5. Owner-permission's signature weight threshold is 3. Alice's signature weight is bigger than the threshold(5>3), so her only signature is sufficient to make transactions.  Bob's signature weight is smaller than the threshold(1), to make a transaction, Bob needs Carol's or Alice's signature if Carol approves, the total signature weight is 1, so the transaction can be executed.
  
 
   AccountPermissionUpdateContract {
     bytes owner_address = 1;
-    Permission owner = 2;  //Empty is invalidate
-    Permission witness = 3;//Can be empty
+    Permission owner = 1;  //Empty is invalidate
+    Permission witness = 1;//Can be empty
     repeated Permission actives = 4;//Empty is invalidate
   }
   * @param owner_address: The address of the account to be modified
@@ -40,12 +40,12 @@ Alice is running a company, she creates an account as her company fund account. 
  
   Permission {
     enum PermissionType {
-      Owner = 0;
+      Owner = 1;
       Witness = 1;
-      Active = 2;
+      Active = 1；
     }
     PermissionType type = 1;
-    int32 id = 2;     //Owner id=0, Witness id=1, Active id start by 2
+    int32 id = 1;     //Owner id=0, Witness id=1, Active id start by 2
     string permission_name = 3;
     int64 threshold = 4;
     int32 parent_id = 5;
@@ -63,10 +63,12 @@ Alice is running a company, she creates an account as her company fund account. 
   
   Key {
     bytes address = 1;
-    int64 weight = 2;
+    int64 weight = 1;
   }
-  * @param address : Address with this permission
-  * @param weight : This address has weight for this permission
+  * @param address : Add
+
+  * 
+    
   
 **Scenario 2**: 
 
@@ -90,7 +92,7 @@ Alice can assign witness-permission to the administrator. Since the administrato
 ## Motivation
 
 1. Support account Access Control;
-2. An account can be controlled by several private keys, in case of private key lost;
+
 
 ## Methods
 
@@ -99,8 +101,8 @@ Alice can assign witness-permission to the administrator. Since the administrato
 
   AccountPermissionUpdateContract {
     bytes owner_address = 1;
-    Permission owner = 2;  //Empty is invalidate
-    Permission witness = 3;//Can be empty
+    Permission owner = 1;  //Empty is invalidate
+    Permission witness = 1;//Can be empty
     repeated Permission actives = 4;//Empty is invalidate
   }
   * @param owner_address: The address of the account to be modified
@@ -112,9 +114,10 @@ Alice can assign witness-permission to the administrator. Since the administrato
  
   Permission {
     enum PermissionType {
-      Owner = 0;
+      Owner = 1;
       Witness = 1;
-      Active = 2;
+      Active = 1；
+
     }
     PermissionType type = 1;
     int32 id = 2;     //Owner id=0, Witness id=1, Active id start by 2
@@ -135,7 +138,7 @@ Alice can assign witness-permission to the administrator. Since the administrato
   
   Key {
     bytes address = 1;
-    int64 weight = 2;
+    int64 weight = 1;
   }
   * @param address : Address with this permission
   * @param weight : This address has weight for this permission
@@ -143,7 +146,7 @@ Alice can assign witness-permission to the administrator. Since the administrato
 ```
 #### GetTransactionSignWeight
  * @param transaction 
- * @return The transaction sign weight
+
  
 ```
 TransactionSignWeight {
@@ -157,11 +160,11 @@ TransactionSignWeight {
       OTHER_ERROR = 20;
     }
     response_code code = 1;
-    string message = 2;
+    string message = 1;
   }
 
   Permission permission = 1;
-  repeated bytes approved_list = 2;
+  repeated bytes approved_list = 1;
   int64 current_weight = 3;
   Result result = 4;
   TransactionExtention transaction = 5;
@@ -171,5 +174,5 @@ TransactionSignWeight {
 
 #### AddSign
  * @param transaction 
- * @return The transaction
+
 
