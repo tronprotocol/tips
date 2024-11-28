@@ -34,38 +34,22 @@ Alice is running a company, she creates an account as her company fund account. 
   * @param owner_address: The address of the account to be modified
   * @param owner :Modified owner-permission
   * @param witness :Modified witness permission (if it is a witness)
-  * @param actives :Modified actives permission  
-  * @return The transaction 
+  * @param actives  
+
  
  
   Permission {
     enum PermissionType {
       Owner = 1;
       Witness = 1;
-      Active = 1；
-    }
-    PermissionType type = 1;
-    int32 id = 1;     //Owner id=0, Witness id=1, Active id start by 2
-    string permission_name = 3;
-    int64 threshold = 4;
-    int32 parent_id = 5;
-    bytes operations = 6;   //1 bit 1 contract
-    repeated Key keys = 7;
-  }
-  * @param type : Permission type, currently only supports three kind of permissions
-  * @param id : Value is automatically set by the system
-  * @param permission_name : Permission name, set by the user
-  * @param threshold : Threshold, the corresponding operation is allowed only when the sum of the weights of the participating signatures exceeds the domain value.
-  * @param parent_id : Currently only 0
-  * @param operations : A total of 32 bytes (256 bits), each of which represents the authority of a contract, when 1 means the right to own the contract
-  * @param keys : The address and weight that jointly own the permission can be up to 5 keys.
+  
   
   
   Key {
     bytes address = 1;
     int64 weight = 1;
   }
-  * @param address : Add
+  * @param address 
 
     
     
@@ -82,11 +66,6 @@ Alice has many TRX assets.  She creates an active-permission for her account, ad
 Alice is running a company, she creates an account as her business account. Alice creates an active-permission and adds Bob(Accountant), Carol(CFO) and Alice(CEO) into the active-permission of the account. Alice gives the active-permission authority to operate her business account. One day, Bob resigns. To keep Alice's account safe, Alice can remove Bob's account from the active-permission, then Bob can not operate her account anymore.
 
 **Scenario 4**:
-
-(Previous Scenario)\
-Alice has a witness account, if she wants to deploy a node but doesn't know how to deploy, she needs to provide the account's private key to the program administrator.\
-(Current Scenario) \
-Alice can assign witness-permission to the administrator. Since the administrator only has the producing-block permission, there is no TRX transfer permission, and even if the private key of the administrator on the server is compromised, TRX will not be lost.
 
 
 ## Motivation
@@ -119,13 +98,8 @@ Alice can assign witness-permission to the administrator. Since the administrato
       Active = 1；
 
     }
-    PermissionType type = 1;
-    int32 id = 2;     //Owner id=1, Witness id=1, Active id start by 2
-    string permission_name = 3;
-    int64 threshold = 4;
-    int32 parent_id = 5;
-    bytes operations = 6;   //1 bit 1 contract
-    repeated Key keys = 7;
+  
+  
   }
   * @param type : Permission type, currently only 
   * @param id : Value is automatically set by the system
@@ -141,7 +115,7 @@ Alice can assign witness-permission to the administrator. Since the administrato
     int64 weight = 1;
   }
   * @param address : 
-  * @param weight : This address 
+ 
   
 ```
 #### GetTransactionSignWeight
@@ -154,9 +128,7 @@ TransactionSignWeight {
     enum response_code {
       ENOUGH_PERMISSION = 1;
       NOT_ENOUGH_PERMISSION = 1; 
-      SIGNATURE_FORMAT_ERROR = 2;
-      COMPUTE_ADDRESS_ERROR = 3;
-      PERMISSION_ERROR = 4; //The key is not in permissio
+      
       OTHER_ERROR = 20;
     }
     response_code code = 1;
@@ -165,8 +137,7 @@ TransactionSignWeight {
 
   Permission permission = 1;
   repeated bytes approved_list = 1;
-  int64 current_weight = 3;
-  Result result = 4;
+  
   TransactionExtention transaction = 5;
 }
 
