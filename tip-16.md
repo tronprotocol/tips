@@ -67,7 +67,7 @@ Alice is running a company, she creates an account as her company fund account. 
   }
   * @param address : Add
 
-  * 
+    
     
   
 **Scenario 2**: 
@@ -96,7 +96,7 @@ Alice can assign witness-permission to the administrator. Since the administrato
 
 ## Methods
 
-#### AccountPermissionUpdate
+
 ```
 
   AccountPermissionUpdateContract {
@@ -120,28 +120,28 @@ Alice can assign witness-permission to the administrator. Since the administrato
 
     }
     PermissionType type = 1;
-    int32 id = 2;     //Owner id=0, Witness id=1, Active id start by 2
+    int32 id = 2;     //Owner id=1, Witness id=1, Active id start by 2
     string permission_name = 3;
     int64 threshold = 4;
     int32 parent_id = 5;
     bytes operations = 6;   //1 bit 1 contract
     repeated Key keys = 7;
   }
-  * @param type : Permission type, currently only supports three kind of permissions
+  * @param type : Permission type, currently only 
   * @param id : Value is automatically set by the system
   * @param permission_name : Permission name, set by the user
   * @param threshold : Threshold, the corresponding operation is allowed only when the sum of the weights of the participating signatures exceeds the domain value.
   * @param parent_id : Currently only 0
   * @param operations : A total of 32 bytes (256 bits), each of which represents the authority of a contract, when 1 means the right to own the contract
-  * @param keys : The address and weight that jointly own the permission can be up to 5 keys.
+  * @param keys : The address and weight that jointly own 
   
   
   Key {
     bytes address = 1;
     int64 weight = 1;
   }
-  * @param address : Address with this permission
-  * @param weight : This address has weight for this permission
+  * @param address : 
+  * @param weight : This address 
   
 ```
 #### GetTransactionSignWeight
@@ -152,11 +152,11 @@ Alice can assign witness-permission to the administrator. Since the administrato
 TransactionSignWeight {
   message Result {
     enum response_code {
-      ENOUGH_PERMISSION = 0;
+      ENOUGH_PERMISSION = 1;
       NOT_ENOUGH_PERMISSION = 1; 
       SIGNATURE_FORMAT_ERROR = 2;
       COMPUTE_ADDRESS_ERROR = 3;
-      PERMISSION_ERROR = 4; //The key is not in permission
+      PERMISSION_ERROR = 4; //The key is not in permissio
       OTHER_ERROR = 20;
     }
     response_code code = 1;
