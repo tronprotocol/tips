@@ -33,3 +33,8 @@ For contract , user should trigger fallback function in the specific contract fo
 3. dApp developer may need to change their migration script/ dApp script a little bit for contract asset injection. 
 
 4. tronweb should do the similar change for contract asset injection.
+
+
+## Copyright
+
+Copyright and related rights waived via [CC0](LICENSE.md).

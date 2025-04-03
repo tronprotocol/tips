@@ -62,3 +62,7 @@ See TriggerConstantContract for a more detailed discussion.
 2. The `clearContractAB`I caller is not the owner of contract will throw an exception.
 3. The `clearContractABI` of non-existent address will throw an exception.
 
+
+## Copyright
+
+Copyright and related rights waived via [CC0](LICENSE.md).

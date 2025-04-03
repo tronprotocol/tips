@@ -58,3 +58,8 @@ There are no backwards compatibility concerns.
 8. The `EXTCODEHASH` of an account that has been newly create and later the creation has been reverted.
 9. The `EXTCODEHASH` of an account that firstly does not exist and later is empty.
 10. The `EXTCODEHASH` of an empty account that is going to be cleared by the state clearing rule.
+
+
+## Copyright
+
+Copyright and related rights waived via [CC0](LICENSE.md).

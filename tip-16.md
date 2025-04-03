@@ -130,3 +130,7 @@ TransactionSignWeight {
  * @param transaction 
  * @return The transaction
 
+
+## Copyright
+
+Copyright and related rights waived via [CC0](LICENSE.md).

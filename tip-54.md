@@ -35,3 +35,8 @@ Regardless of the implementation method, we need to consider whether it will hav
 1. In terms of energy consumption, it needs to be consistent with the system GRPC interface.
 2. If we want to do that, we need to review the impact of each implementation on existing contracts.
 3. One of these implementations relies on TRON's Solidity compiler update, which is not compatible with historical compiler versions.
+
+
+## Copyright
+
+Copyright and related rights waived via [CC0](LICENSE.md).

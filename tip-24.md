@@ -21,3 +21,7 @@ Currently, the java-Tron project uses LevelDB as the only implement of the datab
 
 RocksDB is a good storage engine built on earlier work on LevelDB and it is widely used in production environments. It has higher performance when storing key-value data benefiting from exploiting many CPU cores than LevelDB.RocksDB provides all of the features of LevelDB and some useful functions like backups and snapshots. It is very friendly to the developers to find the bottleneck of the system and contains many parameters used to tune RocksDB for your workload and your system configuration.
 So, it wisely adds the implementation of the database storage layer with RocksDB to make our java-Tron more effective and robust.
+
+## Copyright
+
+Copyright and related rights waived via [CC0](LICENSE.md).
