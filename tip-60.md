@@ -70,3 +70,8 @@ Adding a new precompiledContract cause no backwards compatibility concerns.
 1.Verifying both correct and incorrect signatures in smart contract.
 2.Verifying duplicate signatures.
 3.Verifying more than 5 signatures.
+
+
+## Copyright
+
+Copyright and related rights waived via [CC0](LICENSE.md).

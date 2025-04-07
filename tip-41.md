@@ -45,3 +45,7 @@ There are no backwards compatibility concerns.
 1. Compare storage size from optimization version and not optimization version.
 2. Query function for transaction history
 
+
+## Copyright
+
+Copyright and related rights waived via [CC0](LICENSE.md).

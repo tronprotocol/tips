@@ -158,3 +158,7 @@ Proposal 26: change max deferred transaction process time in one block.
 ## Implementation
 
 
+## Copyright
+
+Copyright and related rights waived via [CC0](LICENSE.md).
+

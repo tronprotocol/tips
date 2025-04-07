@@ -46,4 +46,8 @@ For example, the initial Virtual Energy Limit is 500_000_000_000L and the target
 When the energy usage is <500_000_000 in the first minute, Virtual Energy Limit:= Virtual Energy Limit *1000/999 = 500_500_000_000. When the energy usage is >500_000_000 in the second minute, Virtual Energy Limit = Virtual Energy Limit *99/100=495_500_000_000. However, the Virtual Energy Limit is within the range of [Real Energy Limit, Real Energy Limit * 1000], that is, after the second minute, the Virtual Energy Limit is still 500_000_000_000
 
 
+## Copyright
+
+Copyright and related rights waived via [CC0](LICENSE.md).
+
 

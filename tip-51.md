@@ -37,3 +37,8 @@ The strategy is independent among the different API interfaces, so you can choos
 There are three types of strategies implemented in the java-Tron right now. They are Global Preemptible Strategy, QpsStrategy, IPQPSStrategy. 
 The Global Preemptible Strategy is implemented based on java semaphore. Every API request must require a permit before it is responded and release the permit after the response completes. 
 The QpsStrategy and the IPQPSStrategy are implemented based on guava rate limiter provided by Google. Every API request must require a resource and the number of resources is limited in one period.
+
+
+## Copyright
+
+Copyright and related rights waived via [CC0](LICENSE.md).

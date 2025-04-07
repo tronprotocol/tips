@@ -87,7 +87,11 @@ There are a couple of stages in DPoS.
   - block reward (SR reward): The top 27 candidates who are elected every round will share roughly 230,400 TRX as mined. The reward will be split evenly between the 27 SRs. On average, the SRs who produce a block will get 16 TRX. Once they successfully produce a block, the reward will immediately be sent to them.
  
   The optimized delegation mechanism will add dividend to both users and SRs, increase reward for top 127 SR candidates so that they have enough TRX to give back to vote users, which encourage more uses to join vote and boost community.  More details check [TIP-53](https://github.com/tronprotocol/tips/blob/master/tip-53.md)
- 
+
+
+## Copyright
+
+Copyright and related rights waived via [CC0](LICENSE.md).
 
  
  

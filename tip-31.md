@@ -41,3 +41,8 @@ There are no backwards compatibility concerns.
 
 1. Trigger the constant method by` triggerConstantContract`.
 2. Trigger the non-constant method by `triggerConstantContract`.
+
+
+## Copyright
+
+Copyright and related rights waived via [CC0](LICENSE.md).
