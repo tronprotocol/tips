@@ -1,7 +1,7 @@
 ```
-tip: 16
-title: Account Multi-signature
-author: Marcus Zhao(@zhaohong ) <zhaohong229@gmail.com> 
+tip: 1
+title: 1
+author: Marcus Zhao(@zhaohong ) alialkhtri3@gmail.com
 discussions to: https://github.com/tronprotocol/TIPs/issues/16
 status: Final
 type: Standards Track
