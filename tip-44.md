@@ -48,3 +48,8 @@ There are no backwards compatibility concerns.
 5. The `ISCONTRACT` of self address in constructor function is `true`.
 6. The `ISCONTRACT` of a selfdestructed contract address is `false`.
 
+
+## Copyright
+
+Copyright and related rights waived via [CC0](LICENSE.md).
+

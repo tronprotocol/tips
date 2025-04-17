@@ -47,3 +47,8 @@ The nodes of other blocks will generate a new world state tree root according to
 
 ###Account State Root Validate
 If the local account state and the account state of the block are inconsistent when the block is synchronized, a Bad Block exception will be thrown.
+
+
+## Copyright
+
+Copyright and related rights waived via [CC0](LICENSE.md).

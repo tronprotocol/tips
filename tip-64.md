@@ -139,6 +139,10 @@ Take a look at optimized tron pBFT, consider cases like (3) though it is impossi
   Back to case 4(worst case): the same analysis of case (3), but the difference is that next round will confirm precious 19-1=18 block plus current one. The average confirm time would closer to 1 as the length of chain grow. The same proof as case (2).
  
     Overall, Optimized tron pBFT have tremendously improve performance.
-   
+
+
+## Copyright
+
+Copyright and related rights waived via [CC0](LICENSE.md).
 
     

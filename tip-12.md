@@ -85,3 +85,7 @@ Developers are flexible in defining plug-in configuration files, including messa
 Take Kafka plug-in as an example, define the Kafka server address in the configuration file, Kafka topics (corresponding to the Trigger category). After receiving the Trigger sent by java-tron, the plug-in sends the Trigger to the corresponding Kafka topic according to the Trigger category.
 
 The plug-in implements the ILogsFilterPlugin interface, including the initialization and start-up of the plug-in, receiving Trigger, and loading the plug-in according to the configuration file.
+
+## Copyright
+
+Copyright and related rights waived via [CC0](LICENSE.md).

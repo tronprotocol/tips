@@ -31,3 +31,8 @@ The preimage for the final hashing round is thus always exactly 85 bytes long.
 
 **Engery cost**
 Since address calculation depends on hashing the `init_code`, it would leave clients open to DoS attacks if executions could repeatedly cause hashing of large pieces of `init_code`, since expansion of memory is paid for only once. This TIP uses the same cost-per-word as the `SHA3` opcode.
+
+
+## Copyright
+
+Copyright and related rights waived via [CC0](LICENSE.md).

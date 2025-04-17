@@ -35,3 +35,8 @@ sendqueuelength = 1000 //max length of send queue
 }
 
 Developers should subscribe triggers very conveniently. What they need to do is: connecting to the port, subscribing the topics, then receivingthe triggers.
+
+
+## Copyright
+
+Copyright and related rights waived via [CC0](LICENSE.md).

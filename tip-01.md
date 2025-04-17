@@ -478,3 +478,7 @@ base58Address = Base58(addchecksum):  27e33HNM6jr5bD7GsHENEAxSafVYmTaPzFW
 
 ## Reference
 https://github.com/stellar/stellar-protocol/edit/master/ecosystem/sep-0005.md
+
+## Copyright
+
+Copyright and related rights waived via [CC0](LICENSE.md).

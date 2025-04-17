@@ -46,3 +46,7 @@ for safety concern, the number of signatures is limited to 16, when count of sig
 
 energy charge for the execution cost 1500 per signature
 
+
+## Copyright
+
+Copyright and related rights waived via [CC0](LICENSE.md).

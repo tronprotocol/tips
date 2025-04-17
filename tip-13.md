@@ -68,3 +68,7 @@ That means account lovelycat controlled by adderss3 and address4.
 ## Reserved List
 
 The full note should keep a reserved list for famous company and brand. All the SR can manager this list by voting the proposal to add or remove name from list.
+
+## Copyright
+
+Copyright and related rights waived via [CC0](LICENSE.md).

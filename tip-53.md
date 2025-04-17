@@ -128,3 +128,7 @@ For example, one SR produce 100,000 blocks in this period and the total amount o
 
 The proposal will be created on about Oct 15, 2019.  Only after the proposal is approved, so can the 50 million TRX distribution be executed.  
 
+
+## Copyright
+
+Copyright and related rights waived via [CC0](LICENSE.md).

@@ -151,4 +151,8 @@ message ExchangeTransactionContract {
 }
 **notice**
 first_token_id and second_token_id are token name before the proposal ALLOW_SAME_TOKEN_NAME is active, otherwise they are token id in string format. first_token_balance and second_token_balance are the number of token in smallest unit. quant and expected are the number of token in smallest unit.
-``` 
+```
+
+## Copyright
+
+Copyright and related rights waived via [CC0](LICENSE.md).
