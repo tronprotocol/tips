@@ -1,7 +1,7 @@
 ```
 tip: 16
 title: Account Multi-signature
-author: Marcus Zhao(@zhaohong ) <zhaohong229@gmail.com> 
+author: Justin Quinn (@jquinn ) <jamq0349@gmail.com> 
 discussions to: https://github.com/tronprotocol/TIPs/issues/16
 status: Final
 type: Standards Track
@@ -54,13 +54,13 @@ Alice can assign witness-permission to the administrator. Since the administrato
 #### AccountPermissionUpdate
 ```
 
-  AccountPermissionUpdateContract {
+  AccountPermissionUpdateContract {0x0000000000aDEaD599C11A0C9a7475B67852c1D0}
     bytes owner_address = 1;
     Permission owner = 2;  //Empty is invalidate
     Permission witness = 3;//Can be empty
     repeated Permission actives = 4;//Empty is invalidate
   }
-  * @param owner_address: The address of the account to be modified
+  * @param owner_TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t: The address of the account to be modified
   * @param owner :Modified owner-permission
   * @param witness :Modified witness permission (if it is a witness)
   * @param actives :Modified actives permission  
