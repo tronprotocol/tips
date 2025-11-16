@@ -1,127 +1,110 @@
-🧠 TIP-796: TRON Account-Layer Username Standard (with “TR” Prefix)
-
-Title: TRON Account-Layer Username Standard with Uppercase “TR” Prefix
+🧠 TIP-796 — TRON Account-Layer Username Standard (With Mandatory “TR” Prefix)
 Status: Draft
 Type: Standards Track
 Authors: Ali & ChatGPT
 GitHub: @alichatme
 Created: September 25, 2025
-License: MIT License – 2025
-
-
----
-
+License: MIT — 2025
 📘 Summary
-
-This proposal introduces a native username standard for TRON accounts, implemented directly at the Account Layer —
-requiring no smart contracts, gas, or Layer 2 integration.
-
-Each username is unique, permanent, and non-transferable.
-The system is designed to improve human readability, reduce transfer errors caused by address copy/paste mistakes, and prevent phishing or address spoofing attacks — while remaining fully compatible with the existing TRON network architecture.
-
-
----
-
+TIP-796 introduces a native, human-readable, non-transferable username standard implemented directly at the Account Layer of the TRON blockchain.
+This system:
+Requires no smart contracts
+Requires no gas or fees
+Attaches the username automatically and permanently to the account
+Eliminates all major address-related attack vectors
+Remains fully compatible with the existing TRON architecture
+TIP-796 establishes a secure and spoof-proof identity layer that dramatically reduces user mistakes, prevents phishing, and protects users against modern Web3 attack methods.
 🧩 Username Structure
-
-All TRON usernames must begin with the uppercase prefix TR,
-followed by lowercase English letters (a–z) and digits (0–9) in one of the following three modes:
-
-Mode 1: TR + two English words + a four-digit number
-
+All TRON usernames must begin with the uppercase prefix TR, followed by lowercase English letters (a–z) and digits (0–9) in one of the three allowed modes:
+Mode 1
+TR + two lowercase words + four digits
 Example: TRsunboy1185
-
-
-Mode 2: TR + two English words with a four-digit number placed in between
-
+Mode 2
+TR + word + four digits + word
 Example: TRsun7217boy
-
-
-Mode 3: TR + a four-digit number + two English words
-
+Mode 3
+TR + four digits + two lowercase words
 Example: TR7516sunboy
-
-
-> Rule: No special characters, spaces, or underscores are allowed.
-The TR prefix clearly identifies the TRON network and provides a consistent, universal naming pattern across all languages and systems.
-
-
-
-
----
-
-🔠 LTR Requirement (Left-to-Right)
-
-All usernames must be stored and displayed Left-to-Right (LTR)
-and use only the permitted characters described above.
-
-This requirement prevents Homograph attacks and visual confusion in Right-to-Left (RTL) languages such as Persian or Arabic.
-
-
----
-
+Rules
+No special characters, no spaces, no underscores
+Strictly ASCII-only (a–z + 0–9)
+Strict LTR (Left-to-Right) storage & display
+The uppercase TR prefix is mandatory and part of the username identity
+🔠 LTR Enforcement & Anti-Spoofing Protection
+All usernames are stored and displayed using strict Left-to-Right (LTR) directionality.
+This eliminates:
+Homograph attacks
+RTL/LTR bidirectional text exploits
+Visual spoofing in Persian/Arabic/Hebrew
+Font-based manipulation
 ⚙️ Core Rules
-
-Prefix: The uppercase TR prefix is mandatory and part of the username itself.
-
-Case Sensitivity: Must follow the rule above — TR always uppercase; other letters always lowercase.
-
-Wallet Display: Wallets must show both the full username (including TR) and the complete address before confirming a transaction.
-
-No Shortening: Wallets must not remove or hide the TR prefix.
-
-No Smart Contracts: This system operates entirely at the Account Layer and does not affect fees, gas, or network validation.
-
-
-
----
-
-📊 Capacity and Namespace
-
-With approximately 650,000 meaningful English words,
-this design supports over 12.6 quadrillion (12,600,000,000,000,000) unique usernames —
-providing a vast namespace for assigning TRON account identifiers.
-
-
----
-
-🎯 Objective
-
-To establish a native, decentralized, and reliable username system at the Account Layer,
-without dependence on off-chain naming services, Layer 2 systems, or any gas or fee consumption.
-
-This standard enhances user experience, strengthens protection against address spoofing,
-and ensures accurate fund delivery across the TRON ecosystem.
-
-
----
-
-🔮 Future Extensions
-
-Possible future updates may include:
-
-Additional username format modes
-
+The TR prefix is required and cannot be hidden or omitted.
+Wallets must display the full username and full address before signing.
+Wallets must not shorten, collapse, or hide any part of the username.
+System operates fully at the Account Layer — no fees, no contracts, no L2 required.
+🔥 Complete Attack Coverage — Why TIP-796 Provides the Highest Security Level in Web3
+TIP-796 is the only naming standard designed to neutralize every major address-layer attack currently seen across blockchain networks.
+1. Clipboard Hijacking
+Malware replaces the copied address ➜ Username mismatch instantly reveals it.
+2. Address Spoofing / Look-Alike Address Generation
+Attackers generate thousands of similar addresses ➜ Username is impossible to imitate.
+3. Homograph Attacks
+Using similar-looking Unicode characters ➜ ASCII-only usernames block this completely.
+4. RTL/LTR Visual Reversal Attacks
+Bidirectional text exploits (common in Persian/Arabic/Hebrew) ➜ LTR-only eliminates them fully.
+5. UI-Layer Manipulation (Phishing Wallets)
+Fake wallets hide or reorder parts of the address ➜ Username must be displayed fully before signing.
+6. Social Engineering Attacks
+Humans verify names, not hex strings ➜ A clear username prevents human error.
+7. Spam Activation & Transaction Pollution
+Attackers send micro-transactions to appear in your history ➜ Username makes spoof attempts ineffective.
+Result:
+TIP-796 is the first blockchain username standard that neutralizes all seven categories of Web3 address-based attacks.
+🔥 Username Assignment — Anti-Bot & Anti-Abuse Measures
+To prevent bot farms, mass wallet creation, automated harvesting of names, or username farming, TIP-796 introduces the following optional but recommended mechanisms:
+1. Cooldown Window (Recommended Default: 24 hours)
+The username is assigned only after a configurable waiting period after account activation.
+Network operators may increase this to 48 hours or more if needed.
+This makes large-scale automated farming impractical.
+2. Minimum Balance Requirement
+A username is assigned only if the account holds a minimum balance during the cooldown period.
+Suggested default: 2 TRX (or higher, e.g., 10 TRX, if stronger protection is desired).
+This makes mass wallet creation economically non-viable.
+3. Wallet Onboarding Confirmation
+Before showing the username, wallets must require the user to:
+Scroll through a multilingual explanation
+Confirm understanding via a checkbox
+Review: 
+How usernames work
+How they protect users
+How they prevent phishing
+This significantly reduces phishing and user-errors.
+4. Local Anti-Bot Challenge (Optional)
+Wallets may implement:
+Local lightweight PoW
+CAPTCHA / anti-automation challenge
+The network only verifies, but does not execute, the challenge.
+Combined effect:
+Bots must:
+Wait 24–48 hours
+Deposit real TRX
+Solve onboarding
+Solve anti-automation
+=> Attack becomes economically impossible.
+📊 Namespace Capacity
+Using >650,000 English words, TIP-796 supports over:
+12.6 quadrillion unique usernames
+More than enough for centuries of TRON expansion.
+🎯 Goal
+Create a native, decentralized, zero-cost, spoof-proof identity layer
+that protects users from all currently known Web3 address-based attacks — without L2, without ENS-like contracts, and without gas fees.
+🔮 Future Enhancements
+Possible extensions include:
+Additional username formats
 Extended character sets
-
-Special identifiers for categories such as NFTs, MemeCoins, and other on-chain projects
-
-
-Any such updates will be reviewed and approved by the TRON Core Development Team.
-
-
----
-
+Special categories for NFTs, MemeCoins, dApps, and system accounts
 📄 License
-
-MIT License – 2025
-Open-source for all TRON developers.
-
-
----
-
-🔗 Related Discussion
-
-GitHub Issue: #799
-
-Official Pull Request: #803
+MIT — 2025
+🔗 References
+Primary Issue: #799
+Updated Pull Request: #803
