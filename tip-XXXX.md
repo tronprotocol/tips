@@ -8,217 +8,155 @@ Created: 2025-12-29
 Discussions-To: https://github.com/tronprotocol/tips/issues/810
 
 Abstract
-
-This TIP proposes a native, optional, protocol-level account inheritance mechanism for the TRON network.
-The mechanism allows users to define a time-based inheritance key that can access account assets after a prolonged period of owner inactivity, without revealing private keys, without smart contracts, without additional gas fees, and without dependency on specific wallets or off-chain services.
-
-In addition to inheritance, this mechanism can function as a secure access recovery solution in cases such as permanent loss of seed phrases, cognitive illness, coma, or long-term incapacity.
-
+This TIP introduces a native, optional, protocol-level inheritance mechanism for all TRON network accounts.
+This mechanism allows account owners to define a time-based Inheritance Key for their account, which provides operational access to the account’s assets only if cryptographic inactivity of the Owner Key is detected and after a predefined delay period explicitly set by the owner has elapsed.
+The Inheritance Key operates:
+Without exposing or compromising the Owner Key
+Without relying on smart contracts
+Without additional gas or fee requirements
+Without dependency on any specific wallet or off-chain service
+and is implemented natively at the protocol level as an intrinsic part of TRON accounts.
+In addition to inheritance use cases, this mechanism also serves as a secure access recovery path, even for the owner themselves, in situations such as permanent loss of the Seed Phrase, cognitive diseases (e.g., Alzheimer’s), coma, long-term incapacity, or unexpected incidents that prevent access to the primary account key.
 Motivation
-
-In current blockchain architectures, ownership and access to assets are entirely dependent on possession of private keys.
-If the owner experiences any of the following situations:
-
-Death
-
+In current blockchain architectures, ownership and access to assets are entirely dependent on possession of a private key or Seed Phrase.
+If any of the following conditions occur:
+Death of the owner
 Long-term unconsciousness or coma
-
-Cognitive diseases (e.g., Alzheimer’s)
-
-Permanent loss or forgetting of the seed phrase or private key
-
-the associated digital assets become permanently inaccessible.
-
-Existing solutions suffer from critical drawbacks:
-
-Sharing seed phrases compromises security
-
-Smart-contract-based inheritance introduces exploit and bug risks
-
-Wallet-based solutions are centralized, non-standard, and non-portable
-
-There is a strong need for a native, protocol-level solution that:
-
-Preserves full owner security during lifetime
-
+Memory-related illnesses such as Alzheimer’s
+Permanent loss, theft, or destruction of the private key or Seed Phrase
+the associated digital assets become permanently and irreversibly inaccessible.
+Existing solutions suffer from significant drawbacks:
+Sharing a Seed Phrase severely weakens security
+Smart contract–based inheritance mechanisms are vulnerable to bugs and exploits
+Wallet-based solutions are often centralized, non-standard, and unreliable
+Entrusting recovery phrases even to close relatives carries substantial risk
+Therefore, the network requires a native protocol-level solution that:
+Fully preserves owner security during their lifetime while guaranteeing asset availability for beneficiaries
 Prevents irreversible loss of assets
-
-Avoids legal, technical, or usability complexity
-
-Requires no smart contracts or trust assumptions
-
+Avoids legal complexity, technical fragility, and poor user experience
+Does not rely on smart contracts or trust in third parties
 Specification
 Account Roles
-
-Each TRON account MAY optionally define an additional key role:
-
-Owner Key
-
-Primary account authority
-
-Always valid and active
-
+Every TRON account has an Owner Key that:
+Acts as the primary authority of the account
+Is always valid and active
+This TIP introduces an additional key role:
 Inheritance Key
-
-Defined and managed exclusively by the Owner Key
-
-Inactive by default
-
-Becomes valid only after a protocol-defined inactivity condition is met
-
-The Owner Key is never disabled or revoked by inheritance activation.
-
+Can only be enabled, disabled, or replaced by the Owner Key
+Exists by default for all accounts, but is initially disabled
+Has an independent Seed Phrase distinct from the Owner Key
+Structurally functions as a time-based Active Permission
+The existence of the Inheritance Key at the protocol level is mandatory, while enabling it is entirely optional and requires explicit Owner Key authorization.
+Merely configuring the delay and enabling the Inheritance Key does not grant transaction authority until the inactivity condition is fulfilled.
+Inheritance Key States
+The protocol defines three explicit and auditable states:
+1. Disabled
+No delay configured
+The key is completely inactive at the protocol level
+2. Configured
+Delay period is defined and signed by the Owner Key
+Owner inactivity countdown has started
+The key is not yet authorized to sign transactions
+3. Active
+Owner inactivity condition for the configured delay is satisfied
+The Inheritance Key is authorized to sign transactions with Active Permission scope
+Activation of the Inheritance Key never disables or restricts the Owner Key.
+Explicit Responsibility Separation
+Protocol / Network Responsibilities
+Maintain the Inheritance Key state and parameters
+Enforce activation logic during transaction validation
+Apply protocol-level permission restrictions
+Record the signer role for each transaction
+Wallet Responsibilities
+Display Inheritance Key status in read-only mode
+Display configured delay period
+Display remaining time until activation
+Avoid implementing any security logic outside the protocol
+User (Owner) Responsibilities
+Decide whether to enable or disable inheritance
+Configure the delay period
+Securely store or distribute the Inheritance Key Seed Phrase to trusted parties
 Inheritance Delay
+A native account parameter:
 
-An optional parameter is stored in the native account state:
 
 inheritance_delay
-
-Minimum: 6 months
-
+Minimum: 1 month
 Maximum: 240 months (20 years)
-
-This value represents the required duration of owner inactivity before inheritance activation.
-
 Owner Activity Definition
+A new native field:
 
-A new native account field is introduced:
 
 last_owner_activity_timestamp
-
-This timestamp MUST be updated when a valid on-chain transaction is executed that:
-
-Is signed by the Owner Key
-
-Results in a verifiable state change
-
-Including, but not limited to:
-
+This value is updated only when:
+A transaction is signed by the Owner Key
+The transaction causes a verifiable on-chain state change
+Including (but not limited to):
 Asset transfers
-
 Voting
-
 Freeze / unfreeze operations
-
-Staking and unstaking
-
+Stake / unstake
 Reward withdrawal
-
-Direct smart contract invocations signed by the Owner Key
-
-Receiving assets without Owner Key signature MUST NOT update this timestamp.
-
+Voting actions requiring owner authorization
+Smart contract interactions
+Note: Receiving assets or any activity not signed by the Owner Key does not update this timestamp.
 Inheritance Activation Logic
+During transaction validation:
 
-During transaction signature validation, the protocol evaluates:
 
 (current_time - last_owner_activity_timestamp) >= inheritance_delay
-
-If true, the Inheritance Key is considered valid for transaction authorization.
-
-Activation of the Inheritance Key DOES NOT disable or invalidate the Owner Key.
-
+If the condition is satisfied, the Inheritance Key is considered valid for authorization.
 Behavior After Activation
-
-Once the inheritance condition is met:
-
-The Inheritance Key MAY sign transactions
-
-The Owner Key:
-
-Remains fully valid
-
-MAY reset the inactivity timer
-
-MAY modify the inheritance delay
-
-MAY replace or disable the inheritance key
-
-This design ensures no irreversible or point-of-no-return state is introduced.
-
+The Owner Key retains full control
+The Owner may at any time:
+Disable the Inheritance Key
+Reconfigure the delay and re-enable it
+Permanently delete the existing Inheritance Key and replace it with a completely new one
+Note: Activation of the Inheritance Key never creates an irreversible or point-of-no-return state.
 Permission Model Integration
-
-The Inheritance Key operates as a restricted authority equivalent to an Active permission, with protocol-enforced limitations.
-
-The Inheritance Key:
-
-MAY initiate asset transfers
-
-MAY stake, unstake, and manage resources
-
-MAY interact with smart contracts
-
-The Inheritance Key MUST NOT:
-
+The Inheritance Key is authorized to:
+Transfer assets
+Stake, unstake, and manage resources
+Vote and claim rewards
+Interact with smart contracts
+Perform swaps
+The Inheritance Key is not authorized to:
 Modify Owner permissions
-
-Change account permission structure
-
+Change the account permission structure
 Replace or revoke the Owner Key
-
-Access or recover private keys or seed phrases
-
+Access or recover any Seed Phrase
 Security Considerations
-
-The mechanism introduces no shared secrets
-
-No private key material is exposed
-
+There is no shared material between the Owner Key and the Inheritance Key or their Seed Phrases
+If an account is accessed via the Inheritance Key, it remains bound to all Owner-defined account settings
 No smart contracts are involved
-
-All logic is enforced at the consensus/protocol layer
-
-The Owner Key always retains ultimate control
-
-This design minimizes attack surface and eliminates common inheritance exploit vectors.
-
+All logic is enforced at the consensus / protocol layer
+Delayed Security Layer
+Even if the Inheritance Key Seed Phrase is compromised:
+No operational access is possible before the Owner inactivity delay expires
+This protocol-level delay:
+Prevents immediate asset theft
+Gives the Owner sufficient time to react and replace the Inheritance Key
+This security model is not natively implemented in any existing blockchain.
 Transparency
+Each transaction may include a non-sensitive signer role identifier:
 
-Each transaction MAY include a non-sensitive role identifier:
 
 signature_role: owner
 signature_role: inheritance
-
-This allows public auditability and prevents ambiguity without leaking sensitive data.
-
 Wallet UX Considerations
-
-Wallets SHOULD display the following read-only information:
-
-Inheritance feature status (enabled / disabled)
-
-Configured inheritance delay
-
-Remaining time until potential activation
-
-All inheritance configuration is managed as native account metadata and does not require user interaction with gas fees or smart contracts.
-
-Special Scenarios
-Long-Term Incapacity
-
-The protocol relies solely on cryptographic inactivity.
-A minimum delay of six months provides sufficient protection against accidental activation.
-
-Physical Restriction or Detention
-
-In most scenarios, sending a minimal transaction remains possible.
-Failure to do so is interpreted as implicit consent.
-
-Key Loss or Cognitive Decline
-
-The Inheritance Key provides a secure recovery path without compromising owner security.
-
+Wallets should support:
+Enabling, disabling, configuring delay
+Deleting and replacing the Inheritance Key
+And display:
+Inheritance Key status (Disabled / Configured / Active)
+Configured delay period
+Remaining time until activation
+Automatic timer reset after each Owner Key activity
 Backwards Compatibility
-
 Fully optional
-
 No behavior changes for existing accounts
-
 No smart contract dependency
-
-Compatible with existing TRON permission architecture
-
+Fully compatible with TRON’s existing permission architecture
 Conclusion
-
-This TIP introduces a simple yet foundational protocol feature that prevents permanent loss of digital assets on TRON.
-By combining security, simplicity, and user sovereignty, native account inheritance can become a defining advantage of the TRON network.
+This TIP introduces a foundational protocol-level capability that prevents permanent loss of digital assets on the TRON network.
+By combining security, predictability, and user sovereignty, native account inheritance can become a strategic and distinguishing advantage for the TRON ecosystem.
