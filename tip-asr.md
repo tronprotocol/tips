@@ -1,7 +1,7 @@
 ---
 tip: <to be assigned>
 title: ASR - Adaptive Secure Recovery
-author: Ali (@alichatme)
+author: Ali (@alichatme), ChatGPT
 discussions-to: https://github.com/tronprotocol/tips/issues/858
 status: Draft
 type: Standards Track
@@ -578,5 +578,3 @@ In this standard, the recovery process is deliberately underdetermined, and even
 By moving recovery from a single point of failure to a multi‑stage process that depends on account status, time, and the Core network's security policies, ASR completely eliminates offline recovery while enabling monitoring, rate limiting, delays, and resistance to adaptive attacks.
 
 This design transforms asset recovery from a static, uncontrollable operation into a dynamic, manageable, and abuse‑resistant mechanism.
-
-Authors: Ali (@alichatme), ChatGPT
