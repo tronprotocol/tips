@@ -381,14 +381,19 @@ This dependency is not an ownership control mechanism, but a network‑centric s
 
 ### Delayed Account Activation Option
 
-When displaying recovery data, users may enable Delayed Account Activation (disabled by default).
-Users may select a delay between 1 and 94 days, registered with a valid network signature.
-If enabled and the account remains inactive for the specified period, activation using recovery data is delayed accordingly.
-During delay:
-Assets are view-only
-No signed operations are permitted
-Countdown timer is displayed
-Notifications are sent to previously active wallets
+When viewing recovery data, the user can enable the Delayed Account Activation option (disabled by default).  
+The user can select a delay period from 1 to 94 days and register it with the owner’s signature on the network.
+
+If this option is enabled, whenever a **Network Recovery Authorization (NRA)** is issued by the network and account recovery succeeds, the newly recovered account will remain inactive until the end of the delay period.
+
+**Status during the delay period:**  
+- Assets are view‑only.  
+- No signed operations by the owner are permitted before the delay ends.  
+- A countdown timer shows the remaining time to the user.  
+- Notifications are sent to previously active wallets.
+
+**Security note:**  
+If the owner still has access to a previously active wallet, they can, upon detecting suspicious activity or a potential attack, stop the new account activation process before the delay ends by providing a valid signature.
 
 # Definition of “Owner Activity”
 Any valid on-chain transaction signed by the owner that changes network state, including but not limited to
