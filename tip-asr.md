@@ -386,6 +386,10 @@ The user can select a delay period from 1 to 94 days and register it with the ow
 
 If this option is enabled, whenever a **Network Recovery Authorization (NRA)** is issued by the network and account recovery succeeds, the newly recovered account will remain inactive until the end of the delay period.
 
+**Displaying Recovered Devices with a Single RCID and the Ability to Terminate Previous Sessions:**
+- It should be possible to view active and inactive devices associated with an RCID, as well as to terminate previous sessions for ASR accounts.
+- **Limitation for newly recovered accounts:** A newly recovered account will not be able to terminate previous sessions for 30 days after activation.
+
 **Status during the delay period:**  
 - Assets are view‑only.  
 - No signed operations by the owner are permitted before the delay ends.  
