@@ -1,16 +1,13 @@
 ---
-
-TIP-XXXX
-Title: One-Time Active Keys for Post-Quantum Security (OTAK-PQ)
-Author: Ali(@alichatme)
-Status: Draft
-Type: Standards Track
-Category: Core
-Created: 2026-05-27
-Discussions-to: #820
-
+tip: XXXX
+title: One-Time Active Keys for Post-Quantum Security (OTAK-PQ)
+author: Ali (@alichatme)
+status: Draft
+type: Standards Track
+category: Core
+created: 2026-06-07
+discussions-to: https://github.com/tronprotocol/tips/issues/820
 ---
-
 ### Summary
 
 This TIP adds the capability of One-Time Access Keys (or "child keys" for short) to the Tron network.
