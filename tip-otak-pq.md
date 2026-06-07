@@ -6,7 +6,7 @@ status: Draft
 type: Standards Track
 category: Core
 created: 2026-06-07
-discussions-to: [https://github.com/tronprotocol/tips/issues/820](https://github.com/tronprotocol/tips/issues/890)
+discussions-to: https://github.com/tronprotocol/tips/issues/890
 ---
 ### Summary
 
