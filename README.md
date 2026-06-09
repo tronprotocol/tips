@@ -224,6 +224,7 @@ For further discussion, please enter [Telegram](https://t.me/troncoredevscommuni
 | TIP&nbsp;7951 | [TIP-7951: Precompile for secp256r1 Curve Support](https://github.com/tronprotocol/tips/blob/master/tip-7951.md)                        |   <lei19942016@hotmail.com>    | Standards&nbsp;Track |     VM     |      true      | Last Call |
 | TIP&nbsp;8001 | [TRC-8001: Agent Coordination Framework](https://github.com/tronprotocol/tips/blob/master/tip-8001.md)                                  |    <yanghang8612@gmail.com>    | Standards&nbsp;Track |    TRC     |     false      |   Final   |
 | TIP&nbsp;8004 | [TRC-8004: Trustless Agents](https://github.com/tronprotocol/tips/blob/master/tip-8004.md)                                              |         <team@bankofai.io>          | Standards&nbsp;Track |    TRC     |     false      |   Final   |
+| TIP&nbsp;8126 | [TRC-8126: AI Agent Verification](https://github.com/tronprotocol/tips/blob/master/tip-8126.md)                                         |    <yanghang8612@gmail.com>    | Standards&nbsp;Track |    TRC     |     false      |   Final   |
 
 </details>
 
