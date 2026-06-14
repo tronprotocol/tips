@@ -488,119 +488,108 @@ This sequential index model also naturally prevents replay attacks, because any 
 
 # Threat Model
 
-The main security principles in OTAK-PQ are designed to reduce the exposure level of keys that have access to account assets (Access Keys) and to limit the impact of signatures visible on the blockchain.
+The core security principles of OTAK-PQ are designed to prevent the exposure of Access Key signatures on the blockchain, thereby limiting the impact of any attack to signatures that are publicly visible.
 
-In the ECDSA signature algorithm, every signature recorded on the blockchain can, in the presence of future computational threats (including quantum computing scenarios), be used as data to analyze and recover the private key.
+In the ECDSA signature algorithm, any signature recorded on the blockchain can, in the presence of future computational threats (including quantum computing scenarios), be used as data to recover the private key. Recovering even a single signature gives the attacker access to all assets.
 
-Additionally, repeated use of a key to produce multiple signatures increases the risk level over time. Recovery of even one signature gives the attacker access to all assets.
+Unlike many similar designs, OTAK-PQ ensures that no Access Key signature is ever exposed on the blockchain – neither during the account bootstrap/activation process nor during normal transaction signing. Therefore, even if a future quantum computer could break the signature of one or more Child Keys, it would still be unable to recover the Access Keys or take control of the account, because:
 
-This design in the OTAK-PQ security model ensures that:
-
-. No signature from Access Keys is ever published on the blockchain.
-. No key list is stored in the network State.
-. Compromise of one child key does not affect other keys.
-. Replay attacks are effectively neutralized.
-. The impact of any possible attack is limited to a single transaction.
-. The network can validate an unlimited number of child keys without storing millions of keys.
+· No Access Key signature is ever published on the blockchain
+· No key list is stored in the network State
+· Compromise of one Child Key does not affect other keys
+· The relationship between Access Key and Child Key is a one-way function
+· Replay attacks are effectively neutralized
+· The impact of any possible attack is limited to a single transaction
+· The network can validate an unlimited number of Child Keys without storing millions of keys
+· Each Child Key is deactivated immediately after use
 
 Consequently, OTAK-PQ shifts the account security model from reliance on long-term keys to a structure based on one-time-use keys, Merkle Proofs, and a Root of Trust.
 
-### The main goal of the OTAK-PQ security model is not to eliminate risk entirely, but rather:
+## The main goal of the OTAK-PQ security model is not to eliminate risk entirely, but rather:
 
-. Limit the impact of any disclosed signature to a single transaction.
-. Eliminate the reusability of signing keys.
-. Reduce the attack surface against long-term analysis of signatures (including quantum threats).
-. Transaction signatures are generated only by child keys.
-. Access Keys (Owner/Active Keys) are never directly used to sign on-chain transactions.
-. Each child key is systemically deactivated (inactive) after use, and only then is its signature published on the network.
-. Child keys provide only temporary operational permission to perform a single transaction and are not part of the account’s long-term control structure.
+· Limit the impact of any disclosed signature
+· Eliminate the reusability of signing keys
+· Reduce the attack surface against long-term signature analysis (including quantum threats)
+· Transaction signatures are generated only by Child Keys
+· Access Keys (Owner/Active Keys) are never directly used to sign on-chain transactions
+· Each Child Key is systematically deactivated after use, and only then is its signature published on the network
+· Child Keys provide only temporary operational permission to perform a single transaction and are not part of the account’s long-term control structure
 
 Consequently, even if a recorded signature is disclosed:
 
-. The key corresponding to that signature is limited to a past transaction.
-. No active authority remains for that key to perform a new transaction.
-. The account’s security control remains at the level of the Root of Trust and the Merkle Root structure recorded for the account.
+· The key corresponding to that signature is limited to a past transaction
+· No active authority remains for that key to perform a new transaction
+· The account’s security control remains at the level of the Root of Trust and the Merkle Root structure recorded for the account
 
-### Analysis of the impact of quantum attacks
+## Analysis of the Impact of Quantum Attacks
 
-Assume an asset transfer transaction is signed with a child key.
+Assume an asset transfer transaction is signed with a Child Key:
 
-. The transaction is confirmed by network nodes and the assets arrive at the destination account.
-. The child key is deactivated immediately after confirmation, then the transaction history is recorded on the blockchain and the signature is published.
+· The transaction is confirmed by network nodes and the assets arrive at the destination account
+· The Child Key is deactivated immediately after confirmation, then the transaction history is recorded on the blockchain and the signature is published
 
-In the above assumption, if in the future an attacker is able to:
+If, in the future, an attacker is able to analyze the recorded signature or recover the corresponding key (even assuming quantum computational capability), this access will be limited solely to a consumed key that:
 
-Analyze the recorded signature, or recover the corresponding key (even assuming quantum computational capability).
-This access will be limited solely to a consumed key that:
+· Is no longer in an active state on the network
+· Cannot sign a new transaction
+· No longer has any assets under its control
 
-. Is no longer in an active state on the network.
-. Cannot sign a new transaction.
-. No longer has any assets under its control.
 Therefore, the impact of the attack is limited to the historical level and does not extend to the control level of the account.
 
-### Scope of security coverage
+## Scope of Security Coverage
 
 OTAK-PQ protects against:
 
-. Reducing exposure of long-term keys on the blockchain.
-. Limiting attack impact to a single transaction.
-. Preventing reuse of past signing keys.
-. Reducing the impact of historical signature analysis in future scenarios.
+· Reducing exposure of long-term keys on the blockchain
+· Limiting attack impact to a single transaction
+· Preventing reuse of past signing keys
+· Reducing the impact of historical signature analysis in future scenarios
 
-### OTAK-PQ does NOT protect against:
+## OTAK-PQ does NOT protect against:
 
-. Theft of Seed Phrase or recovery phrase.
-. Compromise of the user’s device (malware / keylogger).
-. Phishing or social engineering attacks.
-. Real-time attacks before final transaction confirmation.
-. Network layer or communication infrastructure attacks.
-. Risks arising from analysis of transaction signatures recorded before the account migrates to OTAK-PQ.
+· Theft of Seed Phrase or recovery phrase
+· Compromise of the user’s device (malware / keylogger)
+· Phishing or social engineering attacks
+· Real-time attacks before final transaction confirmation
+· Network layer or communication infrastructure attacks
+· Risks arising from analysis of transaction signatures recorded before the account migrates to OTAK-PQ
 
-## Comparison of the OTAK-PQ security model with Post-Quantum algorithms
+## Comparison of OTAK-PQ with Post-Quantum Algorithms
 
-### Post-Quantum algorithms such as:
-
-CRYSTALS-Dilithium
-Falcon
-SPHINCS+
-are designed to counter quantum computing threats and attempt to ensure security by making the cryptographic problem harder.
+Post-Quantum algorithms such as CRYSTALS-Dilithium, Falcon, and SPHINCS+ are designed to counter quantum computing threats by making the cryptographic problem harder.
 
 General characteristics of these algorithms:
 
-. Increased signature and key sizes compared to ECDSA.
-. Increased computational cost of verification in nodes.
-. Increased memory and bandwidth consumption.
-. Relative decrease in throughput compared to lighter signatures.
+· Increased signature and key sizes compared to ECDSA
+· Increased computational cost of verification in nodes
+· Increased memory and bandwidth consumption
+· Relative decrease in throughput compared to lighter signatures
 
-In blockchain networks, these costs directly affect:
-. TPS
-. Latency
-. Node resource consumption.
+In blockchain networks, these costs directly affect TPS, latency, and node resource consumption.
 
-### Impact of OTAK-PQ on network speed
+## Impact of OTAK-PQ on Network Speed
 
-OTAK-PQ, instead of trying to increase cryptographic complexity, focuses on reducing the exposure level of sensitive keys. In this model:
+OTAK-PQ, instead of increasing cryptographic complexity, focuses on reducing the exposure level of sensitive keys. In this model:
 
-. The underlying signature algorithm (e.g., ECDSA) remains unchanged.
-. Signature size and transaction structure do not change.
-. Node processing load remains nearly constant.
-. No extensive changes to the consensus layer are required.
+· The underlying signature algorithm (e.g., ECDSA) remains unchanged
+· Signature size and transaction structure do not change
+· Node processing load remains nearly constant
+· No extensive changes to the consensus layer are required
 
 Therefore, OTAK-PQ can act as a complementary security layer, not a replacement for existing signature algorithms.
 
-### Staged architecture for the future
+## Staged Architecture for the Future
 
-OTAK-PQ can act as a transition layer between the current architecture and a possible future migration to Post-Quantum cryptography.
- Especially in current conditions where:
+OTAK-PQ can act as a transition layer between the current architecture and a possible future migration to Post-Quantum cryptography, especially in current conditions where:
 
-. Computational infrastructure is still limited.
-. Full migration to heavy PQ algorithms has high operational costs.
+· Computational infrastructure is still limited
+· Full migration to heavy PQ algorithms has high operational costs
 
-Adopting the OTAK-PQ security model as an alternative solution results in:
+Adopting OTAK-PQ as a security solution results in:
 
-. Reduced exposure level.
-. Maintaining network performance without noticeable degradation.
-. Preparing account structures for future migration.
+· Reduced exposure level
+· Maintaining network performance without noticeable degradation
+·  account structures for future migration
 
 
 # Easy migration with OTAK-PQ
