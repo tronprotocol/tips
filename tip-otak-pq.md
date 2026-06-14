@@ -445,6 +445,39 @@ Child key generation is completely deterministic.
 . There is no need to maintain multiple independent backups.
 . Full recovery of the account structure is possible only with the master Seed.
 
+# 9. Consumed Child Key Tracking Model
+
+In the OTAK-PQ architecture, the network does NOT store any consumed-key set, bitmap, or list of used child keys. The OTAK-PQ-related state per account is minimal and includes only:
+
+· merkle_root
+· bootstrap_completed
+· last_used_child_index
+
+The validation model is based on mandatory sequential ordering of child keys.
+
+For each new transaction, nodes verify:
+
+. The transaction signature is valid.
+
+. The Merkle Proof is valid against the Merkle Root stored in the account.
+
+. The provided child key exactly matches the next expected index.
+
+After successful transaction confirmation, last_used_child_index is updated accordingly.
+
+In fact, last_used_child_index serves the same role as a nonce in the EIP-8202 model, but specifically for the child key lifecycle and without requiring transaction history scanning for account recovery.
+
+As a result:
+
+· No list of consumed keys is maintained.
+· No bitmap or consumed-key set is required.
+· No state growth occurs per transaction.
+· The OTAK-PQ-related state size per account remains constant regardless of transaction count.
+
+Therefore, no pruning or archival mechanisms are needed for consumed child keys.
+
+This sequential index model also naturally prevents replay attacks, because any transaction referencing a previously used child key will be rejected during validation.
+
 ### Threat Model
 
 The main security principles in OTAK-PQ are designed to reduce the exposure level of keys that have access to account assets (Access Keys) and to limit the impact of signatures visible on the blockchain.
