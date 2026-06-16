@@ -9,24 +9,38 @@ Created: 2025-12-29
 Discussions-To: https://github.com/tronprotocol/tips/issues/810
 ---
 # Abstract
-This TIP introduces a native, optional, protocol-level inheritance mechanism for all TRON network accounts.
 
-This mechanism allows account owners to define a time-based Inheritance Key for their account, which provides operational access to the account’s assets only if cryptographic inactivity of the Owner Key is detected and after a predefined delay period explicitly set by the owner has elapsed.
+This TIP introduces a native, optional, protocol-level inheritance mechanism for TRON accounts.
 
-## The Inheritance Key operates:
+Under this proposal, every TRON account is capable of supporting a dedicated Inheritance Key at the protocol level. The Inheritance Key is disabled by default and becomes operational only if explicitly configured by the account owner.
 
-. Without exposing or compromising the Owner Key
+The owner may configure an inheritance delay period and assign an Inheritance Key. If no valid Owner Key activity occurs during the configured delay period, the Inheritance Key becomes active and may operate within the scope of a restricted Active Permission.
+
+### The Owner Key always remains the ultimate authority of the account. At any time, including after inheritance activation, the owner may:
+
+. Disable the Inheritance Key
+
+. Modify or reset the inheritance delay
+
+. Replace the existing Inheritance Key with a completely new one
+
+Activation of the Inheritance Key never disables, replaces, or reduces the authority of the Owner Key.
+
+### The inheritance mechanism operates:
+
+. Without exposing or sharing the Owner Key
+
 . Without relying on smart contracts
-. Without additional gas or fee requirements
-. Without dependency on any specific wallet or off-chain service
 
-and is implemented natively at the protocol level as an intrinsic part of TRON accounts.
+. Without dependency on any specific wallet implementation
 
-In addition to inheritance use cases, this mechanism also serves as a secure access recovery path, even for the owner themselves, in situations such as 
+. Without dependency on off-chain services
 
-. permanent loss of the Seed Phrase
-. cognitive diseases (e.g., Alzheimer’s), coma, long-term incapacity
-. or unexpected incidents that prevent access to the primary account key.
+Configuration, activation, deactivation, and replacement of the Inheritance Key are native protocol-level account operations and do not require deployment of smart contracts or any inheritance-specific fees.
+
+Transactions executed through an active Inheritance Key remain subject to TRON's normal bandwidth, energy, and fee rules.
+
+Beyond inheritance scenarios, this mechanism can also function as a secure recovery path for account owners in situations such as loss of private keys, loss of seed phrases, cognitive impairment, long-term incapacity, or other events that prevent access to the primary account credentials.
 
 
 # Rationale
