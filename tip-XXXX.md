@@ -344,6 +344,250 @@ Once activated, the Inheritance Key is authorized to perform any operation permi
 All inheritance-related configuration operations remain exclusively under the control of the Owner Key.
 
 
+# Threat Model
+
+Overview
+
+This section analyzes the threat landscape relevant to the Inheritance Key mechanism.
+
+The design assumes that:
+
+- The TRON network operates correctly according to consensus rules.
+- The Owner Key remains secure during the owner's active lifetime.
+- The primary objective of the mechanism is to provide account recovery and inheritance capabilities without introducing new attack vectors that could compromise account security.
+
+## 1. Assets Protected
+
+The Inheritance Key mechanism protects the following assets:
+
+- Owner Key sovereignty — the Owner Key remains the ultimate authority at all times.
+- Account assets — TRX, TRC10, TRC20 tokens, NFTs, staking positions, and other account-controlled resources.
+- Account permissions — the permission structure cannot be modified by the Inheritance Key.
+- Seed Phrase confidentiality — the Owner Seed Phrase is never exposed to the Inheritance Key or to third parties.
+- 
+## 2. Threat Actors and Capabilities
+
+External Attacker
+
+Capabilities:
+
+- Attempts to steal the Inheritance Key Seed Phrase.
+- Attempts to compromise the Owner Key.
+- Attempts to exploit protocol implementation flaws.
+
+Malicious Beneficiary
+
+Capabilities:
+
+- Possesses the Inheritance Key Seed Phrase entrusted by the owner.
+- Attempts to gain access before the inactivity delay expires.
+
+Owner (Compromised or Incapacitated)
+
+Capabilities:
+
+- May become cognitively impaired.
+- May become incapacitated.
+- May make configuration mistakes.
+
+Network-Level Adversary
+
+Capabilities:
+
+- Attempts transaction censorship.
+- Attempts transaction ordering manipulation.
+- Attempts consensus-level attacks.
+
+## 3. Threat Analysis and Mitigations
+
+### 3.1. Compromise of the Inheritance Key Seed Phrase
+
+Threat
+
+An attacker obtains the Inheritance Key Seed Phrase through theft, phishing, malware, social engineering, or physical access.
+
+Mitigation
+
+- The Inheritance Key remains inactive until the configured inactivity delay expires.
+- The protocol rejects all Inheritance Key transactions before activation.
+- The delay period provides a detection and response window for the owner.
+- The owner may disable, replace, or reconfigure the Inheritance Key at any time before activation.
+
+Residual Risk
+
+Low.
+
+The attacker must wait through the entire delay period while the owner may remain active and revoke the compromised key.
+
+### 3.2. Compromise of the Owner Key
+
+Threat
+
+An attacker obtains control of the Owner Key or its Seed Phrase.
+
+Mitigation
+
+- The Inheritance Key is cryptographically independent from the Owner Key.
+- No seed material is shared between the two keys.
+- Compromise of the Owner Key does not automatically compromise the Inheritance Key.
+
+Important Limitation
+
+Once an attacker gains effective control of the Owner Key, they possess the highest authority available within the account and may modify account configuration, including Inheritance Key settings.
+
+This mechanism is not intended to protect against Owner Key compromise.
+
+Residual Risk
+
+High.
+
+Owner Key compromise remains a catastrophic event, consistent with the security model of existing blockchain accounts.
+
+### 3.3. Malicious Beneficiary Attempting Early Access
+
+Threat
+
+A beneficiary entrusted with the Inheritance Key attempts to access assets before the owner's actual inactivity.
+
+Mitigation
+
+- Activation is enforced entirely by the protocol.
+- The inactivity condition must be satisfied before any Inheritance Key transaction becomes valid.
+- The owner can disable or replace the Inheritance Key at any time prior to activation.
+
+Residual Risk
+
+Low.
+
+The protocol deterministically prevents premature access.
+
+### 3.4. False Inactivity Due to Automated Activity
+
+Threat
+
+Assets are managed through automated systems, while the owner rarely signs transactions directly, potentially leading to inactivity detection despite continued asset management.
+
+Mitigation
+
+- Only successful Owner Key–signed state-changing transactions update the inactivity timer.
+- Automated activity performed without Owner Key signatures does not reset the timer.
+- Owners may configure longer inactivity periods to match their intended usage patterns.
+
+Residual Risk
+
+Low.
+
+This behavior is intentional and reflects the protocol's explicit definition of Owner activity.
+
+### 3.5. Transaction Ordering Conflicts
+
+Threat
+
+Owner-signed and Inheritance-signed transactions appear near the activation boundary and are included in the same block.
+
+Mitigation
+
+- Standard deterministic transaction ordering rules defined by the TRON protocol apply.
+- Account state transitions are determined by the order in which transactions are executed.
+- No special-case consensus rules are required.
+
+Residual Risk
+
+Low.
+
+Behavior remains deterministic and fully auditable.
+
+### 3.6. Denial of Service or Censorship
+
+Threat
+
+An adversary attempts to prevent activation or execution of valid Inheritance Key transactions.
+
+Mitigation
+
+- The mechanism is enforced directly by consensus.
+- No external services, relayers, or off-chain infrastructure are required.
+- Resistance to censorship is equivalent to that of the underlying TRON network.
+
+Residual Risk
+
+Low.
+
+The mechanism inherits the censorship resistance of the network itself.
+
+### 3.7. False Activation Through Timestamp Manipulation
+
+Threat
+
+An adversary attempts to manipulate timestamps to prematurely activate the Inheritance Key.
+
+Mitigation
+
+- Timestamp validation remains governed by existing TRON consensus rules.
+- Activation relies on consensus-accepted timestamps.
+- No single participant can arbitrarily alter activation timing without violating consensus.
+
+Residual Risk
+
+Negligible.
+
+The mechanism relies on the same timestamp trust assumptions already used throughout the protocol.
+
+### 3.8. Misconfiguration of the Inheritance Delay
+
+Threat
+
+The owner accidentally configures an excessively short inactivity delay, increasing the risk of premature activation.
+
+Mitigation
+
+- The protocol enforces a minimum delay period.
+- The Owner Key may disable, replace, or reconfigure the Inheritance Key at any time.
+- Activation never overrides or restricts Owner Key authority.
+
+Residual Risk
+
+Low.
+
+Configuration choices remain under the owner's control and can be corrected at any time.
+
+## 4. Assumptions
+
+This threat model assumes that:
+
+1. The TRON consensus mechanism functions correctly.
+2. The Owner Key is initially generated and stored securely.
+3. The Inheritance Key Seed Phrase is generated and stored securely.
+4. Users understand the configuration options provided by the mechanism.
+
+## 5. Limitations
+
+This mechanism does not protect against:
+
+- Owner Key compromise.
+- Social engineering attacks that convince the owner to authorize malicious transactions.
+- Physical coercion.
+- Legal coercion.
+- User mismanagement of secret material.
+- Incorrect operational security practices.
+
+Users remain responsible for protecting both the Owner Key and the Inheritance Key according to their individual threat models.
+
+### Security Summary
+
+The Inheritance Key mechanism is designed to address long-term account inaccessibility while preserving Owner sovereignty and minimizing new attack surfaces.
+
+The security model intentionally guarantees:
+
+- No access before the inactivity delay expires.
+- No reduction of Owner authority.
+- No dependency on smart contracts.
+- No dependency on off-chain services.
+- No irreversible account state transitions.
+
+The mechanism therefore provides a protocol-level recovery and inheritance primitive while preserving TRON's existing security assumptions.
+
+
 # Security Considerations
 
 There is no shared material between the Owner Key and the Inheritance Key or their Seed Phrases
