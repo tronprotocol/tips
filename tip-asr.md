@@ -1,7 +1,7 @@
 ---
 tip: <to be assigned>
 title: ASR - Adaptive Secure Recovery
-author: Ali (@alichatme), ChatGPT
+author: Ali (@alichatme)
 discussions-to: https://github.com/tronprotocol/tips/issues/858
 status: Draft
 type: Standards Track
@@ -14,12 +14,14 @@ replaces:
 ASR – Adaptive Secure Recovery
 Adaptive Secure Recovery Standard for Cryptocurrency Accounts
 
-### Introduction
+
+# Introduction
 
 One of the most significant challenges in the cryptocurrency ecosystem is the secure storage of Seed Phrases. Standard protocols like BIP-39, despite their simplicity and widespread adoption, lack any independent cryptographic layer or active defense mechanisms.
 Consequently, if the seed phrase is compromised, the user’s entire assets become accessible and transferable without any security barriers. In this context, the ASR standard is introduced to eliminate this fundamental weakness.
 
-### Rationale
+
+# Rationale
 
 ASR is a standard that ensures the user’s digital currency account assets are not at risk, even if the recovery data is lost or stolen.
 This is because the recovery process in ASR, in addition to a numerical variable, depends on a private keyword variable. This variable is stored in the user’s memory or in a separate location from the numerical variable and acts as the key for recovery. It consists of only 12 English letters, which are easy to remember or can be stored separately from the numerical variable to ensure that even if the numerical recovery data is fully exposed, recovery without the keyword is practically impossible.
@@ -27,7 +29,7 @@ This is because the recovery process in ASR, in addition to a numerical variable
 ASR is not a static recovery mechanism; rather, it is a network-dependent, account-state-dependent, and Core security policy-dependent recovery system. This design transforms asset recovery from a single point of failure into a multi-stage, auditable, and adaptive attack-resistant process.
 
 
-### Overall ASR Architecture
+# Overall ASR Architecture
 ASR consists of three main components:
 
 . ASR-REC: Recovery Numbers
@@ -41,10 +43,10 @@ Each number falls within the range 0000 to 9999.
 This range operates in a modular manner.
 These values are displayed to the user in groups of four digits, separated by - and prefixed with ASR-REC.
 
-# Example of ASR-REC Display Format
+### Example of ASR-REC Display Format
 ASR-REC-1185-7517-7217-1362-1364-1388-4765-6867-7966-6765-2678-6765
 
-# Display Requirements
+### Display Requirements
 
 · Mandatory Left-to-Right
 · Mandatory ASCII
@@ -58,7 +60,7 @@ This variable is exclusively held by the user and stored either in the user’s 
 ASR-VAR is not stored on the network or in the wallet.
 This variable is considered the access key to the assets, and without ASR-VAR, neither the network nor the wallet can map ASR-REC to an account.
 
-# Display Requirements
+### Display Requirements
 . Uppercase letters A–Z only
 . ASCII encoding only
 . No spaces
@@ -69,7 +71,7 @@ This variable is considered the access key to the assets, and without ASR-VAR, n
 The repetition restriction is applied to prevent the selection of extremely low-entropy variables (e.g., AAAAAAAAAAAA) and is comparable to password policy standards in secure systems.
 Allowing up to two consecutive repeated letters ensures linguistic compatibility with natural English language structures.
 
-# Example ASR-VAR Display:
+### Example ASR-VAR Display:
 ASR-VAR-SUNBOYINHOME
 
 Each ASR-VAR lexical character, after entering the cryptographic cycle specific to this standard ASR-CRC , is used by default to encrypt four digits of ASR-REC.
@@ -82,12 +84,12 @@ The cyclic cryptographic core is responsible for:
 . Executing cryptographic cycles via additive variable aggregation to expand numerical digit ranges
 . Ensuring full coverage of the numerical range 0000 to 9999 in the default ASR configuration
 
-# Letter-to-Number Mapping
+### Letter-to-Number Mapping
 The ASR-VAR vocabulary consists exclusively of uppercase English letters A–Z in ASCII.
 Each letter corresponds to a number:
 A = 1, B = 2, …, Z = 26
 
-# Cryptographic Cycle Execution:
+### Cryptographic Cycle Execution:
 First, the lexical variables are converted into a numeric sequence, written inside brackets, and separated by -
 Then, each variable is added to the next variable in sequence; the last variable is added modularly to the first.
 This is performed for all 12 values.
@@ -95,11 +97,11 @@ The results are written inside brackets and separated by - forming the next cycl
 With repeated aggregation, subsequent cycles produce numbers with increasing digit lengths.
 These cycles continue until the last variable exceeds four digits (in the default ASR configuration).
 
-# Full Range Coverage Guarantee:
+### Full Range Coverage Guarantee:
 Once variable values exceed four digits, only the rightmost four digits of each value are extracted for integration, and the remaining leftmost digits are discarded.
 Continuation of the cycles is necessary to guarantee full coverage of the numeric range 0000 to 9999.
 
-# Complete Practical Example of the ASR-CRC Cryptographic Model
+### Complete Practical Example of the ASR-CRC Cryptographic Model
 
 Assume the user selects the following ASR-VAR
 
@@ -148,14 +150,14 @@ Result:
 
 The cycles continue until the last variable exceeds four digits for all variables. Then, in the above assumption, as well as in the default ASR standard, only the rightmost four digits resulting from the cycle of each variable enter the integration stage, and the remaining left digit(s) of each variable are ignored.
 
-# Modular Integration of ASR-CRC Output with ASR-REC (with Example)
+### Modular Integration of ASR-CRC Output with ASR-REC (with Example)
 
 In ASR, the user’s private variable (ASR-VAR) is first processed through the ASR-CRC core.
 The output of this process is a four-digit numeric value (ASR-CRC Output), which serves as an intermediate recovery value and cannot independently reconstruct the Seed or private key.
 This four-digit value is then modularly added to each four-digit ASR-REC number, and the final result is displayed to the user.
 If the sum exceeds 9999, the calculation continues modularly from 0000.
 
-# In another example, with hypothetical numbers different from the previous example.
+### In another example, with hypothetical numbers different from the previous example.
 
 Assume:
 The value of the first four-digit number in ASR-REC is equal to:
@@ -169,7 +171,7 @@ In this case, the integration is performed as follows:
 
 The value 6666 is displayed as the ASR-REC value to the user.
 
-# Recovery Process
+### Recovery Process
 During recovery, the user enters 6666 as the first ASR-REC value.
 After entering ASR-VAR, the wallet reruns ASR-CRC and calculates:
 ASR-CRC Output = 2222
@@ -329,10 +331,10 @@ In wallet implementation:
 
 ## Responsibilities
 
-# User Responsibilities
+### User Responsibilities
 Maintain ASR-VAR and ASR-REC separately
 
-# Wallet Responsibilities
+### Wallet Responsibilities
 The wallet performs all local cryptographic recovery computations
 
 . Storing ASR-REC
@@ -351,7 +353,7 @@ The wallet:
 
 This limitation is a fundamental security constraint in the ASR design, not an implementation flaw.
 
-# Role and Responsibilities of the Core Network in the ASR Recovery Process
+### Role and Responsibilities of the Core Network in the ASR Recovery Process
 
 The Core network in ASR does not act as a "computing engine" or "Seed holder". Instead, it is responsible for providing the final degree of freedom necessary to complete the recovery.
 
@@ -370,7 +372,7 @@ The network:
 However, without issuing the NRA, the Seed reconstruction process is cryptographically and engineering-wise impossible to complete.
 This dependency is not an ownership control mechanism, but a network‑centric security constraint to prevent unauthorized recovery and adaptive attacks.
 
-# ASR Network Layer Responsibilities
+### ASR Network Layer Responsibilities
 
 . No smart contracts
 . No gas or fees
@@ -379,7 +381,8 @@ This dependency is not an ownership control mechanism, but a network‑centric s
 · Each subsequent block of 3 unsuccessful attempts → Apply a time restriction double the previous one (e.g., 24h → 48h → 96h → ...).
 · Mandatory: When a restriction is applied, a countdown timer must be displayed to the user, indicating the remaining waiting time.
 
-### Delayed Account Activation Option
+
+# Delayed Account Activation Option
 
 When viewing recovery data, the user can enable the Delayed Account Activation option (disabled by default).  
 The user can select a delay period from 1 to 94 days and register it with the owner’s signature on the network.
@@ -399,7 +402,7 @@ If this option is enabled, whenever a **Network Recovery Authorization (NRA)** i
 **Security note:**  
 If the owner still has access to a previously active wallet, they can, upon detecting suspicious activity or a potential attack, stop the new account activation process before the delay ends by providing a valid signature.
 
-# Definition of “Owner Activity”
+### Definition of “Owner Activity”
 Any valid on-chain transaction signed by the owner that changes network state, including but not limited to
 
 . Asset transfers
@@ -507,7 +510,7 @@ In engineering terms:
 
 ASR replaces the Mnemonic, not the Seed.
 
-# Engineering Conclusion
+### Engineering Conclusion
 
 ASR is not a key generation standard.
 
@@ -522,7 +525,8 @@ transforms the recovery layer from a single point of failure into a multi-stage,
 
 This precise positioning introduces ASR as an independent, complementary layer in cryptographic wallet architecture, not a replacement for key generation standards.
 
-### Absolute Prohibition of Offline Recovery in ASR
+
+# Absolute Prohibition of Offline Recovery in ASR
 
 Unlike BIP-39, where recovery is completely offline, ASR is fundamentally designed to be network‑dependent.
 
@@ -533,7 +537,8 @@ Full recovery is conditional upon receiving a Network Recovery Authorization (NR
 
 In the absence of NRA, recovery is engineering‑wise impossible.
 
-### Threat Model
+
+# Threat Model
 The ASR standard is designed to protect the account recovery process against threats related to the disclosure of recovery data, and not to counter full compromise of the user's execution environment.
 
 1. ASR is resilient against:
@@ -556,7 +561,8 @@ The ASR standard is designed to protect the account recovery process against thr
 · Attacks based on full device control at the time of owner signing
 · Non‑cryptographic attacks such as physical coercion or in‑person social engineering
 
-### Why ASR Is a Recovery Alternative to BIP-39 (Design Rationale)
+
+# Why ASR Is a Recovery Alternative to BIP-39 (Design Rationale)
 
 BIP-39 is a Seed generation standard that makes recovery dependent on full knowledge of the Mnemonic.
 In this model, recovery is a completely offline, unsupervised process with no distinction between the legitimate owner and an attacker.
@@ -579,7 +585,8 @@ The key differences are:
 
 As a result, ASR enhances security not by replacing basic cryptography, but by completely redesigning the concept of digital asset recovery.
 
-### Summary
+
+# Summary
 ASR is not a recovery phrase; it is a security‑oriented, network‑dependent recovery system.
 
 In this standard, the recovery process is deliberately underdetermined, and even with full possession of the user's recovery data, reconstructing the Seed or controlling the assets is impossible without a recovery authorization issued by the network.
