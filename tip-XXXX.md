@@ -264,44 +264,52 @@ Therefore, the network requires a native protocol-level solution that:
 
 ## Account Roles
 
-Every TRON account has an Owner Key that:
+### Every TRON account has an Owner Permission that:
 
-. Acts as the primary authority of the account
-. Is always valid and active
+· Acts as the primary authority of the account
+· Is always valid and active
 
-## This TIP introduces an additional key role:
+This TIP introduces an additional key role:
 
-Inheritance Key
+## Inheritance Key
 
-. Can only be enabled, disabled, or replaced by the Owner Key
-. Exists by default for all accounts, but is initially disabled
-. Has an independent Seed Phrase distinct from the Owner Key
-. Structurally functions as a time-based Active Permission
+· Can only be enabled, disabled, or replaced through the Owner Permission
+· Is displayed in a dedicated Inheritance Key slot
+· Exists for all accounts, but is initially disabled and unconfigured
+· Has an independent Seed Phrase distinct from the Owner Key
+· Structurally functions as a time‑based Active Permission
 
-The existence of the Inheritance Key at the protocol level is mandatory, while enabling it is entirely optional and requires explicit Owner Key authorization.
+After implementation of this proposal, every TRON account natively supports a dedicated Inheritance Key slot. This slot is disabled by default and remains unconfigured until explicitly configured through the Owner Permission.
 
-Merely configuring the delay and enabling the Inheritance Key does not grant transaction authority until the inactivity condition is fulfilled.
+Note: Merely configuring the delay does not grant the Inheritance Key transaction authority until the Owner inactivity condition is fulfilled.
 
 ## Inheritance Key States
 
-The protocol defines three explicit and auditable states:
+The Inheritance Key can exist in one of the following three states:
 
-1. Disabled
+### 1. Disabled
 
-No delay configured
-The key is completely inactive at the protocol level
+· No delay is configured
+· The key is completely inactive at the protocol level
 
-2. Configured Delay
+### 2. Configured
 
-period is defined and signed by the Owner Key
-Owner inactivity countdown has started
-The key is not yet authorized to sign transactions
+· An inactivity delay period is defined and confirmed through the Owner Permission
+· Immediately after configuration, the Owner inactivity countdown begins
+· The key is not yet authorized to sign transactions until the configured delay period expires
+· After any valid Owner activity (successful state‑changing transactions confirmed through the Owner Permission), the countdown timer resets to the full configured delay period
 
-3. Active
+### 3. Active
 
-. Owner inactivity condition for the configured delay is satisfied
-. The Inheritance Key is authorized to sign transactions with Active Permission scope
-. Activation of the Inheritance Key never disables or restricts the Owner Key.
+· The Owner inactivity condition for the configured delay has been satisfied
+· The Inheritance Key is authorized to sign transactions with Active Key scope
+· Activation of the Inheritance Key never disables or restricts the Owner Permission
+· At any time – even after activation – the Owner can, through the Owner Key, perform the following actions:
+  · Disable the Inheritance Key
+  · Reconfigure the delay period (and thereby reset the timer)
+  · Replace the existing Inheritance Key with a completely new key
+
+Note: Replacing the Inheritance Key automatically cancels and replaces the previous Inheritance Key configuration. The account always has exactly one Inheritance Key slot, which can be disabled, configured, or active.
 
 
 # Explicit Responsibility Separation
