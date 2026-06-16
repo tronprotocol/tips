@@ -155,9 +155,81 @@ The specification explicitly allows the owner to:
 
 No irreversible state is created – even after activation.
 
-## 11. Rationale for Updating last_owner_activity_timestamp Only on Owner-Signed State-Changing Transactions
+## 11. Rationale for Updating last_owner_activity_timestamp
 
-Updating the timestamp on any transaction (including receiving assets) would cause trivial activities to reset the inheritance timer indefinitely, defeating the purpose of inheritance. Only actions that require the owner's explicit cryptographic signature and alter on-chain state represent meaningful "proof of life" from the owner's key. Receiving assets is a passive event and does not demonstrate owner awareness or intent.
+The "last_owner_activity_timestamp" is updated only when a transaction meets all of the following criteria:
+
+. Successfully authorized through the account's Owner Permission,
+. Successfully passes protocol validation requirements,
+. Executes successfully and results in a committed on-chain state change.
+
+This definition intentionally excludes:
+
+· Failed or reverted transactions, even when authorized through the Owner Permission, because they do not produce a committed state change.
+
+· Execution failures, VM exceptions, contract reverts, resource exhaustion failures (e.g., OUT_OF_ENERGY), insufficient balance failures, and any other transactions that do not result in a committed state change.
+
+· Read-only calls (e.g., view/pure functions), because they do not alter state.
+
+· Transactions rejected during protocol validation, including invalid signatures, malformed transactions, or authorization failures.
+
+· Passive events, such as receiving assets, because they do not demonstrate owner intent or awareness.
+
+Rationale for this strict definition:
+
+· Preventing trivial resets: If failed transactions, passive receipts, or non-state-changing operations updated the timestamp, inheritance could be postponed indefinitely, defeating the mechanism's purpose.
+
+· Consensus alignment: Only successful state-changing transactions provide an unambiguous, verifiable proof of owner activity that all consensus participants can independently verify.
+
+· Security: This ensures that the inactivity condition reflects genuine owner absence rather than accidental activity, failed execution attempts, or automated interactions that do not represent meaningful owner participation.
+
+By keeping the definition narrow and deterministic, the protocol maintains a clear, auditable, and consensus-safe boundary for what constitutes "Owner activity."
+
+## 12. Interaction with Existing Permission System and Multi-Signature
+
+The Inheritance Key is designed as a time-conditioned Active Permission and is fully integrated into TRON's existing permission architecture.
+
+· Active Permissions: The Inheritance Key reuses the existing Active Permission structure. No new PermissionType is introduced.
+
+· Multi-Signature Compatibility: Existing multi-signature behavior and validation rules remain unchanged. The inheritance mechanism does not modify or bypass any existing multisig security model.
+
+· Owner Supremacy: Owner Permission always remains the highest authority. The Owner may disable, reconfigure, or replace the Inheritance Key at any time, including after activation.
+
+This design ensures that the inheritance mechanism remains fully compatible with TRON's existing permission framework while preserving all current security guarantees.
+
+## 13. Inheritance Key as an Extension of the Existing Permission System
+
+This proposal does not introduce a separate account-control path.
+
+· Structurally, the Inheritance Key is implemented as a standard Active Permission already supported by TRON accounts.
+
+· The only addition occurs at the protocol validation layer, where a time-based condition determines whether this specific Active Permission is currently authorized.
+
+· Existing permission attributes, including weights, thresholds, and operation scopes, remain fully applicable.
+
+As a result, the inheritance mechanism extends the existing permission architecture rather than introducing a parallel authorization model.
+
+## 14. Simultaneous Owner and Inheritance Transactions in the Same Block
+
+If Owner-authorized and Inheritance-authorized transactions appear within the same block:
+
+· Standard deterministic transaction execution rules defined by the TRON protocol apply.
+
+· The transaction processed first determines the resulting account state for subsequent transactions within that block.
+
+· No inheritance-specific ordering rules are introduced.
+
+This approach preserves protocol simplicity, predictability, and compatibility with existing multi-key account behavior.
+
+## 15. Fee and Resource Clarification: Configuration vs. Transaction Execution
+
+A distinction must be made between inheritance configuration and transaction execution.
+
+· Configuration, activation, deactivation, replacement, or delay-period updates of the Inheritance Key are native account-management operations and do not require any inheritance-specific fees, smart-contract deployment costs, or additional protocol charges beyond standard protocol account-management behavior.
+
+· However, any transaction submitted through an active Inheritance Key consumes normal TRON resources, including bandwidth, energy, and applicable transaction fees, exactly as any other Active Permission transaction.
+
+This distinction is important: the inheritance mechanism itself introduces no additional operational cost, while all on-chain actions performed through the Inheritance Key continue to follow TRON's standard resource and fee model.
 
 
 # Motivation
