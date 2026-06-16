@@ -734,8 +734,4 @@ However, it should be noted that:
 
 . Past signature history remains on the blockchain.
 . Replacing keys does not erase past cryptographic records.
-. This method can reduce some future risks, but it does not turn the account into the equivalent of a newly created account with no on-chain signature history. Because past signature history remains on the blockchain, exposure related to those records will not be completely eliminated, although the account’s future activities will be conducted under the OTAK-PQ security model.
-
-
-
-Author: Ali (@alichatme)
+. This method can reduce some future risks, but it does not turn the account into the equivalent of a newly created account with no on-chain signature history. Because past signature history remains on the blockchain, exposure related to those records will not be completely eliminated, although the account’s future activities will be conducted under the OTAK-PQ security model
