@@ -312,93 +312,36 @@ The Inheritance Key can exist in one of the following three states:
 Note: Replacing the Inheritance Key automatically cancels and replaces the previous Inheritance Key configuration. The account always has exactly one Inheritance Key slot, which can be disabled, configured, or active.
 
 
-# Explicit Responsibility Separation
 
-## Protocol / Network Responsibilities
+## Behavior After Activation
 
-. Maintain the Inheritance Key state and parameters
-. Enforce activation logic during transaction validation
-. Apply protocol-level permission restrictions
-. Record the signer role for each transaction
-
-## Wallet Responsibilities
-
-. Display Inheritance Key status in read-only mode
-. Display configured delay period
-. Display remaining time until activation
-. Avoid implementing any security logic outside the protocol
-
-## User (Owner) Responsibilities
-
-. Decide whether to enable or disable inheritance
-. Configure the delay period
-. Securely store or distribute the Inheritance Key Seed Phrase to trusted parties
-Inheritance Delay
-
-### A native account parameter:
-
-. inheritance_delay
-Minimum: 1 month
-Maximum: 240 months (20 years)
-
-## Owner Activity Definition
-
-A new native field:
-last_owner_activity_timestamp
-
-### This value is updated only when:
-
-. A transaction is signed by the Owner Key
-. The transaction causes a verifiable on-chain state change
-
-### Including (but not limited to):
-
-. Asset transfers
-. Voting
-. Freeze / unfreeze operations
-. Stake / unstake
-. Reward withdrawal
-. Voting actions requiring owner authorization
-. Smart contract interactions
-
-Note: Receiving assets or any activity not signed by the Owner Key does not update this timestamp.
-
-### Inheritance Activation Logic
-
-During transaction validation:
-
-(current_time - last_owner_activity_timestamp) >= inheritance_delay
-
-If the condition is satisfied, the Inheritance Key is considered valid for authorization.
-
-### Behavior After Activation
-
-. The Owner Key retains full control
+· The Owner Key retains full control over account assets and Inheritance Key settings.
 
 ### The Owner may at any time:
 
-. Disable the Inheritance Key
-. Reconfigure the delay and re-enable it
-. Permanently delete the existing Inheritance Key and replace it with a completely new one
+· Disable the Inheritance Key
+· Reconfigure the inactivity delay and reconfigure the Inheritance Key
+· Replace the existing Inheritance Key with a new key, regardless of its current state
+
+After replacement, the new Inheritance Key is disabled by default until configured again.
 
 Note: Activation of the Inheritance Key never creates an irreversible or point-of-no-return state.
 
-### Permission Model Integration
+## Permission Model Integration
 
-The Inheritance Key is authorized to:
+The Inheritance Key functions as a time-conditioned Active Permission.
 
-. Transfer assets
-. Stake, unstake, and manage resources
-. Vote and claim rewards
-. Interact with smart contracts
-Perform swaps
+Once activated, the Inheritance Key is authorized to perform any operation permitted by its assigned Active Permission scope, weights, thresholds, and operation set, exactly as defined by TRON's existing permission system.
 
-### The Inheritance Key is not authorized to:
+### The Inheritance Key is NOT authorized to:
 
-. Modify Owner permissions
-. Change the account permission structure
-. Replace or revoke the Owner Key
-. Access or recover any Seed Phrase
+· Modify Owner permissions
+· Change the account permission structure
+· Replace or revoke the Owner Key
+· Access or recover any Seed Phrase
+· Change its own inheritance state, delay configuration, activation status, or replacement settings
+
+All inheritance-related configuration operations remain exclusively under the control of the Owner Key.
 
 
 # Security Considerations
