@@ -29,6 +29,123 @@ In addition to inheritance use cases, this mechanism also serves as a secure acc
 . or unexpected incidents that prevent access to the primary account key.
 
 
+# Rationale
+
+Designing a native inheritance mechanism at the protocol level, rather than relying on smart contracts or off-chain solutions, is the result of a deliberate trade-off analysis between security, usability, decentralization, and prevention of irreversible asset loss.
+
+## 1. Why Protocol-Level Instead of Smart Contracts?
+
+Smart contract–based inheritance solutions suffer from fundamental limitations:
+
+. Vulnerability to bugs and upgrades:
+Smart contracts can be hacked, and malicious upgrades can bypass inheritance logic.
+
+· Gas dependency: Activation requires the beneficiary to pay gas – which may be impossible if the beneficiary lacks sufficient TRX.
+
+· No native permission integration:
+Smart contracts cannot distinguish between true Owner Key inactivity versus simple non-use of a specific contract.
+
+· Incomplete access to consensus truth: Smart contracts intentionally do not have access to the full, consensus-verifiable history of Owner Key activity (votes, freezes, permission updates, governance actions). This is a deliberate VM security property, not an implementation flaw.
+
+By implementing inheritance natively in the TRON protocol, all accounts automatically possess the potential for inheritance, and activation carries zero additional gas overhead.
+
+## 2. Why Not Key Sharing or Multi-Signature?
+
+· Sharing Seed Phrase: Irreversibly compromises security. A trusted party could access assets at any time without delay.
+
+· Multi-signature: This is a mechanism for simultaneous trust distribution, not time-based recovery. The owner must permanently grant signing power to other parties from day one, which means loss of exclusive control.
+
+The proposed model ensures that during the owner's active lifetime, the Inheritance Key provides zero access, preserving full unilateral control.
+
+## 3. Rationale for the Time-Based Delay Model
+
+The delay period (minimum 1 month, maximum 20 years) serves two critical security functions:
+
+. Detection window: If the Inheritance Key Seed Phrase is compromised, the delay gives the owner time to react before any theft can occur.
+
+. Proof of true inactivity: Short delays risk premature activation during travel or temporary disengagement, causing false inheritance events.
+The 1-month minimum balances practical usability (beneficiaries do not wait indefinitely) with security (no immediate post-loss exploitation).
+
+## 4. Delayed Security Layer Against Inheritance Key Seed Exposure
+
+Even if the Inheritance Key Seed Phrase is exposed, no operational access is possible before the inactivity delay expires. This is a native protocol-level security layer not implemented in any other blockchain.
+
+## 5. Why No Smart Contract Involvement in the Permission Model?
+
+Restricting the Inheritance Key from modifying Owner permissions or account structure is a deliberate design choice to preserve Owner Sovereignty. Even after the Inheritance Key becomes active:
+
+· The owner retains full ability to disable inheritance.
+· The owner can reclaim exclusive control at any time.
+
+This prevents a "hostile inheritance" scenario where a beneficiary could lock out a returning owner.
+
+## 6. Comparison with Other Blockchains
+
+No major Layer 1 blockchain (Bitcoin, Ethereum, Solana, BNB Chain, or TRON itself) currently implements a native, protocol-level, time-delayed inheritance mechanism with independent key material. Existing approaches are either centralized, legal wills (unenforceable on-chain), or vulnerable to smart contract hacks.
+
+This TIP positions TRON as a first mover in solving the permanent asset loss problem without compromising self-custody.
+
+## 7. Why the Inheritance Key Seed Must Be Independent from the Owner Key
+
+If the Inheritance Key were derived from the Owner Key, compromising the Owner Key would simultaneously compromise inheritance security. By maintaining fully independent seed phrases:
+
+· No mathematical relationship exists between the two keys.
+
+· The owner can rotate or replace the Inheritance Key without changing the Owner Key.
+
+· Even if the Inheritance Key is leaked, the owner's day-to-day assets remain safe during the delay period.
+
+## 8. Protocol Necessity (Response to "Why Must This Be at Protocol Layer")
+
+The necessity lies in this reality: "The last valid activity of the Owner Key is a consensus fact, not a reliable application-level signal." No smart contract can deterministically and safely verify:
+
+· Whether the Owner Key has truly been inactive
+
+· Whether activity occurred outside the contract (vote, freeze, permission update)
+
+· Whether a transaction was actually signed by the Owner Key or by another Active Permission
+
+Smart contracts intentionally lack access to this level of information – this is a VM security feature, not a flaw. Consequently, any smart contract–based solution will inevitably suffer from either:
+
+· False positives (incorrect activation),
+
+· False negatives (failure to activate when needed),
+
+· Or reliance on off-chain assumptions.
+
+Therefore, this capability sits exactly at the boundary of what the protocol must define – neither above nor below.
+
+## 9. Protocol Maintenance Cost and Complexity
+
+This proposal:
+
+· Introduces no new signature paths
+
+· Grants no new power to any key
+
+· Adds only a conditional check inside existing signature validation
+
+· Is fully optional and disabled by default
+
+Its maintenance and complexity profile remains at the level of existing permission primitives (Owner/Active, multi-signature), not at the level of behavioral policy systems.
+
+## 10. Handling Edge Cases: Owner Returns After Activation
+
+The specification explicitly allows the owner to:
+
+· Disable the Inheritance Key
+
+· Reconfigure the delay period
+
+· Replace the Inheritance Key entirely
+
+No irreversible state is created – even after activation.
+
+## 11. Rationale for Updating last_owner_activity_timestamp Only on Owner-Signed State-Changing Transactions
+
+Updating the timestamp on any transaction (including receiving assets) would cause trivial activities to reset the inheritance timer indefinitely, defeating the purpose of inheritance. Only actions that require the owner's explicit cryptographic signature and alter on-chain state represent meaningful "proof of life" from the owner's key. Receiving assets is a passive event and does not demonstrate owner awareness or intent.
+
+
 # Motivation
 
 In current blockchain architectures, ownership and access to assets are entirely dependent on possession of a private key or Seed Phrase.
