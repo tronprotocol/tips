@@ -41,8 +41,8 @@ Configuration, activation, deactivation, and replacement of the Inheritance Key 
 Transactions executed through an active Inheritance Key remain subject to TRON's normal bandwidth, energy, and fee rules.
 
 Beyond inheritance scenarios, this mechanism can also function as a secure recovery path for account owners in situations such as loss of private keys, loss of seed phrases, cognitive impairment, long-term incapacity, or other events that prevent access to the primary account credentials.
-
-
+___
+___
 # Rationale
 
 Designing a native inheritance mechanism at the protocol level, rather than relying on smart contracts or off-chain solutions, is the result of a deliberate trade-off analysis between security, usability, decentralization, and prevention of irreversible asset loss.
@@ -230,8 +230,8 @@ A distinction must be made between inheritance configuration and transaction exe
 · However, any transaction submitted through an active Inheritance Key consumes normal TRON resources, including bandwidth, energy, and applicable transaction fees, exactly as any other Active Permission transaction.
 
 This distinction is important: the inheritance mechanism itself introduces no additional operational cost, while all on-chain actions performed through the Inheritance Key continue to follow TRON's standard resource and fee model.
-
-
+___
+___
 # Motivation
 
 In current blockchain architectures, ownership and access to assets are entirely dependent on possession of a private key or Seed Phrase.
@@ -258,8 +258,8 @@ Therefore, the network requires a native protocol-level solution that:
 . Prevents irreversible loss of assets
 . Avoids legal complexity, technical fragility, and poor user experience
 . Does not rely on smart contracts or trust in third parties
-
-
+___
+___
 # Specification
 
 ## Account Roles
@@ -342,8 +342,8 @@ Once activated, the Inheritance Key is authorized to perform any operation permi
 · Change its own inheritance state, delay configuration, activation status, or replacement settings
 
 All inheritance-related configuration operations remain exclusively under the control of the Owner Key.
-
-
+___
+___
 # Threat Model
 
 Overview
@@ -586,8 +586,8 @@ The security model intentionally guarantees:
 - No irreversible account state transitions.
 
 The mechanism therefore provides a protocol-level recovery and inheritance primitive while preserving TRON's existing security assumptions.
-
-
+___
+___
 # Security Considerations
 
 There is no shared material between the Owner Key and the Inheritance Key or their Seed Phrases
