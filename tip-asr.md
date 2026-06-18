@@ -10,25 +10,24 @@ created: 2026-05-02
 requires:
 replaces:
 ---
-
 ASR – Adaptive Secure Recovery
 Adaptive Secure Recovery Standard for Cryptocurrency Accounts
-
-
+___
+___
 # Introduction
 
 One of the most significant challenges in the cryptocurrency ecosystem is the secure storage of Seed Phrases. Standard protocols like BIP-39, despite their simplicity and widespread adoption, lack any independent cryptographic layer or active defense mechanisms.
 Consequently, if the seed phrase is compromised, the user’s entire assets become accessible and transferable without any security barriers. In this context, the ASR standard is introduced to eliminate this fundamental weakness.
-
-
+___
+___
 # Rationale
 
 ASR is a standard that ensures the user’s digital currency account assets are not at risk, even if the recovery data is lost or stolen.
 This is because the recovery process in ASR, in addition to a numerical variable, depends on a private keyword variable. This variable is stored in the user’s memory or in a separate location from the numerical variable and acts as the key for recovery. It consists of only 12 English letters, which are easy to remember or can be stored separately from the numerical variable to ensure that even if the numerical recovery data is fully exposed, recovery without the keyword is practically impossible.
 
 ASR is not a static recovery mechanism; rather, it is a network-dependent, account-state-dependent, and Core security policy-dependent recovery system. This design transforms asset recovery from a single point of failure into a multi-stage, auditable, and adaptive attack-resistant process.
-
-
+___
+___
 # Overall ASR Architecture
 ASR consists of three main components:
 
@@ -380,8 +379,8 @@ This dependency is not an ownership control mechanism, but a network‑centric s
 · First block of 3 unsuccessful attempts → Apply a 24-hour restriction.
 · Each subsequent block of 3 unsuccessful attempts → Apply a time restriction double the previous one (e.g., 24h → 48h → 96h → ...).
 · Mandatory: When a restriction is applied, a countdown timer must be displayed to the user, indicating the remaining waiting time.
-
-
+___
+___
 # Delayed Account Activation Option
 
 When viewing recovery data, the user can enable the Delayed Account Activation option (disabled by default).  
@@ -389,17 +388,19 @@ The user can select a delay period from 1 to 94 days and register it with the ow
 
 If this option is enabled, whenever a **Network Recovery Authorization (NRA)** is issued by the network and account recovery succeeds, the newly recovered account will remain inactive until the end of the delay period.
 
-**Displaying Recovered Devices with a Single RCID and the Ability to Terminate Previous Sessions:**
-- It should be possible to view active and inactive devices associated with an RCID, as well as to terminate previous sessions for ASR accounts.
-- **Limitation for newly recovered accounts:** A newly recovered account will not be able to terminate previous sessions for 30 days after activation.
+### Displaying Recovered Devices with a Single RCID and the Ability to Terminate Previous Sessions:
 
-**Status during the delay period:**  
+- It should be possible to view active and inactive devices associated with an RCID, as well as to terminate previous sessions for ASR accounts.
+- Limitation for newly recovered accounts:
+A newly recovered account will not be able to terminate previous sessions for 30 days after activation.
+
+### Status during the delay period:
 - Assets are view‑only.  
 - No signed operations by the owner are permitted before the delay ends.  
 - A countdown timer shows the remaining time to the user.  
 - Notifications are sent to previously active wallets.
 
-**Security note:**  
+### Security note:
 If the owner still has access to a previously active wallet, they can, upon detecting suspicious activity or a potential attack, stop the new account activation process before the delay ends by providing a valid signature.
 
 ### Definition of “Owner Activity”
@@ -524,8 +525,8 @@ ASR is a Secure Recovery Standard that:
 transforms the recovery layer from a single point of failure into a multi-stage, network-dependent process.
 
 This precise positioning introduces ASR as an independent, complementary layer in cryptographic wallet architecture, not a replacement for key generation standards.
-
-
+___
+___
 # Absolute Prohibition of Offline Recovery in ASR
 
 Unlike BIP-39, where recovery is completely offline, ASR is fundamentally designed to be network‑dependent.
@@ -536,8 +537,8 @@ The output of all ASR components is only an intermediate recovery value.
 Full recovery is conditional upon receiving a Network Recovery Authorization (NRA) from the Core network.
 
 In the absence of NRA, recovery is engineering‑wise impossible.
-
-
+___
+___
 # Threat Model
 The ASR standard is designed to protect the account recovery process against threats related to the disclosure of recovery data, and not to counter full compromise of the user's execution environment.
 
@@ -560,8 +561,8 @@ The ASR standard is designed to protect the account recovery process against thr
 · Compromise of operating system, firmware, or runtime
 · Attacks based on full device control at the time of owner signing
 · Non‑cryptographic attacks such as physical coercion or in‑person social engineering
-
-
+___
+___
 # Why ASR Is a Recovery Alternative to BIP-39 (Design Rationale)
 
 BIP-39 is a Seed generation standard that makes recovery dependent on full knowledge of the Mnemonic.
@@ -584,8 +585,8 @@ The key differences are:
     In ASR, the network is part of the recovery security model.
 
 As a result, ASR enhances security not by replacing basic cryptography, but by completely redesigning the concept of digital asset recovery.
-
-
+___
+___
 # Summary
 ASR is not a recovery phrase; it is a security‑oriented, network‑dependent recovery system.
 
