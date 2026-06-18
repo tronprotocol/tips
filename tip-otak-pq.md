@@ -26,8 +26,8 @@ A key that is derived from one of the account’s Access Keys according to the T
 
 . This feature significantly reduces Tron’s exposure to threats based on key recovery from the history of recorded signatures on the network.
 Because even if an attacker breaks the signature of a child key transaction, they will not gain access to the account’s assets controlled by the Access keys.
-
-
+___
+___
 # Security features of an account before its first outgoing transaction
 
 When a new account is created on the Tron network, until the first on-chain signature is published, its exposure to certain threat scenarios based on quantum computing is significantly reduced, subject to the following factors:
@@ -73,8 +73,8 @@ Since that key has already been deactivated:
 . The security of other child keys is not affected.
 . It does not alone provide enough information for the attacker to recover the account’s Access Keys.
 Consequently, the OTAK-PQ architecture limits the impact of any possible security incident to a single child key and prevents its spread to other components of the account.
-
-
+___
+___
 # Abstract:
 
 Shor’s algorithm in quantum computing has the ability to solve the discrete logarithm problem and thus can theoretically threaten security based on elliptic curves (ECC/ECDSA). In the current Tron architecture, transaction signatures are permanently recorded on the blockchain, which can increase the cryptographic attack surface in the long term.
@@ -133,8 +133,8 @@ Although all these keys are derived from a common root, from a cryptographic and
 
 Each child key has its own independent public and private key and is used only to perform a single transaction.
 After the transaction is successfully processed by network nodes, the child key is recorded as Consumed in the network State and becomes permanently operationally invalid.
-
-
+___
+___
 # Motivation
 
 ### In the current Tron architecture:
@@ -152,8 +152,8 @@ After the transaction is successfully processed by network nodes, the child key 
 . The validity of each child key is verified through the Merkle Proof and the Merkle Root stored in the network State.
 . After the first successful use, the child key is permanently marked as consumed.
 . If the private key of a child key is recovered or broken from its recorded signature, the attacker will only gain access to that consumed key, and because it is deactivated after use, there is no valid way to access assets controlled by the Access Keys or other child keys.
-
-
+___
+___
 # Brief overview of all existing solutions for facing the quantum threat
 
 ### 1. Changing the signature algorithm to Post-Quantum (e.g., ML-DSA)
@@ -180,8 +180,8 @@ Disadvantages:
 . Requires storing the Merkle Root and validating Merkle Proofs at the network protocol level.
 . Requires maintaining the consumed status of child keys in the network State.
 . Increased implementation complexity compared to the traditional model of direct signing with Access Keys.
-
-
+___
+___
 # Goal of this proposal
 
 This proposal changes the transaction signature generation and validation process on the network as follows:
@@ -205,8 +205,8 @@ Consequently, even if an attacker in the future can analyze a transaction signat
 . The relationship between the child key and the Access Keys according to the TRC-102 standard is a one-way function; therefore, recovering Access Keys from a child key is not possible.
 . The data used to prove initial account ownership during the Bootstrap process is not part of the account’s operational history; only the final validation result is stored in the network State.
 . Each child key, past or future, is cryptographically independent of other child keys, and compromising one child key has no impact on the security of the Access Keys or other child keys.
-
-
+___
+___
 # Secure Bootstrap Protocol
 
 ## Necessity
@@ -337,8 +337,8 @@ In the OTAK-PQ architecture, after the Bootstrap process is complete, all signat
 . Compromise of one child key has no impact on the security of the Access Keys or other child keys.
 . The impact of any possible attack is limited to a single transaction.
 . The account receives the full OTAK-PQ security structure before entering the network’s economic cycle.
-
-
+___
+___
 # OTAK-PQ architecture
 
 ### 1. Fundamental principle of the architecture
@@ -484,8 +484,8 @@ As a result:
 Therefore, no pruning or archival mechanisms are needed for consumed child keys.
 
 This sequential index model also naturally prevents replay attacks, because any transaction referencing a previously used child key will be rejected during validation.
-
-
+___
+___
 # Threat Model
 
 The core security principles of OTAK-PQ are designed to prevent the exposure of Access Key signatures on the blockchain, thereby limiting the impact of any attack to signatures that are publicly visible.
@@ -590,8 +590,8 @@ Adopting OTAK-PQ as a security solution results in:
 · Reduced exposure level
 · Maintaining network performance without noticeable degradation
 ·  account structures for future migration
-
-
+___
+___
 # Easy migration with OTAK-PQ
 
 In current blockchain architectures, the account identity, public key, and signature algorithm are directly dependent on each other. This dependency makes migrating from current signature algorithms like ECDSA to Post-Quantum algorithms such as:
@@ -673,8 +673,8 @@ This approach can:
 . Reduce the direct dependency of an account on a single signature algorithm.
 . Simplify the gradual migration path.
 . Allow the network to adapt to future algorithms with minimal changes to the core structure.
-
-
+___
+___
 # Method for migrating existing accounts to OTAK-PQ after full network deployment
 
 For users who have an active account and a history of outgoing transactions before OTAK-PQ activation, several migration paths with different levels of risk reduction can be defined.
