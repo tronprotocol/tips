@@ -1,4 +1,3 @@
-# TRON Improvement Proposals (TIPs)
 
 TRON Improvement Proposals (TIPs) describe standards for the TRON platform, including core protocol specifications, client APIs, and contract standards.
 

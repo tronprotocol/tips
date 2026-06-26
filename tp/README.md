@@ -1,25 +1,55 @@
-## What is a TP?
-A TRON protocol (TP) is a design document describing a particular protocol,
-standard, or feature which is already implemented in TRON but not published as a TIP.
-A TP should list the properties of the standard, explain the design rationale, and
-provide a concise but comprehensive technical specification that can guide developers to implement it conveniently with any other languages.
-A TP should not be used for indicating a specific implementation(such as java-tron) or debating governance proposals.
+TIP: Native Username System for TRON Accounts
 
-## Components
-A TP and TIP have similar components, which include a header, a concise summary, an abstract, the motivation, the specification, the rationale, the implementation and a copyright notice. TP is an implemented protocol, so the implementation module can include a core code of java-tron.
-All top-level sections are required.
-References should be included inline as links or tabulated at the bottom of the section if necessary.
+Abstract
+This proposal introduces a native username system for TRON blockchain accounts. Each account may register a unique human-readable username, reducing the risk of misdirected transactions caused by complex alphanumeric addresses. The system will be implemented at the protocol level to ensure universality across wallets, exchanges, and dApps.
 
-## Formatting
-### General
-TP specifications must be written in GitHub Flavoured Markdown.
+Motivation
+One of the main usability issues in blockchain networks is the reliance on long, complex addresses (e.g., TXY9uZs...). Sending assets to an incorrect address due to copy-paste errors or mistyped characters can result in permanent loss of funds.
 
-### Language
-TP specifications should be written in simple English, avoiding obscure terminologies and unnecessary jargons.
-The keywords “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL NOT”, “SHOULD”, “SHOULD NOT”, “RECOMMENDED”, “MAY”, and “OPTIONAL” in specifications are to be interpreted as described in [RFC 2119](https://tools.ietf.org/html/rfc2119).
-### Pseudocode
-Pseudocode in specifications should be language-agnostic and formatted in a simple standard, with line numbers, variables, simple conditional blocks, for loops, and
-the English fragments are necessary to explain further functionality.
-## Copyright
-All content herein is licensed under [Apache2.0](https://www.apache.org/licenses/LICENSE-2.0).
+By allowing TRON users to register a unique username, the network becomes more user-friendly, more secure, and more attractive to both individuals and businesses. Similar systems have proven successful in Web2 (social usernames, email handles) and in Web3 (ENS, etc.), but TRON lacks a native, protocol-level solution.
 
+Specification
+
+Username Registration
+- Each TRON account may register a single unique username.
+- Usernames are case-insensitive and must be unique across the network.
+- Once registered, a username cannot be deleted.
+
+Change Policy
+- A registered username may only be changed once per year.
+- This balances flexibility with protection against abuse and impersonation.
+
+Length and Availability Rules
+- 8 characters or more: open to individuals. These usernames are non-tradable and permanently bound to the account.
+- 7 characters or fewer: reserved for companies, institutions, and brands. These usernames may be transferable and can be reserved officially via TRON DAO.
+
+Corporate Reservations
+- Companies and verified organizations can reserve short usernames (≤7 characters).
+- TRON DAO manages the reservation process.
+- Payments may be made in installments over 1 year, making it accessible to both startups and enterprises.
+
+Protocol-Level Integration
+- Username mapping will be implemented natively within the TRON blockchain, not as an external contract.
+- Wallets, exchanges, and dApps must display both the username and the underlying TRON address when making transfers.
+- **When a user pastes an address, the system should automatically fetch and display the associated username before confirming the transaction. This ensures the sender can visually verify the recipient and avoid mistakes.**
+
+Rationale
+- Security: Reduces misdirected transfers caused by complex addresses. The auto-display of usernames when pasting addresses adds a crucial verification step.
+- Adoption: Simplifies user onboarding and encourages mainstream adoption.
+- Brand Protection: Companies can secure official usernames, preventing fraud and phishing.
+- Governance: TRON DAO manages corporate reservations, ensuring fairness and transparency.
+
+Governance
+- TRON DAO will oversee and govern the allocation of corporate usernames (≤7 characters).
+- Community voting may be used to decide pricing models, installment options, and dispute resolution.
+- Individuals’ usernames (≥8 characters) remain fully decentralized and non-transferable.
+
+Backward Compatibility
+- No changes to existing TRON addresses.
+- Addresses remain the core identifier at the protocol level.
+- Usernames act as a human-readable overlay.
+
+Implementation
+- Requires protocol-level update to support account-to-username mapping.
+- Wallets, exchanges, and dApps will need to implement display and search functionality for usernames.
+- **Transaction interfaces must resolve addresses to usernames in real time, ensuring users see both before approving transfers.**
