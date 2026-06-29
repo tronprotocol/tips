@@ -484,6 +484,85 @@ As a result:
 Therefore, no pruning or archival mechanisms are needed for consumed child keys.
 
 This sequential index model also naturally prevents replay attacks, because any transaction referencing a previously used child key will be rejected during validation.
+
+### 10. Rotation Window
+
+
+Purpose
+
+To ensure uninterrupted long-term account operation and eliminate the possibility of exhausting an active Merkle Tree, OTAK-PQ introduces a Rotation Window.
+
+A Rotation Window is a reserved range of Child Keys located at the end of every active Merkle Tree. Child Keys within this window MUST NOT be used for ordinary account transactions and are reserved exclusively for Merkle Tree Rotation.
+
+The size of the Rotation Window is protocol-defined or implementation-dependent. For example, an implementation MAY reserve the final 5% of Child Keys for this purpose.
+
+
+Rotation Procedure
+
+Wallet software SHOULD continuously monitor the remaining number of available Child Keys.
+
+
+When the active Merkle Tree enters the Rotation Window, the wallet SHOULD automatically:
+
+· Deterministically generate a new set of Child Keys according to the TRC-102 standard.
+· Build a new Merkle Tree.
+· Compute the corresponding Merkle Root.
+· Create and submit a Merkle Tree Rotation transaction using a valid unused Child Key belonging to the Rotation Window.
+
+This process is intended to occur automatically without requiring user intervention.
+
+Wallet implementations MAY notify the user after a successful Merkle Tree Rotation, but user confirmation is NOT required for the protocol-defined rotation process.
+
+
+Rotation Validation
+
+Upon receiving a Merkle Tree Rotation transaction, network nodes MUST verify that:
+
+· The transaction signature is valid.
+· The signing Child Key belongs to the currently active Merkle Tree.
+· The provided Merkle Proof is valid.
+· The Child Key belongs to the Rotation Window.
+· The Child Key has not been previously consumed.
+· The submitted rotation request satisfies all protocol validation rules.
+
+Network nodes MUST reject any ordinary transaction signed by a Child Key belonging to the Rotation Window.
+
+
+After successful confirmation:
+
+· The stored merkle_root is replaced with the new Merkle Root.
+· last_used_child_index is reset to zero.
+· The new Merkle Tree becomes the active tree.
+· The previous Merkle Tree is permanently deactivated.
+· Any remaining unused Child Keys belonging to the previous Merkle Tree become permanently invalid.
+
+Transactions signed by Child Keys belonging to any previously deactivated Merkle Tree MUST be rejected.
+
+
+Recovery
+
+Because both Access Keys and all Merkle Trees are deterministically derived from the user's master Seed according to the TRC-102 standard, no additional backup material is required.
+
+During account recovery, the wallet regenerates the currently active Merkle Tree from the master Seed and synchronizes its operational state using the merkle_root and last_used_child_index stored in the network State.
+
+
+Security Properties
+
+The Rotation Window preserves the core OTAK-PQ security model while enabling unlimited long-term account operation.
+
+
+Specifically:
+
+· Access Keys never participate in signing on-chain transactions.
+· No Access Key signature is ever exposed during the rotation process.
+· Account ownership remains unchanged.
+· Unlimited Child Key generation is supported through successive Merkle Tree Rotations.
+· The per-account State size remains constant regardless of the number of rotations performed.
+· Merkle Tree replacement is authorized exclusively by valid one-time Child Keys.
+
+By reserving a Rotation Window at the protocol level, OTAK-PQ guarantees that Merkle Tree replacement is enforced by the protocol itself rather than relying solely on wallet implementation behavior.
+
+Consequently, an active Merkle Tree can never become fully exhausted while still retaining sufficient authorization capacity to securely activate its successor.
 ___
 ___
 # Threat Model
