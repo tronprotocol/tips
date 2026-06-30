@@ -565,6 +565,17 @@ By reserving a Rotation Window at the protocol level, OTAK-PQ guarantees that Me
 Consequently, an active Merkle Tree can never become fully exhausted while still retaining sufficient authorization capacity to securely activate its successor.
 ___
 ___
+# A Distinct Approach to Quantum Threats
+
+Post-Quantum signature algorithms (such as ML-DSA) aim to resist quantum attacks by making the underlying cryptography harder — increasing signature sizes and verification costs. OTAK-PQ takes a fundamentally different approach.
+
+ Rather than strengthening the signature algorithm itself, it eliminates the primary long-term attack surface by ensuring that Access Keys, which control account assets, never publish a signature on the blockchain.
+
+ In other words, post-quantum signatures address quantum threats by hardening cryptography, whereas OTAK-PQ addresses them by eliminating long-term signature exposure.
+
+ This architectural separation helps protect against known quantum attacks, such as Shor's algorithm, while also reducing exposure to future cryptanalytic advances, without requiring any change to the underlying transaction signature algorithm.
+___
+___
 # Threat Model
 
 The core security principles of OTAK-PQ are designed to prevent the exposure of Access Key signatures on the blockchain, thereby limiting the impact of any attack to signatures that are publicly visible.
