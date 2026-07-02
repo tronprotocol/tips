@@ -328,7 +328,7 @@ To support OTAK-PQ, the following protocol-level changes are required:
 
 . Add mechanism for consumption and permanent deactivation of child keys after first successful use.
 
-. Prevent Bootstrap Pending accounts from receiving assets until Bootstrap completes successfully.
+. Reject transfers to Bootstrap Pending accounts during transaction validation, treating them as failed transactions until Bootstrap completes successfully.
 
 . Enforce a protocol restriction that, after Bootstrap completes, direct signing of operational account transactions by Access Keys is disallowed.
 
