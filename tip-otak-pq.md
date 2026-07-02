@@ -217,8 +217,9 @@ ___
 ## Account states in OTAK-PQ
 
 OTAK-PQ accounts can be in one of two states:
-Bootstrap Pending
-Active
+
+1. Bootstrap Pending
+2. Active
 
 ### Stage One: Creating the account security structure
 The wallet, locally and offline:
