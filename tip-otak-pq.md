@@ -249,21 +249,27 @@ Only the validation result is stored in the permanent network State; the tempora
 
 ## Restriction for accounts in Bootstrap Pending state
 
-In the inactive state, account Access Keys are only permitted to send a bootstrap request transaction to the network.
+In the Bootstrap Pending state, Access Keys are permitted only to submit the Bootstrap Request required to activate the account.
 
-. Wallets are not allowed to display the account number to users before the account is activated.
+. Wallets SHOULD NOT expose the account address for operational use before the account has been successfully activated.
 
-. A newly created account remains in the Bootstrap Pending state from the beginning to the end of the activation process.
+. A newly created account remains in the Bootstrap Pending state until the Bootstrap process completes successfully.
 
-. Accounts will not enter the network operational cycle until the Bootstrap process completes successfully.
+. An account in the Bootstrap Pending state MUST NOT participate in the network's economic activity.
 
-In the Bootstrap Pending state:
-. The Merkle Root is not yet finally recorded.
-. The initial ownership proof process is not yet complete.
-. OTAK-PQ rules are not yet active.
-. The account is not allowed to receive or send assets.
-. If assets are sent to an account in the Bootstrap Pending state, the transaction is recorded as a pending transfer, and the assets cannot be used until the Bootstrap process completes successfully. After the account is activated, the assets are added to the destination account’s balance. If Bootstrap is not completed within the time period specified by the protocol, the status of these assets will be determined according to network rules.
-This restriction ensures that no account has a balance or economic activity on the network before completing the OTAK-PQ security process.
+Before Bootstrap completion:
+
+. The Merkle Root has not yet been permanently recorded.
+
+. The initial ownership verification has not yet been completed.
+
+. OTAK-PQ validation rules are not yet active.
+
+. The account MUST NOT send or receive assets.
+
+. If a transfer is submitted to an account that is still in the Bootstrap Pending state, network nodes MUST reject the transaction because the destination account is not yet active. The transaction is treated as a failed transaction according to the normal network validation rules, and no assets are transferred.
+
+This rule guarantees that an account cannot participate in the network economy until its OTAK-PQ security structure has been successfully established.
 
 ## Account activation
 
