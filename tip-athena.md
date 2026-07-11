@@ -1,0 +1,904 @@
+---
+tip: XXXX
+title: ATHENA: Admission and Transaction Handling for Efficient Network Architecture
+author: Ali (@alichatme)
+status: Draft
+type: Standards Track
+category: Core
+created: 2026-07-11
+discussions-to: https://github.com/tronprotocol/tips/issues/905
+---
+# ATHENA
+
+### Admission and Transaction Handling for Efficient Network Architecture
+
+### Smarter Admission. Fairer Scheduling. Greater Scalability.
+
+___
+___
+# Introduction
+
+Blockchain networks have made significant progress in security, decentralization, reliability, and practical applications in recent years. Nevertheless, with the increasing number of users and the global expansion of this technology, throughput and scalability remain among the most important challenges facing these networks.
+
+In most blockchain networks, processing capacity is not solely dependent on hardware resources; rather, the distribution of load, transaction scheduling, utilization of validator capacity, and management of transaction inflow also play a determining role in the network's final performance.
+
+In recent years, various approaches have been introduced to increase processing capacity, including block size expansion, consensus algorithm optimization, Layer 2 solutions, Rollups, Sidechains, and Sharding. Each of these approaches, while potentially effective in specific circumstances, typically require changes to one or more fundamental components of the network, including the consensus algorithm, ledger structure, state management model, or transaction execution architecture.
+
+### ATHENA has been designed with a different approach.
+
+The primary goal of ATHENA is to increase the operational efficiency of the network through intelligent admission management, dynamic scheduling, and distribution of independent transactions among processing groups. These groups are formed as a result of ATHENA's dynamic selection of nodes for processing a transaction and organizing them into a group, without requiring changes to the consensus algorithm, global ledger partitioning, asset ownership model, or network validation rules.
+
+In this architecture, ATHENA creates an independent layer prior to the transaction entering the consensus process, responsible for managing Admission Requests, scheduling transaction execution, dynamic node selection and the resulting formation of processing groups, issuing Execution Permits, and monitoring the correct implementation of these policies.
+
+Validators continue to operate according to the native rules of each network, and the consensus process remains completely unchanged. ATHENA does not interfere in the validation process, block production, or transaction finalization; it only determines when and by which nodes each transaction request enters the consensus process.
+
+Consequently, ATHENA seeks to utilize existing network capacity more effectively without increasing the inherent costs of consensus. Given sufficient processing resources, it can increase the effective operational capacity of the network through dynamic scheduling and distribution of independent transactions among processing groups that are formed through ATHENA's real-time dynamic node selection, while maintaining full compatibility with the base architecture, consensus algorithm, and global ledger of the network.
+___
+___
+# Economic Impact and Incentive Model
+
+### 1. The Challenge of Traditional Networks
+
+In many traditional digital currency networks, increasing the number of nodes beyond a certain threshold not only fails to increase the network's processing capacity but may gradually become an economic challenge. Competition among networks to attract more nodes can in practice lead to increased transaction fees, as the operational costs of nodes become difficult to compensate if each node's share of network revenue decreases.
+
+In such a structure, increasing the number of nodes means dividing the revenue from fees among a larger number of participants, while the network's processing capacity remains approximately constant. As a result, the economic return of each node decreases, and in the long term, this may reduce the incentive for participation and investment in network infrastructure.
+
+On the other hand, the fixed processing capacity leads to long queues for transaction confirmation during periods of increased demand. Some networks have implemented fee-based prioritization mechanisms to manage this situation, allowing users to pay higher fees to have their transactions processed faster. While this method may reduce the confirmation time for some transactions, it does not fundamentally increase the network's processing capacity.
+
+### 2. ATHENA's Solution: Turning Threat into Opportunity
+
+ATHENA architecture examines this equation from a different perspective.
+
+Instead of new nodes simply competing for a fixed volume of processing, ATHENA seeks to utilize additional processing capacity to create parallel processing paths.
+
+In this architecture, with the addition of new nodes, more parallel node groups are formed for transaction validation. This can increase the processing capacity for independent incoming transactions and enable the network to accept a larger number of transactions.
+
+Under such conditions, increasing the transaction inflow capacity can lead to increased network activity, increased volume of processed transactions, and consequently increased total network revenue. This feature creates an appropriate economic incentive for new nodes to participate.
+
+For this reason, ATHENA views the increase in the number of nodes not merely as an additional cost, but as a capacity for growth in operational throughput, economic development, and network expansion.
+
+### 3. Positive Economic Feedback Loop
+
+One of the most important features of ATHENA is the potential for forming a positive economic feedback loop:
+
+. With the addition of new processing nodes and their dynamic grouping, ATHENA organizes new nodes into new execution groups.
+
+. Given sufficient demand for transaction inflow to the network, the parallel processing capacity of the network increases with the entry of new nodes.
+
+. Increased transaction inflow can lead to an increased number of processed transactions and consequently increased total network revenue.
+
+. Increased network revenue creates greater incentive for investment and the joining of new nodes, and this cycle repeats.
+
+This cycle will remain stable only when the growth in processing capacity is accompanied by real growth in the demand for transaction inflow to the network.
+
+### 4. Illustrative Example
+
+To clarify the matter, a numerical example is provided. This example is solely intended to demonstrate the theoretical potential of the ATHENA architecture and should not be interpreted as a guarantee of actual performance.
+
+Assume a network has 10,000 processing nodes and an approximate capacity of 1,000 transactions per second (TPS).
+
+Now assume the number of network nodes increases to 20,000.
+
+In traditional architectures:
+
+· Revenue from fees is divided among a larger number of nodes.
+· Processing capacity remains approximately unchanged.
+· Coordination costs and network overhead increase.
+· As a result, without a proportional increase in processing capacity, the economic return of each node decreases.
+
+Now assume the same network uses the ATHENA architecture and the network protocol allows each execution group to consist of at least 200 nodes.
+
+In this case:
+20,000 ÷ 200 = 100 execution groups
+
+In this hypothetical example, if the host protocol, network infrastructure, hardware resources, and transaction inflow demand all support this level of parallel processing, the effective processing capacity of the network could theoretically increase to approximately 100,000 transactions per second—about 100 times the initial capacity.
+
+An important economic difference also emerges.
+
+In traditional networks, total revenue is divided among all nodes; however, in the ATHENA architecture, because each transaction is sent to smaller groups of nodes, the revenue from validating that transaction is also distributed among the members of that same group according to network rules, rather than among all network nodes.
+
+In this hypothetical scenario, if the volume of incoming transactions also increases in proportion to the new parallel processing capacity resulting from node grouping, the distributable revenue within each group could be significantly higher than in traditional architectures. Consequently, in the ATHENA architecture, each node's revenue could experience substantial growth compared to traditional networks.
+
+This can create a strong economic incentive for new nodes to join. Thus, a sustainable growth cycle is formed among increased transaction inflow to the network, attraction of new nodes, and increased parallel processing capability.
+
+### 5. Scope of Economic Analysis
+
+The analysis presented in this section is conceptual and architectural in nature.
+
+The calculations are based on an ideal scenario and do not account for limitations such as hardware capacity, network latency, consensus overhead, implementation quality, bandwidth, or other operational constraints.
+
+The actual performance of ATHENA depends on multiple factors, including:
+
+· Transaction demand
+· Fee market dynamics
+· Protocol reward mechanisms
+· Node hardware capacity
+· Network bandwidth
+· Consensus algorithm overhead
+· Implementation quality
+· Host protocol policies
+
+Therefore, ATHENA does not guarantee a specific increase in throughput or validator revenue. Rather, it provides an architectural framework that, under favorable conditions, can utilize existing network processing capacity more effectively and facilitate the simultaneous growth of operational throughput, economic efficiency, attraction of new nodes, and increased parallel groups of transaction validators.
+___
+___
+# Architectural Analysis and Processing Capacity Enhancement
+
+The ATHENA architecture is based on the premise that in many blockchain networks, before the actual capacity of the consensus algorithm reaches its limit, limitations in the admission layer, scheduling, and transaction inflow management create long queues, increased wait times, and reduced network efficiency.
+
+In ATHENA, during increased network load, instead of forming long waiting queues, the set of qualified validators can be organized into several independent parallel execution groups for transaction validation, in accordance with the policies and limits predefined by the network protocol.
+
+Through dynamic node selection and organizing them into multiple processing groups, ATHENA distributes incoming transactions among these groups. This is while all groups continue to follow the same consensus rules, shared security model, and a single global ledger.
+
+After the transaction validation process is completed in each processing group, the final results of the parallel validating groups are recorded in the global ledger according to the native mechanism of the network, such that the new state is visible to all network nodes.
+
+Thus, ATHENA, without making any changes to the consensus algorithm, validation rules, or ledger structure, seeks to increase the network's operational capacity in proportion to demand by increasing the number of parallel processing paths.
+
+From an architectural perspective, if the number of qualified validators and network processing resources increases, ATHENA has no inherent limitation for creating more execution groups and can create additional parallel processing paths within the framework of policies and limitations defined by the network protocol.
+
+However, the size of each execution group, the minimum number of validators required in each group, the maximum number of allowed groups, and other operational limitations are all determined by the host network protocol to maintain security, decentralization, and network stability while preventing excessive division of validators that could reduce efficiency or security.
+
+ATHENA does not attempt to increase the theoretical capacity of the consensus algorithm; rather, it improves the operational efficiency of the network through more effective utilization of existing processing capacity and the creation of parallel execution paths.
+___
+___
+# Comparison of ATHENA with Other Scalability Solutions
+
+Increasing scalability is one of the most important research topics in blockchain technology, and numerous solutions have been proposed to achieve this goal. Each of these solutions attempts to increase transaction processing capacity by making changes to the network architecture.
+
+ATHENA has been designed with the same goal, but its approach differs from many conventional solutions. This architecture, without changing the consensus algorithm, global ledger structure, or asset ownership model, seeks to increase the transaction inflow capacity and transaction validation capacity of the host network by creating parallel processing lanes.
+
+### Comparison with Sharding
+
+In Sharding architecture, processing capacity is increased by dividing the state and ledger among several independent shards. Each shard manages a set of validators and a portion of the network state, and as a result, transactions that occur across different shards typically require coordination mechanisms and cross-shard communication.
+
+In contrast, ATHENA does not divide the network state or global ledger. All validators continue to operate on a shared state and a single ledger. In ATHENA, the admission process, scheduling, and assignment of transaction execution are managed through dynamic node selection and organizing them into processing groups.
+
+As a result, ATHENA increases the inflow and validation capacity of the host network through dynamic node selection and the creation of processing groups, without changing the consensus structure.
+
+### Comparison with Layer 2 Solutions
+
+Layer 2 solutions typically reduce the computational load on the network by transferring a significant portion of transaction processing off-chain, recording only the final result on Layer 1.
+
+ATHENA takes a different approach.
+
+In this architecture, transactions continue to be managed within the framework of the main network protocol, with only the entry path, scheduling, and assignment to processing validators being performed intelligently.
+
+With official support from the host protocol, ATHENA can direct transaction requests to Layer 2 execution environments in addition to Layer 1 processing groups. Therefore, ATHENA is neither a replacement for Layer 2 solutions nor in conflict with them; rather, it can serve as a complementary layer for intelligent admission management and transaction scheduling alongside them.
+
+### Comparison with Block Size Scaling
+
+Some networks attempt to process more transactions per block by increasing the block size. While this method can increase network throughput, it typically leads to increased hardware requirements, bandwidth consumption, block propagation time, and pressure on the node synchronization process.
+
+ATHENA does not change the block size and pursues increased processing capacity through intelligent admission management and parallel execution of incoming transactions.
+
+### Comparison with Consensus Algorithm Optimization
+
+Some scalability solutions attempt to increase network processing capacity by changing or replacing the consensus algorithm.
+
+In contrast, ATHENA does not make any changes to the consensus algorithm. All validation, voting, block production, and transaction finalization processes are performed according to the native rules of the host protocol, and ATHENA is solely responsible for admission management, scheduling, and assignment of transaction execution prior to entering the consensus process.
+
+### ATHENA's Architectural Position
+
+From an architectural perspective, ATHENA can be viewed as an admission and scheduling layer within Layer 1 of the network.
+
+Whereas:
+
+· Sharding increases capacity by dividing state and ledger;
+· Layer 2 increases capacity by transferring processing off-chain;
+· Block size scaling increases capacity by enlarging each block;
+· Consensus algorithm optimization increases capacity by modifying the consensus mechanism;
+
+ATHENA seeks to increase the network's processing capacity through parallelization of transaction validation, without changing any of these fundamental components, by intelligently managing transaction admission and distributing transaction execution among nodes of the same network.
+
+For this reason, ATHENA is designed as a complementary architecture and can be used alongside other scalable technologies, subject to compatibility with the policies and limitations of the host protocol.
+___
+___
+# ATHENA Architecture Diagram
+
+### The following figure provides an overview of the ATHENA architecture and the transaction execution process within this architecture.
+
+The process begins with the wallet sending an Admission Request. This request, depending on the policies and rules of the host protocol, may include information necessary for issuing an execution permit—such as the sender account identifier, receiver account identifier, transaction amount, and other protocol-required information—but the final transaction signature or the complete transaction itself is not sent at this stage. Thus, the wallet merely announces its intent to send a transaction to ATHENA.
+
+After receiving the request, ATHENA examines the current network state, including processing load, number of incoming requests, transactions being processed, validator capacity, and other parameters defined by the host protocol, and issues an Execution Permit.
+
+This permit specifies which validators the transaction should be sent to during its validity period. Simultaneously, the Canonical Copy of the same permit is recorded in the ATHENA system for use during the verification stage.
+
+In the next step, the wallet sends the transaction along with the Execution Permit directly to the validators specified in the permit. From this point onward, ATHENA is no longer in the transaction transmission path and does not receive or send any copy of the transaction.
+
+Prior to beginning the consensus process, each validator is required to verify the received Execution Permit against the Canonical Copy recorded in ATHENA. After the designated validators have successfully verified the permit, the set of validators responsible for executing that transaction is determined, and the consensus process begins according to the native rules of the host protocol.
+
+After consensus is achieved and the transaction reaches Finality, the transaction along with the Execution Permit or its corresponding Cryptographic Commitment is recorded in the network's global ledger to enable auditing, verification, and independent examination of the validator assignment process in the future.
+
+This sequence of steps in ATHENA is designed to prevent transaction storage in the mempool, manage the transaction execution path in a way that reduces exposure of sensitive transaction information before entering the consensus process, and consequently, as a complementary architectural layer, improve admission management and transaction scheduling while reducing the attack surface against mempool-observation-based scenarios, including potential threats arising from advances in quantum computing.
+
+```
+┌─────────────┐
+│   Wallet    │
+└──────┬──────┘
+       │
+       │ 1. Admission Request
+       │    (Lightweight Request)
+       ▼
+┌──────────────────────────┐
+│         ATHENA           │
+│     Admission Layer      │
+└──────┬───────────────────┘
+       │
+       │ 2. Execution Permit
+       │    (Selected Validators)
+       ▼
+┌─────────────┐
+│   Wallet    │
+└──────┬──────┘
+       │
+       │ 3. Transaction
+       │    + Execution Permit
+       ▼
+┌──────────────────────────┐
+│ Validators Selected by   │
+│     Execution Permit     │
+│                          │
+│ Node A   Node B   Node C │
+└──────┬───────────────────┘
+       │
+       │ 4. Native Consensus
+       ▼
+┌──────────────────────────┐
+│  Unified Global Ledger   │
+│ + Cryptographic          │
+│   Commitment (Optional)  │
+└──────────────────────────┘
+            ▲
+            │
+            │ Monitoring &
+            │ Validator Reports
+            │
+┌──────────────────────────┐
+│         ATHENA           │
+│    Monitoring Layer      │
+└──────────────────────────┘
+```
+
+___
+___
+# ATHENA Architecture
+
+ATHENA is an admission, scheduling, and transaction execution routing layer that sits before transactions enter the network's consensus process.
+
+Unlike many scalability solutions, ATHENA does not make any changes to the consensus algorithm, ledger structure, account model, validation rules, asset ownership model, or the network's economic mechanisms. All consensus processes continue to be performed according to the native rules of the host protocol.
+
+ATHENA's responsibility is solely the intelligent management of transaction execution requests, selection of responsible validators, dynamic formation of execution groups, and routing transactions to the most appropriate processing path.
+
+### Fundamental Principle of ATHENA Architecture
+
+One of the most important differences between ATHENA and many existing architectures is that in this architecture, there are no permanent or pre-formed processing groups.
+
+In ATHENA, execution groups are created simultaneously with the issuance of each Execution Permit, based on the current network state, policies defined by the host protocol, validator capacity, and the requirements of that specific request.
+
+In other words, in ATHENA, suitable validators are first selected, and then those same validators form a logical Execution Group for processing that request.
+
+Therefore, processing groups are not architectural inputs but rather the result of ATHENA's decision-making process.
+
+Since this process is performed independently for each request, the composition of validators can change from one request to another, and no validator can predict their permanent presence in a specific group.
+___
+___
+# Transaction Execution Stages in ATHENA
+
+### Stage 1 — Admission Request
+
+The process begins with a request sent by the wallet.
+
+At this stage, the complete transaction has not yet entered the network, and only an execution request is sent to ATHENA.
+
+This request does not include the transaction signature and only contains the minimum information required for decision-making in the admission layer, including the sender account identifier, receiver account identifier, transaction amount, and other essential information that the protocol needs for applying scheduling policies, preventing simultaneous submission of incompatible transactions, identifying spam transactions, and maintaining the Sender Consistency principle.
+
+At this stage, the complete transaction body, digital signature, and other sensitive information have not yet been sent to validators.
+
+### Stage 2 — Execution Permit Issuance
+
+After receiving the request, ATHENA evaluates the current network state according to the host protocol policies.
+
+This evaluation may include factors such as:
+
+· Instantaneous or average network load
+· Number of pending admission requests
+· Number of transactions being processed
+· Average number of finalized transactions in the time period defined by the network protocol
+· Validator status
+· Available processing capacity based on current node grouping
+· Protocol scheduling policies
+· Checking for unconfirmed or pending transactions from the same sender account
+· Other parameters defined by the host protocol
+
+After this evaluation, ATHENA issues an Execution Permit.
+
+The Canonical Copy of this permit is recorded in the ATHENA system, and a copy of the same permit is sent to the wallet.
+
+
+Contents of the Execution Permit:
+
+The Execution Permit provides the wallet with the information necessary for executing the request. This information may include:
+
+· Permit identifier
+· Permit validity period
+· Selected validator identifiers
+· Created execution group identifier
+· Execution policies relevant to the request
+· Other information required by the host protocol
+
+An important point is that in ATHENA, the process of issuing the Execution Permit simultaneously constitutes the formation of the execution group.
+
+In other words, ATHENA first selects suitable validators and then organizes those same validators as a logical execution group for processing that request.
+
+This group is formed solely for that execution path and will not necessarily be repeated in subsequent requests.
+
+### Stage 3 — Transaction Submission by the Wallet
+
+After receiving the Execution Permit, the wallet sends the complete transaction along with the permit to the validators specified in the Execution Permit.
+
+An important point is that in ATHENA, the Execution Permit includes the identifiers of the validators responsible for processing that transaction, not the identifier of a pre-existing processing group. In effect, the validators selected by ATHENA are determined at that moment, and then the execution group for that transaction is formed. Since this selection is made independently for each request, no validator can predict which validators they will be grouped with in subsequent requests.
+
+At this stage, ATHENA does not receive, store, or transmit any copy of the transaction and is solely responsible for issuing the Execution Permit. The transaction is transmitted directly between the wallet and the designated validators; therefore, ATHENA will never become a bottleneck for data transmission or transaction processing.
+
+### Stage 4 — Execution Permit Verification
+
+Before beginning processing, each validator verifies the validity of the Execution Permit against its Canonical Copy.
+
+The method of accessing the Canonical Copy depends on the host protocol implementation and can be centralized, distributed, or through any other scalable mechanism.
+
+Since permit verification is performed by nodes referring to the ATHENA system, ATHENA becomes aware of the initiation of the validation process by the designated validators and can monitor the execution status of each Execution Permit.
+
+After all designated validators have successfully verified the permit, each validator identifies the other members of the same set and, according to the consensus algorithm and rules of the host protocol, this validator group begins the validation and consensus process.
+
+If any of the following conditions occur:
+
+· The wallet does not send the transaction to all designated validators;
+· One of the validators fails to verify the Execution Permit; or
+· The permit expires;
+
+The execution group for that request will not be formed.
+
+In these circumstances, ATHENA can record the unsuccessful execution of the Execution Permit and provide the necessary report to the host protocol for decision-making. The handling of this situation, including issuing a new permit, rejecting the request, or any other action, is entirely according to the rules of that network.
+
+After an Execution Permit is issued, the composition of validators designated for that permit will not change until the permit expires, even if ATHENA simultaneously selects a different set of validators for new requests. This feature ensures the logical ordering of transactions for each account (Sender Consistency) and prevents changes to the transaction execution path mid-process.
+
+### Stage 5 — Consensus Execution
+
+After successful Execution Permit verification, the designated validators enter the transaction validation process exactly according to the network's original consensus algorithm.
+
+ATHENA has no involvement in the consensus process, validation, block production, finalization, or application of network economic rules at this stage. All these operations are performed according to the native mechanism of the host protocol.
+
+To increase transparency, auditability, and prevent any potential collusion, after each transaction is finalized, a Cryptographic Commitment corresponding to the Execution Permit should also be recorded in the global ledger as part of the permanent information of that transaction.
+
+This Cryptographic Commitment may include, depending on the host protocol's design, information such as the Permit ID, hash of the Execution Permit, hash of the set of designated validators, permit signature, or other required reference data. The exact details of this structure are determined by each protocol.
+
+The recording of this Cryptographic Commitment should not lead to the disclosure of confidential information or reduction of user privacy and should only include the minimum information necessary for independent verification.
+
+Recording this cryptographic reference allows any node, auditor, or researcher to independently verify even after Finality:
+
+· Which validators were selected to process that transaction;
+· Whether the execution process was performed according to the Execution Permit; and
+· In the event of abnormal behavior or violation, whether independent verification and security analysis are possible.
+
+This mechanism, without disclosing unnecessary information, increases accountability, auditability, and non-repudiation, forming one of the complementary security layers of the ATHENA architecture.
+
+### Stage 6 — Execution Completion
+
+After the transaction reaches Finality according to the network protocol rules and is recorded in the global ledger, the lifecycle of the Execution Permit is considered complete.
+
+At this stage, ATHENA can record the final execution status of the permit and release the logical resources associated with it. From this moment, the restrictions related to that execution path are lifted, and if a new request is sent from the same account, ATHENA can select a new set of validators, organize them into a group, and issue a new Execution Permit according to the current network state, unless the host protocol has defined a different policy for preserving the execution order of transactions for that account.
+
+### Stage 7 — Validator Behavior Monitoring
+
+During the transaction execution and consensus process, each validator, in addition to performing their primary function, can monitor the behavior of other validators in the same execution set according to protocol rules.
+
+If any abnormal or network-rule-violating behavior is observed, including:
+
+· Non-participation in the consensus process;
+· Sending conflicting messages or responses;
+· Unusual delays;
+· Providing results inconsistent with consensus rules;
+· Or any other behavior defined as malicious by the host protocol;
+
+Validators can send their reports to ATHENA or the network according to each network's protocol.
+
+ATHENA receives these reports as monitoring information and, if suspicious behavior is observed, can temporarily place the relevant validator in a Logical Quarantine List, reporting the violation to the network so that, until a final decision is made according to the host protocol's rules, that validator is not selected for validating future transactions in the issuance of new Execution Permits.
+
+The host protocol can also, upon detecting malicious behavior by a validator, issue a command to place it in ATHENA's quarantine list.
+
+However, ATHENA has no independent authority for permanent quarantine, imposing penalties, permanently removing validators, or lifting quarantine. All final decisions, including imposing penalties, removal, replacement, or reinstatement of validators to the processing cycle, are made exclusively according to the rules and consensus algorithm of the host protocol.
+
+Thus, ATHENA solely serves as a monitoring, reporting, and validator assignment management system and does not make any changes to the network's governance or security mechanisms.
+___
+___
+# Key Architectural Features
+
+The ATHENA architecture is characterized by the following features.
+
+
+### Transaction Admission Evaluation and Spam Mitigation
+
+When sending an Admission Request, the wallet provides ATHENA with the basic information required for evaluating the request, in addition to the information necessary for issuing the Execution Permit.
+
+This information, depending on the host protocol policies, may include:
+
+· Sender account identifier;
+· Receiver account identifier;
+· Transaction amount;
+· Transaction type;
+· Transaction priority or class (if applicable);
+· Other information that the network protocol deems necessary for decision-making.
+
+The purpose of receiving this information is not to verify the economic validity or validation of the transaction, as these tasks remain entirely the responsibility of the main network protocol; rather, ATHENA uses this information solely for applying scheduling policies and admission management.
+
+One important application of this information is to help reduce the impact of attacks based on spam transactions.
+
+In some malicious scenarios, an attacker may divide an asset into a very large number of transactions with tiny amounts and send a massive volume of requests to occupy network processing capacity or artificially increase network load.
+
+ATHENA does not directly decide whether a transaction is spam; however, it can identify unusual behavioral patterns and send the necessary report to the network protocol. These patterns may include:
+
+· A very large number of sequential requests from one account;
+· Repeated sending of transactions with very small amounts;
+· Unusual patterns in transaction submission;
+· Other criteria defined by the host protocol.
+
+If the network protocol identifies an account or a set of transactions as spam or abusive behavior, it can notify ATHENA of this status.
+
+After receiving this notification, ATHENA can, according to the network's policies, select the minimum validator group size defined by the protocol for processing this category of transactions when issuing the Execution Permit.
+
+In other words, in such circumstances, ATHENA attempts to allocate the minimum processing resources permitted by the network protocols to these requests and validate these transactions using the fewest number of nodes by creating processing groups.
+
+This approach provides two important benefits:
+
+· Prevents unnecessary occupation of network processing resources by a high volume of low-value transactions.
+· Reduces the possibility of abusing the scalability mechanism to increase transaction fees by creating artificial load on the network.
+
+It should be emphasized that the criteria for spam detection, minimum and maximum validator group size, application of restrictions, and validity period of these policies are all determined by the host protocol, and ATHENA is merely the executor of these policies in the Execution Permit issuance process.
+
+
+### Dynamic Formation of Execution Groups
+
+In ATHENA, there is no fixed table or pre-determined group for validators.
+
+Each Execution Permit can select a different set of validators for processing the same request.
+
+The composition of these validators is determined dynamically based on factors such as:
+
+· Current network load;
+· Validator processing capacity;
+· Security policies;
+· Geographic distribution of nodes;
+· Protocol rules;
+· Communication quality;
+· Number of transactions processed in the time period defined by the network protocol;
+· Fees allocated to each node in the time period defined by the network protocol;
+· Other policies according to the host network's needs.
+
+As a result:
+
+· Validators cannot predict the composition of future groups.
+· The likelihood of long-term collusion formation is reduced.
+· Processing capacity is adjusted according to the actual network conditions.
+· The network's execution structure remains dynamic at all times.
+
+
+### Dynamic Adaptation to Network Load
+
+Since execution groups are formed when each Execution Permit is issued, ATHENA can adjust the number of validators participating in each execution path for each new request according to the host protocol policies.
+
+Therefore, in conditions of increasing or decreasing network load, there is no need for fixed groups or heavy reconfigurations, because each new permit can be issued with a different structure.
+
+The minimum and maximum number of validators per group, minimum and maximum number of validator groups, and other execution limitations are not part of ATHENA's fixed architecture and are determined and configured by each network's protocol.
+
+
+### Preserving the Order of Transactions for Each Account
+
+If a new request is sent from the same account before a transaction is finalized, ATHENA, according to the Sender Consistency policy, routes that request to the same previous execution path to preserve the logical order of transactions for that account.
+
+This restriction applies only to transactions from the same account.
+
+In contrast, all new requests from other accounts can be directed to different execution groups by ATHENA without any restrictions.
+
+### Bottleneck Analysis
+
+To bring the network's actual performance closer to theoretical capacity, ATHENA also provides a bottleneck monitoring and analysis mechanism.
+
+This mechanism continuously monitors and analyzes the network's operational indicators to identify performance-limiting factors. These indicators include:
+
+· Network load
+· Transaction waiting time
+· Validator performance and participation rate
+· Quality of load distribution among execution groups
+· Transaction processing rate
+· Time to reach Finality
+· Error rate, Timeout, and other related performance indicators
+
+The purpose of this monitoring is to identify potential bottlenecks and provide an accurate picture of the network's operational status.
+
+With network protocol support, the results of these analyses can be used as input for adjusting parameters such as execution group size, scheduling policies, thresholds for increasing or adjusting groups, and other configurable parameters to bring network efficiency as close as possible to its potential capacity.
+
+However, ATHENA does not independently change network policies, and all potential changes are made solely within the framework of rules, policies, and limitations defined by the host network protocol.
+
+
+### Reducing Mempool Exposure and Quantum Attack Surface
+
+In addition to scalability benefits, intelligent load distribution, and increased network efficiency, the ATHENA architecture can also reduce the attack surface of some threats based on early disclosure of transaction information.
+
+In many common blockchain networks, transactions enter a public mempool after leaving the wallet and remain there until selected by validators. During this period, transaction information—including the public key, digital signature, and other data required for validation—is available to all network nodes.
+
+Academic research and reports published by research centers, including Google Quantum AI, have shown that with the advancement of quantum computers and the development of algorithms such as Shor, this time window could become a potential point of attack against systems based on Elliptic Curve Cryptography (ECC) signatures. This scenario, commonly known as an On-Spend Attack or Mempool Attack, assumes that an attacker can use the available information to attempt to recover the private key between the transaction's broadcast and its finalization.
+
+The ATHENA architecture attempts to reduce this attack surface through changes in the transaction admission and scheduling process.
+
+In ATHENA, the complete transaction does not directly enter a public mempool. First, the wallet sends only an execution request to the Admission Layer. After evaluating the network state, ATHENA issues an Execution Permit and specifies the validator group responsible for processing that transaction.
+
+After the permit is issued, the transaction is sent directly to that validator group. As a result, the transaction is not exposed to public observation by all network nodes for an extended period, and the scope of transaction information dissemination is reduced to a limited set of responsible validators.
+
+This approach can reduce the duration and scope of access to transaction information and, consequently, limit the attack surface of some mempool-observation-based scenarios.
+
+Therefore, ATHENA should be considered a complementary architectural layer that, by reducing public exposure of transaction information, shrinking the attack surface, and shortening the exploitable time window, can further strengthen the network's operational security.
+
+
+### Hysteresis Policy Analysis in ATHENA Architecture
+
+In many scalable systems, a Hysteresis policy is used to prevent frequent increases and decreases in processing resources due to short-term network load fluctuations.
+
+In the ATHENA architecture, the process of forming processing groups is approached differently, and therefore does not have an inherent dependency on classic hysteresis mechanisms.
+
+In ATHENA, each transaction request received from a wallet is first examined by the Admission Layer. If accepted, ATHENA issues an Execution Permit.
+
+This permit specifies:
+
+· Which nodes are responsible for processing that transaction;
+· In which processing group the transaction will be executed;
+· The permit's validity period;
+· What execution policies apply to that transaction.
+
+In other words, the process of grouping nodes occurs simultaneously with the issuance of the Execution Permit.
+
+Since each permit is issued independently based on the current network state, ATHENA does not need to wait for periodic reconfigurations or implement classic hysteresis policies to form processing groups. Each transaction can be directed to the most appropriate set of processing nodes according to the conditions at that moment.
+
+However, to prevent the network from reacting to short-term load fluctuations, the host protocol may decide that increasing or decreasing the logical network capacity should only occur after observing stable changes in the network, specifying the time frame and method.
+
+For this purpose, ATHENA supports configurable parameters determined by the network protocol.
+
+Consequently, hysteresis in ATHENA is not an architectural requirement but an optional tool for controlling network capacity fluctuations. Processing group formation continues to be performed dynamically and simultaneously with the issuance of each Execution Permit, while decisions regarding increasing or decreasing overall network capacity can be made based on stabilization policies defined by the host protocol.
+___
+___
+# Compatibility with Validator Architectures and Processing Units
+
+
+### 1. Design Principle
+
+ATHENA makes no assumptions about how processing nodes are organized in the host network. Some networks use independent nodes, while others utilize structures such as Mining Pools, Validator Pools, Staking Pools, or other resource aggregation models.
+
+The ATHENA architecture is designed to effectively utilize existing network processing capacity regardless of these structures. Therefore, the presence of processing pools or independent nodes does not constitute a barrier to using ATHENA.
+
+
+### 2. Independence from Internal Network Structure
+
+ATHENA does not interfere in the formation of processing pools, validator selection, membership rules, economic models, or internal policies of any pool or set of validators.
+
+All these decisions continue to be made according to the host protocol's rules.
+
+ATHENA's role is solely the intelligent management of transaction admission, scheduling, and formation of balanced execution groups.
+
+
+### 3. Processing Capacity Evaluation
+
+To achieve maximum efficiency, ATHENA can calculate a Capability Score for each node or processing unit.
+
+This score can be determined based on criteria such as:
+
+· Processing power (CPU Performance)
+· Memory capacity
+· Network bandwidth and communication quality
+· Communication latency
+· Availability
+· Performance stability
+· History of participation in processing
+· Other definable criteria by the host protocol
+
+The exact method of calculating this score is determined by each network and is not part of ATHENA's mandatory specifications.
+
+This score can also be updated periodically or according to changes in network operational conditions to ensure scheduling decisions are always based on the actual network state.
+
+
+### 4. Balanced Group Formation
+
+After calculating the Capability Score, ATHENA attempts to distribute processing nodes among execution groups so that the total processing capacity of each group is as balanced as possible.
+
+In other words, ATHENA aims to form groups with approximately equal processing capacity, rather than groups consisting solely of strong or solely of weak nodes.
+
+For example, if the network has strong, medium, and weak nodes, ATHENA can combine them so that each group includes a balanced mix of these different levels, and the total processing capacity of the groups remains as close as possible to each other.
+
+The purpose of this policy is to prevent processing bottlenecks, reduce execution time differences between parallel groups, and increase the uniformity of overall network performance.
+
+
+### 5. Compatibility with Processing Pools
+
+In networks that use processing pools or other structures for aggregating validators, ATHENA can consider these structures as processing units in the scheduling process, provided that the host protocol provides such capability.
+
+In this case, ATHENA's primary criterion remains the operational capacity of each processing unit, not its internal organizational type.
+
+With host protocol support, ATHENA can treat a processing pool as a single processing unit or distribute its members among different execution groups like other network nodes. The choice between these approaches depends entirely on the policies and limitations of the host protocol.
+
+Consequently, the existence of Mining Pools, Validator Pools, or similar structures will not prevent the formation of balanced execution groups.
+
+
+### 6. Architectural Neutrality Principle
+
+ATHENA does not prefer any type of node, pool, or set of validators over others, and strives to divide incoming transactions based on fairness and the host network's protocols.
+
+All decisions regarding the formation of execution groups are made solely based on operational capacity, current network state, and policies defined by the host protocol.
+
+As a result, this architecture, independent of the validator organizational type, attempts to use existing processing capacity in the most balanced and efficient manner possible.
+
+This architectural neutrality makes ATHENA a flexible solution that can be used across a wide range of Account Model-based networks and other compatible architectures, without dependence on the internal structure of validators or processing pools.
+___
+___
+# Design Goals
+
+The ATHENA architecture is designed to increase the efficiency of network processing capacity without making changes to the fundamental blockchain architecture. This architecture is based on the following goals.
+
+
+### 1. Dynamic Parallel Execution
+
+The primary goal of ATHENA is to increase the efficiency of network processing capacity through intelligent admission management, scheduling, and dynamic formation of parallel processing groups.
+
+Under normal conditions, all qualified validators can function as a single execution group.
+
+With increased network load, ATHENA can, according to the policies and limitations defined by the host protocol, divide validators into multiple processing groups operating in parallel, and distribute incoming transactions fairly among these groups according to network protocols.
+
+Each validator group is responsible for processing a portion of incoming transactions, and all results, after going through the native consensus process, are recorded in the same global ledger.
+
+In this way, ATHENA, without making changes to the consensus algorithm, seeks to more effectively utilize existing network capacity by increasing the number of parallel validation paths and increase the network's effective validation capacity according to processing resources and protocol-defined policies by creating parallel paths.
+
+
+### 2. Adaptive Scheduling
+
+ATHENA continuously monitors the network's operational state and adjusts its grouping policy according to the actual network conditions.
+
+The purpose of this mechanism is optimal utilization of existing processing capacity, preventing long transaction queues, and maintaining network performance stability under various workload conditions.
+
+To avoid reacting to short-term fluctuations, ATHENA's decisions are based on permits issued to wallets for sending transactions to nodes and the average network load over a configurable observation window.
+
+Although ATHENA has no restrictions on changing processing node groups in real-time, the following values are recommended as default in this proposal.
+
+These values are not fixed and can be configured for ATHENA by each network's protocol:
+
+· If the average network load over 10 consecutive seconds reaches 80% or more of nominal capacity, ATHENA creates new parallel processing groups according to the host protocol's policies and distributes new transactions among them.
+· If the average network load over 10 consecutive seconds decreases to less than 20% of nominal network capacity, ATHENA merges processing groups and, if the load continues to decrease, returns the network to a smaller number of groups or ultimately to a single node group.
+
+The values and time periods in the above example are merely ATHENA's default recommendations; these values are not fixed and can be modified and customized by each network's protocol.
+
+Each network can increase, decrease, or review these parameters in different time periods according to its needs, based on the consensus algorithm, operational characteristics, and its own policies.
+
+
+### 3. Hysteresis Policy
+
+To prevent frequent formation and removal of processing groups due to minor or momentary changes in network load, ATHENA uses a Hysteresis Policy.
+
+In this policy, the threshold for increasing the number of groups can differ from the threshold for decreasing node groups.
+
+By supporting two independent thresholds, ATHENA ensures that the structure of processing groups changes only when stable changes in the network state are observed, preventing continuous fluctuations in node grouping.
+
+This is why ATHENA considers two separate time periods for increasing and decreasing processing groups to prevent consecutive reconfigurations.
+
+The following values are recommended as defaults for preventing fluctuation:
+
+· After changes in the network's validator groups, at least 10 seconds must pass before ATHENA is allowed to increase the number of groups (Scale-Out Interval).
+· After changes in the validator groups, at least 30 seconds must pass before ATHENA is allowed to decrease the number of validator groups (Scale-In Interval).
+
+The above values are merely ATHENA's default values, and each network can modify them according to its architecture, consensus algorithm, network characteristics, and operational policies.
+
+
+### 4. Sender Consistency
+
+To maintain account state consistency, as long as a transaction has not reached Finality, all subsequent transactions from the same account must be processed in the same processing group or validation path determined by ATHENA.
+
+This principle preserves the logical order of transactions for each account and prevents state inconsistencies, interference between dependent transactions, and race conditions.
+
+
+### 5. Dynamic Validator Grouping
+
+Processing groups in ATHENA do not have a fixed structure and can be reorganized in each reconfiguration cycle according to policies defined by the host protocol.
+
+The purposes of this design are:
+
+· Balanced distribution of processing load among groups;
+· Increasing operational flexibility of the network;
+· Reducing the likelihood of forming fixed and predictable structures;
+· Reducing the likelihood of collusion among validators;
+· Increasing network resilience against coordinated malicious behavior.
+
+As a result, no validator can be certain of their permanent presence in a specific processing group, and the composition of groups can change according to the network's operational conditions.
+___
+___
+# Threat Model
+
+
+### 1. Purpose
+
+ATHENA's threat model specifies the security assumptions, scope of responsibility, and types of threats this architecture is designed to address.
+
+ATHENA is an admission, scheduling, and transaction processing assignment management layer and does not replace the consensus algorithm, validation rules, or basic network security mechanisms. Therefore, the ultimate security of the network remains the responsibility of the host protocol.
+
+
+### 2. Security Assumptions
+
+This architecture is based on the following assumptions:
+
+· The network consensus algorithm is correctly implemented.
+· The Finality mechanism is valid.
+· Validators operate according to protocol rules.
+· Cryptographic signatures are valid.
+· Authentication mechanisms and network access permissions are in place.
+
+If any of these assumptions are violated, the responsibility for managing them lies with the host protocol.
+
+
+### 3. Threats Addressed
+
+ATHENA is designed to mitigate or manage the following threats.
+
+
+Congestion Attacks:
+
+Sending a large volume of transactions with the aim of causing congestion and reducing network efficiency.
+
+ATHENA attempts to reduce the impact of these attacks by distributing incoming transactions among validator groups operating in parallel.
+
+
+Oscillation Attacks:
+
+Attempts to create frequent changes in the number or composition of execution groups to increase network management overhead.
+
+If the hysteresis policy is active, continuous changes are controlled. The host protocol can also adjust the parameters of this policy according to network conditions.
+
+
+Malicious Validator Behavior
+
+Examples include:
+
+· Intentional delays
+· Non-responsiveness
+· Sending invalid information
+· Incomplete participation in the validation process
+
+Nodes in the group can monitor these behaviors and send reports to ATHENA and the network protocol. Final decisions regarding imposing restrictions or removing nodes are made according to the host protocol's rules.
+
+
+Attacks Based on Fixed Group Recognition:
+
+In many architectures, fixed validator groups can be targets of coordinated attacks.
+
+In ATHENA, execution groups are formed dynamically, and there are no permanent memberships or pre-formed groups. This feature reduces the likelihood of stable coalitions forming or specific groups being targeted.
+
+
+Mempool-Based Attacks:
+
+In networks with public mempools, transaction information is exposed before entering consensus.
+
+Since ATHENA uses a mempool-free architecture, the attack surface related to public observation of pending transactions is reduced.
+
+### 4. Out-of-Scope Threats
+
+The following are outside ATHENA's scope of responsibility and are managed by the base protocol or network infrastructure:
+
+· Consensus algorithm attacks
+· 51% attacks or similar attacks
+· Cryptographic algorithm failures
+· Theft of user private keys
+· Compromise of user wallets
+· Network layer attacks
+· Physical attacks on node infrastructure
+· Attacks due to operating system or hardware defects
+
+### 5. Separation of Responsibilities Principle
+
+ATHENA is solely responsible for admission management, scheduling, formation of execution groups, issuance of Execution Permits, and monitoring the transaction processing process.
+
+Transaction validation, consensus algorithm execution, block finalization, global ledger management, and ensuring basic network security remain the responsibility of the host protocol.
+
+### 6. Summary
+
+The ATHENA architecture increases the network's operational security by reducing the attack surface at the admission layer, eliminating dependency on the mempool, dynamically forming execution groups, intelligently distributing processing load, and monitoring node behavior, without taking on the responsibility of the consensus algorithm or the network's basic security model.
+___
+___
+# ATHENA Integration with TRON
+
+
+### Purpose
+
+The TRON network currently uses the Delegated Proof of Stake (DPoS) consensus mechanism and the Super Representatives (SRs) model for block production and consensus. In this architecture, Super Representatives are responsible for block production, consensus, and finalization.
+
+ATHENA is not designed to change this mechanism. Rather, it attempts to add an intelligent Admission and Scheduling Layer before the consensus process, without making any changes to the consensus algorithm, block production process, governance model, voting model, or TRON's security structure.
+
+For this reason, ATHENA is considered a complementary architecture for TRON, not a replacement for its current mechanism.
+
+
+### Complete Independence from TRON Consensus
+
+In the TRON-specific version of ATHENA, the DPoS architecture remains completely unchanged.
+
+ATHENA:
+
+· Does not interfere in the Super Representative selection process.
+· Does not change the DPoS consensus algorithm.
+· Has no role in block production.
+· Does not change the Finality process.
+· Preserves the voting and governance model unchanged.
+· Does not change the network's economic rules.
+
+All responsibility for block production and consensus remains exclusively with the Super Representatives.
+
+
+### ATHENA's Role in the TRON Network
+
+The TRON network currently uses the Super Representatives (SRs) model for block production and consensus algorithm execution. In this architecture, only 27 Super Representatives are responsible for block production and transaction finalization.
+
+ATHENA's goal is not to change this mechanism but to increase processing capacity before the consensus stage, without making the slightest change to the consensus algorithm, block production process, or TRON's security model.
+
+According to its architecture, ATHENA increases the network's inflow and transaction validation capacity by forming parallel validator groups and distributing incoming transactions among these groups, while Super Representatives maintain their traditional role in block production and consensus.
+
+### As a result:
+
+· No validator knows in advance which nodes they will cooperate with in the next transaction.
+· Processing group formation is performed completely dynamically.
+· The ability to predict group structure is significantly reduced.
+· The likelihood of long-term collusion among validators is decreased.
+
+
+### Compatibility with TRON's Future Architecture
+
+One of the most important features of ATHENA is its complete independence from the type of cryptographic algorithm used by the network.
+
+The Execution Permit has no direct dependency on the type of digital signature.
+
+Therefore, if TRON migrates to Post-Quantum signatures in the future, as it has planned, the ATHENA architecture will remain usable without any fundamental changes.
+
+This feature makes ATHENA a Crypto-Agile Scheduling Layer—a layer that operates independently of the cryptographic algorithm type and can be used alongside different generations of signature algorithms.
+
+
+### Supporting the Cryptographic Migration Period
+
+One common challenge during migration to new cryptographic algorithms is the period when the network must simultaneously support two signature algorithms.
+
+In such conditions, ATHENA can, according to policies defined by the host protocol, specify when issuing an Execution Permit which set of validators should process each transaction.
+
+For example, the protocol could determine that:
+
+· Some transactions should be processed by validators compatible with the current algorithm.
+· Some transactions should be processed by validators compatible with the post-quantum algorithm.
+· Or, if needed, both sets of validators should participate in the validation process.
+
+This capability can be implemented without changing ATHENA's core architecture and depends only on policies defined by the host protocol.
+
+
+### Reducing Mempool Attack Surface
+
+In many blockchain networks, complete transactions are stored in a public mempool for some time before entering the consensus process.
+
+This can create a time window suitable for some attacks based on transaction observation.
+
+In the ATHENA architecture, only an execution request is initially sent, and after the Execution Permit is issued, the transaction is sent directly to designated validators.
+
+As a result, the duration of complete transaction information being in the public network space is reduced, and the exposure of sensitive information before the consensus process begins is limited.
+
+ATHENA is not a replacement for quantum-resistant cryptographic algorithms, but as a complementary architectural layer, it can reduce the attack surface from public transaction observation.
+
+
+### Increasing Processing Capacity Efficiency
+
+If the TRON protocol desires, ATHENA can utilize the capacity of other network nodes for initial validation, monitoring validator behavior, and intelligent admission management, without imposing additional load on the Super Representatives' consensus process.
+
+In this case, admission and scheduling management tasks are separated from the consensus process, and network processing resources can be used more effectively.
+___
+___
+# Summary
+
+In the TRON-specific version of ATHENA, all core components of the network architecture, including DPoS, Super Representatives, block production process, governance, and security model, remain unchanged.
+
+ATHENA merely adds an intelligent Admission & Scheduling layer to the existing architecture, responsible for managing transaction entry, issuing Execution Permits, dynamically selecting validators, monitoring their behavior, and preparing transactions for entry into the consensus process.
+
+At the same time, ATHENA's independence from cryptographic algorithms, compatibility with future migrations to post-quantum signatures, ability to support cryptographic transition periods, and reduction of transaction exposure before consensus make this architecture a suitable option for the gradual evolution of the TRON network, without requiring a redesign of the consensus infrastructure or changes to the network's fundamental principles.
