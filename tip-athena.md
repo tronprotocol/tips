@@ -28,6 +28,8 @@ In recent years, various approaches have been introduced to increase processing 
 
 The primary goal of ATHENA is to increase the operational efficiency of the network through intelligent admission management, dynamic scheduling, and distribution of independent transactions among processing groups. These groups are formed as a result of ATHENA's dynamic selection of nodes for processing a transaction and organizing them into a group, without requiring changes to the consensus algorithm, global ledger partitioning, asset ownership model, or network validation rules.
 
+ATHENA dynamically creates balanced parallel validator groups and intelligently distributes incoming transactions among them. By enabling concurrent validation of incoming transactions before the consensus stage, ATHENA improves the effective utilization of existing network resources and increases the network's transaction processing capacity without modifying the consensus protocol or the unified global ledger.
+
 In this architecture, ATHENA creates an independent layer prior to the transaction entering the consensus process, responsible for managing Admission Requests, scheduling transaction execution, dynamic node selection and the resulting formation of processing groups, issuing Execution Permits, and monitoring the correct implementation of these policies.
 
 Validators continue to operate according to the native rules of each network, and the consensus process remains completely unchanged. ATHENA does not interfere in the validation process, block production, or transaction finalization; it only determines when and by which nodes each transaction request enters the consensus process.
