@@ -1,6 +1,6 @@
 ---
 tip: XXXX
-title: ATHENA: Admission and Transaction Handling for Efficient Network Architecture
+title: "ATHENA: Admission and Transaction Handling for Efficient Network Architecture"
 author: Ali (@alichatme)
 status: Draft
 type: Standards Track
