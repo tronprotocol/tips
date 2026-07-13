@@ -589,7 +589,65 @@ ATHENA relies entirely on information and policies provided by the host blockcha
 
 For such transactions, ATHENA issues an Execution Permit instructing the wallet to submit the transaction to the complete validator set defined by the host protocol, rather than to a dynamically selected validation group.
 
-This approach prevents cross-group state conflicts without modifying the blockchain's consensus mechanism or security model, while preserving ATHENA's parallel validation model for ordinary transactions
+This approach prevents cross-group state conflicts without modifying the blockchain's consensus mechanism or security model, while preserving ATHENA's parallel validation model for ordinary transactions.
+
+
+### Execution Permit-Based Transaction Admission Lifecycle
+
+In ATHENA, the traditional public mempool model is replaced by an Execution Permit-based transaction admission architecture. Instead of broadcasting signed transactions directly to the network, transaction admission is performed through a lightweight request-evaluation process before any signed transaction is created or propagated.
+
+Under this model, signed transactions never enter the network before receiving an Execution Permit, eliminating the need to expose signed transactions through a public mempool while enabling admission decisions to be made based on the current state of the network.
+
+The transaction admission process is performed as follows:
+
+1. The user prepares the transaction by specifying the sender address, recipient address, transfer amount, and any additional parameters required by the host blockchain protocol.
+
+2. Before the transaction is signed, the wallet sends an Admission Request to ATHENA. This request contains only the information required for admission decision-making. The exact contents of the Admission Request are determined by the host protocol.Because no signed transaction exists at this stage, no cryptographic signature is exposed to the network.
+
+3. ATHENA evaluates the Admission Request according to the policies defined by the host blockchain protocol. These policies may include, but are not limited to:   
+   
+. Current network load
+. Available processing capacity
+. Number of active validator groups
+. Scheduling policies
+. Transaction priority
+. Spam-prevention policies
+. Rate-limiting rules
+. Other protocol-defined admission parameters
+
+4. If the Admission Request satisfies the admission policy defined by the host protocol, ATHENA issues an Execution Permit.The Execution Permit specifies:
+. The permitted execution time window
+. The validator nodes responsible for processing the transaction
+. The applicable scheduling policy
+. Any additional protocol-defined execution parameters
+ 
+5. A canonical reference of the Execution Permit is stored for subsequent verification.
+ 
+6. After receiving the Execution Permit, the wallet signs the transaction and submits the signed transaction together with the Execution Permit directly to the validator nodes designated by ATHENA.
+From this point onward, the transaction follows the blockchain's native validation, consensus, block production, and finality procedures without modification.
+ 
+7. If the processing capacity defined by the host protocol has been reached, ATHENA temporarily postpones issuing new Execution Permits until sufficient processing capacity becomes available.
+During this period, the wallet remains informed of the request status, while no signed transaction has yet been propagated throughout the network.
+
+Consequently, unlike traditional public mempool architectures, the waiting queue consists of Admission Requests rather than publicly visible signed transactions.
+
+Advantages
+
+This admission model provides several important benefits:
+
+. Eliminates the need to expose signed transactions through a public mempool.
+. Enables intelligent transaction admission based on the actual processing capacity of the network.
+. Prevents premature network-wide dissemination of signed transactions.
+. Significantly reduces the exposure window of signed transactions by broadcasting them only after processing capacity has been allocated and an Execution Permit has been issued.
+. Provides a native backpressure mechanism, preventing transaction admission from exceeding the processing capacity defined by the host blockchain protocol.
+. Preserves compatibility with the existing blockchain architecture by modifying only the admission and scheduling layer.
+
+Architectural Principle
+
+ATHENA separates transaction admission from transaction execution.
+Its responsibility is limited to evaluating Admission Requests, allocating processing capacity, and issuing Execution Permits.
+Consensus, transaction execution, block production, state transition, and finality remain entirely under the control of the host blockchain protocol.
+As a result, ATHENA improves admission efficiency and scheduling flexibility without modifying the blockchain's consensus algorithm, execution engine, or global ledger architecture.
 
 
 ### Reducing Mempool Exposure and Quantum Attack Surface
