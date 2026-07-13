@@ -521,6 +521,77 @@ With network protocol support, the results of these analyses can be used as inpu
 However, ATHENA does not independently change network policies, and all potential changes are made solely within the framework of rules, policies, and limitations defined by the host network protocol.
 
 
+### Protocol-Defined Special Transaction Handling
+
+Objective
+
+One of ATHENA's key capabilities is the ability to support specialized transaction processing based on policies and information defined by the host blockchain protocol.
+
+Certain transactions may require a different validation policy due to their nature or security requirements. The classification of these transactions is determined entirely by the host protocol. ATHENA does not define any internal criteria for identifying special transactions.
+
+Depending on the host protocol, these transactions may include (but are not limited to):
+
+. Smart contract calls
+. Multi-signature transactions
+. Transactions involving shared state
+. High-priority or security-sensitive transactions
+. Any other transaction type designated by the host protocol for special processing
+
+
+Operation
+
+When an Admission Request is received, ATHENA evaluates the information provided by the wallet together with the policies and parameters supplied by the host blockchain protocol.
+
+If the host protocol classifies the transaction as a Special Transaction, ATHENA issues an Execution Permit instructing the wallet to submit the transaction to the complete validator set defined by the host protocol, rather than assigning it to a dynamically selected validation group.
+
+For ordinary transactions, ATHENA continues to apply its standard dynamic validator grouping mechanism, allowing parallel transaction validation across multiple execution groups.
+
+Advantages
+
+1. Prevention of Cross-Group Write Conflicts
+
+Processing protocol-defined special transactions through the complete validator set avoids cross-group write conflicts while preserving the native state consistency guarantees of the underlying blockchain.
+
+2. Enhanced Validation for Sensitive Transactions
+
+Transactions designated by the host protocol as security-sensitive or operationally complex are validated using the most comprehensive validation policy defined by the network itself.
+
+
+3. Reduced Architectural Complexity
+
+ATHENA does not perform complex dependency analysis or attempt to resolve smart contract execution conflicts internally. Those responsibilities remain entirely within the native execution engine of the host blockchain.
+
+4. Consistency with Per-Transaction Decision Making
+
+This mechanism fully aligns with ATHENA's architectural principle of making an independent scheduling decision for each transaction based on the information and policies provided by the host protocol.
+
+5. Future Compatibility
+
+Because the definition of a Special Transaction is entirely controlled by the host protocol, future transaction types can automatically benefit from this mechanism without requiring any modification to the ATHENA architecture.
+
+Host Protocol Independence
+
+ATHENA does not determine whether a transaction is considered special.
+
+The classification of transactions, the applicable processing policies, and the definition of the corresponding validator set are all determined exclusively by the host blockchain protocol.
+
+ATHENA simply enforces those policies by issuing the appropriate Execution Permit.
+
+Consequently, this mechanism fully preserves ATHENA's core architectural principles:
+
+. Protocol Independence
+. Minimal Intrusion
+. Network Configurability
+
+Summary
+
+ATHENA relies entirely on information and policies provided by the host blockchain protocol to identify transactions requiring special handling.
+
+For such transactions, ATHENA issues an Execution Permit instructing the wallet to submit the transaction to the complete validator set defined by the host protocol, rather than to a dynamically selected validation group.
+
+This approach prevents cross-group state conflicts without modifying the blockchain's consensus mechanism or security model, while preserving ATHENA's parallel validation model for ordinary transactions
+
+
 ### Reducing Mempool Exposure and Quantum Attack Surface
 
 In addition to scalability benefits, intelligent load distribution, and increased network efficiency, the ATHENA architecture can also reduce the attack surface of some threats based on early disclosure of transaction information.
