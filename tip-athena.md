@@ -49,7 +49,7 @@ Parallel validation has become one of the most important research directions in 
 
 However, these approaches were designed around the assumptions of their own blockchain architectures. Applying them directly to TRON would require substantial modifications to the transaction lifecycle, execution engine, or protocol behavior.
 
-ATHENA follows a fundamentally different philosophy.
+### ATHENA follows a fundamentally different philosophy.
 
 Rather than redesigning Java-Tron or replacing the execution engine, ATHENA introduces a native admission and validation architecture specifically designed for TRON.
 
@@ -60,7 +60,7 @@ ATHENA performs all critical execution decisions before a transaction enters the
 
 In this unified architecture, ATHENA is no longer merely an admission layer—it becomes the complete decision-making center for the entire transaction lifecycle.
 
-ATHENA's responsibilities include:
+### ATHENA's responsibilities include:
 
 · Transaction Admission: Receiving the Admission Request and required information from the wallet according to Host Protocol rules.
 · Information Analysis: Analyzing the received information, Access List, and other required Metadata for decision-making.
