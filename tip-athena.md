@@ -342,54 +342,78 @@ ___
 ___
 # Comparison of ATHENA with Other Scalability Solutions
 
-Increasing scalability is one of the most important research topics in blockchain technology, and numerous solutions have been proposed to achieve this goal. Each of these solutions attempts to increase transaction processing capacity by making changes to the network architecture.
+Improving scalability has long been one of the primary research objectives in blockchain technology, and numerous architectural approaches have been proposed to achieve this goal. Most existing solutions increase transaction throughput by modifying one or more fundamental components of blockchain architecture, such as the consensus algorithm, ledger organization, execution model, or transaction processing flow.
 
-ATHENA has been designed with the same goal, but its approach differs from many conventional solutions. This architecture, without changing the consensus algorithm, global ledger structure, or asset ownership model, seeks to increase the transaction inflow capacity and transaction validation capacity of the host network by creating parallel processing lanes.
+ATHENA pursues the same objective through a fundamentally different architectural philosophy.
+
+Rather than redesigning the consensus protocol, partitioning the global ledger, modifying the account model, or replacing the native validation mechanism, ATHENA introduces an integrated transaction lifecycle management architecture that intelligently manages transactions from their admission into the network until their final commitment to the global ledger.
+
+Within ATHENA, a transaction begins with an Admission Request submitted by the wallet according to the Host Protocol. ATHENA then collects the required contextual information from both the wallet and the network, dynamically selects the initial validator nodes, forms the initial parallel validation group, determines the appropriate execution domain, selects the least-loaded parallel execution engine within that domain, and generates an Execution Permit that defines the complete validation path of the transaction.
+
+The Execution Permit becomes the authoritative validation contract for the entire transaction lifecycle. One copy is securely stored within the Canonical Copy for future verification, while another copy is delivered to the wallet, allowing the signed transaction to be forwarded to the designated validator nodes.
+
+From this point forward, every component of the network—including validators, execution engines, consensus participants, and other protocol components—processes the transaction exclusively according to the information contained in the Execution Permit and the policies defined by the Host Protocol, without independently redefining the transaction's execution path.
+
+Furthermore, ATHENA introduces a novel Execution Permit–based conflict management mechanism. Whenever execution conflicts or exceptional conditions are detected, ATHENA first re-verifies the Execution Permit and the completed validation path before managing the continuation of transaction processing according to Host Protocol policies. The transaction is therefore managed from the exact stage where the conflict is detected rather than restarting the entire validation lifecycle.
+
+In addition, ATHENA generates analytical reports describing detected conflicts, their causes, applied resolution strategies, and final outcomes. These reports are provided to the Host Protocol as architectural feedback, enabling continuous improvement of future admission policies, scheduling decisions, validator selection strategies, execution domain assignment, execution engine selection, and Execution Permit generation.
+
+Consequently, ATHENA improves the operational capacity of the network through intelligent lifecycle management, dynamic validator selection, parallel initial validation, intelligent execution scheduling, and proactive conflict management while remaining fully compatible with the native blockchain architecture.
 
 ### Comparison with Sharding
 
-In Sharding architecture, processing capacity is increased by dividing the state and ledger among several independent shards. Each shard manages a set of validators and a portion of the network state, and as a result, transactions that occur across different shards typically require coordination mechanisms and cross-shard communication.
+Sharding increases network throughput by partitioning the global state and ledger into multiple independent shards. Each shard maintains its own subset of validators and network state, requiring additional coordination mechanisms for cross-shard transactions.
 
-In contrast, ATHENA does not divide the network state or global ledger. All validators continue to operate on a shared state and a single ledger. In ATHENA, the admission process, scheduling, and assignment of transaction execution are managed through dynamic node selection and organizing them into processing groups.
+ATHENA follows a fundamentally different approach.
 
-As a result, ATHENA increases the inflow and validation capacity of the host network through dynamic node selection and the creation of processing groups, without changing the consensus structure.
+It never partitions the network state or the global ledger. All validators continue operating on the same global state and unified ledger.
+
+Instead of dividing the blockchain itself, ATHENA dynamically organizes validator nodes into parallel initial validation groups while maintaining a unified consensus process and a single global ledger.
 
 ### Comparison with Layer 2 Solutions
 
-Layer 2 solutions typically reduce the computational load on the network by transferring a significant portion of transaction processing off-chain, recording only the final result on Layer 1.
+Layer 2 solutions typically improve scalability by moving a substantial portion of transaction execution outside the main blockchain and recording only the final settlement on Layer 1.
 
-ATHENA takes a different approach.
+ATHENA adopts a different architectural model.
 
-In this architecture, transactions continue to be managed within the framework of the main network protocol, with only the entry path, scheduling, and assignment to processing validators being performed intelligently.
+Transactions remain fully governed by the native protocol of the host blockchain. ATHENA intelligently manages transaction admission, initial validation, scheduling, execution domain selection, execution engine selection, and transaction lifecycle management without moving transaction ownership or validation outside the main protocol.
 
-With official support from the host protocol, ATHENA can direct transaction requests to Layer 2 execution environments in addition to Layer 1 processing groups. Therefore, ATHENA is neither a replacement for Layer 2 solutions nor in conflict with them; rather, it can serve as a complementary layer for intelligent admission management and transaction scheduling alongside them.
+When supported by the Host Protocol, ATHENA may also direct transactions toward Layer 2 execution environments in addition to Layer 1 execution engines.
+
+Therefore, ATHENA is neither a replacement for Layer 2 solutions nor an alternative to them. Instead, it functions as a complementary architectural layer capable of providing intelligent admission management and transaction scheduling alongside Layer 2 technologies.
 
 ### Comparison with Block Size Scaling
 
-Some networks attempt to process more transactions per block by increasing the block size. While this method can increase network throughput, it typically leads to increased hardware requirements, bandwidth consumption, block propagation time, and pressure on the node synchronization process.
+Some blockchain networks increase throughput by enlarging block size, allowing more transactions to be included in each block. Although this approach may improve throughput, it generally increases hardware requirements, bandwidth consumption, block propagation time, and node synchronization overhead.
 
-ATHENA does not change the block size and pursues increased processing capacity through intelligent admission management and parallel execution of incoming transactions.
+ATHENA does not modify block size.
+
+However, it remains fully compatible with any future block size adjustments introduced by the Host Protocol and can simultaneously benefit from larger blocks while continuing to optimize transaction admission, validation, and execution scheduling.
 
 ### Comparison with Consensus Algorithm Optimization
 
-Some scalability solutions attempt to increase network processing capacity by changing or replacing the consensus algorithm.
+Some scalability approaches seek higher throughput by replacing or fundamentally modifying the consensus algorithm.
 
-In contrast, ATHENA does not make any changes to the consensus algorithm. All validation, voting, block production, and transaction finalization processes are performed according to the native rules of the host protocol, and ATHENA is solely responsible for admission management, scheduling, and assignment of transaction execution prior to entering the consensus process.
+ATHENA intentionally avoids this approach.
+
+Validation, voting, block production, and transaction finalization continue to operate entirely according to the native consensus mechanism of the Host Protocol.
+
+Because ATHENA operates independently of the consensus algorithm itself, future modifications or upgrades to the consensus protocol can be adopted without requiring redesign or architectural changes within ATHENA.
 
 ### ATHENA's Architectural Position
 
-From an architectural perspective, ATHENA can be viewed as an admission and scheduling layer within Layer 1 of the network.
+From an architectural perspective, ATHENA can be viewed as an **Integrated Transaction Lifecycle Management Layer** operating within Layer 1.
 
-Whereas:
+Unlike other scalability approaches:
 
-· Sharding increases capacity by dividing state and ledger;
-· Layer 2 increases capacity by transferring processing off-chain;
-· Block size scaling increases capacity by enlarging each block;
-· Consensus algorithm optimization increases capacity by modifying the consensus mechanism;
+. Sharding increases capacity by partitioning network state and ledger.
+. Layer 2  increases capacity by moving execution outside the main chain.
+. Block size scaling increases capacity by enlarging individual blocks.
+. Consensus optimization increases capacity by modifying the consensus mechanism.
 
-ATHENA seeks to increase the network's processing capacity through parallelization of transaction validation, without changing any of these fundamental components, by intelligently managing transaction admission and distributing transaction execution among nodes of the same network.
+ATHENA increases the network's operational capacity through intelligent lifecycle management, dynamic validator selection, parallel initial validation, execution domain classification, intelligent execution engine selection, Execution Permit–based validation management, and proactive conflict resolution, while leaving all fundamental components of the blockchain architecture unchanged.
 
-For this reason, ATHENA is designed as a complementary architecture and can be used alongside other scalable technologies, subject to compatibility with the policies and limitations of the host protocol.
+For this reason, ATHENA is designed as a complementary Layer 1 architecture that can coexist with future scalability technologies, provided they remain compatible with the policies and operational constraints defined by the Host Protocol.
 ___
 ___
 # ATHENA Architecture Diagram
