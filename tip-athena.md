@@ -558,133 +558,103 @@ Furthermore, before the transaction enters the network, ATHENA analyzes the real
 For this reason, the ATHENA architecture can be regarded not only as a transaction lifecycle management system but also as the first known framework to introduce the concept of proactive conflict management—based on the Execution Permit and performed before the transaction enters the network—in a public blockchain.
 ___
 ___
-# Transaction Execution Stages in ATHENA
+# Transaction Lifecycle Management in ATHENA
 
-### Stage 1 — Admission Request
+### 1. Why Do Next-Generation Blockchain Networks Need Such an Architecture?
 
-The process begins with a request sent by the wallet.
+First-generation blockchain networks were primarily designed for asset transfers, and nearly all transactions followed the same validation path. However, today's blockchain networks have evolved into infrastructure for executing a wide variety of operations—from asset and token transfers to smart contracts, staking, governance, tokenized asset management, interaction with decentralized applications, and other complex operations.
 
-At this stage, the complete transaction has not yet entered the network, and only an execution request is sent to ATHENA.
+Each of these transaction types has different characteristics, processing requirements, and execution needs. Under such conditions, using a single fixed validation path for all transactions is no longer sufficient for modern networks and gradually leads to processing bottlenecks, increased queueing, imbalanced load distribution, and reduced operational efficiency.
 
-This request does not include the transaction signature and only contains the minimum information required for decision-making in the admission layer, including the sender account identifier, receiver account identifier, transaction amount, and other essential information that the protocol needs for applying scheduling policies, preventing simultaneous submission of incompatible transactions, identifying spam transactions, and maintaining the Sender Consistency principle.
+ATHENA was designed with this perspective in mind. Rather than routing all transactions through a single fixed path, this architecture determines, from the moment a transaction request is received, the appropriate path for that transaction based on the network's real-time state.
 
-At this stage, the complete transaction body, digital signature, and other sensitive information have not yet been sent to validators.
+### 2. Transaction Lifecycle Management
 
-### Stage 2 — Execution Permit Issuance
+In ATHENA, the lifecycle of each transaction begins when an Admission Request is sent and continues until the transaction is finally recorded in the global ledger.
 
-After receiving the request, ATHENA evaluates the current network state according to the host protocol policies.
+Throughout this lifecycle, ATHENA is responsible for managing, in a unified manner, all decisions that must be made before the transaction enters the consensus process.
 
-This evaluation may include factors such as:
+These decisions may include:
 
-· Instantaneous or average network load
-· Number of pending admission requests
-· Number of transactions being processed
-· Average number of finalized transactions in the time period defined by the network protocol
-· Validator status
-· Available processing capacity based on current node grouping
-· Protocol scheduling policies
-· Checking for unconfirmed or pending transactions from the same sender account
-· Other parameters defined by the host protocol
+· Collecting required information from the wallet and the network
+· Assessing the real-time state of the network
+· Dynamically selecting initial validator nodes
+· Forming initial validation pipelines
+· Determining the appropriate execution domain
+· Selecting the least-loaded parallel execution engine
+· Issuing the Execution Permit
+· Managing conflicts
+· Providing analytical feedback to the Host Protocol
 
-After this evaluation, ATHENA issues an Execution Permit.
+After the Execution Permit is issued, the validation and execution path of the transaction is determined, and other network components continue their operation according to the information recorded in the permit and the Host Protocol rules.
 
-The Canonical Copy of this permit is recorded in the ATHENA system, and a copy of the same permit is sent to the wallet.
+### 3. Managed Admission
 
+One of ATHENA's fundamental distinctions from conventional architectures is the replacement of Unmanaged Admission with Managed Admission.
 
-Contents of the Execution Permit:
+In many current networks, the wallet broadcasts a transaction without any awareness of the network's real-time state, and the network attempts to validate, schedule, and manage it after propagation.
 
-The Execution Permit provides the wallet with the information necessary for executing the request. This information may include:
+In contrast, ATHENA, before the signed transaction enters the network, first examines the network's real-time state and then determines the most appropriate validation and execution path for that transaction.
 
-· Permit identifier
-· Permit validity period
-· Selected validator identifiers
-· Created execution group identifier
-· Execution policies relevant to the request
-· Other information required by the host protocol
+As a result, the network's input is no longer an unmanaged stream of transactions but a controlled, scheduled, and intelligently directed flow.
 
-An important point is that in ATHENA, the process of issuing the Execution Permit simultaneously constitutes the formation of the execution group.
+### 4. Execution Permit
 
-In other words, ATHENA first selects suitable validators and then organizes those same validators as a logical execution group for processing that request.
+In ATHENA, the Execution Permit is not merely an admission authorization.
 
-This group is formed solely for that execution path and will not necessarily be repeated in subsequent requests.
+In practice, this permit serves as the Execution Blueprint for the transaction.
 
-### Stage 3 — Transaction Submission by the Wallet
+The Execution Permit may contain information such as:
 
-After receiving the Execution Permit, the wallet sends the complete transaction along with the permit to the validators specified in the Execution Permit.
+· Responsible validators
+· Initial validation pipeline
+· Execution domain
+· Selected execution engine
+· Validation policies
+· Execution constraints
+· Other Host Protocol-required parameters
 
-An important point is that in ATHENA, the Execution Permit includes the identifiers of the validators responsible for processing that transaction, not the identifier of a pre-existing processing group. In effect, the validators selected by ATHENA are determined at that moment, and then the execution group for that transaction is formed. Since this selection is made independently for each request, no validator can predict which validators they will be grouped with in subsequent requests.
+As a result, all network components operate precisely according to this execution blueprint, and no component makes independent decisions outside the defined policies.
 
-At this stage, ATHENA does not receive, store, or transmit any copy of the transaction and is solely responsible for issuing the Execution Permit. The transaction is transmitted directly between the wallet and the designated validators; therefore, ATHENA will never become a bottleneck for data transmission or transaction processing.
+### 5. Validation Path Transparency
 
-### Stage 4 — Execution Permit Verification
+In many current architectures, once a transaction is recorded in the global ledger, only the final result is visible, and no information exists regarding its validation path.
 
-Before beginning processing, each validator verifies the validity of the Execution Permit against its Canonical Copy.
+In contrast, ATHENA enables the validation path to be reconstructable.
 
-The method of accessing the Canonical Copy depends on the host protocol implementation and can be centralized, distributed, or through any other scalable mechanism.
+For this reason, it is recommended that the Execution Permit or its corresponding Cryptographic Commitment be stored alongside the transaction in the global ledger.
 
-Since permit verification is performed by nodes referring to the ATHENA system, ATHENA becomes aware of the initiation of the validation process by the designated validators and can monitor the execution status of each Execution Permit.
+This information enables independent auditing, reconstruction of the transaction execution path, evaluation of validator performance, and analysis of the validation process—even years after Finality.
 
-After all designated validators have successfully verified the permit, each validator identifies the other members of the same set and, according to the consensus algorithm and rules of the host protocol, this validator group begins the validation and consensus process.
+### 6. Conflict Prediction Before Transaction Entry
 
-If any of the following conditions occur:
+One of the most innovative aspects of ATHENA is conflict management before the transaction enters the network.
 
-· The wallet does not send the transaction to all designated validators;
-· One of the validators fails to verify the Execution Permit; or
-· The permit expires;
+In conventional architectures, conflicts are detected only after the signed transaction has entered the network and the validation process has begun.
 
-The execution group for that request will not be formed.
+However, in ATHENA, efforts are made before the Execution Permit is issued and before the signed transaction enters the network—by analyzing the real-time network state and leveraging insights from past conflicts—to predict and minimize the likelihood of conflicts.
 
-In these circumstances, ATHENA can record the unsuccessful execution of the Execution Permit and provide the necessary report to the host protocol for decision-making. The handling of this situation, including issuing a new permit, rejecting the request, or any other action, is entirely according to the rules of that network.
+When a conflict or exceptional condition is observed, ATHENA provides the Host Protocol with an analytical report detailing the cause, the handling approach, and the final outcome. This enables the Host Protocol to refine admission policies, validator selection, execution domain selection, execution engine selection, and other Execution Permit issuance policies for future requests.
 
-After an Execution Permit is issued, the composition of validators designated for that permit will not change until the permit expires, even if ATHENA simultaneously selects a different set of validators for new requests. This feature ensures the logical ordering of transactions for each account (Sender Consistency) and prevents changes to the transaction execution path mid-process.
+To the best of our knowledge, the use of an architecture that can analyze the likelihood of conflict before the transaction enters the network and before the consensus process begins—and adjust the transaction execution path accordingly—has not been reported in any known blockchain architecture.
 
-### Stage 5 — Consensus Execution
+### 7. Adaptive Architecture
 
-After successful Execution Permit verification, the designated validators enter the transaction validation process exactly according to the network's original consensus algorithm.
+ATHENA does not impose any fixed policies on the Host Protocol.
 
-ATHENA has no involvement in the consensus process, validation, block production, finalization, or application of network economic rules at this stage. All these operations are performed according to the native mechanism of the host protocol.
+All operational parameters—such as:
 
-To increase transparency, auditability, and prevent any potential collusion, after each transaction is finalized, a Cryptographic Commitment corresponding to the Execution Permit should also be recorded in the global ledger as part of the permanent information of that transaction.
+· Number of validators per pipeline
+· Number of validation pipelines
+· Number of execution domains
+· Number of execution engines
+· Validator selection policies
+· Engine selection policies
+· Scheduling policies
 
-This Cryptographic Commitment may include, depending on the host protocol's design, information such as the Permit ID, hash of the Execution Permit, hash of the set of designated validators, permit signature, or other required reference data. The exact details of this structure are determined by each protocol.
+—remain entirely under the authority of the Host Protocol.
 
-The recording of this Cryptographic Commitment should not lead to the disclosure of confidential information or reduction of user privacy and should only include the minimum information necessary for independent verification.
-
-Recording this cryptographic reference allows any node, auditor, or researcher to independently verify even after Finality:
-
-· Which validators were selected to process that transaction;
-· Whether the execution process was performed according to the Execution Permit; and
-· In the event of abnormal behavior or violation, whether independent verification and security analysis are possible.
-
-This mechanism, without disclosing unnecessary information, increases accountability, auditability, and non-repudiation, forming one of the complementary security layers of the ATHENA architecture.
-
-### Stage 6 — Execution Completion
-
-After the transaction reaches Finality according to the network protocol rules and is recorded in the global ledger, the lifecycle of the Execution Permit is considered complete.
-
-At this stage, ATHENA can record the final execution status of the permit and release the logical resources associated with it. From this moment, the restrictions related to that execution path are lifted, and if a new request is sent from the same account, ATHENA can select a new set of validators, organize them into a group, and issue a new Execution Permit according to the current network state, unless the host protocol has defined a different policy for preserving the execution order of transactions for that account.
-
-### Stage 7 — Validator Behavior Monitoring
-
-During the transaction execution and consensus process, each validator, in addition to performing their primary function, can monitor the behavior of other validators in the same execution set according to protocol rules.
-
-If any abnormal or network-rule-violating behavior is observed, including:
-
-· Non-participation in the consensus process;
-· Sending conflicting messages or responses;
-· Unusual delays;
-· Providing results inconsistent with consensus rules;
-· Or any other behavior defined as malicious by the host protocol;
-
-Validators can send their reports to ATHENA or the network according to each network's protocol.
-
-ATHENA receives these reports as monitoring information and, if suspicious behavior is observed, can temporarily place the relevant validator in a Logical Quarantine List, reporting the violation to the network so that, until a final decision is made according to the host protocol's rules, that validator is not selected for validating future transactions in the issuance of new Execution Permits.
-
-The host protocol can also, upon detecting malicious behavior by a validator, issue a command to place it in ATHENA's quarantine list.
-
-However, ATHENA has no independent authority for permanent quarantine, imposing penalties, permanently removing validators, or lifting quarantine. All final decisions, including imposing penalties, removal, replacement, or reinstatement of validators to the processing cycle, are made exclusively according to the rules and consensus algorithm of the host protocol.
-
-Thus, ATHENA solely serves as a monitoring, reporting, and validator assignment management system and does not make any changes to the network's governance or security mechanisms.
+Consequently, as the host protocol evolves or its rules change, ATHENA adapts accordingly without requiring any changes to its own architecture.
 ___
 ___
 # Key Architectural Features
