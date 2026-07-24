@@ -661,7 +661,72 @@ ___
 
 The ATHENA architecture is founded on a set of key capabilities that distinguish it from conventional architectures. These capabilities enable unified transaction lifecycle management and optimal utilization of network resources, without making any changes to the consensus algorithm, unified global ledger, account model, or native validation rules.
 
+### Expected Behavior
 
+One of the key capabilities of the ATHENA architecture is the introduction of the concept of Expected Behavior for each transaction. This concept transforms the transaction lifecycle from a simple "send and wait for result" process into a fully verifiable cycle encompassing planning, execution, monitoring, and result validation.
+
+Expected Behavior refers to the set of outcomes that, based on the information contained in the Admission Request, the rules of the Host Protocol, and the data recorded within the Execution Permit, are anticipated to be observed upon the transaction's finality in the global ledger.
+
+For example, if a wallet requests to transfer 10 TRX from account A to account B, the Expected Behavior of this transaction would include:
+
+· 10 TRX being deducted from account A's balance;
+· 10 TRX being added to account B's balance;
+· The transaction having been processed exactly according to the validation and execution path specified in the Execution Permit;
+· The final result conforming to the rules of the Host Protocol.
+
+For simple transactions, this behavior is usually highly predictable. Conversely, for more complex transactions—such as smart contract calls—the Expected Behavior may involve a set of state changes, outputs, or conditions defined by the contract itself.
+
+For this reason, ATHENA does not attempt to replace the logic of smart contracts; rather, it receives the necessary information to define Expected Behavior from the Host Protocol and incorporates this into the Execution Permit issuance process.
+
+Monitoring Expected Behavior
+
+As described in the ATHENA architecture, ATHENA's responsibility does not end with the issuance of the Execution Permit. ATHENA monitors the lifecycle of each transaction until its final recording in the global ledger. After a transaction reaches Finality, ATHENA compares the recorded outcome with the Expected Behavior.
+
+· If the observed outcome is consistent with the Expected Behavior, the transaction's lifecycle is considered complete.
+· However, if the recorded result deviates from the Expected Behavior, ATHENA registers this as an Exception and sends the necessary report to the Host Protocol.
+
+Investigating the cause of this deviation, determining its origin, and deciding on any subsequent actions remain entirely under the authority of the Host Protocol. ATHENA does not modify any consensus, security, or governance rules.
+
+Impact on Resource Allocation
+
+One benefit of this model is that ATHENA can consider the certainty of the Expected Behavior when issuing the Execution Permit. In general:
+
+· Transactions whose Expected Behavior is simple, deterministic, and highly predictable can be scheduled with the minimum processing resources required by the Host Protocol.
+· Transactions whose Expected Behavior is more complex, more sensitive, or dependent on shared network state can be directed, according to Host Protocol policies, to stronger validation paths or allocated more resources.
+
+These decisions are fully governed by the Host Protocol's rules; ATHENA merely implements them through the Execution Permit.
+
+Assisting in Detecting Anomalous Behavior
+
+Monitoring Expected Behavior can serve as an effective tool for detecting anomalous behavior within the network.
+
+If the final result recorded in the ledger deviates from the Expected Behavior, the Host Protocol may consider this event as an indicator for investigating issues such as:
+
+· Abnormal validator behavior;
+· Potential presence of a malicious Full Node;
+· Execution errors;
+· Synchronization issues;
+· Other exceptional conditions.
+
+ATHENA only identifies and reports the deviation and makes no independent decisions regarding node maliciousness or the imposition of penalties.
+
+Re-validation Capability
+
+If, after reviewing ATHENA's report, the Host Protocol determines that the result of a transaction is unreliable, it can, according to its own policies, decide to re-process the transaction.
+
+In such a case, ATHENA can issue a new Execution Permit for the same request and select a different validation path.
+
+Comparing the results from the independent execution of a transaction across different paths can provide the Host Protocol with valuable data to analyze the root cause of the discrepancy, verify the transaction's execution, and detect anomalous behavior.
+
+Summary
+
+The concept of Expected Behavior is one of the complementary capabilities of the ATHENA architecture for enhancing the Observability and Auditability of the transaction execution process.
+
+This approach is being employed for the first time in a major network, enabling end-to-end monitoring of the transaction lifecycle from the moment an Admission Request is sent to its final recording in the global ledger. It significantly increases the network's transparency, auditability, and performance analysis capabilities.
+
+In this model, without intervening in consensus, ATHENA uses the information from the Admission Request, the Host Protocol rules, and the Execution Permit to compare the final outcome of a transaction against the Expected Behavior. If any discrepancy is observed, it is reported to the Host Protocol.
+
+This approach not only enables full monitoring of the transaction lifecycle but also provides a valuable tool for error analysis, policy improvement, increased validation transparency, and facilitating the investigation of anomalous behavior. Consequently, anomalous behavior can be detected much faster than in conventional models and examined according to Host Protocol policies, without introducing any changes to the blockchain's consensus mechanism or security model.
 ___
 ___
 # Compatibility with Validator Architectures and Processing Units
