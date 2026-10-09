@@ -198,8 +198,14 @@ Recovery requires the simultaneous presence of three independent factors
 - Network-issued Recovery Authorization
 
 This design transforms recovery from a static operation into a controlled, network-dependent, abuse-resistant process.
+___
+___
+# Network-Dependent Account Recovery in ASR: Architectural Constraints and the Impossibility of Offline Recovery
 
-## Additional Engineering Considerations and Security Constraints
+
+___
+___
+# Additional Engineering Considerations and Security Constraints
 
 1. Intentionally Underdetermined Recovery
 
