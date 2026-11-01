@@ -9,11 +9,9 @@ created: 2026-07-11
 discussions-to: https://github.com/tronprotocol/tips/issues/905
 ---
 # AVP-DS
+**Address-Based Validation Paths — Dynamic & Smart**
 
 ### Increasing the Number of Confirmed Transactions Through the Creation and Expansion of Address-Based Parallel Validation Paths and Separation of the Decision Layer from the Execution Layer
-
-### Smarter Admission. Fairer Scheduling. Greater Scalability.
-
 ___
 ___
 # Introduction
