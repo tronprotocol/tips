@@ -690,13 +690,6 @@ In the final stage, ATHENA compares the recorded outcome with the Expected Behav
 ```
 
 
-
-___
-___
-# Key Architectural Features
-
-The ATHENA architecture is founded on a set of key capabilities that distinguish it from conventional architectures. These capabilities enable unified transaction lifecycle management and optimal utilization of network resources, without making any changes to the consensus algorithm, unified global ledger, account model, or native validation rules.
-
 ### Expected Behavior and Outcome Tracking
 
 One of the key capabilities of the ATHENA architecture is the introduction of the concept of Expected Behavior for each transaction. This concept transforms the transaction lifecycle from a simple "send and wait for result" process into a fully verifiable cycle encompassing planning, execution, monitoring, and result validation.
