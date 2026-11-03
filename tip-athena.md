@@ -693,105 +693,6 @@ Execution Permit issuance MUST respect the protocol-defined processing order of 
 This principle ensures that the order of transactions from the same account cannot be bypassed simply by creating a new transaction, modifying the fee, changing the submission path, or reconstructing a previous transaction.
 ___
 ___
-# Transaction Lifecycle Management in ATHENA
-
-### 1. Why Do Next-Generation Blockchain Networks Need Such an Architecture?
-
-First-generation blockchain networks were primarily designed for asset transfers, and nearly all transactions followed the same validation path. However, today's blockchain networks have evolved into infrastructure for executing a wide variety of operations—from asset and token transfers to smart contracts, staking, governance, tokenized asset management, interaction with decentralized applications, and other complex operations.
-
-Each of these transaction types has different characteristics, processing requirements, and execution needs. Under such conditions, using a single fixed validation path for all transactions is no longer sufficient for modern networks and gradually leads to processing bottlenecks, increased queueing, imbalanced load distribution, and reduced operational efficiency.
-
-ATHENA was designed with this perspective in mind. Rather than routing all transactions through a single fixed path, this architecture determines, from the moment a transaction request is received, the appropriate path for that transaction based on the network's real-time state.
-
-### 2. Transaction Lifecycle Management
-
-In ATHENA, the lifecycle of each transaction begins when an Admission Request is sent and continues until the transaction is finally recorded in the global ledger.
-
-Throughout this lifecycle, ATHENA is responsible for managing, in a unified manner, all decisions that must be made before the transaction enters the consensus process.
-
-These decisions may include:
-
-- Collecting required information from the wallet and the network
-- Assessing the real-time state of the network
-- Dynamically selecting initial validator nodes
-- Forming initial validation pipelines
-- Determining the appropriate execution domain
-- Selecting the least-loaded parallel execution engine
-- Issuing the Execution Permit
-- Managing conflicts
-- Providing analytical feedback to the Host Protocol
-
-After the Execution Permit is issued, the validation and execution path of the transaction is determined, and other network components continue their operation according to the information recorded in the permit and the Host Protocol rules.
-
-### 3. Managed Admission
-
-One of ATHENA's fundamental distinctions from conventional architectures is the replacement of Unmanaged Admission with Managed Admission.
-
-In many current networks, the wallet broadcasts a transaction without any awareness of the network's real-time state, and the network attempts to validate, schedule, and manage it after propagation.
-
-In contrast, ATHENA, before the signed transaction enters the network, first examines the network's real-time state and then determines the most appropriate validation and execution path for that transaction.
-
-As a result, the network's input is no longer an unmanaged stream of transactions but a controlled, scheduled, and intelligently directed flow.
-
-### 4. Execution Permit
-
-In ATHENA, the Execution Permit is not merely an admission authorization.
-
-In practice, this permit serves as the Execution Blueprint for the transaction.
-
-The Execution Permit may contain information such as:
-
-- Responsible validators
-- Initial validation pipeline
-- Execution domain
-- Selected execution engine
-- Validation policies
-- Execution constraints
-- Other Host Protocol-required parameters
-
-As a result, all network components operate precisely according to this execution blueprint, and no component makes independent decisions outside the defined policies.
-
-### 5. Validation Path Transparency
-
-In many current architectures, once a transaction is recorded in the global ledger, only the final result is visible, and no information exists regarding its validation path.
-
-In contrast, ATHENA enables the validation path to be reconstructable.
-
-For this reason, it is recommended that the Execution Permit or its corresponding Cryptographic Commitment be stored alongside the transaction in the global ledger.
-
-This information enables independent auditing, reconstruction of the transaction execution path, evaluation of validator performance, and analysis of the validation process—even years after Finality.
-
-### 6. Conflict Prediction Before Transaction Entry
-
-One of the most innovative aspects of ATHENA is conflict management before the transaction enters the network.
-
-In conventional architectures, conflicts are detected only after the signed transaction has entered the network and the validation process has begun.
-
-However, in ATHENA, efforts are made before the Execution Permit is issued and before the signed transaction enters the network—by analyzing the real-time network state and leveraging insights from past conflicts—to predict and minimize the likelihood of conflicts.
-
-When a conflict or exceptional condition is observed, ATHENA provides the Host Protocol with an analytical report detailing the cause, the handling approach, and the final outcome. This enables the Host Protocol to refine admission policies, validator selection, execution domain selection, execution engine selection, and other Execution Permit issuance policies for future requests.
-
-To the best of our knowledge, the use of an architecture that can analyze the likelihood of conflict before the transaction enters the network and before the consensus process begins—and adjust the transaction execution path accordingly—has not been reported in any known blockchain architecture.
-
-### 7. Adaptive Architecture
-
-ATHENA does not impose any fixed policies on the Host Protocol.
-
-All operational parameters—such as:
-
-- Number of validators per pipeline
-- Number of validation pipelines
-- Number of execution domains
-- Number of execution engines
-- Validator selection policies
-- Engine selection policies
-- Scheduling policies
-
-remain entirely under the authority of the Host Protocol.
-
-Consequently, as the host protocol evolves or its rules change, ATHENA adapts accordingly without requiring any changes to its own architecture.
-___
-___
 # Key Architectural Features
 
 The ATHENA architecture is founded on a set of key capabilities that distinguish it from conventional architectures. These capabilities enable unified transaction lifecycle management and optimal utilization of network resources, without making any changes to the consensus algorithm, unified global ledger, account model, or native validation rules.
@@ -1584,7 +1485,7 @@ The final Bundle result MUST include an independently verifiable outcome for eac
 In this way, the Batch Execution Permit enables batch transaction submission while maintaining security, transparency, and complete finalization.
 ___
 ___
-# Transaction Lifecycle in the TRON Network Based on the ATHENA Architecture
+# Transaction Lifecycle After Network Support for the AVP-DS Capability
 
 In the ATHENA architecture, the transaction lifecycle begins at the moment the user decides to send a transaction through their wallet and ends when the final transaction result is recorded in the global ledger and monitored against the expected behavior or outcome by ATHENA.
 
