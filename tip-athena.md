@@ -1485,7 +1485,7 @@ The final Bundle result MUST include an independently verifiable outcome for eac
 In this way, the Batch Execution Permit enables batch transaction submission while maintaining security, transparency, and complete finalization.
 ___
 ___
-# Transaction Lifecycle After Network Support for the AVP-DS Capability
+# Transaction Lifecycle After Network Support of the AVP-DS Capability
 
 In the ATHENA architecture, the transaction lifecycle begins at the moment the user decides to send a transaction through their wallet and ends when the final transaction result is recorded in the global ledger and monitored against the expected behavior or outcome by ATHENA.
 
@@ -1648,42 +1648,6 @@ The Host Protocol, based on its own policies, decides how to handle the discrepa
 ### Key Feature of This Architecture
 
 In the ATHENA architecture, no transaction is permitted to enter the network before receiving an Execution Permit with its complete validation and execution path fully determined. From the moment the permit is issued until the end of the transaction lifecycle, all network components are required to operate strictly according to the instructions recorded in the Execution Permit, and ATHENA monitors this lifecycle through the final expected behavior or outcome monitoring stage.
-___
-___
-# ATHENA Resource Utilization
-
-One of the primary objectives of the ATHENA architecture is to increase the efficiency of existing network processing capacity without making any changes to the native architecture of the Host Protocol.
-
-To achieve this goal, ATHENA—relying on Host Protocol policies and the real‑time state of the network—dynamically selects initial validators, execution domains, and parallel execution engines, and determines the appropriate path for processing each transaction in the form of an Execution Permit.
-
-ATHENA does not alter the role of Super Representatives, the consensus mechanism, block production, or the network's validation structure, nor does it introduce any new class of validators.
-
-The sole purpose of this architecture is to utilize the existing processing capacity of the network more efficiently before transactions enter the consensus process, without modifying the core architecture of the Host Protocol.
-
-### Deterministic Execution Principle
-
-One of the fundamental principles of the ATHENA architecture is that every transaction must be processed exactly according to the execution path defined in its Execution Permit.
-
-After the Execution Permit is issued, no network component is permitted to independently modify, reinterpret, or replace any part of the transaction's validation, scheduling, or execution path.
-
-Each network component is responsible solely for performing the stage assigned to it in the Execution Permit, and after successfully completing that stage, it is required to deliver the transaction to the next component strictly in accordance with the instructions recorded in the permit.
-
-Consequently:
-
-- The execution path of every transaction is deterministically defined from the very moment it enters the network.
-- Independent decision‑making by network components regarding the execution path is eliminated.
-- All stages of transaction validation and execution can be reconstructed and independently verified at any time.
-- The entire transaction lifecycle—from admission to final ledger recording—remains transparent, documented, and auditable.
-
-Accordingly, the behavior of each transaction is determined only once—at the admission stage, based on Host Protocol policies—and remains unchanged throughout the transaction lifecycle.
-
-### Summary
-
-ATHENA is a policy‑driven transaction lifecycle management architecture that provides an intelligent layer for admission, routing, scheduling, and execution, without making any changes to the Host Protocol's consensus mechanism, governance model, security structure, or native execution logic.
-
-In this architecture, all execution decisions are made according to Host Protocol policies and communicated to network components through the Execution Permit. All network components are required to perform transaction validation and execution steps exactly in accordance with this permit.
-
-In this way, ATHENA not only increases the efficiency of existing processing resources but also enables intelligent transaction lifecycle management, independent verification, full auditability, monitoring of expected behavior or outcomes, and full compatibility with the native architecture of the network.
 ___
 ___
 # Threat Model
