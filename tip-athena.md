@@ -1480,13 +1480,17 @@ ___
 ___
 # Transaction Lifecycle After Network Support of the AVP-DS Capability
 
-In the ATHENA architecture, the transaction lifecycle begins at the moment the user decides to send a transaction through their wallet and ends when the final transaction result is recorded in the global ledger and monitored against the expected behavior or outcome by ATHENA.
+With network support of the AVP-DS capability, the lifecycle of each transaction begins from the moment the transaction submission request is sent by the wallet to the Network Protocol, and continues until the comparison and monitoring of the "expected behavior or outcome" recorded in the Execution Permit against the validation result — and then the registration of the final transaction result in the network ledger.
 
-In this architecture, transaction admission, validation, execution, and monitoring are all conducted according to Host Protocol policies. ATHENA is solely responsible for managing the transaction lifecycle.
+In this framework, the Network Protocol is the authority for issuing Execution Permits to route transactions into the network and place them on the authorized validation path — on a per-transaction basis.
 
-### Phase 1: Transaction Preparation and Admission Request Submission
+The instructions concerning the execution path, the relevant authorized components, and the validation conditions — including conflict management at two levels (prevention of conflict before the transaction is sent, and management of conflict after the transaction is sent to the network if identified by the relevant validation components) — are issued within that same permit, on a per-transaction basis, by the Network Protocol.
 
-The user enters the required transaction information into the wallet. Depending on the operation type, this information may include:
+After the components and validation path are determined and the Execution Permit is issued on a per-transaction basis, all relevant and designated components are required to follow the path and instructions of that same permit, and no designated execution component is permitted to independently alter the path or the designated decisions.
+
+### Phase 1: Initial Preparation, Data Collection, and Submission of the Transaction Request to the Network Protocol
+
+The user enters the required transaction information in the wallet. Depending on the type of operation, this information may include:
 
 - Sender address
 - Receiver address
@@ -1494,153 +1498,147 @@ The user enters the required transaction information into the wallet. Depending 
 - Asset type (TRX, TRC-20, NFT, etc.)
 - Smart contract invocation
 - Contract parameters
-- Any other information required by ATHENA in accordance with Host Protocol policies
+- Any other information that the Network Protocol, in accordance with its policies, deems necessary.
 
-After the information is completed, the wallet displays a transaction summary on the confirmation screen for the user to review before signing.
+After completing the information, the wallet displays the transaction summary on the confirmation screen for user review before signing.
 
-At this stage, and before the user is allowed to sign the transaction, the wallet sends an Admission Request containing the information required by the Host Protocol to ATHENA.
+At this stage, and before the user is authorized to sign the transaction, the wallet prepares a transaction submission request (Admission Request) — containing the information required under the rules and requirements of the Network Protocol — and sends it to the Network Protocol.
 
-ATHENA, after evaluating the request, the real-time network state, and Host Protocol policies, issues an Execution Permit upon approval.
+After receiving the transaction submission request from the wallet, the Network Protocol evaluates the request and, after reviewing the real-time network state and its own policies, issues an Execution Permit if approved.
 
-Only after receiving a valid Execution Permit does the wallet enable the user to sign the transaction. Consequently, no signed transaction is created or broadcast before receiving admission authorization, and all transactions enter the network from the outset according to the execution path determined by ATHENA.
+Only after receiving the Execution Permit from the Network Protocol is the wallet authorized to allow the user to sign the transaction. As a result, no signed transaction is created or sent before receiving the Execution Permit, and all transactions, from the outset, are routed — based on the execution path determined by the Network Protocol — to the relevant components designated by their own dedicated Execution Permit.
 
-### Phase 2: Analysis by ATHENA
+### Phase 2: Managed Admission
 
-ATHENA simultaneously evaluates multiple sets of information:
+Network support of the AVP-DS capability replaces "unmanaged admission" with "managed admission."
 
-1. Information received from the wallet.
+In many current networks, wallets send transactions to the transaction-hosting network without any awareness of the real-time state. After transactions are propagated and enter the network, networks make transaction management possible only after entry, through scheduling or queueing.
 
-2. Additional information required by the Host Protocol for each Admission Request.
+Network support of the AVP-DS capability makes transaction management possible not after they are sent, but before sending, at the wallet. Before signed transactions enter the network, the Network Protocol:
 
-3. The current real-time state of the network, including:
+- Reviews the real-time network state.
+- Then determines the most appropriate validation and execution path for that transaction.
+- Based on the volume and number of incoming transaction requests, dynamically forms parallel validation lanes and communicates them, on a per-transaction basis, to the relevant components within the Execution Permit.
+- The Execution Permit contains the validation-related components, on a per-transaction basis for each incoming transaction, and designates the relevant validation components for each transaction based on the dynamic validation lanes, in proportion to the volume of incoming transaction requests.
+- Each transaction uses only the designated validation path and the designated validation components — not a public path, and not the entire network's capacity for validation — in accordance with the Execution Permit issued by the Network Protocol.
 
-- Number of incoming transactions at any given moment
-- Available processing capacity of initial validators
-- Available processing capacity of execution domains
-- Load of parallel execution engines within each domain, individually
-- Sender Consistency status
-- Any other information required by Host Protocol policies
+As a result, transaction management becomes possible before the signed transaction enters the network, through the interaction of the wallet with the Network Protocol — such that the issuance of the Execution Permit and the determination of the transaction path occur before signing the transaction and before sending the transaction to the network.
 
-### Phase 3: Execution Permit Generation
+Thus, the network's input is no longer an unmanaged stream of transactions, but an intelligent, controlled, scheduled, dynamic flow in the hands of the Network Protocol.
 
-After completing its analysis, ATHENA issues an Execution Permit.
+### Phase 3: The Execution Permit
 
-This permit serves as the complete execution blueprint for the transaction.
+The Execution Permit is not merely an admission authorization; it is the dedicated roadmap of each transaction, in which the Network Protocol determines addressing, routing, and transaction direction — from the moment the wallet sends the transaction submission request to the Network Protocol until registration in the ledger. This permit is the interface between the Decision Layer and the Execution Layer, and it conveys the dedicated instructions of each transaction to the relevant components.
 
-The Execution Permit may include:
+The Execution Permit includes the following:
 
-- Permit validity
-- Dynamic selection of initial validators and the resulting formation of parallel validation pipelines based on real-time network load and Host Protocol policies
-- Minimum validation difficulty level
-- Execution domain
-- Selection of the least-loaded execution engine within that domain, from among the parallel engines
-- Application of conflict and exception management policies according to Host Protocol rules
-- Recording of expected behavior or outcome within the Execution Permit
-- Network behavior monitoring policies, expected transaction outcome, conflict management, and exception handling according to Host Protocol rules
-- Any other parameters defined by the Host Protocol
+- Designation of the components responsible for validation (only the designated components, not the entire network capacity)
+- The policy for preventing potential conflicts at two levels (before and after network entry)
+- Designation of the signature algorithm
+- Transaction information: sender and receiver addresses, asset type and amount, expected behavior or outcome, relevant validators, initial validation lane, execution domain and the least-loaded parallel execution engine, and other parameters required by the Network Protocol
 
-Simultaneously:
+Addressing and routing are performed exclusively for each transaction and are not limited to a single public, fixed path for validating all incoming transactions. All relevant components designated in the Execution Permit, on a per-transaction basis, are required to follow the path and instructions specified therein and to advance the process in accordance with the Network Protocol's decisions.
 
-- A Canonical Copy of the permit is stored in ATHENA for future verification.
-- A copy of the Execution Permit is sent to the wallet for transaction submission to the initial validators.
+After the Execution Permit is issued, one copy is sent to the requesting wallet, and the reference copy (Canonical Copy) is retained in the location designated by the Network Protocol, so that the relevant components can verify the authenticity and conformity of the received permit.
 
-### Phase 4: Completion of Both Network Entry Conditions
+After receiving the Execution Permit, the wallet enables the user to sign the transaction and, after signing, sends the transaction along with the permit to the designated initial validation nodes.
 
-In ATHENA, a transaction may only begin entering the network when two independent conditions are met:
+### Phase 4: Transaction Signing After Receiving the Execution Permit
 
-Condition 1: The user has signed the transaction.
+With network support of the AVP-DS capability, the user is authorized to sign the transaction only when the wallet has sent the information required for issuing the Execution Permit to the Network Protocol and has received the Execution Permit.
 
-Condition 2: ATHENA has issued a valid Execution Permit.
+Therefore, after receiving the permit, the wallet enables the user to sign the transaction and sends the transaction, along with the Execution Permit, to the initial validation nodes specified in the Execution Permit.
 
-Neither condition can substitute for the other. Only after both conditions are satisfied is the wallet authorized to submit the transaction.
+### Phase 5: Direct Submission of the Transaction to the Initial Validation Nodes
 
-### Phase 5: Direct Transaction Submission
+First, based on the Network Protocol's instructions, the wallet prepares the transaction submission request along with the required information and sends it to the Network Protocol for evaluation.
 
-After both conditions are met, the wallet submits:
+After receiving the Execution Permit from the Network Protocol, the wallet enables the user to sign the transaction. After the user signs the transaction, the wallet sends it, along with the Execution Permit, directly to the initial validation nodes designated in that same permit.
 
-- The signed transaction, along with
-- The Execution Permit
+In this manner, the signed transaction does not enter any public transaction queue or public waiting layer and will enter the validation process via the dedicated path determined in the Execution Permit.
 
-Directly to the initial validators designated in the Execution Permit.
+### Phase 6: Full Verification of the Execution Permit
 
-The transaction never enters any public transaction queue or waiting layer.
+Before validation begins, the initial validation nodes are required to verify the full contents of the Execution Permit against the reference copy retained in the Canonical Copy, fully and line by line, within the framework of the Network Protocol.
 
-### Phase 6: Full Execution Permit Verification
+This verification covers all components of the permit. In the event of any discrepancy, the transaction is rejected and the relevant report is sent to the Network Protocol.
 
-Before beginning validation, the initial validators are required to verify the entire content of the Execution Permit against the Canonical Copy stored in ATHENA.
-
-This verification covers all components of the permit. If any discrepancy is found, the transaction is rejected, and the appropriate action is taken according to Host Protocol policy.
-
-After successful Execution Permit verification and confirmation of its full alignment with the Canonical Copy—since all transaction validation and execution stages have been completely and authoritatively defined in this permit—all network components are required to operate without making any independent decisions, strictly following the instructions recorded in the Execution Permit.
+Upon successful verification and confirmation of the Execution Permit and its full conformity with the Canonical Copy — given that the complete roadmap of addressing, routing, and the components responsible for validation has been fully determined and specified in the Execution Permit — all relevant and designated components are required to follow exactly the instructions recorded in that same permit, without independent decision-making regarding the path or assigned duties.
 
 ### Phase 7: Initial Validation
 
-The initial validator nodes selected by ATHENA, upon receiving the transaction along with the Execution Permit and after completing its full verification, perform the following preliminary checks:
+The initial validation nodes designated on a per-transaction basis, in accordance with the Execution Permit issued by the Network Protocol, after receiving the transaction along with the Execution Permit and after completing full and line-by-line verification against the copy stored in the Canonical Copy, perform preliminary checks based on the items specified by the Network Protocol — including the following:
 
 - Digital signature validity
 - Transaction structure
 - Account balance
 - Request validity
-- Any other checks defined by the network protocol
+- Any other checks defined by the Network Protocol
 
-After successfully completing the initial validation, the designated nodes forward the transaction to the specified execution domain and, among the set of parallel execution engines within that domain, to the exact execution engine designated in the Execution Permit.
+After successful completion of initial validation, the designated nodes send the transaction to the specified execution domain and, from among the set of parallel execution engines in that domain, to the exact execution engine specified in the Execution Permit.
 
-Each network component is required, after successfully completing its assigned stage, to deliver the transaction to the next component without making any independent decisions, strictly following the instructions recorded in the Execution Permit.
+Each component associated with the validation of a specific transaction, in accordance with the Execution Permit issued by the Network Protocol on a per-transaction basis, is required — after successfully completing its own stage — to deliver the transaction, without any independent decision, strictly in accordance with the instructions recorded in the Execution Permit, to the next relevant component.
 
-### Phase 8: Routing to the Execution Engine
+### Phase 8: Routing the Transaction to the Execution Engine Designated in the Execution Permit
 
-After initial validation is complete, the transaction is routed exactly according to the Execution Permit to the designated execution domain and execution engine.
+After completion of initial validation, the transaction is routed exactly in accordance with the Execution Permit to the designated execution domain and the specified execution engine.
 
-No new decisions are made by any node at this stage.
+No new decision is made by any node at this stage.
 
-Network members are not authorized to make independent decisions at any stage of validation; all steps must be performed strictly according to the Execution Permit.
+Network members are not authorized to make independent decisions at any stage of validation; all stages must be performed exactly in accordance with the Execution Permit.
 
 ### Phase 9: Transaction Execution
 
-After successful initial validation, the validator nodes, following the instructions recorded in the Execution Permit, send the transaction to the designated execution domain. Within that domain, the transaction is directed to the specific execution engine identified in the Execution Permit, from among the set of parallel execution engines.
+After successful completion of initial validation and submission of the transaction to the execution engine designated in the Execution Permit, the execution engine executes the transaction in accordance with the Network Protocol's rules and instructions. All state transitions, smart contract executions, and other native network logic are performed at this stage.
 
-The designated execution engine, upon receiving the transaction, executes it according to Host Protocol rules. All state transitions, smart contract executions, and other native network logic are performed at this stage.
+Throughout this process, no component of the network is permitted to choose a new path or execution engine; all stages must be performed exactly in accordance with the instructions recorded in the Execution Permit.
 
-Throughout this process, no network component is permitted to select a new path or execution engine; all steps must be performed strictly according to the instructions recorded in the Execution Permit.
+### Phase 10: Monitoring the Expected Behavior or Outcome, Before Ledger Registration
 
-### Phase 10: Exception Management
+After completion of transaction execution in the execution engine and before the final result is registered in the ledger, the Network Protocol compares the execution result with the "expected behavior or outcome" recorded in the Execution Permit.
 
-If an exception occurs at any stage of transaction validation:
+If the result matches the expected behavior or outcome, the transaction is sent to complete the consensus process and be finally registered in the ledger.
 
-- ATHENA manages the exception according to the instructions and policies received from the Host Protocol and sends the relevant report to the Host Protocol.
-- All components re-verify the Execution Permit.
-- A report of the exception or incident is prepared and sent to the Host Protocol.
-- If necessary, actions such as transaction cancellation, retransmission, retransmission via a new path, continuation of validation from the same stage without rollback, and other measures are taken—all according to the pre-defined Host Protocol policies for ATHENA's exception handling.
+If it does not match, the Network Protocol:
 
-### Phase 11: Consensus and Finality
+- First verifies the transaction's Execution Permit and reviews the validation stages that have been completed.
+- Then prepares and maintains an analytical report containing the result of the Execution Permit verification, the completed validation stages, information about the identified discrepancy, and the actions taken to manage or resolve it, with the aim of preventing the recurrence of similar conflicts.
 
-ATHENA has no role in the consensus process, block production, or transaction finalization. After the stages defined in the Execution Permit are completed, all further processing proceeds entirely according to Host Protocol rules and the network's native consensus mechanism. Responsibility for consensus, block production, and final ledger recording rests exclusively with the Host Protocol.
+Decision-making regarding how to manage the discrepancy — including continuing the process, rejecting the transaction, re-validation, or any other decision — rests exclusively with the Network Protocol.
 
-### Phase 12: Ledger Registration
+### Phase 11: Conflict Management
 
-After the transaction reaches Finality, it is recorded in the network's global ledger.
+With network support of the AVP-DS capability, conflict management is part of the Network Protocol's decision-making process and is performed at two levels:
 
-In the ATHENA architecture, the Execution Permit is also recorded alongside the transaction in the ledger, preserving a complete record of the lifecycle, validation path, and execution process of that transaction.
+Level One — Prediction and Prevention of Conflict, Before the Transaction Enters the Network
 
-Recording the Execution Permit enables independent verification, auditing, full reconstruction of the transaction lifecycle, verification of validation process compliance with Host Protocol policies, and monitoring of expected behavior or outcomes in the future.
+By reviewing the real-time network state, the information received from the wallet, its own policies, and the experience of past conflicts, the Network Protocol predicts and assesses the likelihood of conflict and determines preventive measures and the appropriate conflict management policy in each transaction's Execution Permit.
 
-Thus, each transaction, in addition to its final result, retains a documented and verifiable history of all its validation, routing, and execution stages—which can serve as the basis for security reviews, incident analysis, and future audits.
+Level Two — Identification and Management of Conflict, After the Transaction Enters the Network
 
-### Phase 13: Monitoring Expected Behavior or Outcome
+The execution components designated in the Execution Permit, upon identifying a conflict or exceptional condition, review the Execution Permit and the completed validation stages, and send the verification report and conflict information to the Network Protocol. Decision-making regarding continuing the process, re-execution, issuing a new permit, changing the path, or rejecting the transaction rests exclusively with the Network Protocol, and all relevant components are required to execute its instructions.
 
-This is the final stage of the transaction lifecycle.
+Analytical Report and Prevention of Conflict Recurrence
 
-After the transaction is recorded, ATHENA compares the recorded outcome with the expected behavior or outcome that was defined when the Execution Permit was issued.
+For each identified conflict, the Network Protocol prepares and maintains an analytical report containing the cause, the manner of identification, the actions taken, and the final outcome. This information is used to improve the policies for issuing Execution Permits, selecting the validation path, validation nodes, domain, and execution engine, and to prevent the recurrence of similar conflicts in future transactions.
 
-If the result matches the expected behavior, the transaction lifecycle ends.
+### Phase 12: Consensus and Finality
 
-If not, ATHENA records the discrepancy as an Exception and sends a report to the Host Protocol.
+The AVP-DS capability is not designed to change or replace the network's fundamental mechanisms, including consensus layers, protocol policies, or core validation rules.
 
-The Host Protocol, based on its own policies, decides how to handle the discrepancy. These decisions may include resolving the discrepancy from the same stage, canceling the transaction, or re-validating via a different parallel path and comparing the results obtained.
+Through the separation of the Decision Layer from the Execution Layer, this capability enables the dynamic use of new capacities, increases validation capacity through parallel paths, manages the transaction from the request stage in the wallet to registration in the ledger, and prevents conflicts before the transaction enters the network.
 
-### Key Feature of This Architecture
+Throughout all these stages, the Network Protocol remains the exclusive decision-making authority, and the components relevant to each transaction follow the instructions issued in the Execution Permit. Therefore, supporting networks can utilize their resources and capacities in a coordinated, dynamic, intelligent, and scalable manner, without requiring changes to the fundamental mechanisms, consensus, or core rules of the network.
 
-In the ATHENA architecture, no transaction is permitted to enter the network before receiving an Execution Permit with its complete validation and execution path fully determined. From the moment the permit is issued until the end of the transaction lifecycle, all network components are required to operate strictly according to the instructions recorded in the Execution Permit, and ATHENA monitors this lifecycle through the final expected behavior or outcome monitoring stage.
+### Phase 13: Registration in the Network Ledger (Transaction Information Alongside the Execution Permit)
+
+In many conventional architectures, when a transaction is registered in the network ledger, only items such as the final transaction result, the signature hash, the sender and receiver addresses, the amount and type of asset, and other public information are visible — and no information about the validation path and relevant components, including the responsible nodes or the execution engine, is present.
+
+In contrast, with network support of the AVP-DS capability, it becomes possible to fully reconstruct the validation path, in addition to the public information. This transparency — the ability to reconstruct and audit — is among the benefits of network support of AVP-DS.
+
+For this reason, the network must store the Execution Permit or the verifiable cryptographic commitment associated with the transaction, along with the other public transaction information, in the network ledger.
+
+This information enables independent auditing, reconstruction of the transaction's execution path, verification of the performance of network components and monitoring of the behavior of the relevant components (including nodes and engines), evaluation of validator performance, and analysis of the validation process — even years after finality.
 ___
 ___
 # Threat Model
