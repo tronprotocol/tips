@@ -349,31 +349,6 @@ Rather, it provides an architectural framework that, under favorable conditions,
 All of this is achieved without changing the consensus algorithm, account model, or the unified global ledger.
 ___
 ___
-# Architectural Analysis and Enhancement of Operational Capacity
-
-The ATHENA architecture is based on the premise that, in many blockchain networks, limitations in the admission layer, transaction admission management, initial validation, scheduling, and workload distribution create long queues, increased waiting times, and reduced operational efficiency long before the consensus algorithm reaches its actual processing capacity.
-
-ATHENA addresses these limitations without introducing any modifications to the consensus algorithm, ledger structure, account model, or the network's native validation rules.
-
-Upon receiving a transaction submission request from a wallet, ATHENA collects the information required by the Host Protocol from both the wallet and the network. Based on the current network load, it dynamically forms the initial validation group through dynamic validator selection, determines the appropriate execution domain, selects the least-loaded parallel execution engine within that domain, and records all information required for transaction validation—from admission to final ledger registration—within the Execution Permit.
-
-After the permit is issued, one copy of the Execution Permit is stored in the Canonical Copy for future verification, while another copy is delivered to the wallet. The wallet then submits the signed transaction together with the Execution Permit to the validator nodes specified in the permit.
-
-From this point onward, every network component—including validator nodes, execution engines, and other protocol components—performs validation, execution, consensus, and final ledger registration strictly according to the information contained in the Execution Permit and the rules defined by the Host Protocol, without making any independent routing or scheduling decisions.
-
-If a conflict or any exceptional condition is detected within an execution engine, the transaction is not returned to the beginning of the validation lifecycle. Instead, ATHENA first revalidates the Execution Permit and verifies the validation path already completed, then manages conflict resolution and continuation of the validation process from the same stage according to the policies defined by the Host Protocol.
-
-ATHENA also generates an analytical report for every detected conflict or exceptional condition, describing its cause, the applied resolution strategy, and the final outcome. These reports are delivered to the Host Protocol, enabling it to refine admission policies, scheduling policies, validator selection, execution-domain selection, execution-engine selection, and other Execution Permit issuance policies in order to reduce the likelihood of similar conflicts in future transactions.
-
-Consequently, without modifying the network's consensus algorithm or validation rules, ATHENA increases the network's operational capacity by providing unified transaction lifecycle management, dynamic validator selection, parallel organization of the initial validation process, intelligent execution-domain selection, dynamic selection of the least-loaded execution engine within each execution domain, conflict management based on Host Protocol policies, and more efficient utilization of existing processing resources.
-
-From an architectural perspective, whenever additional validator nodes or processing resources become available, ATHENA introduces no inherent limitation on creating additional initial validation groups or utilizing more parallel execution engines. The expansion of operational capacity is therefore achieved by scaling these resources within the policies and constraints defined by the Host Protocol.
-
-The size of initial validation groups, the number of validator nodes required for each group, the number of execution engines within each execution domain, the evolution of execution domains, and all other operational constraints remain entirely under the control of the Host Protocol to preserve network security, decentralization, stability, and operational efficiency.
-
-As a result, ATHENA does not attempt to increase the theoretical capacity of the consensus algorithm itself. Instead, through intelligent and unified transaction lifecycle management, more effective utilization of existing resources, balanced workload distribution across parallel initial validation groups and parallel execution engines within each execution domain, and conflict management governed by Host Protocol policies, ATHENA provides a scalable architectural framework for increasing the network's operational capacity without modifying its underlying architecture, consensus algorithm, or unified global ledger.
-___
-___
 # Comparison of ATHENA with Other Scalability Solutions
 
 Improving scalability has long been one of the primary research objectives in blockchain technology, and numerous architectural approaches have been proposed to achieve this goal. Most existing solutions increase transaction throughput by modifying one or more fundamental components of blockchain architecture, such as the consensus algorithm, ledger organization, execution model, or transaction processing flow.
