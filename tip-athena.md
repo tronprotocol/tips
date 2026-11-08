@@ -69,161 +69,298 @@ The AVP-DS capability is presented with the aim of organizing and expanding para
 In this approach, the network protocol is the authority for issuing the necessary permits and determining the instructions for routing transactions within the same permit for organizing parallel validation paths.
 ___
 ___
-# Unified Transaction Lifecycle Management for Parallel Validation in the TRON Network
+# Conflict Management in Parallel Execution with Network Support of the AVP-DS Capability
 
-The continuous growth of the TRON ecosystem has transformed the network into one of the world's largest public blockchain infrastructures in terms of transaction volume, active accounts, smart contract activity, and on-chain applications. While the current architecture has demonstrated remarkable stability and performance, the long-term evolution of the network—including support for parallel transactions—requires an architecture with a novel mechanism in the admission system, validation, and other network components, without altering the network's validation and consensus protocols. Such an architecture must be capable of scaling beyond the limitations of predominantly sequential validation to keep the network scalable and dynamic for the future.
+The continuous growth of the blockchain ecosystem, the increase in transaction volume, the expansion of active accounts, and the development of smart contracts and on-chain applications have transformed blockchain networks into one of the world's most important financial and digital infrastructures. The continuity of innovations and the expansion of this technology's applications further highlights the role of blockchain networks in shaping the future of the global financial system.
 
-Parallel validation has become one of the most important research directions in blockchain scalability. Existing approaches—including optimistic execution, dependency analysis, speculative execution, locking mechanisms, access-list scheduling, and object-oriented execution—attempt to improve throughput by resolving conflicts during execution.
+Current blockchain network architectures have demonstrated remarkable stability and performance; however, the growth in demand and the increase in operational volume — particularly in high-traffic networks — have placed increasing pressure on the validation and execution capacity for transactions.
 
-However, these approaches were designed around the assumptions of their own blockchain architectures. Applying them directly to TRON would require substantial modifications to the transaction lifecycle, execution engine, or protocol behavior.
+The continuation of these mechanisms, without leveraging innovative solutions, will in the long term increase the gap between the network's operational capacity and the volume of incoming requests.
 
-### ATHENA follows a fundamentally different philosophy.
+In contrast, the development and deployment of new architectures makes it possible to expand the validation and execution capacity for transactions in proportion to the network's demand.
 
-Rather than redesigning Java-Tron or replacing the execution engine, ATHENA introduces a native admission and validation architecture specifically designed for TRON.
 
-ATHENA performs all critical execution decisions before a transaction enters the execution phase. This approach transforms conflict management from a reactive process into a proactive one.
+The long-term evolution of networks — including support for parallel validation and execution of transactions, and increasing the number of confirmed transactions in proportion to the growth of incoming requests — requires a novel mechanism in the admission system, validation, and other network components.
 
+This capability must enable the dynamic expansion of validation lanes, without requiring changes to the network's validation and consensus protocols.
 
-### ATHENA's Role in the New Architecture
 
-In this unified architecture, ATHENA is no longer merely an admission layer—it becomes the complete decision-making center for the entire transaction lifecycle.
+Parallel validation, aimed at increasing confirmed transactions, and horizontal scaling of networks (adding parallel validation lanes) as opposed to vertical scaling (increasing the speed of each validation lane), have become one of the most important practical research directions in blockchain scalability.
 
-### ATHENA's responsibilities include:
+Existing approaches in this field — including optimistic execution, dependency analysis, speculative execution, locking mechanisms, access-list-based scheduling, and object-oriented execution — attempt to enable parallel execution and increase the network's throughput by identifying, preventing, or managing transaction conflicts.
 
-- Transaction Admission: Receiving the Admission Request and required information from the wallet according to Host Protocol rules.
-- Information Analysis: Analyzing the received information, Access List, and other required Metadata for decision-making.
-- Applying Network Policies: Applying admission policies and Sender Consistency.
-- Dynamic Validator Selection: Dynamically selecting validator nodes for each transaction based on real-time network policies and TRON protocols.
-- Creating Parallel Validation Pipelines: Assigning each transaction to a dedicated parallel validation pipeline resulting from dynamic node selection.
-- Execution Domain Classification: Determining the execution domain or category of the transaction (TRX, USDT, NFT, General, etc.).
-- Workload Monitoring and Engine Selection: Monitoring the load of execution engines in each domain operating in parallel and selecting the execution engine with the lowest processing load at the time of permit issuance.
-- Determining Conflict Management Policy: Selecting the appropriate conflict management strategy (Serialization, Optimistic, Locking, or Hybrid) based on transaction type, domain, and network status.
-- Issuing Execution Permit: Generating and issuing the Execution Permit containing all the information required for transaction validation, from the selected nodes for initial validation to transaction recording in the ledger, as well as the selected conflict management policy.
-- Canonical Copy Storage: Upon permit issuance, storing the Execution Permit in the Canonical Copy for subsequent verification.
+As the number of concurrently executed transactions increases, so does the likelihood of their simultaneous access to shared data and states. Therefore, conflict management is one of the determining factors in the productivity gained from parallelization. The higher the cost of identifying and resolving conflicts, the more of the capacity gained from adding parallel lanes will be consumed by managing these conflicts.
 
-With the arrival of a transaction submission request from the wallet to ATHENA, ATHENA's responsibility begins and continues until the transaction's final status is determined according to the Host Protocol and the transaction is finally recorded in the network's global ledger.
+### Why Does Conflict Limit Horizontal Scaling?
 
-Although ATHENA does not perform the transaction execution or consensus operations itself, it is responsible for all decisions related to a transaction's validation path—such as dynamic node selection, domain selection, selection of the parallel execution engine in each domain based on load monitoring, and management of exceptions and conflicts if detected—for the entire transaction lifecycle.
+The relationship between horizontal scaling and conflict management can be explained as follows:
 
+1. Horizontal scaling means increasing parallel execution capacity by adding more validation lanes.
+2. As the number of lanes increases, the possibility of executing more transactions concurrently is provided.
+3. As concurrent transactions increase, so does the likelihood of multiple transactions accessing shared states and data.
+4. In the event of a conflict, the network must, in order to preserve the correctness of the final state, respect the execution order of related transactions. Depending on the conflict management mechanism, this may lead to waiting, temporary suspension, rescheduling, re-execution, or rollback of part of the operations.
+5. Therefore, if conflict management is not efficient, the cost of handling conflicts can eliminate a significant portion of the capacity gained from adding parallel lanes.
 
-### ATHENA's Fundamental Innovation: Execution Permit-Based Conflict Management
+Hence, conflict management is one of the important bottlenecks in the effective exploitation of horizontal scaling.
 
-Unlike conventional architectures that handle conflict management after a conflict occurs by creating new schedules, building dependency graphs, re-execution, or locking mechanisms, ATHENA introduces a completely different approach.
+With network support of the AVP-DS capability, this very bottleneck is targeted: by predicting conflicts before the transaction enters the network, determining the validation path, and managing the order of related transactions, the cost arising from conflict is reduced.
 
-In ATHENA, conflict management begins before the transaction enters the execution phase.
+Today, the use of a fixed and pre-determined validation path in the network is no longer sufficient to respond to the volume and diversity of incoming requests, and leads to execution bottlenecks, increased queue lengths, unbalanced load distribution, and reduced network productivity.
 
-All decisions related to the validation path, execution domain, execution engine, and conflict management policy are made and recorded at the time the Execution Permit is issued.
+Under such conditions, as incoming requests increase, the network is no longer able to validate all requests, because the validation capacity — due to the limited number of validation paths — remains limited.
 
-For this reason, when a conflict occurs, the network does not need to redesign the validation path or make a new decision. ATHENA manages the continuation of transaction execution simply by re-verifying the Execution Permit and applying pre-defined policies established by the network protocols.
+The AVP-DS Solution
 
-This approach transforms the traditional concept of "post-occurrence conflict management" into "pre-defined permit-based conflict management" —an approach that reduces runtime overhead, prevents re-execution of initial validation, and enables higher scalability without changing the account model, execution engine, or consensus algorithm.
+Level One — Prediction and Prevention of Conflict, Before the Transaction Enters the Network: The Network Protocol, upon receiving the transaction submission request from the wallet, reviews the network state and related transactions, and by issuing the Execution Permit, determines the validation path, responsible components, and appropriate conflict management policy for each transaction. At this stage, in addition to determining the path, the Network Protocol also specifies the order of handling related transactions, so as to prevent the concurrent execution of incompatible operations and, consequently, the creation of conflict.
 
+Level Two — Conflict Management After the Transaction Enters the Network: If one of the execution components, during validation or execution, identifies a conflict or exceptional condition, it first verifies and reviews the Execution Permit and the completed stages, and then sends the relevant report to the Network Protocol and waits for a response. Decision-making regarding how to manage the conflict and continue the process rests exclusively with the Network Protocol, and none of the execution components are permitted to independently decide on how to handle the identified conflict.
 
-### Execution Permit: The Authoritative Validation Contract
+In this manner, with network support of the AVP-DS capability, conflict management transforms from a purely reactive mechanism into a two-level process: prevention before the transaction enters the network, and controlled management of identified cases after its entry. The goal of this approach is to reduce the need for rollback and re-execution of transactions and to increase the productivity gained from horizontal scaling.
 
-ATHENA's core innovation lies in the fact that all stages of a transaction's validation—from permit issuance for the wallet to ledger recording—are determined by ATHENA and recorded in the Execution Permit. This permit acts as the Authoritative Validation Contract for the entire transaction lifecycle.
 
-The Execution Permit includes the following information:
+Hence, with network support of the AVP-DS capability, a fundamentally different and innovative approach is adopted for achieving network growth — in the direction of increasing transaction validation. The most important feature of this approach is the separation of the Decision Layer from the Execution Layer.
 
-- Permit ID and validity period
-- Validator nodes selected for initial validation
-- Determined execution domain
-- Selected execution engine with the lowest load from each domain
-- Other protocol parameters required for the transaction to progress from admission to final recording
 
-After the Execution Permit is issued:
+The parallelization approach, by leveraging the existing capacity and current components of the network — creates parallel validation lanes dynamically and based on the volume of incoming transactions — and acts in accordance with the priorities, rules, and required difficulty level for validation, on a per-transaction basis.
 
-1. Based on the permit, the wallet sends the signed transaction to the designated nodes.
+This approach moves the starting point of transaction management from the stage after the transaction enters the network to the stage of the transaction submission request in the wallet and before its final signing. At this stage, the wallet sends the information required for admission and initial assessment of the request to the Network Protocol, and the Network Protocol, after review, issues the Execution Permit appropriate to that transaction.
 
-2. After performing initial validation, the nodes send the transaction to the designated domain and execution engine without any new decision-making and solely based on the information in the Execution Permit.
+### Next Priority: Horizontal Scaling of the Network
 
-3. The execution engine processes the transaction according to the designated path.
+Horizontal scaling of the network becomes possible through the dynamic formation of parallel validation lanes in proportion to the increase in incoming requests. The Network Protocol, using the existing hardware capacity and the capacities that will be added to the network in the future, dynamically determines the number and composition of required lanes.
 
-No secondary scheduling decisions, no new execution queues, and no additional routing layers are created at runtime.
+This process is carried out based on conflict management, appropriate path selection, and designation of validation components on a per-transaction basis, so that the network's parallel capacity expands according to demand and available resources.
 
-All validation and transaction routing stages from the moment the Execution Permit is issued until its status is finalized are pre-determined in the permit, and all network components are required to act accordingly.
+Difference from Conventional Networks
 
-All validation stages must be performed in accordance with the Execution Permit issued by ATHENA.
+In many conventional architectures, parallel execution capacity depends on a pre-defined execution structure and resources, and changing the composition of execution paths usually requires architectural or configuration changes.
 
-Neither ATHENA nor the network protocols make new decisions regarding the initial path or continuation of transaction validation after the Execution Permit is issued. All stages are executed based on the previously issued Execution Permit. Only in the event of a conflict or exceptional condition does ATHENA manage the continuation of transaction execution according to Host Protocol policies.
+With network support of the AVP-DS capability, the network — in a different manner — forms validation lanes as dynamic software paths, using existing components or current capacity and under the management of the Network Protocol. The Execution Permit determines the path and components required for each transaction, and the Network Protocol, based on the volume of requests and available resources, provides the possibility of forming and allocating more lanes.
 
-In such cases, ATHENA is responsible for managing exceptions, conflicts, or other potential issues that may occur during the transaction execution path.
+Whenever new hardware capacity is added to the network, the Network Protocol, using the addressing mechanism and the Execution Permit, organizes and employs that new capacity within validation paths.
 
-In these cases, ATHENA does not make new decisions regarding the initial path or continuation of transaction validation; rather, it only manages the continuation of transaction execution in accordance with Host Protocol policies when conflicts or exceptional conditions arise.
+Therefore, the number and composition of validation lanes, with network support of the AVP-DS capability, are not limited to a fixed and pre-determined structure, but can be expanded dynamically and in proportion to the network's resource capacity.
 
-ATHENA's main responsibilities in such cases include:
+### The Central Role of the Execution Permit in Creating Parallel Validation Lanes
 
-- Managing conflicts detected by execution engines according to Host Protocol policies.
-- Re-verifying the Execution Permit in case of interference detection, as a first step and according to Host Protocol rules.
-- Determining the most suitable path for continuing transaction execution after a conflict occurs.
-- Redirecting the transaction to the same engine, another engine from the same domain, or the General Engine according to Host Protocol policies.
-- Executing Retry or Re-execution in cases where Host Protocol deems it mandatory.
-- In exceptional circumstances, returning the transaction for issuance of a new Execution Permit, only if such a process is defined by the Host Protocol.
-- Preparing analytical reports of occurred conflicts and sending them to the Host Protocol as feedback, with the aim of preventing repeated conflicts to improve or change admission policies, scheduling, and Execution Permit issuance for subsequent network transactions.
+With network support of the AVP-DS capability, parallel validation lanes are formed as dynamic software paths on a per-transaction basis, not as fixed and pre-determined hardware paths.
 
+The Execution Permit is the basis for creating, allocating, and organizing parallel validation lanes on a per-transaction basis. The Network Protocol, by reviewing the conditions, the number of incoming transaction requests, and the minimum validation difficulty level required under network rules, determines — through the issuance of the Execution Permit — the roadmap and dedicated validation path of each transaction.
 
-### Conflict Management in ATHENA Architecture
+This path includes the designation of initial validation nodes, the least-loaded execution engine from among the parallel execution engines of a domain, and other components required to complete the validation of a transaction — from the moment the transaction submission request is sent by the wallet to the Network Protocol until the monitoring of the expected outcome and the registration of the final validation result in the network ledger.
 
-In this unified architecture, conflict management is performed proactively, relying on information received from the wallet and the network protocol at the time of Execution Permit issuance.
+Accordingly, parallel validation lanes are formed and organized dynamically, not as public and fixed paths for the entire network, but in accordance with the issued Execution Permits and on a per-transaction basis.
 
-When an execution engine detects a conflict, execution error, or any other exceptional condition according to Host Protocol during transaction validation:
+The designation of the validation roadmap in the Execution Permit, on a per-transaction basis, means that the transaction — in accordance with the designated components — after passing through each validation stage, is directed along its dedicated path in the Execution Permit to the next designated execution component.
 
-1. The execution engine identifies the conflict and reports it to ATHENA.
+In this manner, the parallel validation lane for each transaction is formed through the selection and logical connection of the required network components within a specific execution path. These paths are formed using the existing hardware capacity and the capacities that will be added to the network in the future, in a software manner and under the management of the Network Protocol on a per-transaction basis, and are allocated through the issuance of the Execution Permit.
 
-2. ATHENA first verifies the Execution Permit, and then based on Host Protocol policies, manages the conflict handling and continuation of transaction validation:
+Therefore, the Execution Permit is not merely a routing instruction; it is the Network Protocol's primary mechanism for forming, designating, and dynamically allocating parallel validation lanes on a per-transaction basis in the network.
 
-- It first verifies and validates the integrity and completed validation stages based on the Execution Permit to ensure the validation path has still followed the initial decision.
-- After verification, ATHENA acts according to Host Protocol policies (e.g., redirecting to Fallback Engine, Retry, or Re-execution).
-- If continuing transaction validation is impossible even with the above measures, ATHENA, due to lack of a solution, sends a report to the network, cancels the transaction according to Host Protocol rules, and sends a new permit for retransmission to the wallet.
 
-3. ATHENA prepares an analytical report of each occurred conflict and its management approach and sends it to the Host Protocol to prevent conflict repetition by improving network policies in subsequent permit issuance for future transactions.
+With network support of the AVP-DS capability, the Network Protocol is the authority for decision-making and lifecycle management of the transaction. The Network Protocol, upon receiving the transaction submission request from the wallet — containing the information required under the rules of the Network Protocol, before signing and before the transaction enters the network — and upon receiving the required information from the network (including real-time load monitoring, the number of transactions under validation, and other required information), makes the decisions regarding admission of the request, validation path, selection of relevant components, execution domain, the least-loaded execution engine from the designated domain, and conflict management policy, and records them in the Execution Permit.
 
-4. The network protocol, upon receiving these reports, uses them to improve admission policies, scheduling, and Execution Permit issuance for subsequent transactions, preventing the repetition of the same type of conflict, and accordingly updates permit issuance policies for ATHENA.
+After receiving the Execution Permit, the wallet grants the user permission to sign the transaction and then sends the transaction, along with the permit, to the initial validation nodes designated in the permit.
 
-When a conflict is detected in a transaction, the transaction is never returned to ATHENA, and conflict resolution policies are pursued from the same stage.
+The transaction, in accordance with the stages and components designated in the Execution Permit, after passing through each validation stage, is directed along its dedicated path to the next designated execution component.
 
-For example, if a conflict is detected in an execution engine, the transaction is resent from the initial validation stage to the General Engine or the correct engine.
+The members designated in each Execution Permit are not permitted, at any stage of validation, to make independent decisions; all stages must be performed exactly in accordance with the issued Execution Permit.
 
+### With network support of the AVP-DS capability, the Network Protocol assumes the following responsibilities:
 
-### The "Plan Once, Execute Once" Principle
+- Receiving the transaction submission request, including the information required to review the request, from the wallet, in accordance with the rules of the Network Protocol
+- Analyzing the received information, including the sender's address, the receiver's address, the asset type, the access list, and other metadata required for issuing the Execution Permit
+- Applying admission policies and checking Sender Consistency, using network state information and analytical reports of previous conflicts
+- Reviewing transactions under validation and related transactions, in order to determine the order of handling them and to prevent the concurrent execution of incompatible operations
+- Dynamically selecting validation nodes for each transaction, based on network policies and the minimum permitted difficulty level under protocol rules
+- Dynamically forming the validation lane of each transaction, through the selection and designation of a path among validation nodes, execution domain, execution engine, and other required components — up to the monitoring of behavior and expected outcome and the registration of the final result in the ledger
+- Designating the execution domain and classifying transactions, including TRX, USDT, NFT, and other operation types
+- Selecting the least-loaded execution engine of a domain, based on monitoring the load of execution engines at the time of issuing the Execution Permit
+- Designating the conflict management policy on a per-transaction basis, at two levels: prevention before the signed transaction enters the network, and management of conflict or exceptional condition after the signed transaction enters the network
+- Issuing the Execution Permit, including the information required for validation, the designated path and components, addressing, routing, transaction direction, conflict management policy, and other instructions necessary to complete the transaction lifecycle
+- Storing the Canonical Copy of the Execution Permit, under the control and supervision of the Network Protocol, in order to provide the possibility of verification in the network
 
-This architecture is based on a fundamental principle:
 
-- Planning is done once: ATHENA makes all decisions related to the validation path, domain, engine, and conflict management policy before the transaction enters the network and records them in the Execution Permit.
-- Execution follows the recorded plan: All network components (nodes, engines, and Host Protocol) follow the designated path in the Execution Permit without new decision-making.
-- Exception management: In case of conflict or any exception, ATHENA manages the continuation of validation from the same stage without transaction return or retransmission, relying on re-verification of the Execution Permit and Host Protocol policies, and sends feedback to the Host Protocol.
+The responsibility of the Network Protocol begins upon receiving the transaction submission request from the wallet and continues until the final status of the transaction is determined — that is, the review of the behavior or final outcome and the registration of the transaction in the network ledger.
 
-This principle reduces unnecessary validation work, minimizes repeated admission processing, and enables conflict management during execution without rebuilding the entire transaction lifecycle.
+With network support of the AVP-DS capability, the Network Protocol is responsible for all decisions regarding the designation of the validation roadmap, addressing, dynamic selection of nodes, domain selection, selection of the least-loaded engine from among the parallel engines of a domain, and management of exceptions and conflicts if identified — throughout the entire transaction lifecycle.
 
+### One of the Fundamental Innovations of the AVP-DS Capability: Execution Permit–Based Conflict Management at Two Levels
 
-### Key Advantage: Separating Decision-Making from Execution in a Single Layer
+- Level One: Prediction and prevention of conflict, before the signed transaction enters the network.
+- Level Two: Identification and management of conflicts and exceptional conditions, after the transaction enters the network.
 
-With this unified approach, the philosophy of "separating decision-making from execution" is fully implemented in ATHENA:
+In many conventional architectures, a significant portion of conflict management is performed after parallel execution has begun and dependencies or actual collisions have been identified. This process may require rescheduling, building a dependency graph, waiting, re-execution, or the use of locking mechanisms.
 
-ATHENA decides:
+With network support of the AVP-DS capability, a different approach is adopted: transaction management begins from the stage of the transaction submission request in the wallet. At this stage, before the final signing of the transaction, the transaction submission request, including the required information, is sent to the Network Protocol so that the protocol can review the received request and, after receiving the required information from network components, make the decisions regarding admission, validation path, addressing, routing, execution domain, execution engine, and conflict management policy.
 
-- When a transaction should enter the network.
-- Which nodes should perform initial validation.
-- How initial parallel validation pipelines should be created through dynamic node selection.
-- Which execution domain the transaction should be sent to after initial validation.
-- Which execution engine (with the lowest load) should validate the transaction.
-- What approach should be taken if a conflict is detected at any stage based on Host Protocol policies.
-- ATHENA's responsibilities in case of conflict or exceptions, and their resolution, follow the policies defined in the Host Protocol, which are predetermined for ATHENA.
-- Implementing conflict management policies by ATHENA to guide the transaction to the correct path according to the network protocol and Host Protocol policies.
-- Managing conflict at runtime without transaction return, managing the transaction from the exact stage where the conflict was identified.
-- Sending analytical feedback from ATHENA to the network for continuous improvement in preventing potential conflicts by identifying and addressing them during Execution Permit issuance.
-- The Execution Permit is the sole authoritative validation reference in the network, and all network components are required to act solely according to its provisions without independent decision-making.
+All decisions related to validation — on a per-transaction basis, including the designation of the roadmap, the designation of relevant components, routing, and addressing — from the moment of the transaction submission request and before the transaction is sent to the network, up to the monitoring of the expected outcome and the registration of the final result in the network ledger, are recorded in the Execution Permit and, along with the transaction, are communicated to the relevant components — and not to the entire validation capacity of the network.
 
-As a result, ATHENA is a complete and unified layer that manages all decisions related to transaction validation from beginning to end and also serves as the executor for resolving exceptions and conflicts if detected.
+As a result, this innovation moves conflict management from the stage after the transaction enters the network (in conventional networks) to before the transaction enters the network — and to the moment of the transaction submission request in the wallet.
 
+### Conflict Management
 
-### Conclusion
+With network support of the AVP-DS capability, conflict management is part of the Network Protocol's decision-making process and is performed in two stages:
 
-The unified ATHENA architecture offers a native and dedicated approach to parallel validation in TRON, designed based on the specific characteristics of this network. By relying on the Execution Permit as the Authoritative Validation Contract, this architecture makes all critical decisions before execution, and through the complete separation of "decision-making" from "execution," it enables the network to achieve large-scale parallel validation without changing the account model, consensus algorithm, or ledger.
+- Prediction and prevention of potential conflicts, at the time of issuing the Execution Permit and before the transaction enters the network
+- Identification of conflicts or exceptional conditions by the execution components designated in the Execution Permit, after the transaction enters the network
 
-Conflict management in this architecture is transformed from a reactive runtime process into a proactive, planning-based process in which ATHENA, relying on information received from the wallet and the network at the time of Execution Permit issuance, and by determining the transaction path from start to ledger recording, prevents conflicts. Additionally, in case of exceptions, it manages these cases according to Host Protocol policies and sends feedback to the network to modify permit issuance policies and prevent conflict repetition in subsequent permit issuances.
+Stage One — Prediction and Prevention of Conflict, Before the Transaction Enters the Network
 
-This architecture paves the way for TRON's evolution toward parallel validation without making fundamental changes to the existing infrastructure.
+With network support of AVP-DS, the Network Protocol, before issuing the Execution Permit and before the signed transaction enters the network, reviews the information of the submission request sent from the wallet against the real-time network state, the transactions under validation, and the analytical information from previous conflicts.
+
+Based on this review, the Network Protocol assesses the likelihood of dependency or conflict among transactions and takes appropriate preventive measures. These measures may include designating a compatible validation path, selecting responsible components, determining the order of handling related transactions, and recording the appropriate conflict management policy in the Execution Permit.
+
+In this manner, the Network Protocol, for each transaction, before its entry into the validation and execution process, designates the roadmap and the necessary instructions. This process, using the request information, the network state, and the experience gained from previous conflicts, provides the possibility of reducing the likelihood of recurrence of similar conflicts.
+
+Stage Two — Conflict Management After the Transaction Enters the Network
+
+At this level, whenever one of the execution components related to the validation and execution of the transaction — for example, the execution engine — identifies a conflict or exceptional condition during validation, the following actions are taken:
+
+- Verification of the Execution Permit and review of the validation stages. The component that has identified the conflict must, as its first action, verify the transaction's Execution Permit and review the completed validation stages. This review is carried out with the aim of ensuring the validity of the Execution Permit, the conformity of the transaction with the path designated by the Network Protocol, and the correctness of the performance of the previously designated components. In this manner, it is determined whether the validation stages have been correctly performed in accordance with the instructions of the Execution Permit and in accordance with the roadmap designated by the Network Protocol.
+- Reporting to the Network Protocol and waiting to receive a decision. After completing the review, the component identifying the conflict prepares a report containing the conflict information, the result of the Execution Permit verification, and the results of the review of the validation stages, and sends it to the Network Protocol. Regardless of the outcome of the review, the relevant component must send the report to the Network Protocol and wait until it receives a response and instructions.
+
+Decision-making regarding how to manage the conflict and continue the process rests exclusively with the Network Protocol. None of the execution components are permitted to independently, and outside the instructions of the Network Protocol, change the validation path or the manner of handling the conflict.
+
+The Network Protocol, based on the received report and the current state of the transaction, issues the necessary instructions for continuing the process. These instructions may include actions such as the following:
+
+- Continuing validation or execution from the specified stage
+- Re-executing the transaction in the execution engine that identified the conflict
+- Issuing a new Execution Permit and resending the transaction to new validation components, if a change of path, addressing, or composition of execution components is needed
+- Or any other action that the Network Protocol deems necessary under its rules and policies
+
+All network components are required to act in accordance with the received response and the instructions issued by the Network Protocol.
+
+Prevention of Recurrence of Identified Conflicts. The Network Protocol, for each identified conflict or exceptional condition, prepares an analytical report containing the manner of identification, the cause, the handling method, and the final outcome, and uses these reports to improve the policies for transaction admission, scheduling, selection of validation nodes, selection of the execution domain, selection of the execution engine, and other policies related to the issuance of the Execution Permit — for the purpose of analyzing and preventing the recurrence of conflict.
+
+In this manner, the information obtained from past conflicts is used in the subsequent decision-making of the Network Protocol, so that the recurrence of similar conflicts in the validation of future transactions — from the request stage — is predicted and prevented.
+
+### Foundations of the Effectiveness of Conflict Management in the AVP-DS Capability
+
+Three Fundamental Pillars
+
+With network support of the AVP-DS capability, conflict management rests on three fundamental pillars; each of these three pillars plays a determining role in its effectiveness and correctness:
+
+- Separation of the Decision Layer from the Execution Layer
+- Transfer of transaction management from after entry into the network to before its entry — in the wallet and before signing
+- Addition of addressing and designation of the validation path of transactions with support of the AVP-DS capability
+
+Why Do These Three Pillars Make Conflict Management Possible?
+
+The answer lies in a fundamental point: conflict management in conventional architectures is performed after the occurrence of conflict, with reactive mechanisms — whereas these three pillars transfer conflict management to the stage before its occurrence.
+
+- Separation of the Decision Layer from the Execution Layer enables the Network Protocol, before any execution decision, to designate the path and responsible components.
+- Transfer of transaction management to before entry into the network enables the Network Protocol, before the signing of the transaction and before its submission, to be aware of the existence of related or under-confirmation transactions.
+- Addressing and designation of the validation path enables the Network Protocol, for related transactions, to designate identical or compatible paths and to prevent the collision of paths.
+
+The result of combining these three pillars is the provision of the possibility of proactive conflict management and the reduction of the cost of handling conflicts at execution time. This can increase the productivity gained from adding parallel validation lanes and provide the ground for horizontal scaling of the network.
+
+Two Assumptions with the Highest Conflict Rate
+
+To demonstrate the effectiveness of these three pillars, two assumptions of conflict management that produce the highest conflict rate are examined:
+
+Example 1 — Related Transactions from One Account or to One Account
+
+Suppose account A has a transaction under execution in the network. At the same time:
+
+- Account A sends another transaction submission request to the Network Protocol; or
+- Account B presents a transaction submission request that is related to account A.
+
+Under these conditions, the Network Protocol, being aware of the existence of a transaction under confirmation related to account A, when issuing the Execution Permit for the new requests, designates a shared and coordinated path with the path of the transaction under execution. This path includes the initial validation nodes, the domain, and the parallel execution engine designated.
+
+Therefore, the Execution Permits issued for these related transactions designate identical validation and execution components, and their roadmap — from the stage of receiving the transaction submission request to the registration of information in the network ledger — will be shared.
+
+As a result, the related transactions, instead of being distributed among independent parallel lanes and execution engines, are executed in a shared and coordinated path. This approach prevents the creation of independent execution paths for transactions that are related to one another and provides the possibility of coordinated management of them.
+
+With network support of the AVP-DS capability, the possibility of using parallel validation paths for independent transactions is preserved; while the Network Protocol, for related transactions, designates a shared and coordinated path. In this manner, parallelization for independent transactions and shared routing for related transactions become possible alongside each other.
+
+The Network Protocol, as long as there are transaction submission requests related to account A or transactions under execution related to it, maintains the shared path for new related requests. After the completion of the execution of previous transactions and the absence of a related request or transaction under execution, the Network Protocol can, for subsequent requests, designate a new validation and execution path in accordance with the real-time conditions of the network.
+
+Example 2 — High-Traffic Accounts (such as Exchanges)
+
+Suppose the account of an exchange continuously receives from various accounts and sends to various accounts, and a large number of transaction submission requests to the destination of this account or from its origin are presented to the Network Protocol.
+
+Under these conditions, the Network Protocol, using the information received before the signing of the transaction and its submission from the wallet, identifies the requests related to the exchange account. Then, when issuing the Execution Permit, for transactions that are related to each other's state or operations, it designates a shared and coordinated path including the initial validation nodes, the domain, and the parallel execution engine.
+
+In this manner, the Execution Permits issued for the related transactions designate identical validation and execution components, and their roadmap — from the stage of receiving the transaction submission request to the registration of information in the network ledger — will be shared. This approach provides the possibility of coordinated management of transactions related to the exchange account and prevents the creation of independent execution paths for operations dependent on one another.
+
+In contrast, transactions that, from the perspective of account states and execution operations, do not have effective dependency or relationship with one another, can be directed through independent Execution Permits to different parallel lanes, validation nodes, domains, and execution engines. Therefore, the high-traffic nature of an account by itself does not cause all transactions related to it to be confined to a single path; rather, the type of relationship and dependency of transactions will be the basis of the Network Protocol's decision for choosing a shared or parallel path.
+
+The Network Protocol can also, considering the information received before the signing of the transaction, the real-time network state, execution records, and information obtainable from smart contracts, predict potential conflicts and, at the time of issuing the Execution Permit, designate the appropriate path for preventing and managing them.
+
+Three Principles Governing This Approach
+
+The examples presented demonstrate the Network Protocol's capability in predicting, preventing, and managing conflicts based on three fundamental principles:
+
+1. Separation of the Decision Layer from the Execution Layer: The Network Protocol is the decision-making authority and is responsible for designating the path, selecting validation and execution components, and managing conflicts; while the execution components perform the designated tasks in accordance with the Execution Permit.
+2. Managed Admission, instead of Unmanaged Admission: Transaction submission requests, before the signing and entry of the transaction into the network, are reviewed by the Network Protocol so that execution conditions, potential dependencies, and predictable conflicts are identified.
+3. Dedicated Routing, Addressing, and Direction of Transactions: The Network Protocol, using the Execution Permit, designates the path and required components of each transaction on a dedicated basis. Accordingly, independent transactions can use parallel validation paths and different execution engines; while for related transactions, a shared and coordinated path is designated so that the possibility of coordinated execution and management of them is provided.
+
+All of these processes are carried out under the supervision of the Network Protocol and through the Execution Permit mechanism, and none of the execution components independently have the authority to change the decisions and the designated path.
+
+Conclusion
+
+The prediction of conflicts from the stage of receiving the transaction submission request, alongside dedicated routing for independent transactions and shared and coordinated routing for related transactions, enables the Network Protocol to effectively reduce the conflict rate and manage it at a low level.
+
+The reduction of the conflict rate prevents the waste of resources caused by unsuccessful and repeated executions and increases the network's capacity to confirm a larger number of independent transactions — through parallel paths.
+
+As a result, with network support of the AVP-DS capability, the ground for continuous horizontal scaling and extensive scalability of the network is provided.
+
+### The Execution Permit: The Validation Roadmap of Each Transaction
+
+The most important innovation of AVP-DS is the separation of the Decision Layer from the Execution Layer and the use of the Execution Permit to designate and manage the validation path on a per-transaction basis.
+
+With network support of the AVP-DS capability, the Network Protocol, instead of unmanaged admission of transactions, uses the Managed Admission mechanism. In this mechanism, before the signed transaction enters the network, the initial request is reviewed, and the Network Protocol, by issuing the Execution Permit, designates the validation path, addressing, routing, transaction direction, and responsible components.
+
+These three fundamental principles — namely the separation of the Decision Layer from the Execution Layer, Managed Admission, and the dynamic formation of the validation path using the Execution Permit — provide the ground for predicting and managing conflicts and for more effective exploitation of parallel lanes.
+
+All stages of the validation of a transaction — from the transaction submission request in the wallet to the monitoring of the expected outcome and the registration of the transaction in the ledger — are designated by the Network Protocol and recorded in the Execution Permit. This permit acts as the reference validation contract for the entire transaction lifecycle — from the moment of the transaction submission request by the wallet to the monitoring of the expected outcome and the registration of the validation result in the network ledger.
+
+
+The Execution Permit is a software contract and the reference for the validation instructions of each transaction, issued by the Network Protocol. This permit includes the validation roadmap, addressing, routing, and direction of the transaction to the designated components of the network.
+
+The Network Protocol, using the Execution Permit, forms the validation lane of each transaction dynamically and in a software manner. This lane is formed through the selection and designation of the combination of required network components, including initial validation nodes, execution domain, execution engine, and other relevant components.
+
+The number and composition of validation lanes are determined based on the volume of incoming requests, the validation requirements, the policies of the Network Protocol, and the available execution resources. These resources may include the existing hardware capacity of the network and the capacities that will be added to the network in the future.
+
+In this manner, the Network Protocol can, in proportion to demand and available resources, dynamically form parallel validation lanes and communicate the Execution Permit corresponding to each transaction to the designated components, along with the transaction.
+
+The Execution Permit includes the following information and instructions:
+
+- The identifier of the Execution Permit and its validity period
+- The permitted signature algorithm
+- The initial validation nodes selected
+- The validation path and roadmap, including addressing, routing, and direction of the transaction to the relevant components
+- The designated execution domain
+- The least-loaded execution engine from among the parallel engines of a domain
+- The order of handling or the necessary instructions for coordination with related transactions, if needed
+- The conflict management policy and the instructions for handling exceptional conditions
+- Other parameters and protocol information required to complete the validation process and the final registration of the transaction
+
+After the issuance of the Execution Permit:
+
+1. The wallet, based on the permit, sends the signed transaction to the related initial validation nodes designated.
+2. The initial validation nodes, as their first action, verify the received permit against the copy stored in the Canonical Copy, line by line, and after completing the initial validation, direct and send the transaction — without any new decision-making and solely based on the information in the Execution Permit — to the designated execution domain and execution engine.
+3. The execution engine executes the transaction in accordance with the designated path and sends it to the next designated components.
+4. All stages are performed in accordance with the roadmap designated in the Execution Permit, on a per-transaction basis and according to its designated components; and none of the components are permitted to make a decision or take an action independently and outside the instructions of the Execution Permit.
+5. After monitoring and comparing the expected outcome or behavior with the result obtained from the validation, the transaction is registered in the network ledger.
+6. In the event of an exception or conflict, the identifying component first re-verifies and reviews the Execution Permit and the completed stages, then sends a report to the Network Protocol and waits to receive a response.
+
+All validation and routing stages of the transaction, from the moment of the issuance of the Execution Permit to the finalization of its status, are pre-determined in the Execution Permit, and all network components are required to act accordingly. All validation stages must be performed in accordance with the Execution Permit issued by the Network Protocol.
+
+### The Fundamental Achievements of AVP-DS
+
+With network support of the AVP-DS capability, three fundamental new capabilities are added to the network:
+
+- Separation of the Decision Layer from the Execution Layer
+- Replacement of Managed Admission in place of Unmanaged Admission
+- Dynamic formation of validation lanes and designation of the roadmap, addressing, routing, and direction of each transaction based on the Execution Permit
+
+These three capabilities are employed under the management of the Network Protocol and through the Execution Permit issuance mechanism, with the aim of reducing conflicts, increasing the productivity of parallel execution, and providing the possibility of horizontal scaling of the network.
+
+As a result, the network can, using the existing execution capacities and the capacities added in the future, validate and confirm a larger number of incoming transactions in proportion to its resources and operational conditions.
+
+In the event of new hardware capacities being added, the Network Protocol, through the addressing and routing mechanism, employs the new capacities for transaction validation. In this manner, the network's execution capacity can increase in proportion to the increase in incoming transaction requests.
 ___
 ___
 # Economic Impact and Incentive Model
