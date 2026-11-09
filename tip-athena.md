@@ -1676,7 +1676,7 @@ In this manner, the signed transaction does not enter any public transaction que
 
 ### Phase 6: Full Verification of the Execution Permit
 
-Before validation begins, the initial validation nodes are required to verify the full contents of the Execution Permit against the reference copy retained in the Canonical Copy, fully and line by line, within the framework of the Network Protocol.
+Before validation begins, the initial validation nodes are required to verify the full contents of the Execution Permit against the reference copy retained in the Provisional State, fully and line by line, within the framework of the Network Protocol.
 
 This verification covers all components of the permit. In the event of any discrepancy, the transaction is rejected and the relevant report is sent to the Network Protocol.
 
