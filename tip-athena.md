@@ -1684,7 +1684,7 @@ Upon successful verification and confirmation of the Execution Permit and its fu
 
 ### Phase 7: Initial Validation
 
-The initial validation nodes designated on a per-transaction basis, in accordance with the Execution Permit issued by the Network Protocol, after receiving the transaction along with the Execution Permit and after completing full and line-by-line verification against the copy stored in the Canonical Copy, perform preliminary checks based on the items specified by the Network Protocol — including the following:
+The initial validation nodes designated on a per-transaction basis, in accordance with the Execution Permit issued by the Network Protocol, after receiving the transaction along with the Execution Permit and after completing full and line-by-line verification against the copy stored in the Provisional State, perform preliminary checks based on the items specified by the Network Protocol — including the following:
 
 - Digital signature validity
 - Transaction structure
