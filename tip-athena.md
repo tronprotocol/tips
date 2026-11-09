@@ -1680,7 +1680,7 @@ Before validation begins, the initial validation nodes are required to verify th
 
 This verification covers all components of the permit. In the event of any discrepancy, the transaction is rejected and the relevant report is sent to the Network Protocol.
 
-Upon successful verification and confirmation of the Execution Permit and its full conformity with the Canonical Copy — given that the complete roadmap of addressing, routing, and the components responsible for validation has been fully determined and specified in the Execution Permit — all relevant and designated components are required to follow exactly the instructions recorded in that same permit, without independent decision-making regarding the path or assigned duties.
+Upon successful verification and confirmation of the Execution Permit and its full conformity with the Provisional State — given that the complete roadmap of addressing, routing, and the components responsible for validation has been fully determined and specified in the Execution Permit — all relevant and designated components are required to follow exactly the instructions recorded in that same permit, without independent decision-making regarding the path or assigned duties.
 
 ### Phase 7: Initial Validation
 
