@@ -562,21 +562,7 @@ ATHENA increases the network's operational capacity through intelligent lifecycl
 For this reason, ATHENA is designed as a complementary Layer 1 architecture that can coexist with future scalability technologies, provided they remain compatible with the policies and operational constraints defined by the Host Protocol.
 ___
 ___
-# ATHENA Architecture
-
-ATHENA is a Transaction Lifecycle Management Layer that operates before transactions enter the network's consensus process.
-
-Unlike many scalability solutions, ATHENA makes no changes to the consensus algorithm, the unified global ledger, the account model, the asset ownership model, the native validation rules, or the network's economic mechanisms. All consensus processes, block production, final transaction recording, and state management continue to be performed strictly according to the native rules of the Host Protocol.
-
-ATHENA's role is to intelligently manage the transaction lifecycle from the moment an Admission Request is received until the transaction is finally recorded in the global ledger. This management includes collecting required information from the wallet and the network, dynamically selecting initial validator nodes, forming initial parallel validation pipelines, determining the execution domain, selecting the least-loaded parallel execution engine, issuing the Execution Permit, managing conflicts, and providing analytical feedback to the Host Protocol.
-
-One of ATHENA's primary innovations is the introduction of a Proactive Conflict Management mechanism based on the Execution Permit. Unlike conventional architectures—which detect and manage conflicts after transactions are broadcast to the network and the validation process has begun—ATHENA seeks to predict the likelihood of conflicts before issuing the Execution Permit and before the transaction enters the network. It does so by analyzing the real-time state of the network and leveraging insights gained from past conflicts to select the most appropriate validation and execution path for the transaction.
-
-In the event of a conflict or any exceptional condition, ATHENA prepares an analytical report detailing the cause of the conflict, how it was managed, and the final outcome, and provides it to the Host Protocol. This feedback enables continuous improvement of admission policies, validator selection, execution domain selection, execution engine selection, scheduling, and other Execution Permit issuance policies, thereby reducing the likelihood of similar conflicts recurring in future transactions.
-
-To the best of our knowledge, the use of proactive conflict management—performed before the transaction enters the network and before the execution permit is issued, based on the Execution Permit—has not been reported in any known blockchain architecture. If implemented in the TRON network, this approach would represent the first instance of such conflict management in a public blockchain.
-
-In this way, ATHENA increases the network's operational capacity and improves the efficiency of resource utilization through intelligent lifecycle management, all without interfering with the consensus process.
+# Key Features and Mechanisms of the Network After Support of the AVP-DS Capability
 
 ### Fundamental Principle of ATHENA Architecture
 
