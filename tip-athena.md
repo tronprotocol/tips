@@ -1656,7 +1656,7 @@ The Execution Permit includes the following:
 
 Addressing and routing are performed exclusively for each transaction and are not limited to a single public, fixed path for validating all incoming transactions. All relevant components designated in the Execution Permit, on a per-transaction basis, are required to follow the path and instructions specified therein and to advance the process in accordance with the Network Protocol's decisions.
 
-After the Execution Permit is issued, one copy is sent to the requesting wallet, and the reference copy (Canonical Copy) is retained in the location designated by the Network Protocol, so that the relevant components can verify the authenticity and conformity of the received permit.
+After the Execution Permit is issued, one copy is sent to the requesting wallet, and the reference copy is retained in the Provisional State, so that the relevant components can verify the authenticity and conformity of the received permit.
 
 After receiving the Execution Permit, the wallet enables the user to sign the transaction and, after signing, sends the transaction along with the permit to the designated initial validation nodes.
 
