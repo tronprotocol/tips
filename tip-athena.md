@@ -564,6 +564,26 @@ ___
 ___
 # Key Features and Mechanisms of the Network After Support of the AVP-DS Capability
 
+### Provisional State
+
+The Concept of Provisional State in Blockchain
+
+In blockchain, Provisional State is a temporary storage space and a logical layer that sits between the stage of initial information admission and the final registration of transactions in the ledger.
+
+The purpose of this temporary storage space is the secure and orderly management of data awaiting finalization — without violating the principles of finality and the integrity of the ledger.
+
+With network support of the AVP-DS capability, the Network Protocol uses the Provisional State layer to store and retain the Execution Permit — before the transaction is registered in the network ledger.
+
+After issuing the Execution Permit, the Network Protocol retains a copy of it in the Provisional State for verification purposes, so that the initial validation nodes or the relevant components identifying potential conflicts can verify the authenticity and conformity of the received permit, line by line.
+
+The retention of the permit in the Provisional State is always temporary and time-bound.
+
+- After successful validation, the transaction, along with the Execution Permit, is registered in the final network ledger, and then the temporary copy of the Execution Permit is removed from the Provisional State.
+- If the transaction in question is not sent within the specified deadline, or the validation process does not reach a final outcome, the permit is removed from the Provisional State after the expiration of the time window specified by the Network Protocol.
+
+In this manner, the Provisional State plays the role of a temporary and conditional space for supporting pre-finalization verification — without temporary data entering the main ledger or violating the principles of finality and the integrity of the ledger.
+___
+___
 ### Fundamental Principle of ATHENA Architecture
 
 One of the most important distinctions between ATHENA and many existing architectures is that in this architecture, there are no pre‑formed or permanent validator groups or execution groups.
