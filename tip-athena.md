@@ -339,7 +339,7 @@ The Execution Permit includes the following information and instructions:
 After the issuance of the Execution Permit:
 
 1. The wallet, based on the permit, sends the signed transaction to the related initial validation nodes designated.
-2. The initial validation nodes, as their first action, verify the received permit against the copy stored in the Canonical Copy, line by line, and after completing the initial validation, direct and send the transaction — without any new decision-making and solely based on the information in the Execution Permit — to the designated execution domain and execution engine.
+2. The initial validation nodes, as their first action, verify the received permit against the copy stored in the Provisional State, line by line, and after completing the initial validation, direct and send the transaction — without any new decision-making and solely based on the information in the Execution Permit — to the designated execution domain and execution engine.
 3. The execution engine executes the transaction in accordance with the designated path and sends it to the next designated components.
 4. All stages are performed in accordance with the roadmap designated in the Execution Permit, on a per-transaction basis and according to its designated components; and none of the components are permitted to make a decision or take an action independently and outside the instructions of the Execution Permit.
 5. After monitoring and comparing the expected outcome or behavior with the result obtained from the validation, the transaction is registered in the network ledger.
@@ -563,7 +563,7 @@ ___
 ___
 # Key Features and Mechanisms of the Network After Support of the AVP-DS Capability
 
-### Provisional State
+### « Provisional State »
 
 The Concept of Provisional State in Blockchain
 
