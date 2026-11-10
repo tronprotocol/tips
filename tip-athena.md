@@ -584,24 +584,6 @@ The retention of the permit in the Provisional State is always temporary and tim
 In this manner, the Provisional State plays the role of a temporary and conditional space for supporting pre-finalization verification — without temporary data entering the main ledger or violating the principles of finality and the integrity of the ledger.
 ___
 ___
-### Fundamental Principle of ATHENA Architecture
-
-One of the most important distinctions between ATHENA and many existing architectures is that in this architecture, there are no pre‑formed or permanent validator groups or execution groups.
-
-Each Execution Permit is created independently, based on the current state of the network, Host Protocol policies, the capacity of validator nodes, the capacity of execution engines, and the specific characteristics of the transaction request.
-
-As a result, ATHENA first dynamically selects the initial validator nodes and forms an initial parallel validation pipeline from them. It then determines the appropriate execution domain and selects the least‑loaded execution engine among the parallel engines operating within that domain. All these decisions are recorded in the Execution Permit, which defines the complete validation and execution path for the transaction.
-
-Therefore, in the ATHENA architecture, validation pipelines, execution domains, and selected engines are not fixed architectural components; they are the result of ATHENA's dynamic, real‑time decision‑making at the time of Execution Permit issuance.
-
-Since this process is performed independently for each request, the composition of initial validator nodes, the execution domain, and the selected engine may differ from one transaction to the next. Consequently, no validator node or execution engine can predict permanent membership or anticipate its presence in a specific validation or execution path in advance.
-
-The Execution Permit is not merely an admission authorization; it is the authoritative document that defines the complete validation and execution path of the transaction—from the admission stage to final recording in the global ledger. All network components are required to act in accordance with the information recorded in this permit and the policies defined by the Host Protocol.
-
-Furthermore, before the transaction enters the network, ATHENA analyzes the real‑time network state and leverages knowledge gained from past conflicts to select the most appropriate validation and execution path, thereby reducing the likelihood of conflicts from the outset. This feature transforms conflict management from a reactive process into a proactive one.
-
-For this reason, the ATHENA architecture can be regarded not only as a transaction lifecycle management system but also as the first known framework to introduce the concept of proactive conflict management—based on the Execution Permit and performed before the transaction enters the network—in a public blockchain.
-
 ### Sequential Transaction Processing
 
 Preserving transaction order is one of the important security components of the TRON network. With the introduction of ATHENA into this network, this advantage remains fully intact.
