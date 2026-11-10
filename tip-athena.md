@@ -575,10 +575,11 @@ With network support of the AVP-DS capability, the Network Protocol uses the Pro
 
 After issuing the Execution Permit, the Network Protocol retains a copy of it in the Provisional State for verification purposes, so that the initial validation nodes or the relevant components identifying potential conflicts can verify the authenticity and conformity of the received permit, line by line.
 
-The retention of the permit in the Provisional State is always temporary and time-bound.
+The retention of the permit in the Provisional State is always temporary and time-bound, and based on the final outcome of the process, one of the following two cases occurs:
 
-- After successful validation, the transaction, along with the Execution Permit, is registered in the final network ledger, and then the temporary copy of the Execution Permit is removed from the Provisional State.
-- If the transaction in question is not sent within the specified deadline, or the validation process does not reach a final outcome, the permit is removed from the Provisional State after the expiration of the time window specified by the Network Protocol.
+- In the case where the validation process results in the registration of an outcome in the network ledger: Regardless of the outcome obtained (successful or unsuccessful), the transaction, along with the Execution Permit, is registered in the final network ledger, and then the temporary copy of the Execution Permit is removed from the Provisional State.
+
+- In the case where the validation process does not result in the registration of an outcome in the network ledger: If the transaction in question is not sent to the network within the specified deadline, or if the transaction is rejected during validation in such a way that its final outcome is not registered in the ledger (such as the rejection of the transaction at the initial validation stage), the Execution Permit is removed from the Provisional State after the expiration of the time window specified by the Network Protocol.
 
 In this manner, the Provisional State plays the role of a temporary and conditional space for supporting pre-finalization verification — without temporary data entering the main ledger or violating the principles of finality and the integrity of the ledger.
 ___
