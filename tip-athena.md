@@ -582,6 +582,24 @@ The retention of the permit in the Provisional State is always temporary and tim
 - In the case where the validation process does not result in the registration of an outcome in the network ledger: If the transaction in question is not sent to the network within the specified deadline, or if the transaction is rejected during validation in such a way that its final outcome is not registered in the ledger (such as the rejection of the transaction at the initial validation stage), the Execution Permit is removed from the Provisional State after the expiration of the time window specified by the Network Protocol.
 
 In this manner, the Provisional State plays the role of a temporary and conditional space for supporting pre-finalization verification — without temporary data entering the main ledger or violating the principles of finality and the integrity of the ledger.
+
+Encryption of the Execution Permit in the Provisional State
+
+To prevent early and unauthorized access to the content of the Execution Permit, and to prevent misuse of the information contained within the permit (including, but not limited to: the designated relevant components, the expected outcome and behavior) before the transaction enters the network (such as the threat of Front-Running or sandwich attacks), the Network Protocol, at the time of issuing the Execution Permit, generates a "one-time encryption key" specific to that permit, encrypts the Execution Permit with this same key, and stores it in the Provisional State. It then sends a copy of the Execution Permit and the corresponding one-time key to the requesting wallet.
+
+After signing the transaction, the wallet sends the signed transaction, along with the Execution Permit and the corresponding one-time key, to the initial validation nodes designated in that same permit.
+
+The nodes designated in the Execution Permit, upon receiving the transaction along with the Execution Permit and the corresponding one-time key, use the same one-time key received from the wallet to access the Provisional State and decrypt the Execution Permit related to the transaction stored therein. They then verify the permit received from the wallet against the Execution Permit stored in the Provisional State, line by line.
+
+After successful verification and completion of initial validation, they direct and send the transaction — without any new decision-making and solely based on the information in the Execution Permit — to the designated execution domain and execution engine.
+
+Security advantages of this mechanism:
+
+- No early access: Although the nodes have access to the Provisional State space, they cannot decrypt the permit related to themselves, or view its contents, before receiving the signed transaction along with the Execution Permit and the one-time key from the wallet.
+- Simultaneity of decryption with transaction entry: The one-time key is placed at the disposal of the designated nodes only when the signed transaction, along with the Execution Permit, is sent to the initial validation nodes designated in that same permit. As a result, the time window between viewing the permit's contents and executing the transaction becomes so small and limited that it deprives an attacker of the possibility of carrying out an effective attack.
+- Restricted access to designated nodes: Only the nodes designated in the Execution Permit — and only after receiving the transaction along with the Execution Permit and the one-time key — can access the Provisional State and decrypt and view the contents of the relevant Execution Permit using the received one-time key.
+
+Other network components that have access to the Provisional State cannot decrypt or, consequently, view the contents of the permits, due to the lack of the one-time key.
 ___
 ___
 ### Sequential Transaction Processing
