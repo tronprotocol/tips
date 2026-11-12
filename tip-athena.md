@@ -1671,7 +1671,7 @@ Therefore, after receiving the permit, the wallet enables the user to sign the t
 
 First, based on the Network Protocol's instructions, the wallet prepares the transaction submission request along with the required information and sends it to the Network Protocol for evaluation.
 
-After receiving the Execution Permit from the Network Protocol, the wallet enables the user to sign the transaction. After the user signs the transaction, the wallet sends it, along with the Execution Permit, directly to the initial validation nodes designated in that same permit.
+After receiving the Execution Permit from the Network Protocol, the wallet enables the user to sign the transaction. After the user signs the transaction, the wallet sends the signed transaction — along with the Execution Permit and the one-time encryption key — directly to the initial validation nodes designated in that same received permit.
 
 In this manner, the signed transaction does not enter any public transaction queue or public waiting layer and will enter the validation process via the dedicated path determined in the Execution Permit.
 
