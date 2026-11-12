@@ -573,7 +573,7 @@ The purpose of this temporary storage space is the secure and orderly management
 
 With network support of the AVP-DS capability, the Network Protocol uses the Provisional State layer to store and retain the Execution Permit — before the transaction is registered in the network ledger.
 
-After issuing the Execution Permit, the Network Protocol retains a copy of it in the Provisional State for verification purposes, so that the initial validation nodes or the relevant components identifying potential conflicts can verify the authenticity and conformity of the received permit, line by line.
+After issuing the Execution Permit, the Network Protocol encrypts it with a one-time encryption key and retains the encrypted copy in the Provisional State for verification purposes. The initial validation nodes — or the relevant components identifying potential conflicts — can then decrypt this copy using the one-time key received from the wallet, and verify the authenticity and conformity of the received permit, line by line.
 
 The retention of the permit in the Provisional State is always temporary and time-bound, and based on the final outcome of the process, one of the following two cases occurs:
 
