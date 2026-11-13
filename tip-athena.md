@@ -593,7 +593,7 @@ After signing the transaction, the wallet sends the signed transaction, along wi
 
 The nodes designated in the Execution Permit, upon receiving the transaction along with the Execution Permit and the corresponding one-time key, use the same one-time key received from the wallet to access the Provisional State and decrypt the Execution Permit related to the transaction stored therein. They then verify the permit received from the wallet against the Execution Permit stored in the Provisional State, line by line.
 
-After successful verification and completion of initial validation, they direct and send the transaction — without any new decision-making and solely based on the information in the Execution Permit — to the designated execution domain and execution engine.
+After successful verification and completion of initial validation, they direct and send the transaction, together with the Execution Permit and the one-time key — without any new decision-making and solely based on the information in the Execution Permit — to the designated execution domain and execution engine.
 
 Security advantages of this mechanism:
 
