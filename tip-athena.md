@@ -1695,7 +1695,7 @@ The initial validation nodes designated on a per-transaction basis, in accordanc
 - Request validity
 - Any other checks defined by the Network Protocol
 
-After successful completion of initial validation, the designated nodes send the transaction to the specified execution domain and, from among the set of parallel execution engines in that domain, to the exact execution engine specified in the Execution Permit.
+After successful completion of initial validation, the designated nodes send the transaction, together with the Execution Permit and the one-time encryption key, to the specified execution domain and, from among the set of parallel execution engines in that domain, to the exact execution engine specified in the Execution Permit.
 
 Each component associated with the validation of a specific transaction, in accordance with the Execution Permit issued by the Network Protocol on a per-transaction basis, is required — after successfully completing its own stage — to deliver the transaction, without any independent decision, strictly in accordance with the instructions recorded in the Execution Permit, to the next relevant component.
 
