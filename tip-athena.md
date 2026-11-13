@@ -1661,7 +1661,7 @@ Addressing and routing are performed exclusively for each transaction and are no
 
 After the Execution Permit is issued, the Network Protocol encrypts it with a per-permit encryption key and retains the encrypted copy in the Provisional State. It then sends a copy of the Execution Permit along with the corresponding per-permit encryption key to the requesting wallet, so that the relevant components can decrypt the copy retained in the Provisional State, and verify the authenticity and conformity of the received permit.
 
-After receiving the Execution Permit, the wallet enables the user to sign the transaction and, after signing, sends the transaction — along with the Execution Permit and the one-time encryption key — to the designated initial validation nodes.
+After receiving the Execution Permit, the wallet enables the user to sign the transaction and, after signing, sends the transaction — along with the Execution Permit and the per-permit encryption key — to the designated initial validation nodes.
 
 ### Phase 4: Transaction Signing After Receiving the Execution Permit
 
