@@ -587,7 +587,7 @@ In this manner, the Provisional State plays the role of a temporary and conditio
 
 ### Encryption of the Execution Permit in the Provisional State
 
-To prevent early and unauthorized access to the content of the Execution Permit, and to prevent misuse of the information contained within the permit (including, but not limited to: the designated relevant components, the expected outcome and behavior) before the transaction enters the network (such as the threat of Front-Running or sandwich attacks), the Network Protocol, at the time of issuing the Execution Permit, generates a "one-time encryption key" specific to that permit, encrypts the Execution Permit with this same key, and stores it in the Provisional State. It then sends a copy of the Execution Permit and the corresponding one-time key to the requesting wallet.
+To prevent early and unauthorized access to the content of the Execution Permit, and to prevent misuse of the information contained within the permit (including, but not limited to: the designated relevant components, the expected outcome and behavior) before the transaction enters the network (such as the threat of Front-Running or sandwich attacks), the Network Protocol, at the time of issuing the Execution Permit, generates a "per-permit encryption key" specific to that permit, encrypts the Execution Permit with this same key, and stores it in the Provisional State. It then sends a copy of the Execution Permit and the corresponding per-permit encryption key to the requesting wallet.
 
 After signing the transaction, the wallet sends the signed transaction, along with the Execution Permit and the corresponding one-time key, to the initial validation nodes designated in that same permit.
 
