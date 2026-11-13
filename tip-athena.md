@@ -573,7 +573,9 @@ The purpose of this temporary storage space is the secure and orderly management
 
 With network support of the AVP-DS capability, the Network Protocol uses the Provisional State layer to store and retain the Execution Permit — before the transaction is registered in the network ledger.
 
-After issuing the Execution Permit, the Network Protocol encrypts it with a one-time encryption key and retains the encrypted copy in the Provisional State for verification purposes. The initial validation nodes — or the relevant components identifying potential conflicts — can then decrypt this copy using the one-time key received from the wallet, and verify the authenticity and conformity of the received permit, line by line.
+After issuing the Execution Permit, the Network Protocol encrypts it with a one-time encryption key and retains the encrypted copy in the Provisional State for verification purposes. The designated initial validation nodes, upon receiving the transaction along with the Execution Permit and the one-time encryption key, are required to decrypt the copy stored in the Provisional State using the received one-time key, and to verify the authenticity and conformity of the received permit, line by line. After successful verification and completion of the initial validation process, they direct the transaction — along with the Execution Permit and the one-time encryption key — to the next components, in accordance with the roadmap specified in the Execution Permit.
+
+Other designated components, in the continuation of the validation process, upon encountering a conflict or exceptional condition and requiring re-verification of the permit, use the one-time key that they have received — along with the transaction and the Execution Permit — from the previously designated component in the permit, to re-decrypt the copy stored in the Provisional State and re-verify the permit.
 
 The retention of the permit in the Provisional State is always temporary and time-bound, and based on the final outcome of the process, one of the following two cases occurs:
 
