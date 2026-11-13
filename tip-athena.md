@@ -1687,7 +1687,7 @@ Upon successful verification and confirmation of the Execution Permit and its fu
 
 ### Phase 7: Initial Validation
 
-The initial validation nodes designated on a per-transaction basis, in accordance with the Execution Permit issued by the Network Protocol, receive the transaction along with the Execution Permit and the one-time encryption key. They then use the one-time key to decrypt the encrypted copy retained in the Provisional State, and complete full line-by-line verification of the received permit against the decrypted copy. After completing this verification, they perform preliminary checks based on the items specified by the Network Protocol — including the following:
+The initial validation nodes designated on a per-transaction basis, in accordance with the Execution Permit issued by the Network Protocol, receive the transaction along with the Execution Permit and the per-permit encryption key. They then use the per-permit encryption key to decrypt the encrypted copy retained in the Provisional State, and complete full line-by-line verification of the received permit against the decrypted copy.. After completing this verification, they perform preliminary checks based on the items specified by the Network Protocol — including the following:
 
 - Digital signature validity
 - Transaction structure
