@@ -160,7 +160,7 @@ Therefore, the Execution Permit is not merely a routing instruction; it is the N
 
 With network support of the AVP-DS capability, the Network Protocol is the authority for decision-making and lifecycle management of the transaction. The Network Protocol, upon receiving the transaction submission request from the wallet — containing the information required under the rules of the Network Protocol, before signing and before the transaction enters the network — and upon receiving the required information from the network (including real-time load monitoring, the number of transactions under validation, and other required information), makes the decisions regarding admission of the request, validation path, selection of relevant components, execution domain, the least-loaded execution engine from the designated domain, and conflict management policy, and records them in the Execution Permit.
 
-After receiving the Execution Permit, the wallet grants the user permission to sign the transaction, and then sends the transaction — along with the Execution Permit and the one-time encryption key — to the initial validation nodes designated in the Execution Permit.
+After receiving the Execution Permit, the wallet grants the user permission to sign the transaction, and then sends the transaction — along with the Execution Permit and the per-permit encryption key — to the initial validation nodes designated in the Execution Permit.
 
 The transaction, in accordance with the stages and components designated in the Execution Permit, after passing through each validation stage, is directed along its dedicated path to the next designated execution component.
 
