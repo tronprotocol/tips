@@ -599,7 +599,7 @@ Security advantages of this mechanism:
 
 - No early access: Although the nodes have access to the Provisional State space, they cannot decrypt the permit related to themselves, or view its contents, before receiving the signed transaction along with the Execution Permit and the per-permit encryption key from the wallet.
 - Simultaneity of decryption with transaction entry: The per-permit encryption key is placed at the disposal of the designated nodes only when the signed transaction, along with the Execution Permit, is sent to the initial validation nodes designated in that same permit. As a result, the time window between viewing the permit's contents and executing the transaction becomes so small and limited that it deprives an attacker of the possibility of carrying out an effective attack.
-- Restricted access to designated nodes: Only the nodes designated in the Execution Permit — and only after receiving the transaction along with the Execution Permit and the one-time key — can access the Provisional State and decrypt and view the contents of the relevant Execution Permit using the received one-time key.
+- Restricted access to designated nodes: Only the nodes designated in the Execution Permit — and only after receiving the transaction along with the Execution Permit and the per-permit encryption key — can access the Provisional State and decrypt and view the contents of the relevant Execution Permit using the received per-permit encryption key.
 
 Other network components that have access to the Provisional State cannot decrypt or, consequently, view the contents of the permits, due to the lack of the one-time key.
 ___
