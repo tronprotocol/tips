@@ -1736,7 +1736,7 @@ By reviewing the real-time network state, the information received from the wall
 
 Level Two — Identification and Management of Conflict, After the Transaction Enters the Network
 
-The execution components designated in the Execution Permit, upon identifying a conflict or exceptional condition, decrypt the encrypted copy retained in the Provisional State using the one-time encryption key, verify the Execution Permit against the decrypted copy, review the completed validation stages, and send the verification report and conflict information to the Network Protocol. Decision-making regarding continuing the process, re-execution, issuing a new permit, changing the path, or rejecting the transaction rests exclusively with the Network Protocol, and all relevant components are required to execute its instructions.
+The execution components designated in the Execution Permit, upon identifying a conflict or exceptional condition, decrypt the encrypted copy retained in the Provisional State using the per-permit encryption key, verify the Execution Permit against the decrypted copy, review the completed validation stages, and send the verification report and conflict information to the Network Protocol. Decision-making regarding continuing the process, re-execution, issuing a new permit, changing the path, or rejecting the transaction rests exclusively with the Network Protocol, and all relevant components are required to execute its instructions.
 
 Analytical Report and Prevention of Conflict Recurrence
 
