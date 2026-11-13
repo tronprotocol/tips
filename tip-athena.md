@@ -1659,7 +1659,7 @@ The Execution Permit includes the following:
 
 Addressing and routing are performed exclusively for each transaction and are not limited to a single public, fixed path for validating all incoming transactions. All relevant components designated in the Execution Permit, on a per-transaction basis, are required to follow the path and instructions specified therein and to advance the process in accordance with the Network Protocol's decisions.
 
-After the Execution Permit is issued, the Network Protocol encrypts it with a one-time encryption key and retains the encrypted copy in the Provisional State. It then sends a copy of the Execution Permit along with the corresponding one-time key to the requesting wallet, so that the relevant components can decrypt the copy retained in the Provisional State, and verify the authenticity and conformity of the received permit.
+After the Execution Permit is issued, the Network Protocol encrypts it with a per-permit encryption key and retains the encrypted copy in the Provisional State. It then sends a copy of the Execution Permit along with the corresponding per-permit encryption key to the requesting wallet, so that the relevant components can decrypt the copy retained in the Provisional State, and verify the authenticity and conformity of the received permit.
 
 After receiving the Execution Permit, the wallet enables the user to sign the transaction and, after signing, sends the transaction — along with the Execution Permit and the one-time encryption key — to the designated initial validation nodes.
 
