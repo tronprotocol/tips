@@ -1761,7 +1761,7 @@ In many conventional architectures, when a transaction is registered in the netw
 
 In contrast, with network support of the AVP-DS capability, it becomes possible to fully reconstruct the validation path, in addition to the public information. This transparency — the ability to reconstruct and audit — is among the benefits of network support of AVP-DS.
 
-For this reason, the network must store the Execution Permit or the verifiable cryptographic commitment associated with the transaction, along with the other public transaction information, in the network ledger.
+For this reason, the network must store the Execution Permit or the verifiable cryptographic commitment associated with the transaction, along with the other public transaction information, in the network ledger. The per-permit encryption key is never recorded in the ledger and is removed from the operational cycle after the transaction and the Execution Permit are registered in the network ledger.
 
 This information enables independent auditing, reconstruction of the transaction's execution path, verification of the performance of network components and monitoring of the behavior of the relevant components (including nodes and engines), evaluation of validator performance, and analysis of the validation process — even years after finality.
 ___
