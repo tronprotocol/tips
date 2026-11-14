@@ -1668,7 +1668,9 @@ After receiving the Execution Permit, the wallet enables the user to sign the tr
 
 ### Phase 4: Transaction Signing After Receiving the Execution Permit
 
-With network support of the AVP-DS capability, the user is authorized to sign the transaction only when the wallet has sent the information required for issuing the Execution Permit to the Network Protocol and has received the Execution Permit.
+After the user signs the transaction, the wallet sends the transaction — along with the unencrypted copy of the Execution Permit and the per-permit encryption key specific to that permit — to the initial validation nodes designated in the Execution Permit.
+
+The relevant validation components in the network use the per-permit encryption key — which was sent along with the transaction — to decrypt the encrypted copy of the Execution Permit stored in the Provisional State, for the purpose of verifying the submitted permit.
 
 Therefore, after receiving the permit, the wallet enables the user to sign the transaction and sends the transaction, along with the Execution Permit and the per-permit encryption key, to the initial validation nodes specified in the Execution Permit.
 
