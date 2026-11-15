@@ -429,6 +429,8 @@ The path designated for the transactions of each account, in terms of the order 
 Execution Permit issuance must respect, for requests related to a shared state — such as the same liquidity pool in a shared contract or the balance of a shared account — the same roadmap, path, and components designated for the previous request related to that same shared state. A subsequent transaction or Bundle must become eligible for admission with the same path and components as its related predecessor request — not with a new path.
 
 This principle ensures that the order of requests related to a shared state cannot be bypassed by creating a new request, changing the fee amount, changing the submission path, or reconstructing a previous transaction; while preserving the network's parallelization capacity for requests from independent accounts.
+
+In this manner, with network support of the AVP-DS capability, order is preserved at the level of each account and each shared state, while parallelization expands at the network level. These two — order and parallelization — are not in opposition, but in mutual evolution: each account follows its own sequential path; independent accounts advance simultaneously along parallel paths. This is the very balance between security and scalability that AVP-DS realizes at the network level.
 ___
 ___
 # Economic Impact and Incentive Model
