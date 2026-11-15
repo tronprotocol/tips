@@ -360,6 +360,75 @@ These three capabilities are employed under the management of the Network Protoc
 As a result, the network can, using the existing execution capacities and the capacities added in the future, validate and confirm a larger number of incoming transactions in proportion to its resources and operational conditions.
 
 In the event of new hardware capacities being added, the Network Protocol, through the addressing and routing mechanism, employs the new capacities for transaction validation. In this manner, the network's execution capacity can increase in proportion to the increase in incoming transaction requests.
+
+### Parallel Validation with Sequential Execution Simulation
+
+Preserving transaction order is one of the pillars of security and correctness in blockchain networks. Respecting validation order helps maintain the integrity of account states, prevent conflicts, prevent double-spending, ensure predictability of network behavior, and enable accurate auditing.
+
+As networks move toward parallel validation, preserving the logical order among dependent requests becomes even more important; because the simultaneous execution of related requests leads to conflicts and state inconsistency in the network, and increases validation cost.
+
+The AVP-DS capability manages this issue by enforcing order through a shared path at the Admission Layer and using the Execution Permit mechanism.
+
+As a result, transactions related to each account are executed along a single path and sequentially — similar to the behavior of a network with sequential execution, but at the level of that account.
+
+Other transactions from other accounts are organized by the Network Protocol, using the Execution Permit, across other parallel software execution paths — in line with transaction validation and utilizing the full hardware capacity of the network.
+
+
+1. Enforcing Order through a Shared Path at the Admission Layer
+
+With network support of the AVP-DS capability, the order of requests is enforced not by suspending permit issuance until the validation of the transactions under validation related to an account is complete — including sends and receives, smart contract invocations, and interactions with a shared state (whether a shared contract such as a decentralized exchange, or a shared account such as a centralized exchange) — but through the designation of a shared path for the new transaction with the transactions under validation, by means of the Execution Permit and based on the information received from the wallets in the form of transaction submission requests to the network.
+
+When an admission request is received from a source account, the Network Protocol reviews the execution state of previous requests and the received requests related to that same account. Accordingly, it issues the Execution Permit for the new request with the same roadmap, path, and components designated for the previous request under validation, or for the received requests related to that same account.
+
+Therefore, the execution order of requests is preserved through the shared path, not by suspending permit issuance until the validation of the transactions under validation is complete.
+
+As a result, an account cannot bypass the execution order of its previous requests by submitting a new request, changing the fee amount, or choosing a different path — because the path remains the same. This rule applies equally to individual transactions and Bundles.
+
+
+2. Independence from Submission Type
+
+The sequential relationship between requests from the same account is independent of their submission type:
+
+- A new individual transaction cannot bypass the execution order of a previous request from the same account by choosing a different path.
+- A new Bundle cannot bypass the execution order of a previous request from the same account by choosing a different path.
+- The number of transactions within a Bundle or the fee amount alone does not grant it priority over a previous request from the same account.
+
+Therefore, the execution order of requests is determined by their logical and temporal relationship at the account level, not by the apparent form of submission or the fee amount.
+
+
+3. Defense Against Reordering and Front-Running
+
+This mechanism creates a new defensive layer against attempts to reorder transactions. If an attacker attempts to enter their transaction into the network earlier than the target transaction, they cannot deliver it to the network through a different validation path; because the permits issued for transactions related to a shared state — such as the same liquidity pool in a shared contract (for example, a decentralized exchange) or the balance of a shared account (for example, a centralized exchange) — with network support of the AVP-DS capability, must all follow the same path and components as the previous transactions under validation, through the Execution Permit mechanism for addressing, routing, and direction.
+
+Therefore, submission time or submission path cannot bypass the defined order — because the path remains identical.
+
+
+4. Benefits of Preserving Order in AVP-DS
+
+· Preserving State Integrity: Respecting the order of requests prevents inconsistent states and certain double-spend scenarios.
+· Reduced Race Conditions and Reordering: Consecutive requests from the same account cannot enter the execution path without respecting the required order.
+· Predictability: Network behavior becomes clearer and more predictable for users and applications.
+· Easier Auditing: The sequential relationship of requests and their results can be reconstructed and verified.
+· Safe Parallelization: By preserving the order of requests within each account, requests from independent accounts — in terms of state — can be validated and executed in parallel; while requests related to a shared state (such as a shared contract or a shared account) are directed in a coordinated manner, in accordance with the shared-path policy.
+
+
+5. Relationship with Conflict Management
+
+Sequential validation does not replace conflict management; it is complementary to it.
+
+Sequential validation at the level of each account is carried out by simulating the behavior of sequential validation in conventional networks within a single validation lane. This approach prevents a significant portion of conflicts — including conflicts caused by the improper order of requests from an account — at the Admission Layer itself and before entering execution.
+
+
+6. Simulating Sequential Validation for Each Account
+
+The path designated for the transactions of each account, in terms of the order of handling, functions similarly to the sequential validation approach in conventional networks; with the difference that, with network support of the AVP-DS capability, this order is confined to the specific path of that same account, and independent accounts can be handled simultaneously in other parallel execution paths. Within this framework, transactions that access a shared state — such as the same liquidity pool in a shared contract or the balance of a shared account — are directed according to the shared-path policy, so that the order and coordination of related transactions are also preserved.
+
+
+7. Foundational Principle
+
+Execution Permit issuance must respect, for requests related to a shared state — such as the same liquidity pool in a shared contract or the balance of a shared account — the same roadmap, path, and components designated for the previous request related to that same shared state. A subsequent transaction or Bundle must become eligible for admission with the same path and components as its related predecessor request — not with a new path.
+
+This principle ensures that the order of requests related to a shared state cannot be bypassed by creating a new request, changing the fee amount, changing the submission path, or reconstructing a previous transaction; while preserving the network's parallelization capacity for requests from independent accounts.
 ___
 ___
 # Economic Impact and Incentive Model
@@ -607,65 +676,6 @@ Security advantages of this mechanism:
 Other network components that have access to the Provisional State cannot decrypt or, consequently, view the contents of the permits, due to the lack of the per-permit encryption key.
 ___
 ___
-### Sequential Transaction Processing
-
-Preserving transaction order is one of the important security components of the TRON network. With the introduction of ATHENA into this network, this advantage remains fully intact.
-
-Based on this mechanism, ATHENA establishes a defined sequential relationship between consecutive transactions from the same account, according to Host Protocol policies. This ensures that a subsequent transaction or a reconstructed transaction cannot bypass the original transaction simply by modifying the fee, changing the submission path, or reaching a node earlier.
-
-The purpose of this mechanism is to create a deterministic and verifiable order for the admission of related transactions into the validation and processing pipeline.
-
-1. Enforcing Order at the Admission Layer
-
-In the ATHENA architecture, transaction ordering is enforced at the Admission Layer through the Execution Permit.
-
-When a transaction from a source account enters the admission process, ATHENA records the processing state of that account.
-
-Until the previous transaction reaches the required state for passing the Admission stage—according to Host Protocol policy—ATHENA will not issue a new permit for the next transaction from the same account.
-
-As a result, an account cannot bypass its previous transaction by submitting a new transaction, nor can it cause the new transaction to enter the validation path earlier.
-
-This rule applies to both individual transactions and Bundles.
-
-2. Independence from Submission Type
-
-Processing order is not determined by submission type.
-
-This means that:
-
-- An individual transaction cannot overtake a previous Bundle.
-- A new Bundle cannot overtake a previous individual transaction.
-- A Bundle cannot gain priority over a previous request from the same account simply because it contains more transactions or has a different fee.
-
-Therefore, the sequential relationship between requests from the same account is independent of whether the request is submitted individually or as a Bundle.
-
-3. Defense Against Transaction Reconstruction and Replacement
-
-This mechanism provides a defensive layer against scenarios where an attacker reconstructs a valid transaction and creates another version of it.
-
-Even if the reconstructed version is structurally acceptable, the attacker cannot simply submit it through a different path or node to get it ahead of the original transaction. This is because ATHENA will not issue a new permit for the source account until the required processing state of the previous transaction has been established.
-
-Thus, submission time or submission path cannot bypass the sequential relationship established at the Admission Layer.
-
-4. Benefits of Sequential Transaction Processing
-
-- Transparency and Predictability: The sequential relationship of transactions from the same account is clearly defined, making network behavior more predictable for users.
-- Reduced Race Conditions: Consecutive transactions from the same account cannot enter the processing path without respecting the defined order.
-- Reduced Transaction Reordering: A subsequent transaction cannot overtake a previous one simply by modifying the fee, path, or submission time.
-- Enhanced State Integrity: A defined processing order helps prevent inconsistent states and certain Double-Spend scenarios.
-- Easier Auditing: The sequential relationship of requests and their processing results can be reconstructed and verified.
-
-5. Relationship with Conflict Management
-
-Sequential Transaction Processing does not replace Conflict Management.
-
-Conflict Management is used to handle conflicts that arise during the processing phase, while Sequential Transaction Processing aims to prevent some of these conflicts from occurring in the first place—specifically those caused by improper order of transactions from the same account—at the Admission Layer.
-
-6. Foundational Principle
-
-Execution Permit issuance MUST respect the protocol-defined processing order of requests originating from the same account. A subsequent transaction or bundle MUST NOT become eligible for admission before the required processing state of its predecessor has been established according to Host Protocol policy.
-
-This principle ensures that the order of transactions from the same account cannot be bypassed simply by creating a new transaction, modifying the fee, changing the submission path, or reconstructing a previous transaction.
 
 ### ATHENA Architecture Diagram
 
