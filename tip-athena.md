@@ -1630,66 +1630,66 @@ For this reason, the network must store the Execution Permit or the verifiable c
 
 This information enables independent auditing, reconstruction of the transaction's execution path, verification of the performance of network components and monitoring of the behavior of the relevant components (including nodes and engines), evaluation of validator performance, and analysis of the validation process — even years after finality.
 
-
+### Overview of the Transaction Path in the Network After Support of the AVP-DS Capability
 
 ```
 
 ┌───────────────────────────────────────────────────────────┐
-│           1: User: Decision to submit a transaction                 │
+│           1: User: Decision to submit a transaction                  │
 └─────────────────────────────┬─────────────────────────────┘
                                    │
                                    ▼
 ┌───────────────────────────────────────────────────────────┐
-│           2: Wallet: Initial transaction preparation                │
+│           2: Wallet: Initial transaction preparation                 │
 └─────────────────────────────┬─────────────────────────────┘
                                    │
                                    ▼
 ┌───────────────────────────────────────────────────────────┐
-│ 3: Wallet: Data collection and sending the transaction              │
-│             request to the Network Protocol                         │
+│ 3: Wallet: Data collection and sending the transaction               │
+│             request to the Network Protocol                          │
 └─────────────────────────────┬─────────────────────────────┘
                                    │
                                    ▼
 ┌───────────────────────────────────────────────────────────┐
-│ 4: Network Protocol: Receiving the transaction request              │
-│                   from the wallet                                   │
+│ 4: Network Protocol: Receiving the transaction request               │
+│                   from the wallet                                    │
 └─────────────────────────────┬─────────────────────────────┘
                                    │
                                    ▼
 ┌───────────────────────────────────────────────────────────┐
-│ 5: Network Protocol: Receiving required information                 │
-│               from network components                               │
+│ 5: Network Protocol: Receiving required information                  │
+│               from network components                                │
 └─────────────────────────────┬─────────────────────────────┘
                                    │
                                    ▼
 ┌───────────────────────────────────────────────────────────┐
-│ 6: Network Protocol: Adopting the required policy for               │
-│           potential conflict prevention                             │
+│ 6: Network Protocol: Adopting the required policy for                │
+│           potential conflict prevention                              │
 └─────────────────────────────┬─────────────────────────────┘
                                    │
                                    ▼
 ┌───────────────────────────────────────────────────────────┐
-│ 7: Network Protocol: Creating parallel software                     │
-│ validation lanes by selecting components and                        │
-│ determining the transaction validation path                         │
+│ 7: Network Protocol: Creating parallel software                      │
+│ validation lanes by selecting components and                         │
+│ determining the transaction validation path                          │
 └─────────────────────────────┬─────────────────────────────┘
                                    │
                                    ▼
 ┌───────────────────────────────────────────────────────────┐
-│     8: Network Protocol: Issuing the Execution Permit               │
+│     8: Network Protocol: Issuing the Execution Permit                │
 └────────┬─────────────────────────────────────────┬────────┘
-          │                                                  │
-          ▼                                                 ▼
+          │                                                 │
+          ▼                                                ▼
 ┌────────────────────┐         ┌──────────────────────────────────────┐
-│ 9: Network Protocol   │         │ 10: Network Protocol: Sending the           │
-│ Storing an encrypted  │         │ unencrypted Execution Permit along          │
-│ copy of the           │         │ with the per-permit encryption key          │
-│ Execution Permit      │         │ to the wallet                               │
-│ using the             │         └─────────────────┬────────────────────┘
-│ per-permit            │                              │
-│ encryption key in     │                              ▼
-│ the Provisional       │      ┌──────────────────────────────────────┐
-│ State                 │      │ 11: Wallet: Displaying the                  │
+│ 9: Network Protocol    │        │ 10: Network Protocol: Sending the           │
+│ Storing an encrypted   │        │ unencrypted Execution Permit along          │
+│ copy of the            │        │ with the per-permit encryption key          │
+│ Execution Permit       │        │ to the wallet                               │
+│ using the              │        └─────────────────┬────────────────────┘
+│ per-permit             │                             │
+│ encryption key in      │                             ▼
+│ the Provisional        │     ┌──────────────────────────────────────┐
+│ State                  │     │ 11: Wallet: Displaying the                  │
 └────────┬───────────┘     │ transaction signing window to the           │
           │                    │ user and signing the transaction            │
           │                    └─────────────────┬────────────────────┘
@@ -1708,47 +1708,47 @@ This information enables independent auditing, reconstruction of the transaction
                                  │
                                  ▼
 ┌───────────────────────────────────────────────────────────┐
-│ 13: Initial Validation Nodes: Using the received                    │
-│ per-permit key along with the Execution Permit and the              │
-│ signed transaction from the wallet, they first decrypt              │
-│ the Execution Permit copy stored in the Provisional                 │
-│ State, and then verify the Execution Permit received                │
-│ from the wallet line-by-line against the decrypted                  │
-│ version in the Provisional State                                    │
+│ 13: Initial Validation Nodes: Using the received                     │
+│ per-permit encryption key along with the Execution Permit and the    │
+│ signed transaction from the wallet, they first decrypt               │
+│ the Execution Permit copy stored in the Provisional                  │
+│ State, and then verify the Execution Permit received                 │
+│ from the wallet line-by-line against the decrypted                   │
+│ version in the Provisional State                                     │
 └─────────────────────────────┬─────────────────────────────┘
                                    │
                                    ▼
 ┌───────────────────────────────────────────────────────────┐
-│ 14: Initial Validation Nodes: After successful                      │
-│ verification and completion of initial validation, they             │
-│ send the transaction to the execution domain and                    │
-│ execution engine designated in the Execution Permit                 │
+│ 14: Initial Validation Nodes: After successful                       │
+│ verification and completion of initial validation, they              │
+│ send the transaction to the execution domain and                     │
+│ execution engine designated in the Execution Permit                  │
 └─────────────────────────────┬─────────────────────────────┘
                                    │
                                    ▼
 ┌───────────────────────────────────────────────────────────┐
-│ 15: Execution Engine: Upon receiving the transaction                │
-│ along with the verified Execution Permit and the                    │
-│ per-permit key, executes and confirms the transaction               │
+│ 15: Execution Engine: Upon receiving the transaction                 │
+│ along with the verified Execution Permit and the                     │
+│ per-permit encryption key, executes and confirms the transaction     │
 └─────────────────────────────┬─────────────────────────────┘
                                    │
                                    ▼
 ┌───────────────────────────────────────────────────────────┐
-│ 16: Network Protocol: Monitoring the expected behavior              │
-│                       and outcome                                   │
+│ 16: Network Protocol: Monitoring the expected behavior               │
+│                       and outcome                                    │
 └─────────────────────────────┬─────────────────────────────┘
                                    │
                                    ▼
 ┌───────────────────────────────────────────────────────────┐
-│ 17: Network: Transaction entering the consensus process             │
+│ 17: Network: Transaction entering the consensus process              │
 └─────────────────────────────┬─────────────────────────────┘
                                    │
                                    ▼
 ┌───────────────────────────────────────────────────────────┐
-│ 18: Network: Recording the transaction and Execution                │
-│ Permit in the network ledger, removing the per-permit               │
-│ key accompanying the transaction, and also removing the             │
-│ Execution Permit stored in the Provisional State                    │
+│ 18: Network: Recording the transaction and Execution                 │
+│ Permit in the network ledger, removing the per-permit                │
+│ encryption key accompanying the transaction, and also removing the   │
+│ Execution Permit stored in the Provisional State                     │
 └───────────────────────────────────────────────────────────┘
 
 ```
