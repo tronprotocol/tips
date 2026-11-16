@@ -1630,7 +1630,7 @@ For this reason, the network must store the Execution Permit or the verifiable c
 
 This information enables independent auditing, reconstruction of the transaction's execution path, verification of the performance of network components and monitoring of the behavior of the relevant components (including nodes and engines), evaluation of validator performance, and analysis of the validation process — even years after finality.
 
-### Overview of the Transaction Path in the Network After Support of the AVP-DS Capability
+### Overview of the Transaction Validation Path in the Network After Support of the AVP-DS Capability
 
 ```
 
