@@ -1698,11 +1698,11 @@ This information enables independent auditing, reconstruction of the transaction
           │                     ┌──────────────────────────────────────┐
           │                     │ 12: Wallet: Sending the signed              │
           │                     │ transaction along with the Execution        │
-          │                     │ Permit and the transaction-specific         │
-          │                     │ encryption key to the initial               │
-          │                     │ validation nodes designated in the          │
-          │                     │ Execution Permit                            │
+          │                     │ Permit and the per-permit encryption        │
+          │                     │ key to the initial validation nodes         │
+          │                     │ designated in the Execution Permit          │
           │                     └─────────────────┬────────────────────┘
+          │                                          │
           │                                          │
           └───────────────────┬────────────────┘
                                  │
