@@ -1631,6 +1631,9 @@ For this reason, the network must store the Execution Permit or the verifiable c
 This information enables independent auditing, reconstruction of the transaction's execution path, verification of the performance of network components and monitoring of the behavior of the relevant components (including nodes and engines), evaluation of validator performance, and analysis of the validation process — even years after finality.
 
 
+
+```
+
 ┌───────────────────────────────────────────────────────────┐
 │           1: User: Decision to submit a transaction                 │
 └─────────────────────────────┬─────────────────────────────┘
@@ -1747,6 +1750,8 @@ This information enables independent auditing, reconstruction of the transaction
 │ key accompanying the transaction, and also removing the             │
 │ Execution Permit stored in the Provisional State                    │
 └───────────────────────────────────────────────────────────┘
+
+```
 ___
 ___
 # Threat Model
