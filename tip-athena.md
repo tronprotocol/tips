@@ -650,8 +650,8 @@ Other designated components, in the continuation of the validation process, upon
 
 The retention of the Execution Permit in the Provisional State is temporary, and its lifecycle depends on the status of the related transaction. Accordingly, the removal of the temporary copy of the Execution Permit and its per-permit encryption key is achieved in two ways:
 
-· In the case where the validation process of a transaction results in the registration of an outcome in the network ledger: Regardless of the outcome obtained (successful or unsuccessful), the transaction, along with the Execution Permit, is registered in the final network ledger; then, the encrypted copy of the relevant Execution Permit in the Provisional State and the per-permit encryption key specific to that permit — which was accompanying the transaction — are also removed.
-· In the case where the validation process does not result in the registration of an outcome in the network ledger: If the transaction in question is not sent to the network within the specified deadline, or if the transaction is rejected during validation in such a way that its final outcome is not registered in the ledger (such as the rejection of the transaction at the initial validation stage), or after the expiration of the time deadline specified by the Network Protocol, the Execution Permit is removed from the Provisional State, and the per-permit encryption key specific to that permit is simultaneously removed from the operational cycle.
+- In the case where the validation process of a transaction results in the registration of an outcome in the network ledger: Regardless of the outcome obtained (successful or unsuccessful), the transaction, along with the Execution Permit, is registered in the final network ledger; then, the encrypted copy of the relevant Execution Permit in the Provisional State and the per-permit encryption key specific to that permit — which was accompanying the transaction — are also removed.
+- In the case where the validation process does not result in the registration of an outcome in the network ledger: If the transaction in question is not sent to the network within the specified deadline, or if the transaction is rejected during validation in such a way that its final outcome is not registered in the ledger (such as the rejection of the transaction at the initial validation stage), or after the expiration of the time deadline specified by the Network Protocol, the Execution Permit is removed from the Provisional State, and the per-permit encryption key specific to that permit is simultaneously removed from the operational cycle.
 
 In this manner, the Provisional State plays the role of a temporary and conditional space for supporting pre-finalization verification — without temporary data entering the main ledger or violating the principles of finality and the integrity of the ledger.
 
@@ -676,76 +676,80 @@ Security advantages of this mechanism:
 - Restricted access to designated nodes and components: Only the nodes and components designated in the Execution Permit — and only after receiving the transaction along with the Execution Permit and the per-permit encryption key — can access the Provisional State and decrypt and view the contents of the relevant Execution Permit using the received per-permit encryption key.
 
 Other network components that have access to the Provisional State cannot decrypt or, consequently, view the contents of the permits, due to the lack of the per-permit encryption key.
-___
-___
-### Expected Behavior and Outcome Tracking
 
-One of the key capabilities of the ATHENA architecture is the introduction of the concept of Expected Behavior for each transaction. This concept transforms the transaction lifecycle from a simple "send and wait for result" process into a fully verifiable cycle encompassing planning, execution, monitoring, and result validation.
+### Monitoring Expected Behavior and Outcome
 
-Expected Behavior refers to the set of outcomes that, based on the information contained in the Admission Request, the rules of the Host Protocol, and the data recorded within the Execution Permit, are anticipated to be observed upon the transaction's finality in the global ledger.
+With network support of the AVP-DS capability, the transaction lifecycle transforms from a simple "send and wait for result" process into a fully verifiable cycle encompassing planning, execution, monitoring, and result validation.
 
-For example, if a wallet requests to transfer 10 TRX from account A to account B, the Expected Behavior of this transaction would include:
+Expected Behavior and Outcome refers to the set of results that, based on the information in the transaction submission request sent from the wallet to the Network Protocol, Network Protocol rules, and the data recorded in the Execution Permit, are anticipated to be observed after transaction execution and before its final recording in the network ledger.
 
-- 10 TRX being deducted from account A's balance;
-- 10 TRX being added to account B's balance;
-- The transaction having been processed exactly according to the validation and execution path specified in the Execution Permit;
-- The final result conforming to the rules of the Host Protocol.
+For example, if the wallet submits a request to transfer 10 TRX from account A to account B, the Expected Behavior and Outcome of this transaction would include:
 
-For simple transactions, this behavior is usually highly predictable. Conversely, for more complex transactions—such as smart contract calls—the Expected Behavior may involve a set of state changes, outputs, or conditions defined by the contract itself.
+- Deduction of 10 TRX from account A's balance;
+- Addition of 10 TRX to account B's balance;
+- Execution of the transaction exactly according to the validation path, roadmap, and components specified in the Execution Permit;
+- Comparison and monitoring of the validation result obtained from the transaction after the execution engine, with the value recorded in the Execution Permit, by the Network Protocol.
 
-For this reason, ATHENA does not attempt to replace the logic of smart contracts; rather, it receives the necessary information to define Expected Behavior from the Host Protocol and incorporates this into the Execution Permit issuance process.
+For simple transactions, this behavior is usually highly predictable. Conversely, for more complex transactions—such as smart contract calls—the Expected Behavior and Outcome may involve a set of state changes, outputs, constraints, or conditions defined by the contract itself.
 
-Monitoring Expected Behavior
+Consequently, for a smart contract call, as with other transactions, the user first sends a request to interact with the contract to the Network Protocol via the wallet, and an Execution Permit is issued for this call by the Network Protocol and sent to the wallet along with the encryption key specific to that permit. The Network Protocol obtains the data required to define the Expected Behavior and Outcome from the contract's recorded content in the network (such as its code and state), previous execution records, and the transaction submission request, and incorporates it into the Execution Permit issuance process.
 
-As described in the ATHENA architecture, ATHENA's responsibility does not end with the issuance of the Execution Permit. ATHENA monitors the lifecycle of each transaction until its final recording in the global ledger. After a transaction reaches Finality, ATHENA compares the recorded outcome with the Expected Behavior.
+Internal Calls and the Smart Contract Call Chain
 
-- If the observed outcome is consistent with the Expected Behavior, the transaction's lifecycle is considered complete.
-- However, if the recorded result deviates from the Expected Behavior, ATHENA registers this as an Exception and sends the necessary report to the Host Protocol.
+A smart contract call transaction may, during execution, internally call other contracts. In the AVP-DS capability, this entire call chain is considered part of the same transaction and is executed under the same Execution Permit and based on the same roadmap, path, and components specified therein. Internal calls do not receive separate permits and do not follow separate paths; because their independent execution along different paths could itself lead to conflicts in the shared state.
 
-Investigating the cause of this deviation, determining its origin, and deciding on any subsequent actions remain entirely under the authority of the Host Protocol. ATHENA does not modify any consensus, security, or governance rules.
+When issuing the permit, the Network Protocol predicts the contracts and accounts that are likely to be involved in the call chain by reviewing the contract's code and state, previous execution records, and the request information, and determines the path and execution engine based on the entirety of them. If other transactions are also related to these same contracts or shared state, they are directed along the same coordinated path in accordance with the shared path policy.
+
+However, if during execution it becomes apparent that the call chain reaches a contract or state that necessitates a different path or components, this event is considered an exceptional condition and, in accordance with Level Two conflict management, its report is sent to the Network Protocol. In this case, the Network Protocol can issue a new Execution Permit for the transaction, and the transaction will be executed along the new path. The execution engine does not independently change the path.
+
+Network Protocol Responsibility
+
+Based on the transaction lifecycle after network support of the AVP-DS capability, the Network Protocol's responsibility does not end with the issuance of the Execution Permit. The Network Protocol monitors the lifecycle of each transaction until its final recording in the network ledger. After the transaction validation is completed in the execution engine and before the transaction is finally recorded in the network ledger, the Network Protocol compares the resulting outcome with the Expected Behavior and Outcome.
+
+- If the observed outcome does not conflict with the Expected Behavior and Outcome, the transaction enters the consensus process and is finally recorded in the network ledger.
+- If the execution outcome conflicts with the Expected Behavior and Outcome, the Network Protocol first verifies the Execution Permit and the completed validation stages, and then records it as an exception and prepares an analytical report containing the cause, root cause analysis of the discrepancy, and the handling method. These reports are used to improve policies for defining and monitoring Expected Behavior and Outcome in future transactions and to prevent the recurrence of similar cases.
+
+Investigating the cause of the exception, determining its origin, and deciding on the continuation of the process (including continuation, transaction rejection, or re-validation) is solely the responsibility of the Network Protocol. No consensus, security, or governance rule is modified by this mechanism.
 
 Impact on Resource Allocation
 
-One benefit of this model is that ATHENA can consider the certainty of the Expected Behavior when issuing the Execution Permit. In general:
+One of the advantages of this model is that the Network Protocol can consider the certainty of the Expected Behavior and Outcome when issuing the Execution Permit. In general:
 
-- Transactions whose Expected Behavior is simple, deterministic, and highly predictable can be scheduled with the minimum processing resources required by the Host Protocol.
-- Transactions whose Expected Behavior is more complex, more sensitive, or dependent on shared network state can be directed, according to Host Protocol policies, to stronger validation paths or allocated more resources.
+- Transactions whose Expected Behavior and Outcome are simple, deterministic, and highly predictable can be scheduled with the minimum execution resources required by the Network Protocol.
+- Transactions whose Expected Behavior and Outcome are more complex, more sensitive, or dependent on the shared network state can be directed to stronger validation paths or allocated more resources in accordance with Network Protocol policies.
 
-These decisions are fully governed by the Host Protocol's rules; ATHENA merely implements them through the Execution Permit.
+These decisions are fully governed by Network Protocol rules and are reflected in the Execution Permit.
 
-Assisting in Detecting Anomalous Behavior
+Assisting in Detecting Unexpected Behavior
 
-Monitoring Expected Behavior can serve as an effective tool for detecting anomalous behavior within the network.
+Monitoring Expected Behavior and Outcome can be an effective tool for detecting unexpected behaviors in the network.
 
-If the final result recorded in the ledger deviates from the Expected Behavior, the Host Protocol may consider this event as an indicator for investigating issues such as:
+If the final outcome recorded in the ledger deviates from the Expected Behavior and Outcome, the Network Protocol can consider this event as an indicator to investigate issues such as:
 
-- Abnormal validator behavior;
-- Potential presence of a malicious Full Node;
+- A node exhibiting abnormal behavior;
 - Execution errors;
 - Synchronization issues;
 - Other exceptional conditions.
 
-ATHENA only identifies and reports the deviation and makes no independent decisions regarding node maliciousness or the imposition of penalties.
+If the Network Protocol identifies any of the above cases, it first prepares and records an analytical report of the identified deviation for further investigation and record-keeping, and then places the appropriate action regarding the identified unexpected behavior on its agenda.
 
 Re-validation Capability
 
-If, after reviewing ATHENA's report, the Host Protocol determines that the result of a transaction is unreliable, it can, according to its own policies, decide to re-process the transaction.
+After the transaction execution is completed in the execution engine and before the final outcome is recorded in the ledger, the Network Protocol compares the "Expected Behavior and Outcome" recorded in the Execution Permit with the outcome obtained from the execution engine.
 
-In such a case, ATHENA can issue a new Execution Permit for the same request and select a different validation path.
+If the transaction execution outcome in the execution engine conflicts with the Expected Behavior and Outcome recorded in the Execution Permit, the Network Protocol first re-verifies the Execution Permit and, after reviewing the completed validation stages, prepares an analytical report including how it was identified, the cause, the handling method, and the final outcome. It then uses these reports to prevent the recurrence of similar cases in the future, and based on its policies, issues a new Execution Permit for the same request and selects a different validation path. The new permit is issued along with its specific encryption key, and the previous permit and its specific key are removed from the Provisional State.
 
-Comparing the results from the independent execution of a transaction across different paths can provide the Host Protocol with valuable data to analyze the root cause of the discrepancy, verify the transaction's execution, and detect anomalous behavior.
+Comparing the results of independent execution of a transaction along different paths can provide valuable data to the Network Protocol for root cause analysis of the discrepancy, verifying the transaction execution, and detecting abnormal behavior of network components.
 
 Summary
 
-The concept of Expected Behavior is one of the complementary capabilities of the ATHENA architecture for enhancing the Observability and Auditability of the transaction execution process.
+The concept of Expected Behavior and Outcome is one of the complementary capabilities provided by network support of the AVP-DS capability to enhance the observability and auditability of the transaction execution process.
 
-This approach is being employed for the first time in a major network, enabling end-to-end monitoring of the transaction lifecycle from the moment an Admission Request is sent to its final recording in the global ledger. It significantly increases the network's transparency, auditability, and performance analysis capabilities.
+This approach enables the Network Protocol to fully monitor the transaction lifecycle from the moment the transaction submission request is sent from the wallet to the Network Protocol until its final recording in the ledger.
 
-In this model, without intervening in consensus, ATHENA uses the information from the Admission Request, the Host Protocol rules, and the Execution Permit to compare the final outcome of a transaction against the Expected Behavior. If any discrepancy is observed, it is reported to the Host Protocol.
-
-This approach not only enables full monitoring of the transaction lifecycle but also provides a valuable tool for error analysis, policy improvement, increased validation transparency, and facilitating the investigation of anomalous behavior. Consequently, anomalous behavior can be detected much faster than in conventional models and examined according to Host Protocol policies, without introducing any changes to the blockchain's consensus mechanism or security model.
-
-
+This approach not only enables full monitoring of the transaction lifecycle before the transaction enters the consensus process but also provides a valuable tool for error analysis, policy improvement, increasing validation transparency, and facilitating the investigation of unexpected behavior. As a result, unexpected behavior can be identified more quickly and investigated in accordance with Network Protocol policies, without introducing any changes to the network's consensus mechanism or security model.
+___
+___
 ### Execution Permit–Based Transaction Admission
 Eliminating the Public Transaction Waiting Layer
 
