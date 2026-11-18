@@ -361,6 +361,22 @@ As a result, the network can, using the existing execution capacities and the ca
 
 In the event of new hardware capacities being added, the Network Protocol, through the addressing and routing mechanism, employs the new capacities for transaction validation. In this manner, the network's execution capacity can increase in proportion to the increase in incoming transaction requests.
 
+### Conflict Management in Smart Contracts and Internal Calls
+
+With network support of the AVP-DS capability, to request interaction with a smart contract, the user sends a transaction submission request from the wallet to the Network Protocol.
+
+Upon receiving this request, to prevent conflicts, the Network Protocol collects the necessary data from the network, including the contract's recorded content (such as its code and state) and previous execution records.
+
+If the Network Protocol determines based on this data that the transaction might internally call other contracts during execution, upon issuing the Execution Permit, it considers the entire possible internal call chain as part of the same transaction and, accordingly, issues the Execution Permit along with the per-permit encryption key.
+
+All network components complete the validation stages of the main contract and the potentially invoked internal contracts based on the roadmap and path specified in the permit. Therefore, potential internal calls do not receive separate permits and do not follow separate paths; because their independent execution along different paths could lead to conflict in the shared state.
+
+If the Network Protocol receives other transaction submission requests related to the same contracts or shared state, being aware of the transaction under confirmation, it determines a shared path coordinated with the path of the transaction being executed when issuing Execution Permits for the new requests, and then issues the new permit.
+
+If, during the execution of the smart contract and within the internal contract call, changing the path for the invoked internal contract becomes unavoidable, this event is considered an exceptional condition. In this case, the component identifying the exception first re-verifies the Execution Permit and, after reviewing the validation stages, sends the report to the Network Protocol and waits for a decision. In this state, the Network Protocol can issue a new Execution Permit including the new validation path.
+
+All network components are required to act in accordance with the response and instructions issued by the Network Protocol. No network component is permitted to make independent decisions or take actions outside the Network Protocol's instructions within the framework of the Execution Permit.
+
 ### Parallel Validation with Sequential Execution Simulation
 
 Preserving transaction order is one of the pillars of security and correctness in blockchain networks. Respecting validation order helps maintain the integrity of account states, prevent conflicts, prevent double-spending, ensure predictability of network behavior, and enable accurate auditing.
