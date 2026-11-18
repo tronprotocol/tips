@@ -1112,20 +1112,6 @@ This architecture ensures:
 
 In other words, ATHENA transforms the network from an architecture with unmanaged transaction admission into one with Managed Transaction Admission—an architecture in which transaction volume growth and processing capacity growth can be managed in a coordinated and balanced manner.
 
-
-### Conflict Prediction and Mitigation Before Transaction Entry
-
-One of ATHENA's core innovations is proactive conflict management.
-
-In conventional architectures, conflicts are typically detected after the transaction has been broadcast to the network and during its execution.
-
-In contrast, ATHENA attempts to predict the likelihood of conflicts before issuing the Execution Permit and before the transaction enters the network—by analyzing the current state of the network and leveraging insights from previously recorded conflicts to select the most appropriate validation and execution path.
-
-Reports generated from actual conflicts are also sent to the Host Protocol, enabling improvements to admission policies, scheduling, node selection, domain selection, and execution engine selection, thereby reducing the likelihood of similar conflicts recurring in the future.
-
-To the best of this research, such an approach—predicting and managing conflicts before the transaction enters the network and before the execution permit is issued—has not been reported in any known blockchain architecture and is one of ATHENA's primary innovations.
-
-
 ### Sender Consistency
 
 ATHENA preserves the logical ordering of transactions for each account without imposing restrictions on other accounts.
