@@ -1279,7 +1279,7 @@ All execution decisions are made by the Host Protocol.
 
 ATHENA is solely responsible for managing the transaction lifecycle—from receiving the Admission Request, issuing the Execution Permit, managing the execution path, monitoring policy execution, verifying network behavior, and reporting any discrepancies to the Host Protocol.
 
-For this reason, ATHENA can be regarded as a Policy‑Driven Transaction Lifecycle Management Layer—a layer that, without making any changes to the consensus algorithm, security model, or ledger structure, enables intelligent, dynamic, and verifiable management of the complete transaction lifecycle
+For this reason, ATHENA can be regarded as a Policy‑Driven Transaction Lifecycle Management Layer—a layer that, without making any changes to the consensus algorithm, security model, or ledger structure, enables intelligent, dynamic, and verifiable management of the complete transaction lifecycle.
 ___
 ___
 # Transaction Lifecycle After Network Support of the AVP-DS Capability
