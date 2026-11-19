@@ -766,257 +766,6 @@ This approach enables the Network Protocol to fully monitor the transaction life
 This approach not only enables full monitoring of the transaction lifecycle before the transaction enters the consensus process but also provides a valuable tool for error analysis, policy improvement, increasing validation transparency, and facilitating the investigation of unexpected behavior. As a result, unexpected behavior can be identified more quickly and investigated in accordance with Network Protocol policies, without introducing any changes to the network's consensus mechanism or security model.
 ___
 ___
-### Execution Permit–Based Transaction Admission
-Eliminating the Public Transaction Waiting Layer
-
-
-Transaction Admission in Conventional Blockchain Architectures
-
-In conventional blockchain architectures, regardless of the consensus algorithm employed, transaction admission generally follows a common architectural pattern.
-
-After a wallet signs a transaction, the signed transaction is immediately propagated throughout the network and placed into a shared public waiting layer, commonly referred to as the  mempool  or  transaction queue.
-
-This waiting layer temporarily stores incoming transactions until validators or block producers select them for execution.
-
-Consequently, transaction admission and transaction execution are decoupled.
-
-Transactions first become publicly visible to the network, and only afterwards compete for execution resources according to the current processing capacity of the blockchain.
-
-
-```
-
-Conventional Architecture
-
-
-
-      Wallet
-
-         │
-
-         │ Sign Transaction
-
-         ▼
-
- ┌───────────────────────┐
-
- │ Public Waiting Layer  │
-
- │ (Mempool / Queue)     │
-
- └───────────────────────┘
-
-         │
-
-         ▼
-
-     Validators
-
-         │
-
-         ▼
-
-      Consensus
-
-         │
-
-         ▼
-
-    Global Ledger
-
-```
-
-
-This architectural model introduces several inherent characteristics:
-
-. Signed transactions enter the network before execution resources are allocated.
-. All transactions compete within the same public waiting layer.
-. During periods of congestion, the waiting layer naturally grows.
-. The execution path of a transaction is unknown until validators eventually select it.
-. Every network participant can observe the signed transaction while it waits.
-. The public waiting layer therefore becomes an architectural component rather than merely an implementation detail.
-
-
-Transaction Admission in ATHENA
-
-ATHENA fundamentally redesigns transaction admission.
-
-Instead of allowing a signed transaction to enter the network immediately, the wallet first requests permission to execute the transaction.
-
-This request, referred to as an  Admission Request,  contains only the information required by the Host Protocol for admission decision-making.
-
-No signed transaction exists at this stage.
-
-After receiving the Admission Request, ATHENA evaluates the current operational state of the network together with the policies defined by the Host Protocol and generates an  Execution Permit.
-
-The Execution Permit completely defines the transaction lifecycle before the signed transaction is created.
-
-Depending on Host Protocol policy, the permit may specify:
-
-- validation path;
-- initial validator chain;
-- execution domain;
-- execution engine;
-- scheduling policy;
-- execution constraints;
-- conflict-management policy;
-- expected behavior;
-- validator quorum;
-- and any additional execution parameters required by the Host Protocol.
-
-Only after receiving this permit does the wallet digitally sign the transaction.
-
-The signed transaction is then transmitted  directly  to the validator chain specified inside the Execution Permit.
-
-No public transaction waiting layer exists between the wallet and the designated validators.
-
-
-```
-
-ATHENA Architecture
-
-
-
-      Wallet
-
-         │
-
-         │ Admission Request
-
-         ▼
-
- ┌────────────────────┐
-
- │      ATHENA        │
-
- │ Admission Layer    │
-
- └────────────────────┘
-
-         │
-
-         │ Execution Permit
-
-         ▼
-
-      Wallet
-
-         │
-
-         │ Sign Transaction
-
-         ▼
-
- Designated Validator Chain
-
-         │
-
-         ▼
-
- Native Consensus
-
-         │
-
-         ▼
-
-  Global Ledger
-
-```
-
-
-Unlike conventional architectures, transaction admission in ATHENA is no longer based on placing signed transactions into a shared waiting pool.
-
-Instead, each transaction receives its execution path before entering the blockchain.
-
-From the moment an Execution Permit is issued, the wallet already knows:
-
-- where the transaction must be sent;
-- how it will be validated;
-- which execution policies apply;
-- and which validators are responsible for processing it.
-
-The transaction therefore follows its predefined execution path immediately after being signed.
-
-
-Architectural Consequences
-
-This architectural redesign introduces several important properties.
-
-1. Elimination of the Public Waiting Layer
-
-ATHENA removes the public transaction waiting layer from the transaction lifecycle.
-
-Transactions no longer wait inside a shared pool before execution.
-
-Execution resources are allocated first; transaction propagation occurs afterwards.
-
-2. Execution Path Determined Before Transaction Creation
-
-Unlike conventional architectures, ATHENA determines the execution path before the signed transaction is even created.
-
-The wallet receives the complete execution instructions in advance through the Execution Permit.
-
-3. Managed Transaction Admission
-
-ATHENA transforms transaction admission from an uncontrolled broadcast model into a managed admission model.
-
-Instead of allowing unlimited signed transactions to enter the network simultaneously, admission is coordinated according to the real processing capacity defined by the Host Protocol.
-
-4. No Global Competition Between Transactions
-
-Transactions no longer compete inside a common waiting layer.
-
-Each transaction follows only the execution path assigned by its own Execution Permit.
-
-5. Elimination of Unnecessary Public Disclosure
-
-Because signed transactions are not propagated before execution resources have already been assigned, unnecessary public disclosure of transaction information is eliminated.
-
-The signed transaction becomes visible only to the validator chain responsible for processing that specific transaction.
-
-
-Architectural Security Implications
-
-The elimination of the public waiting layer produces important architectural security consequences.
-
-In conventional blockchain systems, the public mempool represents an observation layer where signed transactions remain publicly accessible before execution.
-
-Researchers have discussed various attack scenarios that rely on observing transactions during this waiting period, including front-running, transaction-copying attacks, denial-of-service amplification, and long-term concerns regarding quantum-assisted cryptanalysis of publicly exposed signatures.
-
-ATHENA removes the architectural condition required for such attacks.
-
-Because signed transactions are never placed into a publicly accessible waiting layer:
-
-- there is no public transaction pool to observe;
-- there is no global transaction queue to monitor;
-- there is no architectural waiting period between public propagation and execution.
-
-Instead, transactions are signed only after execution authorization has already been granted and are delivered directly to the validator chain designated by the Execution Permit.
-
-Consequently, the public observation surface created by conventional mempool architectures no longer exists within ATHENA.
-
-This should not be interpreted as ATHENA replacing cryptographic security.
-
-Rather, ATHENA removes an entire architectural exposure layer while preserving the native consensus, execution engine, and security model of the Host Protocol.
-
-
-Native Compatibility
-
-Although ATHENA fundamentally redesigns transaction admission, it leaves the blockchain's native execution model completely unchanged.
-
-Consensus, block production, state transition, validator governance, and finality remain entirely under the authority of the Host Protocol.
-
-ATHENA modifies only the admission architecture—not the blockchain itself.
-
-
-Architectural Summary
-
-ATHENA replaces public transaction broadcasting with permission-based transaction admission.
-
-Transactions no longer wait inside a shared public pool; instead, each transaction receives its execution path before it is signed, allowing it to move directly from the wallet to its designated validator chain.
-
-By eliminating the public transaction waiting layer as an architectural component, ATHENA removes an entire class of exposure inherent to conventional mempool-based designs while remaining fully compatible with the Host Protocol's native consensus and execution model.
-
-
 ### Full Execution Permit Verification
 
 One of the fundamental principles of the ATHENA architecture is that the Execution Permit is not merely an admission authorization for a transaction. Rather, it is the official, immutable document governing the complete validation and execution lifecycle of that transaction.
@@ -1280,6 +1029,119 @@ All execution decisions are made by the Host Protocol.
 ATHENA is solely responsible for managing the transaction lifecycle—from receiving the Admission Request, issuing the Execution Permit, managing the execution path, monitoring policy execution, verifying network behavior, and reporting any discrepancies to the Host Protocol.
 
 For this reason, ATHENA can be regarded as a Policy‑Driven Transaction Lifecycle Management Layer—a layer that, without making any changes to the consensus algorithm, security model, or ledger structure, enables intelligent, dynamic, and verifiable management of the complete transaction lifecycle.
+___
+___
+# Removal of Public Transaction Propagation with Network Support of the AVP-DS Capability via Changing Mempool Access from a Shared Memory to a Dedicated Memory
+
+### What is a Mempool?
+
+From a technical perspective, the "mempool" is not a central and unified memory across the entire network; rather, each node (Full Node or validation node) has its own local in-memory data structure, typically kept in RAM, referred to as a Mempool (short for Memory Pool).
+
+In conventional networks, when a transaction is propagated, it is sent to all nodes and copied into the mempool of each individual node. Transactions are distributed in the memory of all network nodes and are observable; in technical literature, this entire distributed layer is referred to as the "Public Waiting Layer" (Public Mempool).
+
+Transaction Admission in Conventional Networks
+
+In conventional blockchain networks, regardless of the consensus algorithm, transaction admission follows a common pattern:
+
+- The wallet signs the transaction;
+- The transaction is propagated across the network and placed in the public waiting layer;
+- After public propagation, the validation process begins upon the transaction's entry into the network.
+
+In conventional networks, the transaction first enters the waiting pool; therefore, the time of entry is not the same as the time of selection for execution. This model entails the following characteristics:
+
+- Signed transactions enter the network before the allocation of execution resources.
+- All transactions are passed around in the nodes' memory and propagated across the entire network.
+- The time a transaction enters the network is not the same as the time the validation process begins.
+- During periods of congestion, the waiting layer naturally grows.
+- The execution path of a transaction remains unknown until validators initiate the validation process.
+- All nodes can observe the signed transaction during the waiting period.
+
+Therefore, the public waiting layer in conventional networks is a structural component, not merely an implementation detail.
+
+### Transaction Admission After Network Support of the AVP-DS Capability
+
+With network support of the AVP-DS capability, the transaction lifecycle is redesigned. Instead of allowing a signed transaction to enter the network immediately, the wallet first sends a transaction submission request to the Network Protocol. This request contains the information the Network Protocol needs for admission decision-making. At this stage, no signed transaction exists.
+
+After receiving the required information in the form of a transaction submission request from the wallet—and after monitoring the real-time load and receiving the necessary and supplementary information from network components—the Network Protocol evaluates the current operational state and, by creating a parallel software validation lane that includes the validation roadmap, addressing, routing, and directing the transaction to the designated components (and not the entire hardware capacity), issues the respective Execution Permit in two versions:
+
+- One version is encrypted with the per-permit encryption key and stored in the Provisional State for subsequent verifications.
+- The other unencrypted version of the Execution Permit is then sent to the requesting wallet along with its per-permit encryption key.
+
+The Execution Permit contains the transaction's validation roadmap—from the moment the transaction enters the network, including:
+
+- The designated initial validation nodes (and not all initial validation nodes in the network)
+- The execution domain
+- The least-loaded execution engine among the parallel engines of a domain
+- The scheduling policy
+- The default conflict management policy
+- Monitoring the expected behavior and outcome
+
+—until the transaction is recorded in the network ledger.
+
+Upon receiving the Execution Permit along with the per-permit encryption key, the wallet enables the user to sign the transaction. After the user signs the transaction, the wallet sends the signed transaction along with the Execution Permit and the per-permit encryption key (used to decrypt the stored version of the permit in the Provisional State) directly to the initial validation nodes designated in the Execution Permit, and not to all initial validation nodes in the network.
+
+### Although from a hardware perspective, local memory (mempool) space still exists:
+
+1. This space is no longer public and observable for all network components; rather, it is a private memory dedicated to that specific node.
+2. Once the transaction enters this memory, it is not passed around among network nodes.
+3. Only the validation nodes designated in the Execution Permit (and not all validation nodes in the network) receive the transaction directly from the wallet in accordance with the Execution Permit.
+
+With network support of the AVP-DS capability, each transaction receives its execution path from the Network Protocol in the form of an Execution Permit prior to entering the blockchain.
+
+Although transactions still utilize the mempool memory space from a hardware perspective, this storage space is no longer public and accessible to all nodes; rather, it becomes a storage space with access dedicated to that specific node.
+
+From the moment the Execution Permit is issued, the wallet already knows:
+
+- Where the transaction must be sent;
+- How it will be validated;
+- What execution policies will be applied;
+- And which validators are responsible for processing it.
+
+Therefore, immediately after signing, the transaction follows its pre-determined execution path. Based on the Execution Permit, each transaction is routed, addressed, and directed along its validation path and designated components (and not the entire hardware capacity of the network).
+
+### Consequences of This Redesign
+
+Removal of the Public Waiting Layer: With network support of the AVP-DS capability, the public waiting layer of transactions is removed from the transaction lifecycle. Transactions no longer wait in a shared pool before execution. First, the hardware capacity and execution resources of the network are assessed; then, parallel software validation lanes are formed, and by determining the allocated hardware capacity, the Execution Permit is issued by the Network Protocol. Validation begins and ends based on the allocated hardware capacity, and not the entire hardware capacity of the network.
+
+Determining the Execution Path Prior to Transaction Creation: Unlike conventional networks, with network support of the AVP-DS capability, the Network Protocol—even before the transaction is signed and enters the network—determines all validation stages, transaction routing, and related components in the form of an Execution Permit and communicates them, along with the transaction, to the designated components and not all network components. From the moment the wallet sends the transaction along with the Execution Permit and the per-permit encryption key to all initial validation nodes designated in the Execution Permit, and upon receipt of the transaction along with the Execution Permit and per-permit encryption key (used to decrypt the stored version of the permit in the Provisional State) by the relevant initial validation nodes, until monitoring the expected behavior and outcome and recording the validation result in the network ledger.
+
+All components designated in the transaction's Execution Permit are required to act without any independent decision-making and strictly in accordance with the stages and components specified in the Execution Permit; such that after passing through each validation stage, the transaction is directed along its dedicated path to the next designated execution component.
+
+Managed Transaction Admission: In conventional networks, the wallet sends the signed transaction, and transaction management is performed after its entry into the network—through scheduling or queuing—and after receipt by network components.
+
+With network support of the AVP-DS capability, this procedure transforms into a managed admission model. Transaction management is performed by the Network Protocol prior to signing and in the wallet. Before the transaction is signed and enters the network, the Network Protocol reviews the real-time state of the network, determines the most appropriate validation and execution path for each transaction, dynamically forms parallel validation lanes based on the volume of incoming requests, and records all these decisions in the Execution Permit.
+
+It then sends the Execution Permit along with its per-permit encryption key to the wallet. After receiving the Execution Permit from the Network Protocol, the wallet allows the user to sign, and after the user signs the transaction, the wallet sends the transaction along with the Execution Permit and the per-permit encryption key (used to decrypt the stored version of the permit in the Provisional State) to all initial validation nodes designated in the Execution Permit.
+
+As a result, the network's input is no longer an unmanaged transaction flow; rather, it is an intelligent, controlled, scheduled, and dynamic flow managed by the Network Protocol.
+
+No Competition or Queuing Among Transactions: Transactions are no longer queued in a public waiting layer. Each transaction, along with the Execution Permit and the per-permit encryption key, enters the network solely through its dedicated execution path specified in the Execution Permit, sent directly from the wallet to all initial validation nodes designated in the permit.
+
+Removal of Unnecessary Public Disclosure: Since signed transactions are not propagated before the allocation of execution resources, unnecessary public disclosure of transaction information is eliminated. The signed transaction becomes visible only to the validation chain responsible for processing that specific transaction.
+
+### Security Implications of the AVP-DS Capability
+
+Transforming the public transaction waiting layer into a local, dedicated buffer specific to each node has important security implications. In conventional blockchain systems, the public mempool acts as a propagation layer where signed transactions are accessible to all network nodes prior to execution.
+
+Researchers have examined various attack scenarios that rely on observing transactions during the waiting period prior to execution and finalization; including Front-Running, transaction copying or replay, and Denial of Service (DoS) attacks and their amplification. Furthermore, another long-term concern exists: when transactions and their signatures are publicly propagated in the network environment—including the mempool, nodes, block producers, validators, and RPC/API providers—they are exposed to widespread observation and recording and are recorded in the network history; as a result, a future attacker might be able to extract the account's private key by analyzing the exposed signature and public key using quantum computers.
+
+With network support of the AVP-DS capability, the conditions required for such attacks are eliminated. Because signed transactions are never placed in a waiting layer with public accessibility:
+
+- There is no public transaction pool to observe;
+- No global transaction queue is available for monitoring;
+- No structural waiting period exists between public propagation and execution.
+
+Instead, transactions are signed only after receiving the Execution Permit and are sent directly by wallets, along with the respective Execution Permit and the per-permit encryption key, to all validators designated in the Execution Permit.
+
+In this design, the public disclosure surface resulting from conventional designs based on public/shared mempools no longer exists; because the mempool in this design is a private, local memory specific to each node, not a public memory accessible to all network nodes.
+
+### Native Compatibility
+
+As a result, with network support of the AVP-DS capability and the transformation of the publicly accessible mempool into local and dedicated buffers specific to each node, the wallet sends the transaction along with the Execution Permit and the per-permit encryption key (used to decrypt the stored version of the Execution Permit in the Provisional State) directly to all initial validation nodes designated in the Execution Permit. In this state, the structural exposure layer caused by the shared mempool no longer exists; while the native consensus, execution engine, and security model of the Network Protocol remain intact.
+
+### Summary of the AVP-DS Capability
+
+With network support of the AVP-DS capability, the transaction waiting layer—which was previously a structural component and a public, accessible memory for all network nodes—is transformed into a dedicated buffer specific to each node. Following this change, instead of being passed around in the mempool until reaching the entire network, the transaction is sent directly by the wallet to all initial validation nodes designated in the Execution Permit.
 ___
 ___
 # Transaction Lifecycle After Network Support of the AVP-DS Capability
