@@ -766,29 +766,6 @@ This approach enables the Network Protocol to fully monitor the transaction life
 This approach not only enables full monitoring of the transaction lifecycle before the transaction enters the consensus process but also provides a valuable tool for error analysis, policy improvement, increasing validation transparency, and facilitating the investigation of unexpected behavior. As a result, unexpected behavior can be identified more quickly and investigated in accordance with Network Protocol policies, without introducing any changes to the network's consensus mechanism or security model.
 ___
 ___
-
-### Intelligent Transaction Admission and Lifecycle Management
-
-In conventional architectures, after a transaction is broadcast to the network, it enters the validation process, and decisions regarding its execution path are made primarily during the initial stages of processing.
-
-In contrast, ATHENA manages the transaction lifecycle before the transaction enters the network and before the digital signature is ever propagated.
-
-After receiving the Admission Request, ATHENA collects the required information from the wallet and the network according to Host Protocol policies. By analyzing the real-time state of the network—including:
-
-- Available processing capacity of initial validator nodes;
-- Status of execution domains;
-- Load of parallel execution engines within each domain;
-- Transactions currently being processed;
-- Execution status of transactions from the same account;
-- And other policies defined by the Host Protocol—
-
-and based on the transaction type and the monitored information received from the network, ATHENA determines the most appropriate validation and execution path for the transaction and records all these decisions within the Execution Permit.
-
-The Execution Permit is not merely an admission authorization. It is the document that defines the complete validation and execution path of the transaction—from admission to final ledger recording—and all network components are required to operate according to the information recorded within it and the rules of the Host Protocol.
-
-This approach ensures that every transaction has a defined, verifiable, and pre-planned path before entering the network, preventing sudden congestion, imbalanced load distribution, and inefficient use of processing resources.
-
-
 ### Dynamic Resource Orchestration
 
 One of the most important features of ATHENA is its dynamic management of network resources.
