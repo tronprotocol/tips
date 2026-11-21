@@ -766,54 +766,6 @@ This approach enables the Network Protocol to fully monitor the transaction life
 This approach not only enables full monitoring of the transaction lifecycle before the transaction enters the consensus process but also provides a valuable tool for error analysis, policy improvement, increasing validation transparency, and facilitating the investigation of unexpected behavior. As a result, unexpected behavior can be identified more quickly and investigated in accordance with Network Protocol policies, without introducing any changes to the network's consensus mechanism or security model.
 ___
 ___
-### Full Execution Permit Verification
-
-One of the fundamental principles of the ATHENA architecture is that the Execution Permit is not merely an admission authorization for a transaction. Rather, it is the official, immutable document governing the complete validation and execution lifecycle of that transaction.
-
-At the time of issuance, the Execution Permit is generated based on the current state of the network and the policies defined by the Host Protocol. It records all decisions made by ATHENA for that transaction. Depending on Host Protocol policies, this information may include:
-
-- Transaction type;
-- Validation path;
-- Initial validator nodes;
-- Execution domain;
-- Selected execution engine;
-- Scheduling policies;
-- Permit validity period;
-- Security policies;
-- Expected behavior;
-- And any other parameters required by the Host Protocol.
-
-Simultaneously with permit issuance, a Canonical Copy of the Execution Permit is recorded within ATHENA and serves as the sole authoritative reference for that transaction.
-
-
-Full Execution Permit Verification Principle
-
-Before any initial validator node begins the transaction validation process, it is required to perform a complete verification of the entire Execution Permit content against the Canonical Copy stored in ATHENA.
-
-This verification is not limited to checking the Permit ID or the validity of the permit signature. Rather, all information recorded within the Execution Permit must match the canonical version without any discrepancy.
-
-In other words, each validator node must verify that:
-
-- The transaction type exactly matches the type for which the permit was issued;
-- The validation path remains unchanged;
-- The execution domain is the one originally assigned;
-- The execution engine is the one originally selected;
-- The set of initial validator nodes exactly matches the permit;
-- The scheduling and security policies have not been altered;
-- The permit validity period has not expired;
-- And all parameters defined by the Host Protocol remain identical to the Canonical Copy.
-
-Any discrepancy—even in a single parameter—invalidates the Execution Permit, and the transaction will be rejected before entering the validation and consensus process.
-
-
-Significance of This Mechanism
-
-In many conventional blockchain architectures, after a transaction is broadcast to the network, its validation path can no longer be independently verified. Subsequent nodes simply accept the results of previous stages without independent validation.
-
-In contrast, ATHENA, by recording the Canonical Copy and requiring initial validator nodes to perform full Execution Permit verification, ensures that the entire validation process proceeds exactly according to ATHENA's original decision. No part of the validation path can be altered between permit issuance and the start of processing.
-
-For this reason, the Execution Permit can be considered the Official Execution Checklist for the transaction—a document that all network components are required to follow precisely during validation and execution.
-
 
 ### Intelligent Transaction Admission and Lifecycle Management
 
