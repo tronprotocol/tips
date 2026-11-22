@@ -766,34 +766,6 @@ This approach enables the Network Protocol to fully monitor the transaction life
 This approach not only enables full monitoring of the transaction lifecycle before the transaction enters the consensus process but also provides a valuable tool for error analysis, policy improvement, increasing validation transparency, and facilitating the investigation of unexpected behavior. As a result, unexpected behavior can be identified more quickly and investigated in accordance with Network Protocol policies, without introducing any changes to the network's consensus mechanism or security model.
 ___
 ___
-### Runtime Monitoring and Adaptive Feedback
-
-ATHENA continuously monitors the operational status of various network components.
-
-This monitoring may include:
-
-- Load of initial validator nodes;
-- Load of execution domains;
-- Status of parallel execution engines;
-- Conflict rate;
-- Initial validation time;
-- Time to reach consensus;
-- Time to reach Finality;
-- Re-execution rate;
-- Load distribution quality;
-- And other performance indicators defined by the Host Protocol.
-
-The purpose of this monitoring is not merely to display network status, but to create a continuous learning cycle for performance improvement.
-
-Whenever a conflict or exceptional condition occurs during validation or execution—such as the absence of an expected outcome or deviation from expected validator behavior—ATHENA prepares an analytical report detailing the cause, the handling approach, and the final outcome, and sends it to the Host Protocol.
-
-This feedback can serve as the basis for refining admission policies, scheduling, node selection, domain selection, execution engine selection, and other Execution Permit issuance policies, reducing the likelihood of similar conflicts or exceptional conditions recurring in the future.
-
-Consequently, ATHENA, without directly altering network policies, enables Continuous Improvement of network performance through operational analysis and feedback to the Host Protocol.
-
-All final decisions remain the authority of the Host Protocol, while ATHENA serves as the intelligent monitoring, analysis, and transaction lifecycle management system.
-
-
 ### Policy-Driven Transaction Lifecycle Management
 
 One of the most important capabilities of the ATHENA architecture is the transformation of the transaction validation process from a static process into a fully policy-driven one.
