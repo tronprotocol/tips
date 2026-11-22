@@ -766,30 +766,6 @@ This approach enables the Network Protocol to fully monitor the transaction life
 This approach not only enables full monitoring of the transaction lifecycle before the transaction enters the consensus process but also provides a valuable tool for error analysis, policy improvement, increasing validation transparency, and facilitating the investigation of unexpected behavior. As a result, unexpected behavior can be identified more quickly and investigated in accordance with Network Protocol policies, without introducing any changes to the network's consensus mechanism or security model.
 ___
 ___
-### Dynamic Resource Orchestration
-
-One of the most important features of ATHENA is its dynamic management of network resources.
-
-In this architecture, no validation pipeline, execution domain, or execution engine is permanently assigned to transactions.
-
-For each Admission Request, ATHENA independently decides—based on the current state of the network, the type and domain of the transaction, and the Admission Request sent by the wallet—the following:
-
-- Which initial validator nodes should be selected;
-- How many groups and, consequently, how many initial validation pipelines are required across the network for this volume of incoming transactions;
-- Which Execution Domain the transaction should enter after initial validation;
-- Which execution engine, among the parallel engines within that domain, has the lowest processing load.
-
-As a result, the execution path of each transaction may differ from the next, even if both belong to the same type of operation.
-
-This architecture ensures:
-
-- Balanced distribution of processing load across available resources;
-- Prevention of hot spots;
-- Scalability of operational capacity in proportion to resource growth;
-- Elimination of predictability regarding transaction execution paths by nodes or other network actors.
-
-In other words, ATHENA transforms the network from an architecture with unmanaged transaction admission into one with Managed Transaction Admission—an architecture in which transaction volume growth and processing capacity growth can be managed in a coordinated and balanced manner.
-
 ### Sender Consistency
 
 ATHENA preserves the logical ordering of transactions for each account without imposing restrictions on other accounts.
