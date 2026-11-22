@@ -766,17 +766,6 @@ This approach enables the Network Protocol to fully monitor the transaction life
 This approach not only enables full monitoring of the transaction lifecycle before the transaction enters the consensus process but also provides a valuable tool for error analysis, policy improvement, increasing validation transparency, and facilitating the investigation of unexpected behavior. As a result, unexpected behavior can be identified more quickly and investigated in accordance with Network Protocol policies, without introducing any changes to the network's consensus mechanism or security model.
 ___
 ___
-### Sender Consistency
-
-ATHENA preserves the logical ordering of transactions for each account without imposing restrictions on other accounts.
-
-If a new request is sent from the same account before a transaction is finalized, ATHENA, in accordance with Host Protocol policies and using the information recorded in the Execution Permit, maintains the logical execution order of transactions for that account.
-
-This restriction applies solely to that account and does not prevent the concurrent processing of transactions from other accounts.
-
-Consequently, while maintaining state consistency for each account, the network's parallel processing capacity is preserved.
-
-
 ### Runtime Monitoring and Adaptive Feedback
 
 ATHENA continuously monitors the operational status of various network components.
