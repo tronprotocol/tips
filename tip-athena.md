@@ -876,7 +876,7 @@ Further Explanation
 
 The wallet, using the child account generation mechanism (according to the hierarchical deterministic derivation model, including the TRC-102 standard and the OTAK-NES model), generates a child key from the account's private key compatible with the signature algorithm specified in the Execution Permit, signs the transaction with it, and sends it along with the Execution Permit and its per-permit encryption key directly to the initial validation nodes designated in the Execution Permit — and not all initial validation nodes in the network.
 
-### Dynamicity Centered on Required Difficulty
+۲. Dynamicity Centered on Required Difficulty
 
 One of the fundamental differences of the AVP-DS capability compared to conventional networks is the network's difficulty orientation proportionate to the number of transaction submission requests to the network.
 
@@ -884,8 +884,8 @@ With network support of the AVP-DS capability, there is no fixed path for any ca
 
 Therefore, the execution path of each transaction is always a function of two factors:
 
-1. The required difficulty for execution, based on the transaction type and considering the monitoring of expected behavior and outcome.
-2. The real-time status of transaction submission requests to the network and the real-time load monitoring of network components at the moment of Execution Permit issuance.
+. The required difficulty for execution, based on the transaction type and considering the monitoring of expected behavior and outcome.
+. The real-time status of transaction submission requests to the network and the real-time load monitoring of network components at the moment of Execution Permit issuance.
 
 The Network Protocol may adopt different validation policies for different transaction types. For example, based on the minimum and maximum allowed difficulty range and using the Execution Permit mechanism, it may determine that:
 
