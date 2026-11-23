@@ -766,135 +766,136 @@ This approach enables the Network Protocol to fully monitor the transaction life
 This approach not only enables full monitoring of the transaction lifecycle before the transaction enters the consensus process but also provides a valuable tool for error analysis, policy improvement, increasing validation transparency, and facilitating the investigation of unexpected behavior. As a result, unexpected behavior can be identified more quickly and investigated in accordance with Network Protocol policies, without introducing any changes to the network's consensus mechanism or security model.
 ___
 ___
-### Policy-Driven Transaction Lifecycle Management
+# Transaction Lifecycle Management Based on Required Difficulty
 
-One of the most important capabilities of the ATHENA architecture is the transformation of the transaction validation process from a static process into a fully policy-driven one.
+One of the most important capabilities of the AVP-DS capability is transforming the transaction validation process from a static and fixed process into a fully dynamic and intelligent process based on the "required difficulty" for validation.
 
-In conventional architectures, after a transaction enters the network, validators process nearly all transactions using a similar logic, and validation decisions are made during runtime.
+In conventional networks, after a transaction enters the network, network components process almost all transactions using similar logic, and validation decisions are made at runtime. As a result, all network resources are typically subjected to an identical processing load to confirm transactions.
 
-In contrast, ATHENA designs the complete execution path of the transaction before it enters the network, based on policies defined by the Host Protocol, and delivers it to the network in the form of an Execution Permit.
+Changing the processing load proportional to the required difficulty of validating a transaction is crucial, yet conventional networks lack the necessary structure to implement it; because in those networks, the validation path is fixed, and all components process all transactions in a linear procedure. This type of validation creates significant limitations in transaction confirmation, execution, and other aspects.
 
-For this reason, ATHENA does not decide how a transaction should be validated; rather, it simply enforces the pre‑defined policies established by the Host Protocol.
+With network support of the AVP-DS capability, the necessary infrastructure to change the validation process based on the required difficulty — depending on the transaction type — is placed at the disposal of the Network Protocol.
 
+### Minimum and Maximum Required Difficulty
 
-Execution Policies Are Defined by the Host Protocol
+Although a specific and fixed number (e.g., the number of nodes) cannot be determined to guarantee absolute network security, the minimum and maximum required difficulty levels can be determined — based on each network's policies, the AVP-DS capability, and relying on the expected behavior and outcome — with a probability of error close to zero:
 
-Modern blockchain networks are no longer limited to simple asset transfers.
+- Minimum Difficulty: The minimum resources and number of nodes required to securely confirm a transaction, proportionate to its type and value.
+- Maximum Difficulty: The ceiling determined by the Network Protocol to prevent the allocation of more resources than necessary and to avoid network capacity waste.
 
-Depending on the Host Protocol, a network may support various types of operations, including:
+These two parameters are recorded in each transaction's Execution Permit and serve as the basis for resource allocation. The basis for determining the required difficulty is the prediction of expected behavior and outcome for that transaction and the Network Protocol's monitoring of the process before entering consensus.
 
-- Native coin transfers;
-- Token transfers;
-- Smart contract execution;
-- dApp interactions;
-- Staking operations;
-- Voting and governance;
-- Multi‑signature transactions;
-- State‑sensitive operations;
-- Cross‑module operations;
-- Any new operation type introduced by the Host Protocol in the future.
+### For Example
 
-Clearly, not all of these transactions can be processed with a single validation policy.
+The importance of this issue becomes clear when we ask: Why should the transaction confirmation path and the amount of resources and components required in the network for transferring, say, 1 TRX from account A to account B be the same as a Swap transaction that requires interaction with smart contracts and connection to liquidity pools?
 
-For this reason, validation policies for each transaction type are defined solely by the Host Protocol, and ATHENA has no independent decision‑making logic in this regard.
+In the example of transferring 1 TRX from account A to account B:
 
+The expected behavior and outcome are entirely predictable: 1 TRX is deducted from account A, and 1 TRX is added to account B.
 
-Execution Permit: The Transaction Execution Blueprint
+Consequently, if we assume the network has 800 validation nodes, a limited number of validation nodes — for example, 50 nodes — can be used to validate this transaction:
 
-After receiving the Admission Request, ATHENA evaluates the information received from the wallet, the current state of the network, and the Host Protocol policies, and issues the Execution Permit.
+- If the validation outcome, after the execution engine, matches the expected behavior and outcome value, the transaction is finalized and recorded in the network ledger along with the Execution Permit.
+- If the resulting outcome does not match the expected behavior and outcome, the Network Protocol identifies this as an exception and may place the following on its agenda:
+  1. Re-verifying the Execution Permit and reviewing the completed stages and matching them with the Execution Permit, or reviewing and re-confirming the parameters of the expected behavior and outcome;
+  2. Using more hardware resources;
+  3. Re-validating by routing the transaction using limited resources but along a different path and with different components, and then comparing the results and preparing a report to correct the policies for predicting expected behavior and outcome;
+  4. Reviewing the completed stages in accordance with the issued Execution Permit, reviewing the results, and ultimately identifying the violating component or identifying a fault or failure in the network.
 
-The Execution Permit is, in effect, the Execution Blueprint for that transaction.
+The Network Protocol determines the required difficulty for validating a transaction after receiving the transaction submission request and, accordingly, performs routing, addressing, and designation of relevant validation components — using the Execution Permit mechanism.
 
-Depending on Host Protocol policies, this permit may specify:
+### Countering Spam Transactions
 
-- The initial validation path;
-- The initial validators;
-- The Execution Domain;
-- The selected execution engine;
-- The minimum validation difficulty;
-- Scheduling policies;
-- Conflict management policies;
-- Exception handling policies;
-- Monitoring policies or expected behavior;
-- Execution constraints;
-- And any other parameters the Host Protocol deems necessary.
+There is almost no network that does not expend a large portion of its processing power on validating spam transactions or transactions with negligible value.
 
-From this point onward, network components no longer make independent decisions about how to process the transaction; they simply follow the steps defined in the Execution Permit.
+Attackers, aiming to create long input queues to drive real users away from the target network, render the network inefficient, or send numerous low-value transactions to keep an account number in a particular account's transaction history (hoping to trick the account owner into making a mistaken deposit), enable third-party statistical analysis of the network, and other such tactics — exacerbated by new network approaches to reducing fees — put pressure on real users and network validation components.
 
+In conventional networks, the solution for dealing with spam transactions is increasing the cost of such transactions or creating restrictions for them.
 
-Dynamic Routing
+Based on the AVP-DS capability, by adopting a correct difficulty-oriented policy and allocating "minimum network resources for validating spam transactions," it is possible to prevent the aforementioned damages to real users and network validation components. This is achieved without changing consensus or compromising network security.
 
-One of ATHENA's fundamental differences from conventional architectures is dynamic routing.
+In other words, the Network Protocol determines the required difficulty for validating transactions not by changing the validation stages or consensus, but by managing resources — and through determining the required difficulty proportionate to the transaction type and value.
 
-In ATHENA, there is no fixed path for any category of transaction.
+### How the Network Protocol Manages Resources
 
-Even two completely identical transactions may receive different Execution Permits if the network state has changed.
+Modern blockchain networks are no longer limited to simple asset transfers. Depending on software capabilities, a network may support various types of operations, including:
+
+- Native currency transfers
+- Token transfers
+- Smart contract execution
+- dApp interaction
+- Staking operations
+- Voting and governance
+- Multi-signature transactions
+- State-sensitive operations
+- Cross-module operations
+- And any new operation type the Network Protocol introduces in the future.
+
+Obviously, not all these transactions can be processed with a single routing and validation policy, or relying on a single difficulty-oriented policy.
+
+Therefore, validation policies based on the required difficulty for each transaction type are regulated solely by the Network Protocol and in the form of an Execution Permit — on a per-transaction basis — considering network policies, real-time load monitoring of network components, the number of transaction submission requests, and other factors. This permit, along with the transaction and its per-permit encryption key, is sent directly by the wallet to the initial validation nodes designated in the Execution Permit.
+
+### Execution Permit: The Transaction Execution Blueprint
+
+After receiving the admission request, the information received from the wallet, the current state of the network, and the required validation policies regarding conflict management and the required difficulty — and after assessing the real-time load of network components — the Network Protocol issues the Execution Permit.
+
+The Execution Permit is, in effect, the execution blueprint of a transaction, which is regulated based on the network's difficulty-oriented policies, within the network's minimum and maximum allowed difficulty range, and considering the real-time load monitoring of components and the number of incoming transaction requests to the network.
+
+This permit may specify the following:
+
+- The permitted signature algorithm
+- The roadmap, routing, addressing, and direction of the transaction from the moment of entry into the network until monitoring the expected behavior and outcome and recording in the ledger
+- Initial validators, execution domain, and the least-loaded execution engine among the parallel engines of a domain
+- Scheduling policies
+- Default conflict management policy
+- Default exception handling policies
+- Monitoring policies or expected behavior and outcome
+- Execution constraints and any other parameters the Network Protocol deems necessary.
+
+Upon receiving the transaction along with the Execution Permit and its per-permit encryption key, network components do not make independent decisions regarding how to process the transaction; they merely follow the steps defined in the Execution Permit.
+
+### How Resources Are Allocated
+
+After network support of the AVP-DS capability, the possibility of allocating and adding various resources to the network is provided, and the network uses the addressing mechanism to make the best use of available resources for transaction validation and execution.
+
+Resources available or addable to the network include:
+
+1. Different Signature Algorithms
+
+Each signature algorithm has its own specific advantages and disadvantages; some offer higher security and some offer higher speed. Networks add different signature algorithms to the network as new software capabilities based on their pros and cons, and the Network Protocol determines, based on the required difficulty, which algorithm each transaction should be signed with.
+
+For a better understanding, one only needs to look at the minimum resources required for validating transactions based on different signature algorithms. A first review reveals the difference between algorithms in terms of speed, security, and resource utilization.
+
+With network support of the AVP-DS capability, the Network Protocol, using the Execution Permit mechanism, determines — in addition to items such as the components required for validation including initial validation nodes and the least-loaded execution engine of a domain — the required resources and the permitted signature algorithm for each transaction, considering the network's difficulty-oriented policies within the allowed minimum and maximum range.
+
+Within the allowed minimum and maximum difficulty range, the Network Protocol determines — by designating the components required for validating a transaction (and not the entire hardware capacity of the network), as well as designating the permitted signature algorithm from among the algorithms supported in the network — using the Execution Permit mechanism, on a per-transaction basis. In reality, it determines how much hardware, software, and processing resources of the network a transaction will use.
+
+The wallet signs the transaction with the permitted signature algorithm specified in the Execution Permit and then, based on the roadmap specified in the same permit, sends the signed transaction along with the Execution Permit and its per-permit encryption key directly to the initial validation nodes designated in the Execution Permit.
+
+Further Explanation
+
+The wallet, using the child account generation mechanism (according to the hierarchical deterministic derivation model, including the TRC-102 standard and the OTAK-NES model), generates a child key from the account's private key compatible with the signature algorithm specified in the Execution Permit, signs the transaction with it, and sends it along with the Execution Permit and its per-permit encryption key directly to the initial validation nodes designated in the Execution Permit — and not all initial validation nodes in the network.
+
+### Dynamicity Centered on Required Difficulty
+
+One of the fundamental differences of the AVP-DS capability compared to conventional networks is the network's difficulty orientation proportionate to the number of transaction submission requests to the network.
+
+With network support of the AVP-DS capability, there is no fixed path for any category of transactions. Even two completely identical transactions may receive different Execution Permits if the status of incoming transaction requests to the network has changed.
 
 Therefore, the execution path of each transaction is always a function of two factors:
 
-1. The policies defined by the Host Protocol;
-2. The real‑time state of the network.
+1. The required difficulty for execution, based on the transaction type and considering the monitoring of expected behavior and outcome.
+2. The real-time status of transaction submission requests to the network and the real-time load monitoring of network components at the moment of Execution Permit issuance.
 
-As a result, the network's execution structure can evolve and adapt dynamically without any changes to the consensus algorithm.
+The Network Protocol may adopt different validation policies for different transaction types. For example, based on the minimum and maximum allowed difficulty range and using the Execution Permit mechanism, it may determine that:
 
+- A simple transfer, given the accurate prediction of expected behavior and outcome monitoring in these cases, should be validated using the minimum required difficulty.
+- The transfer of a specific token requires a different execution domain, or must be validated using the minimum allowed difficulty but along two different parallel paths with different validation components, and the results from both paths should be compared with the outcome specified in the expected behavior and outcome.
+- Invoking a smart contract requires more initial validators, or the use of the maximum allowed difficulty, or a specific signature algorithm.
+- Certain sensitive transactions must be validated through dedicated paths or with higher difficulty.
+- Certain transactions must be executed in parallel but with sequential validation simulation, along a specific or shared path with other transactions of an account.
 
-Resource Management Based on Transaction Type
-
-The Host Protocol may define different policies for different transaction types.
-
-For example, it may determine that:
-
-- A simple TRX transfer requires only minimal validation resources;
-- A specific token transfer requires a different execution domain;
-- Smart contract execution requires more validators;
-- Minimum validation difficulty varies by transaction type and category;
-- Some sensitive transactions should be validated through dedicated paths or with higher difficulty;
-- Certain operations should be routed to a specific execution engine;
-- Some transactions should be executed in parallel or sequentially and their results compared.
-
-ATHENA does not define these policies; it merely communicates them to the network through the Execution Permit.
-
-
-Policy Enforcement Verification
-
-One of ATHENA's most important innovations is that the issuance of the Execution Permit is not the end of its responsibility.
-
-ATHENA monitors the execution of the policies defined in the Execution Permit until the transaction is finally recorded in the global ledger.
-
-At this stage, ATHENA verifies whether the network has acted exactly according to the Execution Permit.
-
-This verification may include checking that:
-
-- The validation path was correctly followed;
-- All designated validators participated in the validation;
-- The execution domain was respected;
-- The designated execution engine performed the validation;
-- The expected behavior or outcome was correct and no exception occurred;
-- And all other policies defined by the Host Protocol were properly enforced.
-
-If any discrepancy is observed, ATHENA registers it as an Exception and sends the necessary report to the Host Protocol.
-
-
-Transparency in Network Component Behavior
-
-In conventional architectures, once a transaction is broadcast, there is virtually no independent reference to verify whether network components have acted exactly according to protocol policies.
-
-However, in ATHENA, the Execution Permit becomes an official reference for verifying network behavior.
-
-Consequently, any deviation from defined policies is quickly detected and reported by ATHENA to the Host Protocol.
-
-This feature significantly increases the network's transparency, auditability, and observability.
-
-
-Architectural Principle
-
-ATHENA never decides what a transaction is or how it should be validated.
-
-All execution decisions are made by the Host Protocol.
-
-ATHENA is solely responsible for managing the transaction lifecycle—from receiving the Admission Request, issuing the Execution Permit, managing the execution path, monitoring policy execution, verifying network behavior, and reporting any discrepancies to the Host Protocol.
-
-For this reason, ATHENA can be regarded as a Policy‑Driven Transaction Lifecycle Management Layer—a layer that, without making any changes to the consensus algorithm, security model, or ledger structure, enables intelligent, dynamic, and verifiable management of the complete transaction lifecycle.
+The Network Protocol determines policies and difficulty levels based on actual need, real-time component load, the number of incoming transaction requests to the network, and other valid parameters, and communicates these decisions to the designated network components in each permit through the Execution Permit mechanism on a per-transaction basis, so that resources are utilized only as much as needed and exactly along the correct path. Thus, processing capacity growth keeps pace with transaction demand, without changing the network's native consensus, state transition logic, or ledger structure.
 ___
 ___
 # Removal of Public Transaction Propagation with Network Support of the AVP-DS Capability via Changing Mempool Access from a Shared Memory to a Dedicated Memory
