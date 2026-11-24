@@ -760,6 +760,23 @@ Network support of the AVP-DS capability makes transaction management possible n
 As a result, transaction management becomes possible before the signed transaction enters the network, through the interaction of the wallet with the Network Protocol — such that the issuance of the Execution Permit and the determination of the transaction path occur before signing the transaction and before sending the transaction to the network.
 
 Thus, the network's input is no longer an unmanaged stream of transactions, but an intelligent, controlled, scheduled, dynamic flow in the hands of the Network Protocol.
+
+### The Execution Permit
+
+The Execution Permit is not merely an admission authorization; it is the dedicated roadmap of each transaction, in which the Network Protocol determines addressing, routing, and transaction direction — from the moment the wallet sends the transaction submission request to the Network Protocol until registration in the ledger. This permit is the interface between the Decision Layer and the Execution Layer, and it conveys the dedicated instructions of each transaction to the relevant components.
+
+The Execution Permit includes the following:
+
+- Designation of the components responsible for validation (only the designated components, not the entire network capacity)
+- The policy for preventing potential conflicts at two levels (before and after network entry)
+- Designation of the signature algorithm
+- Transaction information: sender and receiver addresses, asset type and amount, expected behavior or outcome, relevant validators, initial validation lane, execution domain and the least-loaded parallel execution engine, and other parameters required by the Network Protocol
+
+Addressing and routing are performed exclusively for each transaction and are not limited to a single public, fixed path for validating all incoming transactions. All relevant components designated in the Execution Permit, on a per-transaction basis, are required to follow the path and instructions specified therein and to advance the process in accordance with the Network Protocol's decisions.
+
+After the Execution Permit is issued, the Network Protocol encrypts it with a per-permit encryption key and retains the encrypted copy in the Provisional State. It then sends a copy of the Execution Permit along with the corresponding per-permit encryption key to the requesting wallet, so that the relevant components can decrypt the copy retained in the Provisional State, and verify the authenticity and conformity of the received permit.
+
+After receiving the Execution Permit, the wallet enables the user to sign the transaction and, after signing, sends the transaction — along with the Execution Permit and the per-permit encryption key — to the designated initial validation nodes.
 ___
 ___
 # Transaction Lifecycle Management Based on Required Difficulty
@@ -1043,22 +1060,23 @@ In this phase, without any interaction or communication with the network, the wa
 
 In this phase, the wallet organizes the data entered by the user for subsequent actions.
 
-### Phase 3: The Execution Permit
+### Phase 3: Wallet — Data Collection and Sending the Transaction Request to the Network Protocol
 
-The Execution Permit is not merely an admission authorization; it is the dedicated roadmap of each transaction, in which the Network Protocol determines addressing, routing, and transaction direction — from the moment the wallet sends the transaction submission request to the Network Protocol until registration in the ledger. This permit is the interface between the Decision Layer and the Execution Layer, and it conveys the dedicated instructions of each transaction to the relevant components.
+This phase is the first interaction of the wallet with the network and the starting point of transaction management by the Network Protocol.
 
-The Execution Permit includes the following:
+Accordingly, in conventional networks, transaction management is performed after signing and after the transaction enters the network; however, in networks with support of the AVP-DS capability, transaction management is moved to before signing and to the stage of sending the transaction request in the wallet.
 
-- Designation of the components responsible for validation (only the designated components, not the entire network capacity)
-- The policy for preventing potential conflicts at two levels (before and after network entry)
-- Designation of the signature algorithm
-- Transaction information: sender and receiver addresses, asset type and amount, expected behavior or outcome, relevant validators, initial validation lane, execution domain and the least-loaded parallel execution engine, and other parameters required by the Network Protocol
+In this phase, using the organized data, the wallet prepares a transaction submission request — containing the required information according to the rules and requirements defined by the Network Protocol — based on the transaction type and Network Protocol requirements.
 
-Addressing and routing are performed exclusively for each transaction and are not limited to a single public, fixed path for validating all incoming transactions. All relevant components designated in the Execution Permit, on a per-transaction basis, are required to follow the path and instructions specified therein and to advance the process in accordance with the Network Protocol's decisions.
+Then, the wallet sends the prepared transaction submission request to the Network Protocol.
 
-After the Execution Permit is issued, the Network Protocol encrypts it with a per-permit encryption key and retains the encrypted copy in the Provisional State. It then sends a copy of the Execution Permit along with the corresponding per-permit encryption key to the requesting wallet, so that the relevant components can decrypt the copy retained in the Provisional State, and verify the authenticity and conformity of the received permit.
+The transaction submission request contains the necessary information, including:
 
-After receiving the Execution Permit, the wallet enables the user to sign the transaction and, after signing, sends the transaction — along with the Execution Permit and the per-permit encryption key — to the designated initial validation nodes.
+- Sender and receiver addresses
+- Asset amount and type
+- And other supplementary data in accordance with Network Protocol policies.
+
+This request is sent by the wallet to the Network Protocol and contains the essential information required by the Network Protocol for subsequent decision-making.
 
 ### Phase 4: Transaction Signing After Receiving the Execution Permit
 
