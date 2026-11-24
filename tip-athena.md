@@ -1032,8 +1032,16 @@ The lifecycle of every transaction begins with the user's decision to submit a t
 
 After completing the selections and determining the values by the user, the wallet displays the transaction summary on the confirmation screen prior to signing; however, it does not grant the user permission to sign the transaction.
 
-### Phase 2: 
+### Phase 2: Wallet — Initial Transaction Preparation
 
+After the user completes the selections and values and the wallet displays the transaction summary on the pre-signature confirmation screen, the wallet initiates the initial transaction preparation completely locally within the same pre-signature window.
+
+In this phase, without any interaction or communication with the network, the wallet performs only the following local actions:
+
+- Local data validation: Checking the format validity of the sender and receiver addresses, the compatibility of the asset type with the selected network, the sufficiency of the account balance, and any other local checks the wallet deems necessary according to network rules.
+- Local data structure preparation: The wallet organizes the entered data into its local data structure and prepares the transaction data structure based on the Network Protocol rules.
+
+In this phase, the wallet organizes the data entered by the user for subsequent actions.
 
 ### Phase 3: The Execution Permit
 
