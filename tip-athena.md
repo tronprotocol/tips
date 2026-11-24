@@ -742,6 +742,24 @@ The concept of Expected Behavior and Outcome is one of the complementary capabil
 This approach enables the Network Protocol to fully monitor the transaction lifecycle from the moment the transaction submission request is sent from the wallet to the Network Protocol until its final recording in the ledger.
 
 This approach not only enables full monitoring of the transaction lifecycle before the transaction enters the consensus process but also provides a valuable tool for error analysis, policy improvement, increasing validation transparency, and facilitating the investigation of unexpected behavior. As a result, unexpected behavior can be identified more quickly and investigated in accordance with Network Protocol policies, without introducing any changes to the network's consensus mechanism or security model.
+
+### Managed Admission
+
+Network support of the AVP-DS capability replaces "unmanaged admission" with "managed admission."
+
+In many current networks, wallets send transactions to the transaction-hosting network without any awareness of the real-time state. After transactions are propagated and enter the network, networks make transaction management possible only after entry, through scheduling or queueing.
+
+Network support of the AVP-DS capability makes transaction management possible not after they are sent, but before sending, at the wallet. Before signed transactions enter the network, the Network Protocol:
+
+- Reviews the real-time network state.
+- Then determines the most appropriate validation and execution path for that transaction.
+- Based on the volume and number of incoming transaction requests, dynamically forms parallel validation lanes and communicates them, on a per-transaction basis, to the relevant components within the Execution Permit.
+- The Execution Permit contains the validation-related components, on a per-transaction basis for each incoming transaction, and designates the relevant validation components for each transaction based on the dynamic validation lanes, in proportion to the volume of incoming transaction requests.
+- Each transaction uses only the designated validation path and the designated validation components — not a public path, and not the entire network's capacity for validation — in accordance with the Execution Permit issued by the Network Protocol.
+
+As a result, transaction management becomes possible before the signed transaction enters the network, through the interaction of the wallet with the Network Protocol — such that the issuance of the Execution Permit and the determination of the transaction path occur before signing the transaction and before sending the transaction to the network.
+
+Thus, the network's input is no longer an unmanaged stream of transactions, but an intelligent, controlled, scheduled, dynamic flow in the hands of the Network Protocol.
 ___
 ___
 # Transaction Lifecycle Management Based on Required Difficulty
@@ -1019,23 +1037,8 @@ After receiving the transaction submission request from the wallet, the Network 
 
 Only after receiving the Execution Permit from the Network Protocol is the wallet authorized to allow the user to sign the transaction. As a result, no signed transaction is created or sent before receiving the Execution Permit, and all transactions, from the outset, are routed — based on the execution path determined by the Network Protocol — to the relevant components designated by their own dedicated Execution Permit.
 
-### Phase 2: Managed Admission
+### Phase 2: 
 
-Network support of the AVP-DS capability replaces "unmanaged admission" with "managed admission."
-
-In many current networks, wallets send transactions to the transaction-hosting network without any awareness of the real-time state. After transactions are propagated and enter the network, networks make transaction management possible only after entry, through scheduling or queueing.
-
-Network support of the AVP-DS capability makes transaction management possible not after they are sent, but before sending, at the wallet. Before signed transactions enter the network, the Network Protocol:
-
-- Reviews the real-time network state.
-- Then determines the most appropriate validation and execution path for that transaction.
-- Based on the volume and number of incoming transaction requests, dynamically forms parallel validation lanes and communicates them, on a per-transaction basis, to the relevant components within the Execution Permit.
-- The Execution Permit contains the validation-related components, on a per-transaction basis for each incoming transaction, and designates the relevant validation components for each transaction based on the dynamic validation lanes, in proportion to the volume of incoming transaction requests.
-- Each transaction uses only the designated validation path and the designated validation components — not a public path, and not the entire network's capacity for validation — in accordance with the Execution Permit issued by the Network Protocol.
-
-As a result, transaction management becomes possible before the signed transaction enters the network, through the interaction of the wallet with the Network Protocol — such that the issuance of the Execution Permit and the determination of the transaction path occur before signing the transaction and before sending the transaction to the network.
-
-Thus, the network's input is no longer an unmanaged stream of transactions, but an intelligent, controlled, scheduled, dynamic flow in the hands of the Network Protocol.
 
 ### Phase 3: The Execution Permit
 
