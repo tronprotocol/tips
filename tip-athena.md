@@ -1017,7 +1017,7 @@ The instructions concerning the execution path, the relevant authorized componen
 
 After the components and validation path are determined and the Execution Permit is issued on a per-transaction basis, all relevant and designated components are required to follow the path and instructions of that same permit, and no designated execution component is permitted to independently alter the path or the designated decisions.
 
-### Phase 1: Phase 1: User's Decision to Submit a Transaction
+### Phase 1: User's Decision to Submit a Transaction
 
 The lifecycle of every transaction begins with the user's decision to submit a transaction. Initially, the user intends to perform an operation in the network, and to initiate the process, the user enters the required transaction information into the wallet. Depending on the type of operation, this information may include the following:
 
