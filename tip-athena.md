@@ -451,125 +451,103 @@ ___
 ___
 # Economic Impact and Incentive Model
 
-### 1. The Challenge of Traditional Architectures
+### The Challenge of Conventional Networks
 
-In many blockchain networks, increasing the number of nodes beyond a certain threshold does not necessarily lead to an increase in the network's processing capacity. In these architectures, although more validators join the network, the transaction processing path remains limited by the fixed capacity of the network's validation and execution system.
+In many blockchain networks, increasing the number of nodes beyond a certain threshold does not necessarily lead to an increase in the network's execution capacity. In these networks, although more validators join the network, the transaction execution path remains limited to the fixed capacity of the network's validation and execution system.
 
-Under such conditions:
+As a result, as validators increase in conventional networks:
 
 - Revenue from fees is distributed among a larger number of nodes.
-- The network's operational capacity remains approximately constant.
-- The economic return of each node gradually decreases.
-- Increased demand typically leads to longer queues and higher fees, rather than an increase in actual processing capacity.
+- The network's operational capacity remains nearly constant, and only overhead costs are added to the network.
+- The economic efficiency of each node gradually decreases.
+- And increased demand typically leads to longer queues and higher fees, rather than an increase in actual execution capacity.
 
-For this reason, in many networks, the growth in the number of validators does not necessarily result in a proportional growth in network capacity.
+For this reason, in many networks, the growth in the number of nodes does not necessarily result in a proportional growth in the network's validation capacity.
 
-### 2. ATHENA's Different Approach
+### The Network's Different Approach with AVP-DS Capability Support
 
-ATHENA examines this issue from a fundamentally different perspective.
+In conventional networks, adding new hardware — due to the atomic structure and dependency on a single shared validation lane — does not necessarily lead to an increase in throughput and merely creates redundant load or coordination overhead.
 
-In the ATHENA architecture, increasing the number of nodes is not merely about adding more validators—it creates new capacity for expanding parallel validation and increasing the network's operational throughput.
+In contrast, with network support of the AVP-DS capability, absorbing new initial validation nodes and execution engines means adding parallel validation lanes and expanding actual execution capacity. The Network Protocol, utilizing the addressing mechanism and issuing Execution Permits, organizes new hardware into parallel validation lanes (including initial validation nodes and execution engines). The direct result of this approach is an increase in admission capacity for incoming transactions, the ability to respond to a higher volume of requests without creating long queues, and an increase in the number of confirmed transactions; without the need for any changes to native consensus, the account model, or the network's ledger structure.
 
-Through unified transaction lifecycle management, ATHENA:
+### Positive Economic Feedback Loop
 
-- Receives the required information from the wallet and the network.
-- Dynamically selects the initial validator nodes, resulting in the creation of parallel validation pipelines in the network.
-- Determines the appropriate execution domain.
-- Selects the least-loaded execution engine among those operating in parallel within that domain.
-- Issues the Execution Permit.
-- Manages the validation path according to Host Protocol policies until the transaction is finally recorded in the global ledger.
+Network support of the AVP-DS capability enables the creation of a positive economic feedback loop. This loop operates as follows:
 
-Therefore, the addition of new nodes can directly increase the transaction admission and initial validation capacity. Subsequently, the Host Protocol, in response to increased load, can increase the number of execution engines in each domain.
+New hardware, including nodes and execution engines, joins the network. Then, the Network Protocol, utilizing the AVP-DS capability, organizes the new hardware capacity into parallel validation lanes via Execution Permits. As a result, total admission and validation capacity increases.
 
-As a result, validation capacity and execution capacity grow in a coordinated manner.
+In response to an increase in incoming transaction requests to the network, the Network Protocol creates and activates more parallel validation lanes — including initial validation nodes and execution engines — in a software-driven and dynamic manner. As the number of parallel validation lanes increases, more transactions enter the validation and execution cycle. This leads to an increase in the number of confirmed transactions in the network. An increase in confirmed transactions means collecting more fees and increasing the network's total revenue.
 
-### 3. Positive Economic Feedback Loop
+Revenue is not merely a function of the number of nodes; rather, it is a function of the network's actual execution capacity, and the more transactions the network executes, the total revenue and the distributable revenue among participating validators increase. Increased revenue creates greater incentive to invest in network infrastructure and for new hardware to join, and the cycle repeats.
 
-The ATHENA architecture enables the creation of a positive economic feedback loop.
+The stability of this cycle depends on the existence of real demand for incoming transactions and appropriate Network Protocol policies for developing the network's execution resources — through absorbing new hardware, organizing and utilizing the absorbed components via Execution Permits, and resolving bottlenecks.
 
-This loop operates as follows:
+### Conceptual Example and Multi-fold Growth Analysis
 
-1. New nodes join the network.
-2. ATHENA organizes them into parallel validation pipelines.
-3. Admission and initial validation capacity increases.
-4. In response to increased load, the Host Protocol activates more execution engines across different domains.
-5. More transactions enter the validation and execution cycle.
-6. The number of transactions recorded in the global ledger increases.
-7. Total network revenue increases.
-8. Increased revenue creates greater incentive for new nodes to join.
-9. The cycle repeats.
+Suppose a network has 10,000 validation nodes, one execution engine, and a base execution capacity of approximately 1,000 transactions per second (TPS). Now suppose the number of nodes increases to 20,000, and no execution engine is added.
 
-The stability of this cycle depends on the existence of real demand for incoming transactions and appropriate Host Protocol policies for developing the network's execution resources.
+In conventional networks, with an increase in the number of nodes, typically:
 
-### 4. Conceptual Example
+- The operational execution capacity remains nearly constant.
+- Coordination overhead and latency increase.
+- Fees and revenue are divided among a larger number of nodes, and as a result, the economic efficiency of each node gradually decreases.
 
-Assume a network has:
+In contrast, with network support of the AVP-DS capability, adding new hardware capacities to the network — such as initial validation nodes or execution engines — is carried out within the framework of the Network Protocol's policies, and through the issuance of Execution Permits, these capacities are organized into parallel validation lanes. This approach, provided that other network components grow proportionally, bottlenecks are resolved, and incoming transaction demand increases proportionally, leads to a multi-fold growth in validation capacity and, ultimately, an increase in the network's throughput.
 
-10,000 validator nodes with an approximate capacity of 1,000 transactions per second (TPS).
+In the above example, with the numerical increase of network nodes to 20,000, suppose the Network Protocol, during increased incoming transaction demand, facilitates the formation of parallel validation lanes consisting of, for instance, 200 nodes along with one execution engine, and identifies independent transactions and distributes them among the newly formed lanes based on Execution Permits.
 
-Now assume the number of nodes increases to 20,000.
+Under this assumption, the number of parallel validation lanes — including initial validators and execution engines — can be formed in software up to 100 lanes. The Network Protocol, using the Execution Permit mechanism and based on receiving the required information upon receiving the transaction submission request, identifies independent transactions and routes and validates them in the new lanes. In this case, theoretically, the network's throughput before transactions enter consensus increases significantly and effectively.
 
-In conventional architectures:
+Throughput does not increase merely by adding initial validators and execution engines; after initial validation, each transaction is directed according to the Execution Permit to the designated execution domain and the least-loaded execution engine in that domain. Adding and scaling parallel execution engines across different domains (software-wise or via execution capacities compatible with Network Protocol policies) allows the network to increase parallel execution capacity proportional to the execution load, by separating independent state from shared state by the Network Protocol through receiving transaction information in the form of transaction submission requests from the wallet and organizing transactions via routing and component designation using the Execution Permit mechanism.
 
-- The number of validators increases.
-- Processing capacity remains approximately constant.
-- Revenue is divided among a larger number of nodes.
-- The economic return of each node decreases.
+For a better understanding, one only needs to look at the number of reverted transactions (Reverted) based on the mandatory mechanism of Atomicity in cryptocurrency networks.
 
-In the ATHENA architecture:
+A large portion of networks' bandwidth is spent on dealing with reverted transactions, resending them, and consecutive reverts.
 
-Assume the Host Protocol allows ATHENA, in the event of high incoming transaction demand, to form initial validation pipelines consisting of 200 nodes each, and distribute incoming transactions among these processing pipelines.
+This is while, with network support of the AVP-DS capability, a large portion of these transactions cannot pass the filter of the "transaction submission request" stage due to the lack of required information. Additionally, for other transactions, the Network Protocol uses the "Execution Permit" mechanism to determine the best validation path in order to prevent reverts, conflicts, or potential exceptions.
 
-In this case, approximately 100 parallel validation pipelines could be formed, which could theoretically increase transaction validation capacity up to 100 times.
+This process leads to the cleansing of incoming transactions to the network and the full dedication of bandwidth to healthy transactions.
 
-This example is provided solely to demonstrate the potential of the architecture and should not be interpreted as a guarantee of actual performance.
+This example is presented solely to demonstrate the potential for multi-fold growth in parallel validation and execution layers and does not mean a guaranteed fixed multiplier in TPS or the network's final efficiency; because ultimately, the final recording capacity of transactions in the network ledger still depends on the power of initial validation nodes, execution engines, bandwidth, Network Protocol policies, and block and consensus capacity limitations.
 
-ATHENA distributes independent transactions among these parallel initial validation pipelines and, after initial validation, directs each transaction according to the Execution Permit to the relevant execution domain and the least-loaded engine within that domain.
+### Passing the Consensus Layer Bottleneck Based on the AVP-DS Capability and the Principle of "Separating Independent State from Shared State"
 
-If the network infrastructure, hardware resources, execution engines, and transaction demand all support this level of processing, the network's operational capacity could increase significantly.
+In the practical realization of this potential, several key pillars operate together; with the explanation that the final recording capacity in the ledger remains subject to the capacity of the consensus layer and network blocks, and AVP-DS, by increasing efficiency and reducing waste, allocates a larger portion of this capacity to healthy transactions:
 
-### 5. Economic Impact
+1. Increasing and Grouping Initial Validation Nodes in Parallel Lanes
+By separating the decision-making layer from the execution layer and issuing Execution Permits by the Network Protocol, initial validation nodes are organized into parallel groups and the initial load is distributed among them; without transactions being sent to the entire network capacity or a public layer.
 
-In ATHENA, revenue is not merely a function of the number of nodes—it is a function of the network's actual transaction processing capacity.
+2. Horizontal Network Expansion by Increasing Parallel Execution Engines
+The Network Protocol, with real-time load monitoring and based on Execution Permits, directs transactions to the appropriate domain and the least-loaded execution engine. In case of increased demand and the need for higher execution capacity, based on the AVP-DS capability, the possibility of absorbing and utilizing new parallel execution engines is always available.
+As soon as new hardware is absorbed or added — for example, a new execution engine in a domain — the Network Protocol, using the Execution Permit mechanism and by addressing transactions, organizes this hardware into parallel validation lanes and directs new transactions (considering the real-time load) to this fresh capacity, so that this capacity is utilized for executing transactions and increasing the network's validation capacity.
 
-The more transactions the network can process using parallel validation and parallel execution engines:
+3. Reducing and Purposefully Passing the Consensus Bottleneck via the Principle of Separating "Independent State from Shared State"
+The biggest potential limitation against a network's multi-fold validation growth is the finalization and consensus stage; because at this stage, parallel paths must reach a coherent and final network state. With network support of the AVP-DS capability, the pressure of this limitation is significantly reduced through the separation of independent state from shared state, as well as the prevention of resource waste:
 
-- Total network revenue increases.
-- Distributable revenue among participating validators increases.
-- Economic incentive for investing in network infrastructure and joining new nodes increases.
-- Gradual network expansion becomes possible without changing the base architecture.
+- Transactions that operate on independent states (such as accounts or non-overlapping resources that have no state or operational dependency on each other) can proceed without global locking and without causing interference in parallel paths, and their concurrency is achieved with minimal friction.
+- Transactions that depend on a shared state or shared root (such as a high-traffic account like an exchange, a liquidity pool in a smart contract, or accounts related to a shared root) are identified before entering the network and at the time of issuing the Execution Permit, and are placed by the Network Protocol in a shared and coordinated path.
 
-Therefore, ATHENA transforms the increase in the number of nodes from a potential operational cost into an opportunity for operational capacity growth and economic network development.
+4. Drastically Reducing Reverted Transactions and Saving Bandwidth
+In cryptocurrency networks, the mandatory mechanism of Atomicity requires that if a transaction cannot be completed for any reason (conflict, lack of resources, logical error, or data defect), its entire operation is reverted. One only needs to look at the statistics of reverted transactions to realize that a large portion of networks' bandwidth is spent on dealing with these failed transactions, resending them, and repeated attempts at re-execution.
 
-### 6. Scope of This Analysis
+With network support of the AVP-DS capability, this defective cycle is heavily curbed:
 
-The analysis presented in this section is conceptual and architectural in nature.
+- Admission Filter: A large portion of incomplete, lacking-required-information, or spam transactions are filtered and rejected by the Network Protocol at the very stage of "transaction submission request" and before entering the network; thus, they do not occupy execution and consensus resources at all.
+- Proactive Conflict Prevention: For valid transactions, the Network Protocol uses the "Execution Permit" mechanism to determine the best validation path. This intelligent routing (based on the separation of states) does not allow transactions to face conflicts in the lower layers and lead to reverts.
 
-The actual performance of ATHENA will depend on multiple factors, including:
+This intelligent separation and filtering drastically reduces simultaneous conflicts, costly returns (Reverts), unnecessary repetitions, and invalid transactions before reaching the finalization stage. As a result, network bandwidth, instead of being wasted on reverted transactions, is fully dedicated to healthy transactions. The consensus layer, instead of wasting power to resolve clashes caused by unregulated parallelization, faces a more orderly, refined, and compatible stream of transactions; at the same time, the network's native consensus is preserved, and in the future horizon, networks can also evolve their consensus and finalization mechanisms in proportion to the growth of parallel capacities.
 
-- Real transaction demand
-- Host Protocol policies
-- Node hardware capacity
-- Execution capacity and the number of parallel engines in each domain
-- Network bandwidth
-- Implementation quality
-- Consensus algorithm overhead
-- Network economic policies
-- Reward distribution mechanisms
+### Conclusion
 
-Therefore, ATHENA does not guarantee a specific increase in TPS or validator revenue.
+In most networks (including TRON), consensus means agreement on a single sequence of blocks. Even if validation and execution become fully parallel, the output must be recorded in blocks with limited capacity (size, resources/gas, block time) and a total order. Therefore, the actual TPS ceiling is determined by block capacity and consensus time, and the AVP-DS capability alone does not remove it.
 
-Rather, it provides an architectural framework that, under favorable conditions, can utilize existing network resources more effectively and facilitate the simultaneous growth of:
+What network support of the AVP-DS capability actually provides with the current mechanism regarding consensus bottleneck management is:
 
-- Transaction admission capacity
-- Parallel validation
-- Parallel execution
-- Economic efficiency
-- Attraction of new nodes
-- Development of execution engines
-- Overall network operational throughput
+- Reducing Waste: Conflicting, reverted (Reverted), and invalid transactions are filtered before entering the network through the "transaction submission request" mechanism. Also, for authorized transactions, correct routing is performed through the "Execution Permit" mechanism and the prevention of potential exceptions and conflicts. As a result, blocks contain a larger share of healthy transactions, the efficiency of block capacity increases (not the raw block capacity itself), and consensus in the network is effectively optimized.
+- Batch Preparation: Since dependencies and paths are predetermined, the block producer can arrange transactions more orderly without re-execution or redundant conflict checking.
+- Consensus Evolution Groundwork: If the network upgrades block capacity or the consensus mechanism in the future, the parallel and separated output is already prepared.
 
-All of this is achieved without changing the consensus algorithm, account model, or the unified global ledger.
+Since the validation output is pre-separated into independent groups with support of the AVP-DS capability, networks can, in the future, if they wish, employ these groups in parallel consensus and finalization mechanisms (such as multi-block or committee models); this decision is entirely at the discretion of the Network Protocol, and the AVP-DS capability does not mandate it.
 ___
 ___
 # Comparison of ATHENA with Other Scalability Solutions
