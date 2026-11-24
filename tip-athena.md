@@ -1017,25 +1017,20 @@ The instructions concerning the execution path, the relevant authorized componen
 
 After the components and validation path are determined and the Execution Permit is issued on a per-transaction basis, all relevant and designated components are required to follow the path and instructions of that same permit, and no designated execution component is permitted to independently alter the path or the designated decisions.
 
-### Phase 1: Initial Preparation, Data Collection, and Submission of the Transaction Request to the Network Protocol
+### Phase 1: Phase 1: User's Decision to Submit a Transaction
 
-The user enters the required transaction information in the wallet. Depending on the type of operation, this information may include:
+The lifecycle of every transaction begins with the user's decision to submit a transaction. Initially, the user intends to perform an operation in the network, and to initiate the process, the user enters the required transaction information into the wallet. Depending on the type of operation, this information may include the following:
 
-- Sender address
-- Receiver address
-- Asset amount
-- Asset type (TRX, TRC-20, NFT, etc.)
-- Smart contract invocation
-- Contract parameters
-- Any other information that the Network Protocol, in accordance with its policies, deems necessary.
+· Network selection
+· Sender address
+· Receiver address
+· Asset amount
+· Asset type (TRX, TRC-20, NFT, etc.)
+· Smart contract invocation
+· Contract parameters
+· And any other information the user deems necessary.
 
-After completing the information, the wallet displays the transaction summary on the confirmation screen for user review before signing.
-
-At this stage, and before the user is authorized to sign the transaction, the wallet prepares a transaction submission request (Admission Request) — containing the information required under the rules and requirements of the Network Protocol — and sends it to the Network Protocol.
-
-After receiving the transaction submission request from the wallet, the Network Protocol evaluates the request and, after reviewing the real-time network state and its own policies, issues an Execution Permit if approved.
-
-Only after receiving the Execution Permit from the Network Protocol is the wallet authorized to allow the user to sign the transaction. As a result, no signed transaction is created or sent before receiving the Execution Permit, and all transactions, from the outset, are routed — based on the execution path determined by the Network Protocol — to the relevant components designated by their own dedicated Execution Permit.
+After completing the selections and determining the values by the user, the wallet displays the transaction summary on the confirmation screen prior to signing; however, it does not grant the user permission to sign the transaction.
 
 ### Phase 2: 
 
