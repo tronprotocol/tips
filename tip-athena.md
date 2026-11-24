@@ -1021,14 +1021,14 @@ After the components and validation path are determined and the Execution Permit
 
 The lifecycle of every transaction begins with the user's decision to submit a transaction. Initially, the user intends to perform an operation in the network, and to initiate the process, the user enters the required transaction information into the wallet. Depending on the type of operation, this information may include the following:
 
-· Network selection
-· Sender address
-· Receiver address
-· Asset amount
-· Asset type (TRX, TRC-20, NFT, etc.)
-· Smart contract invocation
-· Contract parameters
-· And any other information the user deems necessary.
+- Network selection
+- Sender address
+- Receiver address
+- Asset amount
+- Asset type (TRX, TRC-20, NFT, etc.)
+- Smart contract invocation
+- Contract parameters
+- And any other information the user deems necessary.
 
 After completing the selections and determining the values by the user, the wallet displays the transaction summary on the confirmation screen prior to signing; however, it does not grant the user permission to sign the transaction.
 
