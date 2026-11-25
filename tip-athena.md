@@ -1078,13 +1078,11 @@ The transaction submission request contains the necessary information, including
 
 This request is sent by the wallet to the Network Protocol and contains the essential information required by the Network Protocol for subsequent decision-making.
 
-### Phase 4: Transaction Signing After Receiving the Execution Permit
+### Phase 4: Network Protocol — Receiving the Transaction Request from the Wallet
 
-After the user signs the transaction, the wallet sends the transaction — along with the unencrypted copy of the Execution Permit and the per-permit encryption key specific to that permit — to the initial validation nodes designated in the Execution Permit.
+In this phase, the Network Protocol receives the transaction submission request. This request contains the information required for evaluation and decision-making, including sender and receiver addresses, asset amount and type, and other supplementary data in accordance with the Network Protocol's policies and requirements.
 
-The relevant validation components in the network use the per-permit encryption key — which was sent along with the transaction — to decrypt the encrypted copy of the Execution Permit stored in the Provisional State, for the purpose of verifying the submitted permit.
-
-Therefore, after receiving the permit, the wallet enables the user to sign the transaction and sends the transaction, along with the Execution Permit and the per-permit encryption key, to the initial validation nodes specified in the Execution Permit.
+If the Network Protocol, after an initial review, evaluates the received request as lacking the necessary information or conflicting with the basic admission rules, it rejects the request at this very stage, before occupying network resources and starting validation and execution, and returns a message containing the reason for rejection to the requesting wallet.
 
 ### Phase 5: Direct Submission of the Transaction to the Initial Validation Nodes
 
