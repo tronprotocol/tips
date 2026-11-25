@@ -1084,13 +1084,23 @@ In this phase, the Network Protocol receives the transaction submission request.
 
 If the Network Protocol, after an initial review, evaluates the received request as lacking the necessary information or conflicting with the basic admission rules, it rejects the request at this very stage, before occupying network resources and starting validation and execution, and returns a message containing the reason for rejection to the requesting wallet.
 
-### Phase 5: Direct Submission of the Transaction to the Initial Validation Nodes
+### Phase 5: Network Protocol — Receiving Required Information from Network Components
 
-First, based on the Network Protocol's instructions, the wallet prepares the transaction submission request along with the required information and sends it to the Network Protocol for evaluation.
+In this phase, after receiving the initial information in the form of a transaction submission request from the wallet and performing a preliminary evaluation of the received request, if the request does not conflict with the requirements defined by the network, the Network Protocol receives the required information from various network components to make precise subsequent decisions.
 
-After receiving the Execution Permit from the Network Protocol, the wallet enables the user to sign the transaction. After the user signs the transaction, the wallet sends the signed transaction — along with the Execution Permit and the per-permit encryption key — directly to the initial validation nodes designated in that same received permit.
+In many conventional networks, transaction decision-making and execution take place without precise, real-time awareness of the state of network components; however, with network support of the AVP-DS capability, the Network Protocol receives the necessary data from network components before any decision-making.
 
-In this manner, the signed transaction does not enter any public transaction queue or public waiting layer and will enter the validation process via the dedicated path determined in the Execution Permit.
+This information may include the following:
+
+- Real-time load of initial validation nodes and their available capacity.
+- Status and load of all execution engines across different domains.
+- Execution status of transactions from the same account (to maintain logical order).
+- Related or dependent transactions.
+- Utilization of stored records and analytical reports.
+- Smart contract information (code and state), if applicable.
+- And any other supplementary information the Network Protocol deems necessary according to its policies.
+
+By collecting data related to the received request from network components and monitoring the real-time load of components, the Network Protocol assesses the actual and real-time state of the network, thereby providing a precise basis for its subsequent decision-making and operations.
 
 ### Phase 6: Full Verification of the Execution Permit
 
