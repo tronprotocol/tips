@@ -1102,13 +1102,24 @@ This information may include the following:
 
 By collecting data related to the received request from network components and monitoring the real-time load of components, the Network Protocol assesses the actual and real-time state of the network, thereby providing a precise basis for its subsequent decision-making and operations.
 
-### Phase 6: Full Verification of the Execution Permit
+### Phase 6: Network Protocol — Adopting the Required Policy for Potential Conflict Prevention
 
-Before validation begins, the initial validation nodes are required to decrypt the encrypted copy of the Execution Permit retained in the Provisional State using the per-permit encryption key received from the wallet, and then verify the full contents of the Execution Permit received from the wallet against that decrypted copy, fully and line by line, within the framework of the Network Protocol.
+In this phase, the Network Protocol, by analyzing the information collected from the wallet (in the form of a transaction submission request) and network components — including the status of executing transactions, related transactions, and smart contracts — and after monitoring the real-time load of execution components, predicts and evaluates the probability of exceptions and conflicts for the new transaction. This evaluation is carried out relying on network policies and utilizing past analytical records. This evaluation specifically focuses on identifying potential dependencies with executing transactions.
 
-This verification covers all components of the permit. In the event of any discrepancy, the transaction is rejected and the relevant report is sent to the Network Protocol.
+The Network Protocol, considering the following inputs:
 
-Upon successful verification and confirmation of the Execution Permit and its full conformity with the decrypted copy from the Provisional State — given that the complete roadmap of addressing, routing, and the components responsible for validation has been fully determined and specified in the Execution Permit — all relevant and designated components are required to follow exactly the instructions recorded in that same permit, without independent decision-making regarding the path or assigned duties.
+- Information received from the wallet in the form of a transaction submission request to the Network Protocol
+- The actual and real-time status of executing transactions and the load of network components
+- Network policies and rules
+- Experience and analytical reports prepared regarding how past conflicts were handled
+
+adopts the conflict prevention policy. This policy may include the following:
+
+- Determining the handling order for related transactions (to prevent the simultaneous execution of incompatible operations)
+- Requiring the use of a "Shared Path" for transactions that access a shared state
+- Directing independent transactions to parallel paths to prevent the creation of queues and bottlenecks
+
+Based on this evaluation, the Network Protocol adopts a preventive policy appropriate to the specific conditions of that transaction; including determining whether the transaction operates on independent states or depends on a shared state or shared root (such as a high-traffic account like an exchange, a liquidity pool, or accounts related to a shared root).
 
 ### Phase 7: Initial Validation
 
