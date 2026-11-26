@@ -1213,25 +1213,25 @@ This information enables independent auditing, reconstruction of the transaction
                                    ▼
 ┌───────────────────────────────────────────────────────────┐
 │ 3: Wallet: Data collection and sending the transaction               │
-│             request to the Network Protocol                          │
+│            request to the Network Protocol                           │
 └─────────────────────────────┬─────────────────────────────┘
                                    │
                                    ▼
 ┌───────────────────────────────────────────────────────────┐
 │ 4: Network Protocol: Receiving the transaction request               │
-│                   from the wallet                                    │
+│                      from the wallet                                 │
 └─────────────────────────────┬─────────────────────────────┘
                                    │
                                    ▼
 ┌───────────────────────────────────────────────────────────┐
 │ 5: Network Protocol: Receiving required information                  │
-│               from network components                                │
+│                      from network components                         │
 └─────────────────────────────┬─────────────────────────────┘
                                    │
                                    ▼
 ┌───────────────────────────────────────────────────────────┐
-│ 6: Network Protocol: Adopting the required policy for                │
-│           potential conflict prevention                              │
+│ 6: Network Protocol: Preventing Exceptions and Conflicts,            │
+│    as well as Predicting Expected Behavior and Outcome               │
 └─────────────────────────────┬─────────────────────────────┘
                                    │
                                    ▼
