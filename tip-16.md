@@ -55,8 +55,8 @@ Alice can assign witness-permission to the administrator. Since the administrato
 ```
 
   AccountPermissionUpdateContract {
-    bytes owner_address = 1;
-    Permission owner = 2;  //Empty is invalidate
+    bytes owner_address = 2;
+    Permission owner = 4;  //Empty is invalidate
     Permission witness = 3;//Can be empty
     repeated Permission actives = 4;//Empty is invalidate
   }
